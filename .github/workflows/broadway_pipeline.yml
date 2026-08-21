@@ -1,0 +1,162 @@
+name: Broadway Data Pipeline (Playbill + BroadwayWorld)
+
+# data/broadway.csv 하나에 전체 이력(1985 ~ 현재)이 다 들어있는 구조로 통합함.
+# 1단계: Playbill에서 data/broadway.csv의 마지막 week_ending 다음 주부터 최신까지
+#         이어서 수집 (week_number, weekly_gross_overall 포함) 하고 broadway.csv에 병합
+# 2단계: data/broadway.csv의 show 목록 중, 기존 data/broadwayworld_full.csv에 아직
+#         없는 "신규 쇼"만 BroadwayWorld에서 장르/캐스트/창작진/프로듀서/개막·폐막일 수집
+#         (이미 수집된 쇼는 매번 재수집하지 않음)
+# 3단계: 신규로 모은 메타데이터를 data/broadway.csv에 새 컬럼(genre/cast/creative_team/
+#         producer/first_preview/opening_date/closing_date/based_on)으로 병합.
+#         기존 주간 흥행 컬럼(weekly_gross 등)은 전혀 건드리지 않고, 이미 채워진
+#         메타 컬럼 값도 덮어쓰지 않음(신규로 빈 값만 채움).
+# 4단계: run_number/is_revival을 계산해서 추가 (크롤링 없이 기존 week_ending
+#         데이터의 공백 구간만으로 계산, 매번 최신 데이터 기준으로 재계산됨)
+# 네 단계를 한 job 안에서 순서대로 실행해서, 체크아웃한 파일 상태를 그대로 이어씀.
+on:
+  schedule:
+    - cron: "0 15 * * 1"  # 매주 월요일 UTC 15:00 (KST 화요일 00:00) - 일요일 마감 데이터 반영 후
+  workflow_dispatch:
+    inputs:
+      sleep_seconds:
+        description: "요청 사이 대기 시간(초)"
+        required: false
+        default: "1.0"
+      limit:
+        description: "BroadwayWorld 수집 테스트용 처리 개수 제한 (비워두면 전체)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 pandas
+
+      # ---------- 1단계: Playbill 이어붙이기 (broadway.csv에 직접 병합) ----------
+      - name: Step 1 - Scrape latest Playbill grosses into broadway.csv
+        run: |
+          python scripts/scrape_playbill_grosses.py \
+            --append-to data/broadway.csv \
+            --sleep ${{ github.event.inputs.sleep_seconds || '1.0' }}
+
+      - name: Step 1 result summary
+        run: |
+          echo "broadway.csv 행 수:"
+          wc -l data/broadway.csv
+          echo "최근 week_ending 5개:"
+          python3 scripts/_print_recent_weeks.py
+
+      # ---------- 2단계: BroadwayWorld 메타 수집 (신규 쇼만) ----------
+      - name: Step 2 - Fetch BroadwayWorld meta for new shows only
+        run: |
+          LIMIT_ARG=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then
+            LIMIT_ARG="--limit ${{ github.event.inputs.limit }}"
+          fi
+          EXISTING_ARG=""
+          if [ -f data/broadwayworld_full.csv ]; then
+            EXISTING_ARG="--existing data/broadwayworld_full.csv"
+          fi
+          python scripts/fetch_broadwayworld_full.py \
+            --raw data/broadway.csv \
+            $EXISTING_ARG \
+            --out-dir data \
+            --sleep ${{ github.event.inputs.sleep_seconds || '1.0' }} \
+            $LIMIT_ARG
+
+      - name: Step 2 result summary
+        run: |
+          echo "broadwayworld_full.csv 행 수:"
+          wc -l data/broadwayworld_full.csv
+          head -5 data/broadwayworld_full.csv
+
+      # ---------- 3단계: 메타데이터를 broadway.csv에 병합 ----------
+      - name: Step 3 - Merge genre/cast/creative_team/producer into broadway.csv
+        run: |
+          python scripts/merge_broadwayworld_meta.py \
+            --broadway data/broadway.csv \
+            --meta data/broadwayworld_full.csv \
+            --out data/broadway.csv
+
+      - name: Step 3 result summary
+        run: |
+          echo "병합 후 broadway.csv 컬럼:"
+          head -1 data/broadway.csv
+
+      # ---------- 4단계: 재공연 여부 계산 (크롤링 없이 기존 데이터로만) ----------
+      - name: Step 4 - Calculate revival flags
+        run: |
+          python scripts/calculate_revival_flags.py \
+            --broadway data/broadway.csv \
+            --out data/broadway.csv \
+            --exclude-shutdown-gap
+
+      # ---------- 5단계: IBDB 수상 이력 수집 (신규 쇼만) ----------
+      - name: Step 5 - Fetch IBDB awards for new shows only
+        run: |
+          LIMIT_ARG=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then
+            LIMIT_ARG="--limit ${{ github.event.inputs.limit }}"
+          fi
+          EXISTING_ARG=""
+          if [ -f data/ibdb_awards.csv ]; then
+            EXISTING_ARG="--existing data/ibdb_awards.csv"
+          fi
+          python scripts/fetch_ibdb_awards.py \
+            --raw data/broadway.csv \
+            $EXISTING_ARG \
+            --out-dir data \
+            --sleep ${{ github.event.inputs.sleep_seconds || '1.0' }} \
+            $LIMIT_ARG
+
+      - name: Step 5 result summary
+        run: |
+          echo "ibdb_awards.csv 행 수:"
+          wc -l data/ibdb_awards.csv
+
+      # ---------- 6단계: 수상 이력을 broadway.csv에 병합 ----------
+      - name: Step 6 - Merge IBDB awards into broadway.csv
+        run: |
+          python scripts/merge_broadwayworld_meta.py \
+            --broadway data/broadway.csv \
+            --awards data/ibdb_awards.csv \
+            --out data/broadway.csv
+
+      # ---------- 결과물 업로드 + 커밋 ----------
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: broadway-pipeline-results
+          path: |
+            data/broadway.csv
+            data/broadwayworld_full.csv
+            data/ibdb_awards.csv
+          retention-days: 30
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/broadway.csv data/broadwayworld_full.csv data/ibdb_awards.csv
+          git diff --cached --quiet && echo "변경 없음, 커밋 건너뜀" && exit 0
+          git commit -m "chore: broadway.csv 주간 자동 업데이트 + 신규 쇼 메타/수상 병합 ($(date -u +%Y-%m-%d))"
+
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+            echo "push 실패, 재시도 ($i/3)..."
+            sleep 5
+          done
