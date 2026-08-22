@@ -31,6 +31,8 @@ import time
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 BASE = "https://www.broadwayworld.com"
 HEADERS = {
@@ -70,9 +72,22 @@ def slugify(title):
     return s
 
 
+def make_session():
+    session = requests.Session()
+    retry = Retry(
+        total=3, backoff_factor=1.5,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET", "HEAD"],
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
 def find_show_slug(title, session, grosses_html_cache):
     if grosses_html_cache["soup"] is None:
-        resp = session.get(f"{BASE}/grosses.php", headers=HEADERS, timeout=20)
+        resp = session.get(f"{BASE}/grosses.php", headers=HEADERS, timeout=30)
         grosses_html_cache["soup"] = BeautifulSoup(resp.text, "html.parser")
     soup = grosses_html_cache["soup"]
     target_norm = re.sub(r"[^A-Z0-9]", "", title.upper())
@@ -84,7 +99,7 @@ def find_show_slug(title, session, grosses_html_cache):
 
 def fetch_genre_map(session):
     """현재 상연작만 잡힘 - 종영작은 쇼 페이지 <title> 태그 휴리스틱으로 보조 판별."""
-    resp = session.get(f"{BASE}/grosses.php", headers=HEADERS, timeout=20)
+    resp = session.get(f"{BASE}/grosses.php", headers=HEADERS, timeout=30)
     soup = BeautifulSoup(resp.text, "html.parser")
     genre_map = {}
     for a in soup.select("a[href^='/grosses/']"):
@@ -96,7 +111,7 @@ def fetch_genre_map(session):
 
 def fetch_show_page(slug, session):
     """개별 쇼 그로스 페이지 -> showid + 개막/폐막/프리뷰 날짜 추출."""
-    resp = session.get(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=20)
+    resp = session.get(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=30)
     if resp.status_code != 200:
         return None, {}
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -130,7 +145,7 @@ def fetch_cast_and_creative(showid, session):
     역할명이 사람 이름 옆에 붙는 구조."""
     if not showid:
         return [], [], ""
-    resp = session.get(f"{BASE}/shows/cast.php?showid={showid}", headers=HEADERS, timeout=20)
+    resp = session.get(f"{BASE}/shows/cast.php?showid={showid}", headers=HEADERS, timeout=30)
     if resp.status_code != 200:
         return [], [], ""
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -180,7 +195,7 @@ def main():
     ap.add_argument("--sleep", type=float, default=1.0)
     args = ap.parse_args()
 
-    session = requests.Session()
+    session = make_session()
 
     if args.shows:
         titles = args.shows
@@ -211,47 +226,55 @@ def main():
     time.sleep(args.sleep)
 
     rows = []
+    n_errors = 0
     for i, title in enumerate(titles, 1):
-        slug = slugify(title)
-        test = session.head(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=15)
-        if test.status_code != 200:
-            found = find_show_slug(title, session, grosses_cache)
-            if found:
-                slug = found
-            else:
-                print(f"[{i}/{len(titles)}] '{title}' -> 슬러그 못 찾음, 스킵")
-                continue
+        try:
+            slug = slugify(title)
+            test = session.head(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=30)
+            if test.status_code != 200:
+                found = find_show_slug(title, session, grosses_cache)
+                if found:
+                    slug = found
+                else:
+                    print(f"[{i}/{len(titles)}] '{title}' -> 슬러그 못 찾음, 스킵")
+                    continue
 
-        showid, meta, genre_guess = fetch_show_page(slug, session)
+            showid, meta, genre_guess = fetch_show_page(slug, session)
+            time.sleep(args.sleep)
+
+            cast_entries, creative_entries, _ = fetch_cast_and_creative(showid, session)
+            time.sleep(args.sleep)
+
+            genre = genre_map.get(slug, "") or genre_guess
+
+            cast_str = "; ".join(f"{name} as {', '.join(roles)}" if roles else name for name, roles in cast_entries)
+            creative_str = "; ".join(f"{name} ({role})" for name, role in creative_entries)
+            producer_str = "; ".join(name for name, role in creative_entries if "producer" in role.lower())
+
+            row = {
+                "title": title,
+                "slug": slug,
+                "showid": showid,
+                "genre": genre,
+                "first_preview": meta.get("first_preview", ""),
+                "opening_date": meta.get("opening_date", ""),
+                "closing_date": meta.get("closing_date", ""),
+                "based_on": meta.get("based_on", ""),
+                "cast": cast_str,
+                "creative_team": creative_str,
+                "producer": producer_str,
+            }
+            rows.append(row)
+            print(f"[{i}/{len(titles)}] '{title}' -> slug={slug}, showid={showid}, "
+                  f"genre={genre}, cast={len(cast_entries)}명, creative={len(creative_entries)}명, "
+                  f"producer={'있음' if producer_str else '없음'}, "
+                  f"based_on={meta.get('based_on') or '원작 없음/오리지널'}")
+        except Exception as e:
+            n_errors += 1
+            print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
         time.sleep(args.sleep)
 
-        cast_entries, creative_entries, _ = fetch_cast_and_creative(showid, session)
-        time.sleep(args.sleep)
-
-        genre = genre_map.get(slug, "") or genre_guess
-
-        cast_str = "; ".join(f"{name} as {', '.join(roles)}" if roles else name for name, roles in cast_entries)
-        creative_str = "; ".join(f"{name} ({role})" for name, role in creative_entries)
-        producer_str = "; ".join(name for name, role in creative_entries if "producer" in role.lower())
-
-        row = {
-            "title": title,
-            "slug": slug,
-            "showid": showid,
-            "genre": genre,
-            "first_preview": meta.get("first_preview", ""),
-            "opening_date": meta.get("opening_date", ""),
-            "closing_date": meta.get("closing_date", ""),
-            "based_on": meta.get("based_on", ""),
-            "cast": cast_str,
-            "creative_team": creative_str,
-            "producer": producer_str,
-        }
-        rows.append(row)
-        print(f"[{i}/{len(titles)}] '{title}' -> slug={slug}, showid={showid}, "
-              f"genre={genre}, cast={len(cast_entries)}명, creative={len(creative_entries)}명, "
-              f"producer={'있음' if producer_str else '없음'}, "
-              f"based_on={meta.get('based_on') or '원작 없음/오리지널'}")
+    print(f"\n처리 중 오류 {n_errors}건 (스킵하고 계속 진행함)")
 
     if not rows:
         print("\n신규로 수집된 데이터가 없어요.")

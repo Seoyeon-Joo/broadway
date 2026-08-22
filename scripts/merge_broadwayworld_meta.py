@@ -27,7 +27,7 @@ META_COLUMNS = [
 ]
 
 AWARD_COLUMNS = [
-    "tony_nominations", "tony_wins", "has_pulitzer", "has_drama_desk_win", "awards_detail",
+    "tony_wins", "tony_nominations", "awards_detail",
 ]
 
 
