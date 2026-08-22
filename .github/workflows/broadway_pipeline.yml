@@ -105,18 +105,18 @@ jobs:
             --out data/broadway.csv \
             --exclude-shutdown-gap
 
-      # ---------- 5단계: IBDB 수상 이력 수집 (신규 쇼만) ----------
-      - name: Step 5 - Fetch IBDB awards for new shows only
+      # ---------- 5단계: 토니상 수상 이력 수집 (신규 쇼만) ----------
+      - name: Step 5 - Fetch Tony Awards for new shows only
         run: |
           LIMIT_ARG=""
           if [ -n "${{ github.event.inputs.limit }}" ]; then
             LIMIT_ARG="--limit ${{ github.event.inputs.limit }}"
           fi
           EXISTING_ARG=""
-          if [ -f data/ibdb_awards.csv ]; then
-            EXISTING_ARG="--existing data/ibdb_awards.csv"
+          if [ -f data/tony_awards.csv ]; then
+            EXISTING_ARG="--existing data/tony_awards.csv"
           fi
-          python scripts/fetch_ibdb_awards.py \
+          python scripts/fetch_tony_awards.py \
             --raw data/broadway.csv \
             $EXISTING_ARG \
             --out-dir data \
@@ -125,15 +125,15 @@ jobs:
 
       - name: Step 5 result summary
         run: |
-          echo "ibdb_awards.csv 행 수:"
-          wc -l data/ibdb_awards.csv
+          echo "tony_awards.csv 행 수:"
+          wc -l data/tony_awards.csv
 
       # ---------- 6단계: 수상 이력을 broadway.csv에 병합 ----------
-      - name: Step 6 - Merge IBDB awards into broadway.csv
+      - name: Step 6 - Merge Tony Awards into broadway.csv
         run: |
           python scripts/merge_broadwayworld_meta.py \
             --broadway data/broadway.csv \
-            --awards data/ibdb_awards.csv \
+            --awards data/tony_awards.csv \
             --out data/broadway.csv
 
       # ---------- 결과물 업로드 + 커밋 ----------
@@ -144,14 +144,14 @@ jobs:
           path: |
             data/broadway.csv
             data/broadwayworld_full.csv
-            data/ibdb_awards.csv
+            data/tony_awards.csv
           retention-days: 30
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/broadway.csv data/broadwayworld_full.csv data/ibdb_awards.csv
+          git add data/broadway.csv data/broadwayworld_full.csv data/tony_awards.csv
           git diff --cached --quiet && echo "변경 없음, 커밋 건너뜀" && exit 0
           git commit -m "chore: broadway.csv 주간 자동 업데이트 + 신규 쇼 메타/수상 병합 ($(date -u +%Y-%m-%d))"
 
