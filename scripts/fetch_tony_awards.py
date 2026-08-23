@@ -107,7 +107,7 @@ def main():
     ap.add_argument("--shows", nargs="+", default=None, help="테스트용: 쇼 이름을 직접 나열")
     ap.add_argument("--existing", default=None,
                      help="기존 tony_awards.csv 경로. 있으면 그 안에 이미 있는 title은 건너뜀")
-    ap.add_argument("--out-dir", default=".")
+    ap.add_argument("--out-dir", default="data")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--sleep", type=float, default=1.0)
     args = ap.parse_args()

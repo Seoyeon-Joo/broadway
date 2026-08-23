@@ -120,7 +120,7 @@ def main():
     ap.add_argument("--shows", nargs="+", default=None,
                      help="테스트용: 'Title:showid' 형태로 나열 (예: 'American Psycho:331080')")
     ap.add_argument("--existing", default=None)
-    ap.add_argument("--out-dir", default=".")
+    ap.add_argument("--out-dir", default="data")
     ap.add_argument("--reviews-detail-dir", default=None,
                      help="쇼별 개별 리뷰 텍스트 CSV를 저장할 폴더 (performance_id=showid 기준으로 "
                           "파일 하나씩 생성). 지정 안 하면 <out-dir>/reviews_by_show 사용")
