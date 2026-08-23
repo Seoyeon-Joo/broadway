@@ -12,7 +12,25 @@ name: Broadway Data Pipeline (Playbill + BroadwayWorld)
 #         메타 컬럼 값도 덮어쓰지 않음(신규로 빈 값만 채움).
 # 4단계: run_number/is_revival을 계산해서 추가 (크롤링 없이 기존 week_ending
 #         데이터의 공백 구간만으로 계산, 매번 최신 데이터 기준으로 재계산됨)
-# 네 단계를 한 job 안에서 순서대로 실행해서, 체크아웃한 파일 상태를 그대로 이어씀.
+# 5~6단계: 토니상 수상 이력 수집 + 병합
+# 7~8단계: 평론가/독자 평점 수집 + 병합 (개별 리뷰 원문은 별도 Release로)
+# 9단계: 데드 컬럼 정리 + 시상식별 컬럼을 토니상/그외 시상식 2그룹으로 합산
+#         (scripts/clean_broadway_columns.py, 이유는 스크립트 상단 주석 참고)
+#
+# *** 저장 방식: git commit이 아니라 GitHub Release ***
+# data/broadway.csv가 136MB+ 로 커져서 GitHub의 git push 파일 크기 제한(100MB)에
+# 걸림 - 그래서 예전엔 8단계가 전부 "성공"으로 표시돼도 실제로는 커밋이 하나도
+# 안 됐음(push가 매번 조용히 실패, scripts/checkpoint_release.sh 주석 참고).
+# Release 자산은 파일당 2GB까지 허용되고 git 히스토리에도 안 쌓여서 이 문제를
+# 근본적으로 피할 수 있어서, 생성되는 모든 데이터 파일(broadway.csv,
+# broadwayworld_full.csv, tony_awards.csv, bww_reviews.csv)을 "broadway-data"
+# 라는 Release에 업로드함 (매번 같은 파일명으로 덮어씀 = 항상 최신 버전 하나만
+# 유지, 과거 버전은 안 남음). 단계별로 나눠서 여러 번 업로드하는 이유는 중간
+# 단계가 실패해도 그 전까지 만든 데이터는 이미 Release에 반영돼 있게 하기 위함.
+#
+# data/ 폴더 자체는 이제 리포지토리에는 커밋하지 않음 - 최신 데이터는 항상
+# Releases 탭(예: https://github.com/Seoyeon-Joo/broadway/releases/tag/broadway-data)
+# 에서 받아야 함.
 on:
   schedule:
     - cron: "0 15 * * 1"  # 매주 월요일 UTC 15:00 (KST 화요일 00:00) - 일요일 마감 데이터 반영 후
@@ -30,6 +48,10 @@ on:
 permissions:
   contents: write
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  RELEASE_TAG: broadway-data
+
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -46,6 +68,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4 pandas
 
+      # ---------- 최초 1회: 기존 Release에 있던 최신 데이터를 받아서 이어서 작업 ----------
+      # (git에는 더 이상 data/*.csv를 안 두므로, 매번 Release에서 받아와야
+      #  "신규 쇼만 수집" 로직 - --existing 옵션 - 이 제대로 동작함)
+      - name: Restore latest data from Release (if any)
+        run: |
+          mkdir -p data
+          gh release download "$RELEASE_TAG" --dir data --clobber 2>/dev/null || \
+            echo "기존 Release가 없어요 (최초 실행) - 빈 상태로 시작"
+          ls -la data/
+
       # ---------- 1단계: Playbill 이어붙이기 (broadway.csv에 직접 병합) ----------
       - name: Step 1 - Scrape latest Playbill grosses into broadway.csv
         run: |
@@ -59,6 +91,9 @@ jobs:
           wc -l data/broadway.csv
           echo "최근 week_ending 5개:"
           python3 scripts/_print_recent_weeks.py
+
+      - name: Checkpoint 1 - Playbill 최신 흥행 데이터 업로드
+        run: bash scripts/checkpoint_release.sh "$RELEASE_TAG" data/broadway.csv
 
       # ---------- 2단계: BroadwayWorld 메타 수집 (신규 쇼만) ----------
       - name: Step 2 - Fetch BroadwayWorld meta for new shows only
@@ -105,6 +140,11 @@ jobs:
             --out data/broadway.csv \
             --exclude-shutdown-gap
 
+      - name: Checkpoint 2 - BroadwayWorld 메타 + 재공연 플래그 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$RELEASE_TAG" \
+            data/broadway.csv data/broadwayworld_full.csv
+
       # ---------- 5단계: 토니상 수상 이력 수집 (신규 쇼만) ----------
       - name: Step 5 - Fetch Tony Awards for new shows only
         run: |
@@ -135,6 +175,11 @@ jobs:
             --broadway data/broadway.csv \
             --awards data/tony_awards.csv \
             --out data/broadway.csv
+
+      - name: Checkpoint 3 - 토니상 수상 이력 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$RELEASE_TAG" \
+            data/broadway.csv data/tony_awards.csv
 
       # ---------- 7단계: 평론가/독자 평점 수집 (신규 쇼만) + 개별 리뷰 원문은 쇼별 CSV로 ----------
       - name: Step 7 - Fetch BroadwayWorld critic/reader ratings for new shows only
@@ -171,10 +216,55 @@ jobs:
             --reviews data/bww_reviews.csv \
             --out data/broadway.csv
 
+      # ---------- 8-2단계: IBDB에서 제작사/프로듀서(production) 수집 ----------
+      # 검색 API 대신 productions-sitemap.xml을 통째로 받아서 제목으로 매칭함
+      # (scripts/fetch_ibdb_production.py 상단 주석 참고). 리바이벌처럼 같은
+      # slug에 id가 여러 개 걸리는 쇼는 자동으로 건너뛰고 로그만 남김.
+      - name: Step 8-2 - Fetch IBDB production for new shows only
+        run: |
+          LIMIT_ARG=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then
+            LIMIT_ARG="--limit ${{ github.event.inputs.limit }}"
+          fi
+          EXISTING_ARG=""
+          if [ -f data/ibdb_production.csv ]; then
+            EXISTING_ARG="--existing data/ibdb_production.csv"
+          fi
+          python scripts/fetch_ibdb_production.py \
+            --raw data/broadway.csv \
+            $EXISTING_ARG \
+            --out-dir data \
+            --sleep ${{ github.event.inputs.sleep_seconds || '1.0' }} \
+            $LIMIT_ARG
+
+      - name: Step 8-2 merge - Merge production into broadway.csv
+        run: |
+          python scripts/merge_broadwayworld_meta.py \
+            --broadway data/broadway.csv \
+            --meta data/ibdb_production.csv \
+            --out data/broadway.csv
+
+      - name: Checkpoint 4 - IBDB 제작사 정보 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$RELEASE_TAG" \
+            data/broadway.csv data/ibdb_production.csv
+
+      # ---------- 9단계: 데드 컬럼 정리 + 시상식 컬럼을 토니상/그외 2그룹으로 합산 ----------
+      - name: Step 9 - Clean dead columns and consolidate award columns
+        run: |
+          python scripts/clean_broadway_columns.py \
+            --broadway data/broadway.csv \
+            --out data/broadway.csv
+
+      - name: Checkpoint 5 - 평론가/독자 평점 + 컬럼 정리 결과 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$RELEASE_TAG" \
+            data/broadway.csv data/bww_reviews.csv
+
       # ---------- 8-1단계: 개별 리뷰 원문 CSV들을 zip해서 GitHub Release에 업로드 ----------
-      # (쇼 하나당 파일 하나라 개수가 많아지고, 텍스트 본문이라 용량도 커서 git 저장소에
-      #  직접 커밋하지 않고 Release 자산으로 분리 - 예전에 큰 shard CSV를 Releases로
-      #  돌렸던 것과 같은 이유)
+      # (쇼 하나당 파일 하나라 개수가 많아지고, 텍스트 본문이라 용량도 커서 별도
+      #  Release 자산으로 분리 - broadway-data와는 다른 태그라서 매주 최신 데이터
+      #  Release와 안 섞임)
       - name: Zip individual review text files
         run: |
           if [ -d data/reviews_by_show ] && [ "$(ls -A data/reviews_by_show 2>/dev/null)" ]; then
@@ -197,7 +287,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ---------- 9단계: 프로덕션별 공연 이력 수집 -> 제거함 ----------
+      # ---------- 9단계(구): 프로덕션별 공연 이력 수집 -> 제거함 ----------
       # (fetch_show_history.py가 가정한 '/shows/<slug>-<id>.html#history'의 런별
       #  날짜범위 테이블은 실제 페이지를 열어서 확인한 결과 존재하지 않음 - #history는
       #  페이지 안의 앵커일 뿐, 이미 페이지 상단에 나오는 Opened/Closing 요약 하나가
@@ -206,8 +296,9 @@ jobs:
       #  find_show_slug가 title_ambiguous 플래그로 "동일 제목 리바이벌이 여러 개라
       #  이 메타가 어느 프로덕션 것인지 불확실함"을 표시하도록 바꿔서, 최소한의 방어선으로 씀.
 
-      # ---------- 결과물 업로드 + 커밋 ----------
+      # ---------- 마지막 안전망: Actions 아티팩트로도 남겨둠 (30일 보관) ----------
       - name: Upload artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: broadway-pipeline-results
@@ -218,18 +309,3 @@ jobs:
             data/bww_reviews.csv
           retention-days: 30
           if-no-files-found: ignore
-
-      - name: Commit and push if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/broadway.csv data/broadwayworld_full.csv data/tony_awards.csv \
-                  data/bww_reviews.csv 2>/dev/null || true
-          git diff --cached --quiet && echo "변경 없음, 커밋 건너뜀" && exit 0
-          git commit -m "chore: broadway.csv 주간 자동 업데이트 + 신규 쇼 메타/수상/평점 병합 ($(date -u +%Y-%m-%d))"
-
-          for i in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
-            echo "push 실패, 재시도 ($i/3)..."
-            sleep 5
-          done
