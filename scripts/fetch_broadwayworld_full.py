@@ -112,13 +112,21 @@ def find_show_slug(title, session, letter_cache):
     쇼만 나와서 대부분의 과거/폐막 쇼를 못 찾는 문제가 있었음 - 실제 확인됨)
     letter_cache: {letter: soup} 형태로 한 번 받아온 글자 페이지는 재사용.
 
-    반환값: (slug, is_ambiguous) 튜플. 동일 제목으로 grossesbyshow.php에 매치가
-    여러 개 있으면(=완전히 같은 이름으로 재상연된 리바이벌 - 실제로 BroadwayWorld가
-    "Cabaret" 같은 원제와 "Cabaret at the Kit Kat Club" 같은 리바이벌 전용 개명 제목을
-    따로 등재하는 경우가 많지만, 재개명 없이 완전히 동일한 제목을 쓰는 리바이벌도
-    있어서 이 경우를 위한 방어 로직) 첫 번째 매치를 쓰되 is_ambiguous=True로 표시함 -
-    이 표시는 fetch_show_page 등 이후 단계에서 얻는 opening_date/cast 등이 어느
-    프로덕션 것인지 확신할 수 없다는 뜻이라, target 빌더가 신뢰도를 낮춰 잡는 데 씀."""
+    매칭 2단계:
+      1. 완전 일치 (영숫자만 남기고 비교)
+      2. 그래도 못 찾으면, 제목에 콜론(:)이 있는 경우 콜론 앞부분만으로 재시도.
+         실제로 확인된 사례: Playbill/broadway.csv엔 "Danny Gans on Broadway: The
+         Man of Many Voices"로 풀네임이 들어있는데, BroadwayWorld grosses 인덱스엔
+         부제 없이 "Danny Gans On Broadway"로만 등재돼 있어서 완전일치가 실패했음.
+         이런 축약 등재가 흔해서 콜론 기준 폴백을 추가함.
+
+    반환값: (slug, is_ambiguous, match_type) 튜플.
+      - is_ambiguous: 동일 제목으로 매치가 여러 개 있으면 True (=완전히 같은 이름으로
+        재상연된 리바이벌 방어 로직 - BroadwayWorld가 "Cabaret at the Kit Kat Club"처럼
+        리바이벌을 아예 개명해서 따로 등재하는 경우가 많지만, 개명 없는 경우도 있음).
+        첫 번째 매치를 쓰되 이 플래그로 표시해서 target 빌더가 신뢰도를 낮춰 잡게 함.
+      - match_type: "exact" 또는 "colon_stripped" - 후자는 부제를 뗀 근사 매칭이라
+        완전히 다른 쇼를 잘못 골랐을 여지가 exact보다 약간 더 있음을 표시."""
     first_char = title.strip()[0].upper() if title.strip() else ""
     letter = first_char if first_char.isalpha() else "1"  # 숫자/기호로 시작하면 '#' 페이지(letter=1)
 
@@ -128,18 +136,30 @@ def find_show_slug(title, session, letter_cache):
 
     soup = letter_cache[letter]
     if soup is None:
-        return None, False
+        return None, False, ""
 
-    target_norm = re.sub(r"[^A-Z0-9]", "", title.upper())
-    matches = []
-    for a in soup.select("a[href^='/grosses/']"):
-        if re.sub(r"[^A-Z0-9]", "", a.get_text(strip=True).upper()) == target_norm:
-            matches.append(a["href"].split("/grosses/")[-1])
+    def norm(s):
+        return re.sub(r"[^A-Z0-9]", "", s.upper())
+
+    links = soup.select("a[href^='/grosses/']")
+
+    def find_all(target_norm):
+        return [a["href"].split("/grosses/")[-1] for a in links if norm(a.get_text(strip=True)) == target_norm]
+
+    matches = find_all(norm(title))
+    match_type = "exact"
+
+    if not matches and ":" in title:
+        stripped = title.split(":")[0].strip()
+        if stripped:
+            matches = find_all(norm(stripped))
+            match_type = "colon_stripped"
 
     if not matches:
-        return None, False
+        return None, False, ""
     is_ambiguous = len(set(matches)) > 1
-    return matches[0], is_ambiguous
+    return matches[0], is_ambiguous, match_type
+
 
 
 
@@ -369,9 +389,10 @@ def main():
         try:
             slug = slugify(title)
             title_ambiguous = False
+            match_type = "direct"
             test = session.head(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=30)
             if test.status_code != 200:
-                found, title_ambiguous = find_show_slug(title, session, letter_cache)
+                found, title_ambiguous, match_type = find_show_slug(title, session, letter_cache)
                 if found:
                     slug = found
                 else:
@@ -407,6 +428,8 @@ def main():
                 "title_ambiguous": title_ambiguous,  # True면 동일 제목 리바이벌이 여러 개 있어서
                                                        # 이 메타(opening_date/cast 등)가 정확히
                                                        # 어느 프로덕션 것인지 확신할 수 없음
+                "title_match_type": match_type,  # direct/exact/colon_stripped - colon_stripped는
+                                                   # 부제를 뗀 근사 매칭이라 살짝 덜 확실함
                 "genre": genre,
                 "first_preview": meta.get("first_preview", ""),
                 "opening_date": meta.get("opening_date", ""),
@@ -427,7 +450,8 @@ def main():
                   f"producer={'있음' if producer_str else '없음'}, "
                   f"awards={n_award_wins}승/{n_award_noms}노미, "
                   f"based_on={meta.get('based_on') or '원작 없음/오리지널'}"
-                  + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else ""))
+                  + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else "")
+                  + (" [부제 생략 매칭]" if match_type == "colon_stripped" else ""))
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
