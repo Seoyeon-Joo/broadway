@@ -1,5 +1,12 @@
 name: Broadway YouTube 영상 수집 (병렬)
 
+# *** 저장 방식: git commit이 아니라 GitHub Release (broadway_pipeline.yml과 동일 패턴) ***
+# data/broadway.csv 자체가 git엔 없고 "broadway-data" Release에만 있으므로, 여기서도
+# 시작할 때 그 Release에서 broadway.csv를 받아옴. 그리고 유튜브 결과물(shard별 CSV -
+# 영상 description을 최대 5,000자까지 통째로 저장하다 보니 shard 하나도 금방 커짐)도
+# git에 커밋하지 않고 "broadway-youtube-data"라는 별도 Release에 올림. 20개 shard job이
+# 동시에 다른 파일명으로 업로드하는 구조라 git push처럼 브랜치 경합/100MB 제한 문제가
+# 아예 생기지 않음 - checkpoint_release.sh를 그대로 재사용함.
 on:
   workflow_dispatch:
     inputs:
@@ -15,6 +22,11 @@ on:
 permissions:
   contents: write
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BROADWAY_DATA_TAG: broadway-data          # broadway_pipeline.yml이 관리하는 Release
+  YOUTUBE_DATA_TAG: broadway-youtube-data   # 이 워크플로가 관리하는 Release (별도 태그)
+
 jobs:
   build_targets:
     runs-on: ubuntu-latest
@@ -24,18 +36,23 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pandas
+
+      - name: broadway.csv를 broadway-data Release에서 받아오기
+        run: |
+          mkdir -p data
+          gh release download "$BROADWAY_DATA_TAG" --dir data --pattern "broadway.csv" --clobber
+          echo "받아온 broadway.csv 행 수:"
+          wc -l data/broadway.csv
+
       - name: broadway.csv -> run 단위 target 리스트 생성
         run: |
           python scripts/build_broadway_youtube_targets.py \
             --broadway data/broadway.csv \
             --out data/broadway_youtube_targets.csv
-      - name: target 리스트 커밋
+
+      - name: target 리스트를 broadway-youtube-data Release에 업로드
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "github-actions"
-          git add data/broadway_youtube_targets.csv
-          git diff --staged --quiet || git commit -m "chore: broadway_youtube_targets.csv 갱신"
-          git pull --rebase && git push || echo "변경 없음"
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" data/broadway_youtube_targets.csv
 
   collect:
     needs: build_targets
@@ -50,6 +67,17 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install requests
+
+      - name: target 리스트 + (있다면) 이 shard의 기존 진행 상황 받아오기
+        run: |
+          mkdir -p data data/youtube_broadway
+          gh release download "$YOUTUBE_DATA_TAG" --dir data \
+            --pattern "broadway_youtube_targets.csv" --clobber
+          # 지난 주에 이 shard가 이미 모아둔 결과 + 체크포인트가 있으면 이어서 진행
+          # (없으면 첫 실행이라 실패하는 게 정상 - 조용히 넘어감)
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_broadway \
+            --pattern "shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
+            echo "이 shard의 기존 데이터 없음 (첫 실행)"
 
       - name: 이번 shard가 쓸 API 키 고르기
         env:
@@ -76,18 +104,11 @@ jobs:
             --limit "${{ github.event.inputs.limit || '80' }}" \
             --limit-per-show "${{ github.event.inputs.limit_per_show || '60' }}"
 
-      - name: 결과 커밋
+      - name: 결과를 broadway-youtube-data Release에 업로드
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "github-actions"
-          git add data/youtube_broadway/shard_${{ matrix.shard }}.csv \
-                  data/youtube_broadway/shard_${{ matrix.shard }}.processed.txt
-          git diff --staged --quiet || git commit -m "chore: shard ${{ matrix.shard }} 브로드웨이 유튜브 수집 결과"
-          for i in 1 2 3 4 5; do
-            git pull --rebase && git push && break
-            echo "push 실패, 재시도 $i"
-            sleep $((RANDOM % 10 + 1))
-          done
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" \
+            data/youtube_broadway/shard_${{ matrix.shard }}.csv \
+            data/youtube_broadway/shard_${{ matrix.shard }}.processed.txt
 
   merge:
     needs: collect
@@ -98,15 +119,30 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pandas
+
+      - name: 20개 shard 결과 전부 받아오기
+        run: |
+          mkdir -p data/youtube_broadway
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_broadway \
+            --pattern "shard_*.csv" --clobber
+          echo "받아온 shard 파일:"
+          ls -la data/youtube_broadway/
+
       - name: shard 병합
         run: |
           python scripts/merge_broadway_youtube_shards.py \
             --shard-dir data/youtube_broadway \
             --out data/youtube_broadway_merged.csv
-      - name: 병합 결과 커밋
+
+      - name: 병합 결과를 broadway-youtube-data Release에 업로드
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "github-actions"
-          git add data/youtube_broadway_merged.csv
-          git diff --staged --quiet || git commit -m "chore: 브로드웨이 유튜브 병합 결과 갱신"
-          git pull --rebase && git push || echo "변경 없음"
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" data/youtube_broadway_merged.csv
+
+      - name: 안전망 - Actions 아티팩트로도 보관 (30일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: broadway-youtube-merged
+          path: data/youtube_broadway_merged.csv
+          retention-days: 30
+          if-no-files-found: ignore
