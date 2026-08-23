@@ -197,25 +197,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ---------- 9단계(선택): 프로덕션별 공연 이력 수집 (신규 쇼만, 구조 미검증) ----------
-      - name: Step 9 - Fetch show production history for new shows only
-        continue-on-error: true  # URL/구조가 아직 미검증이라 실패해도 파이프라인 전체는 안 죽게
-        run: |
-          LIMIT_ARG=""
-          if [ -n "${{ github.event.inputs.limit }}" ]; then
-            LIMIT_ARG="--limit ${{ github.event.inputs.limit }}"
-          fi
-          EXISTING_ARG=""
-          if [ -f data/show_history.csv ]; then
-            EXISTING_ARG="--existing data/show_history.csv"
-          fi
-          python scripts/fetch_show_history.py \
-            --raw data/broadway.csv \
-            --showids data/broadwayworld_full.csv \
-            $EXISTING_ARG \
-            --out-dir data \
-            --sleep ${{ github.event.inputs.sleep_seconds || '1.0' }} \
-            $LIMIT_ARG
+      # ---------- 9단계: 프로덕션별 공연 이력 수집 -> 제거함 ----------
+      # (fetch_show_history.py가 가정한 '/shows/<slug>-<id>.html#history'의 런별
+      #  날짜범위 테이블은 실제 페이지를 열어서 확인한 결과 존재하지 않음 - #history는
+      #  페이지 안의 앵커일 뿐, 이미 페이지 상단에 나오는 Opened/Closing 요약 하나가
+      #  전부였음. continue-on-error로 조용히 매번 빈 결과만 내고 있었던 것으로 확인되어
+      #  이 스텝과 다음 병합 스텝을 파이프라인에서 제거함. 대신 fetch_broadwayworld_full.py의
+      #  find_show_slug가 title_ambiguous 플래그로 "동일 제목 리바이벌이 여러 개라
+      #  이 메타가 어느 프로덕션 것인지 불확실함"을 표시하도록 바꿔서, 최소한의 방어선으로 씀.
 
       # ---------- 결과물 업로드 + 커밋 ----------
       - name: Upload artifacts
@@ -227,7 +216,6 @@ jobs:
             data/broadwayworld_full.csv
             data/tony_awards.csv
             data/bww_reviews.csv
-            data/show_history.csv
           retention-days: 30
           if-no-files-found: ignore
 
@@ -236,7 +224,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/broadway.csv data/broadwayworld_full.csv data/tony_awards.csv \
-                  data/bww_reviews.csv data/show_history.csv 2>/dev/null || true
+                  data/bww_reviews.csv 2>/dev/null || true
           git diff --cached --quiet && echo "변경 없음, 커밋 건너뜀" && exit 0
           git commit -m "chore: broadway.csv 주간 자동 업데이트 + 신규 쇼 메타/수상/평점 병합 ($(date -u +%Y-%m-%d))"
 

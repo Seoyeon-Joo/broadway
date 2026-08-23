@@ -1,0 +1,112 @@
+name: Broadway YouTube 영상 수집 (병렬)
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "shard당 처리할 최대 run 개수"
+        default: "80"
+      limit_per_show:
+        description: "run 하나당 최대 수집 영상 개수"
+        default: "60"
+  schedule:
+    - cron: "0 18 * * *"  # 매일 UTC 18:00 = KST 03:00
+
+permissions:
+  contents: write
+
+jobs:
+  build_targets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+      - name: broadway.csv -> run 단위 target 리스트 생성
+        run: |
+          python scripts/build_broadway_youtube_targets.py \
+            --broadway data/broadway.csv \
+            --out data/broadway_youtube_targets.csv
+      - name: target 리스트 커밋
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "github-actions"
+          git add data/broadway_youtube_targets.csv
+          git diff --staged --quiet || git commit -m "chore: broadway_youtube_targets.csv 갱신"
+          git pull --rebase && git push || echo "변경 없음"
+
+  collect:
+    needs: build_targets
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+
+      - name: 이번 shard가 쓸 API 키 고르기
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          INDEX=${{ matrix.shard }}
+          SELECTED="${KEYS[$INDEX]}"
+          if [ -z "$SELECTED" ]; then
+            echo "shard $INDEX 에 해당하는 키가 없어요."
+            exit 1
+          fi
+          echo "SHARD_YOUTUBE_KEY=$SELECTED" >> "$GITHUB_ENV"
+
+      - name: 영상 수집
+        env:
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEY }}
+        run: |
+          python scripts/youtube_collect_broadway.py \
+            --targets data/broadway_youtube_targets.csv \
+            --out data/youtube_broadway/shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} \
+            --num-shards 20 \
+            --limit "${{ github.event.inputs.limit || '80' }}" \
+            --limit-per-show "${{ github.event.inputs.limit_per_show || '60' }}"
+
+      - name: 결과 커밋
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "github-actions"
+          git add data/youtube_broadway/shard_${{ matrix.shard }}.csv \
+                  data/youtube_broadway/shard_${{ matrix.shard }}.processed.txt
+          git diff --staged --quiet || git commit -m "chore: shard ${{ matrix.shard }} 브로드웨이 유튜브 수집 결과"
+          for i in 1 2 3 4 5; do
+            git pull --rebase && git push && break
+            echo "push 실패, 재시도 $i"
+            sleep $((RANDOM % 10 + 1))
+          done
+
+  merge:
+    needs: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+      - name: shard 병합
+        run: |
+          python scripts/merge_broadway_youtube_shards.py \
+            --shard-dir data/youtube_broadway \
+            --out data/youtube_broadway_merged.csv
+      - name: 병합 결과 커밋
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "github-actions"
+          git add data/youtube_broadway_merged.csv
+          git diff --staged --quiet || git commit -m "chore: 브로드웨이 유튜브 병합 결과 갱신"
+          git pull --rebase && git push || echo "변경 없음"
