@@ -1,0 +1,1454 @@
+﻿run_id,show,theatre,opening_date,closing_date,date_source,is_revival,revival_rank,genre,based_on,lead_cast,title_ambiguous,n_weeks_observed
+master-harold-and-the-boys-run1,"""Master Harold""...and the Boys",Royale Theatre,2003-05-11,2003-07-13,week_range,False,1,,,,,10
+juliet-run1,& Juliet,Stephen Sondheim Theatre,2022-10-30,2026-08-16,week_range,False,1,,,,,199
+night-mother-run1,"'night, Mother",Royale Theatre,2004-10-24,2005-01-09,week_range,False,1,,,,,12
+110-in-the-shade-run1,110 in the Shade,Studio 54,2007-04-15,2007-07-29,week_range,False,1,,,,,16
+13-run1,13,Bernard B. Jacobs Theatre,2008-09-21,2009-01-04,week_range,False,1,,,,,16
+1776-run1,1776,Gershwin Theatre,1997-07-20,2023-01-08,week_range,False,1,,,,,63
+1984-run1,1984,Hudson Theatre,2017-05-21,2017-10-08,week_range,False,1,,,,,21
+3-from-brooklyn-run1,3 from Brooklyn,Helen Hayes Theatre,1992-11-15,1992-12-27,week_range,False,1,,,,,7
+33-variations-run1,33 Variations,Eugene O'Neill Theatre,2009-02-15,2009-05-24,week_range,False,1,,,,,15
+42nd-street-run1,42nd Street,St. James Theatre,2001-05-02,2005-01-02,show_level,True,1,Musical,,,,188
+42nd-street-run2,42nd Street,Ford Center for the Performing Arts,2001-05-02,2005-01-02,show_level,True,2,Musical,,,,196
+45-seconds-from-broadway-run1,45 Seconds from Broadway,Richard Rodgers Theatre,2001-10-21,2002-01-13,week_range,False,1,,,,,13
+700-sundays-run1,700 Sundays,Broadhurst Theatre,2004-11-14,2005-06-12,week_range,True,1,,,,,29
+700-sundays-run2,700 Sundays,Imperial Theatre,2013-11-10,2014-01-05,week_range,True,2,,,,,9
+9-to-5-run1,9 to 5,Marquis Theatre,2009-04-12,2009-09-06,week_range,False,1,,,,,22
+a-beautiful-noise-the-neil-diamond-music-run1,"A Beautiful Noise, The Neil Diamond Musical",Broadhurst Theatre,2022-11-06,2024-06-30,week_range,False,1,,,,,87
+a-behanding-in-spokane-run1,A Behanding in Spokane,Gerald Schoenfeld Theatre,2010-02-21,2010-06-06,week_range,False,1,,,,,16
+a-bronx-tale-run1,A Bronx Tale,Walter Kerr Theatre,2007-10-07,2008-02-24,week_range,False,1,,,,,21
+a-bronx-tale-the-musical-run1,A Bronx Tale The Musical,Longacre Theatre,2016-11-06,2018-08-05,week_range,False,1,,,,,92
+a-catered-affair-run1,A Catered Affair,Walter Kerr Theatre,2008-03-30,2008-07-27,week_range,False,1,,,,,18
+a-change-in-the-heir-run1,A Change in the Heir,Edison Theatre,1990-04-15,1990-05-13,week_range,False,1,,,,,5
+a-chorus-line-run1,A Chorus Line,Sam S. Shubert Theatre,2006-10-05,2008-08-17,show_level,True,1,Musical,,,,255
+a-chorus-line-run2,A Chorus Line,Gerald Schoenfeld Theatre,2006-10-05,2008-08-17,show_level,True,2,Musical,,,,100
+a-christmas-carol-run1,A Christmas Carol,Eugene O'Neill Theatre,1991-12-22,1991-12-29,week_range,True,1,,,,,2
+a-christmas-carol-run2,A Christmas Carol,Broadhurst Theatre,1992-12-20,1993-01-03,week_range,True,2,,,,,3
+a-christmas-carol-run3,A Christmas Carol,Richard Rodgers Theatre,1994-12-25,1995-01-08,week_range,True,3,,,,,3
+a-christmas-carol-run4,A Christmas Carol,Marquis Theatre,2001-12-30,2001-12-30,week_range,True,4,,,,,1
+a-christmas-carol-run5,A Christmas Carol,Lyceum Theatre,2019-11-10,2023-01-01,week_range,True,5,,,,,17
+a-christmas-story-the-musical-run1,"A Christmas Story, The Musical",Lunt-Fontanne Theatre,2012-11-11,2012-12-30,week_range,False,1,,,,,8
+a-class-act-run1,A Class Act,Ambassador Theatre,2001-02-18,2001-06-10,week_range,False,1,,,,,17
+a-day-in-the-death-of-joe-egg-run1,A Day in the Death of Joe Egg,American Airlines Theatre,2003-03-16,2003-06-01,week_range,False,1,,,,,12
+a-delicate-balance-run1,A Delicate Balance,Plymouth Theatre,1996-03-31,1996-09-29,week_range,True,1,,,,,27
+a-delicate-balance-run2,A Delicate Balance,John Golden Theatre,2014-10-26,2015-02-22,week_range,True,2,,,,,18
+a-doll-s-house-run1,A Doll's House,Belasco Theatre,1997-03-30,2023-06-11,week_range,False,1,,,,,40
+a-doll-s-house-part-2-run1,"A Doll's House, Part 2",John Golden Theatre,2017-04-02,2017-09-24,week_range,False,1,,,,,26
+a-few-good-men-run1,A Few Good Men,Music Box Theatre,1989-11-05,1991-01-27,week_range,False,1,,,,,65
+a-free-man-of-color-run1,A Free Man of Color,Vivian Beaumont Theater,2010-10-24,2011-01-09,week_range,False,1,,,,,12
+a-funny-thing-happened-on-the-way-to-the-run1,A Funny Thing Happened on the Way to the Forum,St. James Theatre,1996-03-24,1998-01-04,week_range,False,1,,,,,94
+a-gentleman-s-guide-to-love-and-murder-run1,A Gentleman's Guide to Love and Murder,Walter Kerr Theatre,2013-10-27,2016-01-17,week_range,False,1,,,,,116
+a-grand-night-for-singing-run1,A Grand Night for Singing,Criterion Center Stage Right,1993-10-17,1994-01-02,week_range,False,1,,,,,12
+a-life-in-the-theatre-run1,A Life in the Theatre,Gerald Schoenfeld Theatre,2010-09-26,2010-11-28,week_range,False,1,,,,,10
+a-little-hotel-on-the-side-run1,A Little Hotel on the Side,Belasco Theatre,1992-01-19,1992-03-01,week_range,False,1,,,,,7
+a-little-like-magic-run1,A Little Like Magic,Lyceum Theatre,1986-10-19,1986-12-07,week_range,False,1,,,,,8
+a-little-more-magic-run1,A Little More Magic,Belasco Theatre,1994-03-20,1994-04-03,week_range,False,1,,,,,3
+a-little-night-music-run1,A Little Night Music,Walter Kerr Theatre,2009-11-29,2011-01-09,week_range,False,1,,,,,56
+a-man-for-all-seasons-run1,A Man for All Seasons,American Airlines Theatre,2008-09-14,2008-12-14,week_range,False,1,,,,,14
+a-midsummer-night-s-dream-run1,A Midsummer Night's Dream,Lunt-Fontanne Theatre,1996-03-24,1996-05-26,week_range,False,1,,,,,10
+a-mom-s-life-run1,A Mom's Life,Belasco Theatre,1998-10-25,1998-11-08,week_range,False,1,,,,,3
+a-month-in-the-country-run1,A Month in the Country,Criterion Center Stage Right,1995-04-09,1995-06-11,week_range,False,1,,,,,10
+a-month-of-sundays-run1,A Month of Sundays,Ritz Theatre,1987-04-05,1987-04-19,week_range,False,1,,,,,3
+a-moon-for-the-misbegotten-run1,A Moon for the Misbegotten,Walter Kerr Theatre,2000-03-12,2000-07-02,week_range,True,1,,,,,17
+a-moon-for-the-misbegotten-run2,A Moon for the Misbegotten,Brooks Atkinson Theatre,2007-04-01,2007-06-10,week_range,True,2,,,,,11
+a-naked-girl-on-the-appian-way-run1,A Naked Girl on the Appian Way,American Airlines Theatre,2005-09-18,2005-12-04,week_range,False,1,,,,,12
+a-night-with-janis-joplin-run1,A Night With Janis Joplin,Lyceum Theatre,2013-09-22,2014-02-09,week_range,False,1,,,,,21
+a-raisin-in-the-sun-run1,A Raisin in the Sun,Royale Theatre,2004-04-04,2004-07-11,week_range,True,1,,,,,15
+a-raisin-in-the-sun-run2,A Raisin in the Sun,Ethel Barrymore Theatre,2014-03-09,2014-06-15,week_range,True,2,,,,,15
+a-small-family-business-run1,A Small Family Business,Music Box Theatre,1992-04-05,1992-06-07,week_range,False,1,,,,,10
+a-soldier-s-play-run1,A Soldier's Play,American Airlines Theatre,2019-12-29,2020-03-08,week_range,False,1,,,,,11
+a-steady-rain-run1,A Steady Rain,Gerald Schoenfeld Theatre,2009-09-13,2009-12-06,week_range,False,1,,,,,13
+a-strange-loop-run1,A Strange Loop,Lyceum Theatre,2022-04-17,2023-01-15,week_range,False,1,,,,,40
+a-streetcar-named-desire-run1,A Streetcar Named Desire,Circle in the Square Theatre,1988-02-21,1988-05-22,week_range,True,1,,,,,14
+a-streetcar-named-desire-run2,A Streetcar Named Desire,Ethel Barrymore Theatre,1992-03-22,1992-08-09,week_range,True,2,,,,,21
+a-streetcar-named-desire-run3,A Streetcar Named Desire,Studio 54,2005-03-27,2005-07-03,week_range,True,3,,,,,15
+a-streetcar-named-desire-run4,A Streetcar Named Desire,Broadhurst Theatre,2012-04-08,2012-07-22,week_range,True,4,,,,,16
+a-tale-of-two-cities-run1,A Tale of Two Cities,Al Hirschfeld Theatre,2008-08-24,2008-11-09,week_range,False,1,,,,,12
+a-thousand-clowns-run1,A Thousand Clowns,Criterion Center Stage Right,1996-06-16,1996-08-11,week_range,True,1,,,,,9
+a-thousand-clowns-run2,A Thousand Clowns,Longacre Theatre,2001-07-08,2001-09-23,week_range,True,2,,,,,12
+a-time-to-kill-run1,A Time to Kill,John Golden Theatre,2013-09-29,2013-11-17,week_range,False,1,,,,,8
+a-touch-of-the-poet-run1,A Touch of the Poet,Studio 54,2005-11-13,2006-01-29,week_range,False,1,,,,,12
+a-tuna-christmas-run1,A Tuna Christmas,Booth Theatre,1994-12-11,1995-01-01,week_range,False,1,,,,,4
+a-view-from-the-bridge-run1,A View from the Bridge,Neil Simon Theatre,1997-11-30,1998-08-30,week_range,True,1,,,,,35
+a-view-from-the-bridge-run2,A View from the Bridge,Cort Theatre,2010-01-03,2010-04-04,week_range,True,2,,,,,14
+a-view-from-the-bridge-run3,A View from the Bridge,Lyceum Theatre,2015-10-25,2016-02-21,week_range,True,3,,,,,17
+a-walk-in-the-woods-run1,A Walk in the Woods,Booth Theatre,1988-02-14,1988-06-26,week_range,False,1,,,,,20
+a-wonderful-world-the-louis-armstrong-mu-run1,A Wonderful World: The Louis Armstrong Musical,Studio 54,2024-10-20,2025-02-23,week_range,False,1,,,,,19
+a-year-with-frog-and-toad-run1,A Year with Frog and Toad,Cort Theatre,2003-04-06,2003-06-15,week_range,False,1,,,,,11
+abe-lincoln-in-illinois-run1,Abe Lincoln in Illinois,Vivian Beaumont Theater,1993-11-07,1994-01-02,week_range,False,1,,,,,9
+absurd-person-singular-run1,Absurd Person Singular,Biltmore Theatre,2005-09-25,2005-12-04,week_range,False,1,,,,,11
+accent-on-youth-run1,Accent on Youth,Samuel J. Friedman Theatre,2009-04-12,2009-06-28,week_range,False,1,,,,,12
+accomplice-run1,Accomplice,Richard Rodgers Theatre,1990-04-08,1990-06-10,week_range,False,1,,,,,10
+act-one-run1,Act One,Vivian Beaumont Theater,2014-03-23,2014-06-15,week_range,False,1,,,,,13
+after-midnight-run1,After Midnight,Brooks Atkinson Theatre,2013-10-20,2014-06-29,week_range,False,1,,,,,37
+after-miss-julie-run1,After Miss Julie,American Airlines Theatre,2009-09-20,2009-12-06,week_range,False,1,,,,,12
+after-the-fall-run1,After the Fall,American Airlines Theatre,2004-06-27,2004-09-12,week_range,False,1,,,,,12
+after-the-night-and-the-music-run1,After the Night and the Music,Biltmore Theatre,2005-05-01,2005-07-03,week_range,False,1,,,,,10
+ah-wilderness-run1,"Ah, Wilderness!",Vivian Beaumont Theater,1998-02-22,1998-05-03,week_range,False,1,,,,,11
+aida-run1,Aida,Palace Theatre,2000-02-27,2004-09-05,week_range,False,1,,,,,237
+ain-t-broadway-grand-run1,Ain't Broadway Grand,Lunt-Fontanne Theatre,1993-03-28,1993-05-09,week_range,False,1,,,,,7
+ain-t-misbehavin-run1,Ain't Misbehavin',Ambassador Theatre,1988-08-14,1989-01-15,week_range,False,1,,,,,23
+ain-t-no-mo-run1,Ain't No Mo',Belasco Theatre,2022-11-13,2022-12-25,week_range,False,1,,,,,7
+ain-t-too-proud-the-life-and-times-of-th-run1,Ain't Too Proud-The Life and Times of the Temptations,Imperial Theatre,2019-03-03,2020-03-01,week_range,False,1,,,,,53
+ain-t-too-proud-the-life-and-times-of-th-run1,Ain't Too Proud—The Life and Times of the Temptations,Imperial Theatre,2020-03-08,2022-01-16,week_range,False,1,,,,,14
+airline-highway-run1,Airline Highway,Samuel J. Friedman Theatre,2015-04-05,2015-06-07,week_range,False,1,,,,,10
+aladdin-run1,Aladdin,New Amsterdam Theatre,2014-03-02,2026-08-16,week_range,False,1,,,,,567
+all-about-me-run1,All About Me,Henry Miller's Theatre,2010-02-28,2010-04-04,week_range,False,1,,,,,6
+all-in-comedy-about-love-run1,All In: Comedy About Love,Hudson Theatre,2024-12-15,2025-02-16,week_range,False,1,,,,,10
+all-my-sons-run1,All My Sons,John Golden Theatre,1987-04-19,1987-05-17,week_range,True,1,,,,,5
+all-my-sons-run2,All My Sons,Gerald Schoenfeld Theatre,2008-09-21,2009-01-11,week_range,True,2,,,,,17
+all-my-sons-run3,All My Sons,American Airlines Theatre,2019-04-07,2019-06-30,week_range,True,3,,,,,13
+all-out-comedy-about-ambition-run1,All Out: Comedy About Ambition,Nederlander Theatre,2025-12-14,2026-03-08,week_range,False,1,,,,,13
+all-shook-up-run1,All Shook Up,Palace Theatre,2005-02-20,2005-09-25,week_range,False,1,,,,,32
+all-the-way-run1,All The Way,Neil Simon Theatre,2014-02-16,2014-06-29,week_range,False,1,,,,,20
+allegiance-run1,Allegiance,Longacre Theatre,2015-10-11,2016-02-14,week_range,False,1,,,,,18
+almost-famous-run1,Almost Famous,Bernard B. Jacobs Theatre,2022-10-09,2023-01-08,week_range,False,1,,,,,14
+alton-brown-live-eat-your-science-run1,Alton Brown Live: Eat Your Science,Ethel Barrymore Theatre,2016-11-27,2016-11-27,week_range,False,1,,,,,1
+amadeus-run1,Amadeus,Music Box Theatre,1999-12-12,2000-05-14,week_range,False,1,,,,,23
+amazing-grace-run1,Amazing Grace,Nederlander Theatre,2015-06-28,2015-10-25,week_range,False,1,,,,,18
+amelie-a-new-musical-run1,"Amelie, A New Musical",Walter Kerr Theatre,2017-03-12,2017-05-21,week_range,False,1,,,,,11
+american-buffalo-run1,American Buffalo,Circle in the Square Theatre,2008-11-02,2022-07-10,week_range,False,1,,,,,20
+american-idiot-run1,American Idiot,St. James Theatre,2010-03-28,2011-04-24,week_range,False,1,,,,,57
+american-psycho-run1,American Psycho,Gerald Schoenfeld Theatre,2016-03-27,2016-06-05,week_range,False,1,,,,,11
+american-son-run1,American Son,Booth Theatre,2018-10-07,2019-01-27,week_range,False,1,,,,,17
+amour-run1,Amour,Music Box Theatre,2002-09-22,2002-11-03,week_range,False,1,,,,,7
+amy-s-view-run1,Amy's View,Ethel Barrymore Theatre,1999-04-04,1999-07-18,week_range,False,1,,,,,16
+an-act-of-god-run1,An Act of God,Studio 54,2015-05-10,2015-08-02,week_range,True,1,,,,,13
+an-act-of-god-run2,An Act of God,Booth Theatre,2016-05-29,2016-09-04,week_range,True,2,,,,,15
+an-almost-holy-picture-run1,An Almost Holy Picture,American Airlines Theatre,2002-01-27,2002-04-07,week_range,False,1,,,,,11
+an-american-daughter-run1,An American Daughter,Cort Theatre,1997-03-23,1997-06-29,week_range,False,1,,,,,15
+an-american-in-paris-run1,An American in Paris,Palace Theatre,2015-03-15,2016-10-09,week_range,False,1,,,,,82
+an-enemy-of-the-people-run1,An Enemy of the People,Circle in the Square Theatre,2012-09-09,2024-06-23,week_range,False,1,,,,,28
+an-evening-with-jerry-herman-run1,An Evening with Jerry Herman,Booth Theatre,1998-07-19,1998-08-23,week_range,False,1,,,,,6
+an-evening-with-patti-lupone-and-mandy-p-run1,An Evening with Patti LuPone and Mandy Patinkin,Ethel Barrymore Theatre,2011-11-20,2012-01-15,week_range,False,1,,,,,9
+an-ideal-husband-run1,An Ideal Husband,Ethel Barrymore Theatre,1996-04-28,1997-01-26,week_range,False,1,,,,,40
+an-inspector-calls-run1,An Inspector Calls,Royale Theatre,1994-04-17,1995-05-28,week_range,False,1,,,,,59
+anastasia-run1,Anastasia,Broadhurst Theatre,2017-03-26,2019-03-31,week_range,False,1,,,,,106
+andre-heller-s-wonderhouse-run1,Andre Heller's Wonderhouse,Broadhurst Theatre,1991-10-13,1991-10-27,week_range,False,1,,,,,3
+angels-in-america-a-gay-fantasia-on-nati-run1,Angels in America: A Gay Fantasia on National Themes,Neil Simon Theatre,2018-02-25,2018-07-15,week_range,False,1,,,,,21
+ann-run1,Ann,Vivian Beaumont Theater,2013-02-24,2013-06-30,week_range,False,1,,,,,19
+anna-christie-run1,Anna Christie,Criterion Center Stage Right,1992-12-27,1993-02-28,week_range,False,1,,,,,10
+anna-karenina-run1,Anna Karenina,Circle in the Square Theatre,1992-08-16,1992-10-04,week_range,False,1,,,,,8
+anna-in-the-tropics-run1,Anna in the Tropics,Royale Theatre,2003-11-09,2004-02-22,week_range,False,1,,,,,16
+annie-run1,Annie,Martin Beck Theatre,1997-03-16,1997-10-19,week_range,True,1,,,,,32
+annie-run2,Annie,Palace Theatre,2012-10-07,2014-01-05,week_range,True,2,,,,,66
+annie-get-your-gun-run1,Annie Get Your Gun,Marquis Theatre,1999-02-07,2001-09-02,week_range,False,1,,,,,135
+any-given-day-run1,Any Given Day,Longacre Theatre,1993-11-07,1993-12-12,week_range,False,1,,,,,6
+anything-goes-run1,Anything Goes,Vivian Beaumont Theater,1987-09-13,1989-09-03,week_range,True,1,,,,,104
+anything-goes-run2,Anything Goes,Stephen Sondheim Theatre,2011-03-13,2012-07-08,week_range,True,2,,,,,70
+appropriate-run1,Appropriate,Belasco Theatre,2023-12-03,2024-06-30,week_range,False,1,,,,,28
+arcadia-run1,Arcadia,Vivian Beaumont Theater,1995-03-05,1995-08-27,week_range,True,1,,,,,26
+arcadia-run2,Arcadia,Ethel Barrymore Theatre,2011-02-27,2011-06-19,week_range,True,2,,,,,17
+aren-t-we-all-run1,Aren't We All?,Brooks Atkinson Theatre,1985-06-09,1985-07-21,week_range,False,1,,,,,7
+arms-and-the-man-run1,Arms and the Man,Circle in the Square Theatre,1985-05-30,1985-09-01,show_level,False,1,Play,,,,13
+arsenic-and-old-lace-run1,Arsenic and Old Lace,46th Street Theatre,1986-06-22,1987-01-04,week_range,False,1,,,,,29
+art-run1,Art,Royale Theatre,1998-02-15,2025-12-21,week_range,False,1,,,,,95
+artist-descending-a-staircase-run1,Artist Descending a Staircase,Helen Hayes Theatre,1989-11-26,1989-12-31,week_range,False,1,,,,,6
+as-is-run1,As Is,Lyceum Theatre,1985-05-01,1986-01-04,show_level,False,1,Play,,,,31
+as-long-as-we-both-shall-laugh-run1,As Long as We Both Shall Laugh,American Airlines Theatre,2003-02-23,2003-06-01,week_range,False,1,,,,,14
+asinamali-run1,Asinamali!,Jack Lawrence Theatre,1987-04-19,1987-05-17,week_range,False,1,,,,,5
+aspects-of-love-run1,Aspects of Love,Broadhurst Theatre,1990-03-25,1991-03-03,week_range,False,1,,,,,50
+assassins-run1,Assassins,Studio 54,2004-04-04,2004-07-18,week_range,False,1,,,,,16
+august-osage-county-run1,August: Osage County,Music Box Theatre,2007-11-04,2009-06-28,week_range,False,1,,,,,86
+avenue-q-run1,Avenue Q,John Golden Theatre,2003-07-13,2009-09-13,week_range,False,1,,,,,323
+awake-and-sing-run1,Awake and Sing!,Belasco Theatre,2006-03-26,2006-06-25,week_range,False,1,,,,,14
+aznavour-run1,Aznavour,Marquis Theatre,1998-10-25,1998-11-15,week_range,False,1,,,,,4
+boop-the-musical-run1,BOOP! The Musical,Broadhurst Theatre,2025-03-16,2025-07-13,week_range,False,1,,,,,18
+baby-it-s-you-run1,Baby It's You!,Broadhurst Theatre,2011-03-27,2011-09-04,week_range,False,1,,,,,24
+back-to-the-future-run1,Back To The Future,Winter Garden Theatre,2023-07-02,2025-01-05,week_range,False,1,,,,,80
+bad-cinderella-run1,Bad Cinderella,Imperial Theatre,2023-02-19,2023-06-04,week_range,False,1,,,,,16
+band-in-berlin-run1,Band in Berlin,Helen Hayes Theatre,1999-02-21,1999-03-21,week_range,False,1,,,,,5
+bandstand-run1,Bandstand,Bernard B. Jacobs Theatre,2017-04-02,2017-09-17,week_range,False,1,,,,,25
+barbara-cook-s-broadway-run1,Barbara Cook's Broadway!,Vivian Beaumont Theater,2004-03-21,2004-04-18,week_range,False,1,,,,,4
+barbara-cook-a-concert-for-the-theatre-run1,Barbara Cook: A Concert for the Theatre,Ambassador Theatre,1987-04-05,1987-04-26,week_range,False,1,,,,,4
+barefoot-in-the-park-run1,Barefoot in the Park,Cort Theatre,2006-01-29,2006-05-21,week_range,False,1,,,,,17
+barrymore-run1,Barrymore,Music Box Theatre,1997-03-16,1997-11-02,week_range,False,1,,,,,34
+basia-on-broadway-run1,Basia on Broadway,Neil Simon Theatre,1994-11-20,1994-11-27,week_range,False,1,,,,,2
+be-more-chill-run1,Be More Chill,Lyceum Theatre,2019-02-17,2019-08-11,week_range,False,1,,,,,26
+bea-arthur-on-broadway-run1,Bea Arthur on Broadway,Booth Theatre,2002-02-03,2002-04-14,week_range,False,1,,,,,11
+beaches-a-new-musical-run1,"Beaches, A New Musical",Majestic Theatre,2026-03-29,2026-05-24,week_range,False,1,,,,,9
+beautiful-the-carole-king-musical-run1,Beautiful: The Carole King Musical,Stephen Sondheim Theatre,2013-11-24,2019-10-27,week_range,False,1,,,,,309
+beauty-and-the-beast-run1,Beauty and the Beast,Lunt-Fontanne Theatre,1994-03-13,2007-07-29,week_range,False,1,,,,,690
+becky-shaw-run1,Becky Shaw,Hayes Theater,2026-03-22,2026-06-14,week_range,False,1,,,,,13
+beetlejuice-run1,Beetlejuice,Winter Garden Theatre,2019-03-31,2023-01-08,week_range,True,1,,,,,90
+beetlejuice-run2,Beetlejuice,Palace Theatre,2025-10-12,2026-01-04,week_range,True,2,,,,,13
+bells-are-ringing-run1,Bells Are Ringing,Plymouth Theatre,2001-03-18,2001-06-10,week_range,False,1,,,,,13
+ben-platt-live-at-the-palace-run1,Ben Platt: Live at the Palace,Palace Theatre,2024-06-02,2024-06-16,week_range,False,1,,,,,3
+benefactors-run1,Benefactors,Brooks Atkinson Theatre,1985-12-15,1986-06-29,week_range,False,1,,,,,29
+bengal-tiger-at-the-baghdad-zoo-run1,Bengal Tiger at the Baghdad Zoo,Richard Rodgers Theatre,2011-03-13,2011-07-03,week_range,False,1,,,,,17
+bernhardt-hamlet-run1,Bernhardt/Hamlet,American Airlines Theatre,2018-09-02,2018-11-18,week_range,False,1,,,,,12
+betrayal-run1,Betrayal,American Airlines Theatre,2000-10-22,2001-02-04,week_range,True,1,,,,,16
+betrayal-run2,Betrayal,Ethel Barrymore Theatre,2013-10-06,2014-01-05,week_range,True,2,,,,,14
+betrayal-run3,Betrayal,Bernard B. Jacobs Theatre,2019-08-18,2019-12-08,week_range,True,3,,,,,17
+between-riverside-and-crazy-run1,Between Riverside and Crazy,Hayes Theater,2022-12-04,2023-02-19,week_range,False,1,,,,,12
+big-run1,Big,Sam S. Shubert Theatre,1996-04-14,1996-10-13,week_range,False,1,,,,,27
+big-deal-run1,Big Deal,Broadway Theatre,1986-04-06,1986-06-08,week_range,False,1,,,,,10
+big-fish-run1,Big Fish,Neil Simon Theatre,2013-09-08,2013-12-29,week_range,False,1,,,,,17
+big-river-run1,Big River,Eugene O'Neill Theatre,1985-06-09,1987-09-20,week_range,True,1,,,,,120
+big-river-run2,Big River,American Airlines Theatre,2003-07-06,2003-09-21,week_range,True,2,,,,,12
+bill-maher-victory-begins-at-home-run1,Bill Maher: Victory Begins at Home,Virginia Theatre,2003-05-04,2003-05-18,week_range,False,1,,,,,3
+billy-elliot-the-musical-run1,Billy Elliot: The Musical,Imperial Theatre,2008-10-05,2012-01-08,week_range,False,1,,,,,171
+biloxi-blues-run1,Biloxi Blues,Neil Simon Theatre,1985-06-09,1986-06-29,week_range,False,1,,,,,56
+birthday-candles-run1,Birthday Candles,American Airlines Theatre,2022-03-20,2022-05-29,week_range,False,1,,,,,11
+black-and-blue-run1,Black and Blue,Minskoff Theatre,1989-01-01,1991-01-20,week_range,False,1,,,,,108
+blackbird-run1,Blackbird,Belasco Theatre,2016-02-07,2016-06-12,week_range,False,1,,,,,19
+blast-run1,Blast!,Broadway Theatre,2001-04-08,2001-09-23,week_range,False,1,,,,,25
+blithe-spirit-run1,Blithe Spirit,Neil Simon Theatre,1987-03-15,1987-06-28,week_range,True,1,,,,,16
+blithe-spirit-run2,Blithe Spirit,Sam S. Shubert Theatre,2009-03-01,2009-07-19,week_range,True,2,,,,,21
+blood-brothers-run1,Blood Brothers,Music Box Theatre,1993-04-18,1995-04-30,week_range,False,1,,,,,107
+blood-knot-run1,Blood Knot,John Golden Theatre,1985-12-01,1986-03-02,week_range,False,1,,,,,14
+bloody-bloody-andrew-jackson-run1,Bloody Bloody Andrew Jackson,Bernard B. Jacobs Theatre,2010-09-26,2011-01-02,week_range,False,1,,,,,15
+bobbi-boland-run1,Bobbi Boland,Cort Theatre,2003-11-09,2003-11-09,week_range,False,1,,,,,1
+boeing-boeing-run1,Boeing-Boeing,Longacre Theatre,2008-04-20,2009-01-04,week_range,False,1,,,,,38
+bombay-dreams-run1,Bombay Dreams,Broadway Theatre,2004-04-04,2005-01-02,week_range,False,1,,,,,40
+bonnie-clyde-run1,Bonnie & Clyde,Gerald Schoenfeld Theatre,2011-11-06,2012-01-01,week_range,False,1,,,,,9
+born-yesterday-run1,Born Yesterday,46th Street Theatre,1989-01-22,1989-06-11,week_range,True,1,,,,,21
+born-yesterday-run2,Born Yesterday,Cort Theatre,2011-04-03,2011-06-26,week_range,True,2,,,,,13
+breakfast-at-tiffany-s-run1,Breakfast at Tiffany's,Cort Theatre,2013-03-10,2013-04-21,week_range,False,1,,,,,7
+breaking-the-code-run1,Breaking the Code,Neil Simon Theatre,1987-11-08,1988-04-10,week_range,False,1,,,,,23
+bridge-tunnel-run1,Bridge & Tunnel,Helen Hayes Theatre,2006-01-15,2006-08-06,week_range,False,1,,,,,30
+brief-encounter-run1,Brief Encounter,Studio 54,2010-09-12,2011-01-02,week_range,False,1,,,,,17
+bright-star-run1,Bright Star,Cort Theatre,2016-02-28,2016-06-26,week_range,False,1,,,,,18
+brighton-beach-memoirs-run1,Brighton Beach Memoirs,46th Street Theatre,1985-06-09,1986-05-11,week_range,True,1,,,,,49
+brighton-beach-memoirs-run2,Brighton Beach Memoirs,Nederlander Theatre,2009-10-04,2009-11-01,week_range,True,2,,,,,5
+bring-it-on-the-musical-run1,Bring It On: The Musical,St. James Theatre,2012-07-15,2012-12-30,week_range,False,1,,,,,25
+bring-in-da-noise-bring-in-da-funk-run1,"Bring in 'da Noise, Bring in 'da Funk",Ambassador Theatre,1996-04-14,1999-01-10,week_range,False,1,,,,,144
+broadway-run1,Broadway,Royale Theatre,1987-06-28,1987-06-28,week_range,False,1,,,,,1
+broadway-bound-run1,Broadway Bound,Broadhurst Theatre,1986-11-30,1988-09-25,week_range,False,1,,,,,96
+broken-glass-run1,Broken Glass,Booth Theatre,1994-04-17,1994-06-26,week_range,False,1,,,,,11
+bronx-bombers-run1,Bronx Bombers,Circle in the Square Theatre,2014-01-12,2014-03-02,week_range,False,1,,,,,8
+brooklyn-run1,Brooklyn,Gerald Schoenfeld Theatre,2004-09-26,2005-06-26,week_range,False,1,,,,,40
+brooklyn-boy-run1,Brooklyn Boy,Biltmore Theatre,2005-01-16,2005-03-27,week_range,False,1,,,,,11
+buddy-run1,Buddy,Sam S. Shubert Theatre,1990-10-28,1991-05-19,week_range,False,1,,,,,30
+buena-vista-social-club-run1,Buena Vista Social Club,Gerald Schoenfeld Theatre,2025-02-23,2026-08-16,week_range,False,1,,,,,78
+bug-run1,Bug,Samuel J. Friedman Theatre,2025-12-21,2026-03-08,week_range,False,1,,,,,12
+bullets-over-broadway-run1,Bullets Over Broadway,St. James Theatre,2014-03-16,2014-08-24,week_range,False,1,,,,,24
+buried-child-run1,Buried Child,Brooks Atkinson Theatre,1996-04-21,1996-06-30,week_range,False,1,,,,,11
+burn-this-run1,Burn This,Plymouth Theatre,1987-10-11,1988-10-30,week_range,True,1,,,,,56
+burn-this-run2,Burn This,Hudson Theatre,2019-03-17,2019-07-14,week_range,True,2,,,,,18
+burn-the-floor-run1,Burn the Floor,Longacre Theatre,2009-07-26,2010-01-10,week_range,False,1,,,,,25
+bus-stop-run1,Bus Stop,Circle in the Square Theatre,1996-02-04,1996-03-17,week_range,False,1,,,,,7
+butley-run1,Butley,Booth Theatre,2006-10-08,2007-01-14,week_range,False,1,,,,,15
+buttons-on-broadway-run1,Buttons on Broadway,Ambassador Theatre,1995-06-11,1995-07-16,week_range,False,1,,,,,6
+by-jeeves-run1,By Jeeves,Helen Hayes Theatre,2001-10-21,2001-12-30,week_range,False,1,,,,,11
+bye-bye-birdie-run1,Bye Bye Birdie,Henry Miller's Theatre,2009-09-13,2010-01-24,week_range,False,1,,,,,20
+cabaret-run1,Cabaret,Minskoff Theatre,1987-10-11,1988-06-05,week_range,True,1,,,,,35
+cabaret-run2,Cabaret,Studio 54,1998-02-15,2004-01-04,week_range,True,2,,,,,304
+cabaret-run3,Cabaret,August Wilson Theatre,2014-03-23,2025-09-21,week_range,True,3,,,,,131
+cafe-crown-run1,Cafe Crown,Brooks Atkinson Theatre,1989-02-19,1989-03-26,week_range,False,1,,,,,6
+call-me-izzy-run1,Call Me Izzy,Studio 54,2025-05-25,2025-08-24,week_range,False,1,,,,,14
+camelot-run1,Camelot,Vivian Beaumont Theater,1993-06-20,2023-07-23,week_range,False,1,,,,,28
+canciones-de-mi-padre-run1,Canciones De Mi Padre,Minskoff Theatre,1988-07-17,1988-07-31,week_range,False,1,,,,,3
+candida-run1,Candida,Criterion Center Stage Right,1993-03-07,1993-05-02,week_range,False,1,,,,,9
+candide-run1,Candide,Gershwin Theatre,1997-04-20,1997-07-27,week_range,False,1,,,,,15
+caroline-or-change-run1,"Caroline, or Change",Eugene O'Neill Theatre,2004-04-18,2022-01-09,week_range,False,1,,,,,34
+carousel-run1,Carousel,Vivian Beaumont Theater,1994-02-20,1995-01-15,week_range,True,1,,,,,48
+carousel-run2,Carousel,Imperial Theatre,2018-03-04,2018-09-16,week_range,True,2,,,,,29
+carrie-run1,Carrie,Virginia Theatre,1988-05-01,1988-05-15,week_range,False,1,,,,,3
+casa-valentina-run1,Casa Valentina,Samuel J. Friedman Theatre,2014-04-06,2014-06-29,week_range,False,1,,,,,13
+cat-on-a-hot-tin-roof-run1,Cat on a Hot Tin Roof,Eugene O'Neill Theatre,1990-03-18,1990-08-05,week_range,True,1,,,,,21
+cat-on-a-hot-tin-roof-run2,Cat on a Hot Tin Roof,Music Box Theatre,2003-10-12,2004-03-07,week_range,True,2,,,,,22
+cat-on-a-hot-tin-roof-run3,Cat on a Hot Tin Roof,Broadhurst Theatre,2008-02-17,2008-06-22,week_range,True,3,,,,,19
+cat-on-a-hot-tin-roof-run4,Cat on a Hot Tin Roof,Richard Rodgers Theatre,2012-12-23,2013-03-31,week_range,True,4,,,,,15
+catch-me-if-you-can-run1,Catch Me If You Can,Neil Simon Theatre,2011-03-13,2011-09-04,week_range,False,1,,,,,26
+cats-run1,Cats,Winter Garden Theatre,1985-06-09,2000-09-10,week_range,True,1,,,,,797
+cats-run2,Cats,Neil Simon Theatre,2016-07-17,2017-12-31,week_range,True,2,,,,,77
+cats-the-jellicle-ball-run1,Cats: The Jellicle Ball,Broadhurst Theatre,2026-03-22,2026-08-09,week_range,False,1,,,,,21
+catskills-on-broadway-run1,Catskills on Broadway,Lunt-Fontanne Theatre,1991-11-24,1993-01-03,week_range,False,1,,,,,59
+celebrity-autobiography-run1,Celebrity Autobiography,Sam S. Shubert Theatre,2018-12-02,2026-06-21,week_range,False,1,,,,,9
+chaplin-run1,Chaplin,Ethel Barrymore Theatre,2012-08-26,2013-01-06,week_range,False,1,,,,,20
+charlie-and-the-chocolate-factory-run1,Charlie and the Chocolate Factory,Lunt-Fontanne Theatre,2017-04-02,2018-01-14,week_range,False,1,,,,,42
+checkmates-run1,Checkmates,46th Street Theatre,1988-07-24,1989-01-01,week_range,False,1,,,,,24
+chess-run1,Chess,Imperial Theatre,1988-04-17,2026-06-21,week_range,False,1,,,,,47
+chicago-run1,Chicago,Ambassador Theatre,1996-10-27,2026-08-16,week_range,False,1,,,,,1476
+chicken-biscuits-run1,Chicken & Biscuits,Circle in the Square Theatre,2021-09-26,2021-11-28,week_range,False,1,,,,,9
+children-of-a-lesser-god-run1,Children of a Lesser God,Studio 54,2018-03-25,2018-05-27,week_range,False,1,,,,,10
+china-doll-run1,China Doll,Gerald Schoenfeld Theatre,2015-10-25,2016-01-31,week_range,False,1,,,,,14
+chinese-coffee-run1,Chinese Coffee,Circle in the Square Theatre,1992-05-31,1992-08-02,week_range,False,1,,,,,10
+chinglish-run1,Chinglish,Longacre Theatre,2011-10-16,2012-01-29,week_range,False,1,,,,,16
+chita-rivera-the-dancer-s-life-run1,Chita Rivera: The Dancer's Life,Gerald Schoenfeld Theatre,2005-11-27,2006-02-19,week_range,False,1,,,,,13
+chitty-chitty-bang-bang-run1,Chitty Chitty Bang Bang,Hilton Theatre,2005-03-27,2006-01-01,week_range,False,1,,,,,41
+choir-boy-run1,Choir Boy,Samuel J. Friedman Theatre,2018-12-16,2019-03-10,week_range,False,1,,,,,13
+chronicle-of-a-death-foretold-run1,Chronicle of a Death Foretold,Plymouth Theatre,1995-05-21,1995-07-16,week_range,False,1,,,,,9
+chu-chem-run1,Chu Chem,Ritz Theatre,1989-03-19,1989-05-14,week_range,False,1,,,,,9
+cinderella-run1,Cinderella,Broadway Theatre,2013-01-27,2015-01-04,week_range,False,1,,,,,102
+cirque-dreams-run1,Cirque Dreams,Broadway Theatre,2008-06-22,2008-08-24,week_range,False,1,,,,,10
+cirque-du-soleil-paramour-run1,Cirque du Soleil Paramour,Lyric Theatre,2016-04-17,2017-04-16,week_range,False,1,,,,,53
+city-of-angels-run1,City of Angels,Virginia Theatre,1989-11-26,1992-01-19,week_range,False,1,,,,,113
+closer-run1,Closer,Music Box Theatre,1999-03-14,1999-08-22,week_range,False,1,,,,,24
+clybourne-park-run1,Clybourne Park,Walter Kerr Theatre,2012-04-01,2012-09-02,week_range,False,1,,,,,23
+clyde-s-run1,Clyde's,Hayes Theater,2021-11-07,2022-01-16,week_range,False,1,,,,,11
+coastal-disturbances-run1,Coastal Disturbances,Circle in the Square Theatre,1987-02-15,1988-01-03,week_range,False,1,,,,,47
+colin-quinn-an-irish-wake-run1,Colin Quinn -- An Irish Wake,Helen Hayes Theatre,1998-08-30,1998-09-20,week_range,False,1,,,,,4
+colin-quinn-long-story-short-run1,Colin Quinn: Long Story Short,Helen Hayes Theatre,2010-10-24,2011-03-06,week_range,False,1,,,,,20
+collected-stories-run1,Collected Stories,Samuel J. Friedman Theatre,2010-04-11,2010-06-13,week_range,False,1,,,,,10
+come-back-little-sheba-run1,"Come Back, Little Sheba",Biltmore Theatre,2008-01-06,2008-03-16,week_range,False,1,,,,,11
+come-fly-away-run1,Come Fly Away,Marquis Theatre,2010-03-07,2010-09-05,week_range,False,1,,,,,27
+come-from-away-run1,Come From Away,Gerald Schoenfeld Theatre,2017-02-19,2022-10-02,week_range,False,1,,,,,214
+comedy-tonight-run1,Comedy Tonight,Lunt-Fontanne Theatre,1994-12-18,1994-12-25,week_range,False,1,,,,,2
+company-run1,Company,Criterion Center Stage Right,1995-09-03,1995-12-03,week_range,True,1,,,,,14
+company-run2,Company,Ethel Barrymore Theatre,2006-11-05,2007-07-01,week_range,True,2,,,,,35
+company-run3,Company,Bernard B. Jacobs Theatre,2020-03-08,2022-07-31,week_range,True,3,,,,,38
+constellations-run1,Constellations,Samuel J. Friedman Theatre,2014-12-21,2015-03-15,week_range,False,1,,,,,13
+contact-run1,Contact,Vivian Beaumont Theater,2000-03-05,2002-09-01,week_range,False,1,,,,,131
+conversations-with-my-father-run1,Conversations with My Father,Royale Theatre,1992-03-08,1993-03-14,week_range,False,1,,,,,54
+copenhagen-run1,Copenhagen,Royale Theatre,2000-03-26,2001-01-21,week_range,False,1,,,,,44
+coram-boy-run1,Coram Boy,Imperial Theatre,2007-04-22,2007-05-27,week_range,False,1,,,,,6
+corpse-run1,Corpse!,Helen Hayes Theatre,1985-12-15,1986-04-20,week_range,False,1,,,,,19
+cost-of-living-run1,Cost of Living,Samuel J. Friedman Theatre,2022-09-18,2022-11-06,week_range,False,1,,,,,8
+crazy-he-calls-me-run1,Crazy He Calls Me,Walter Kerr Theatre,1992-01-19,1992-02-02,week_range,False,1,,,,,3
+crazy-for-you-run1,Crazy for You,Sam S. Shubert Theatre,1992-02-02,1996-01-07,week_range,False,1,,,,,206
+criss-angel-raw-the-mindfreak-unplugged-run1,Criss Angel Raw - The Mindfreak Unplugged,Lunt-Fontanne Theatre,2019-07-07,2019-07-07,week_range,False,1,,,,,1
+cry-baby-run1,Cry-Baby,Marquis Theatre,2008-03-16,2008-06-22,week_range,False,1,,,,,15
+cuba-and-his-teddy-bear-run1,Cuba and His Teddy Bear,Longacre Theatre,1986-07-20,1986-09-21,week_range,False,1,,,,,10
+cult-of-love-run1,Cult of Love,Hayes Theater,2024-11-24,2025-02-02,week_range,False,1,,,,,11
+curtains-run1,Curtains,Al Hirschfeld Theatre,2007-03-04,2008-06-29,week_range,False,1,,,,,70
+cymbeline-run1,Cymbeline,Vivian Beaumont Theater,2007-11-04,2008-01-06,week_range,False,1,,,,,10
+cyrano-the-musical-run1,Cyrano - The Musical,Neil Simon Theatre,1993-10-24,1994-03-20,week_range,False,1,,,,,22
+cyrano-de-bergerac-run1,Cyrano de Bergerac,Richard Rodgers Theatre,2007-10-14,2008-01-06,week_range,True,1,,,,,13
+cyrano-de-bergerac-run2,Cyrano de Bergerac,American Airlines Theatre,2012-09-16,2012-11-25,week_range,True,2,,,,,11
+dame-edna-back-with-a-vengeance-run1,Dame Edna: Back with a Vengeance,Music Box Theatre,2004-11-07,2005-05-01,week_range,False,1,,,,,26
+dame-edna-the-royal-tour-run1,Dame Edna: The Royal Tour,Booth Theatre,1999-09-19,2000-07-02,week_range,False,1,,,,,42
+dames-at-sea-run1,Dames at Sea,Helen Hayes Theatre,2015-09-27,2016-01-03,week_range,False,1,,,,,14
+damn-yankees-run1,Damn Yankees,Marquis Theatre,1994-02-20,1995-08-06,week_range,False,1,,,,,69
+dana-h-run1,Dana H.,Lyceum Theatre,2021-10-03,2021-11-28,week_range,False,1,,,,,9
+dance-of-death-run1,Dance of Death,Broadhurst Theatre,2001-09-23,2002-01-13,week_range,False,1,,,,,17
+dance-of-the-vampires-run1,Dance of the Vampires,Minskoff Theatre,2002-10-20,2003-01-26,week_range,False,1,,,,,15
+dancin-run1,Dancin',Music Box Theatre,2023-03-05,2023-05-14,week_range,False,1,,,,,11
+dancing-at-lughnasa-run1,Dancing at Lughnasa,Plymouth Theatre,1991-10-13,1992-10-25,week_range,False,1,,,,,55
+dangerous-games-run1,Dangerous Games,Nederlander Theatre,1989-10-15,1989-10-22,week_range,False,1,,,,,2
+danny-gans-on-broadway-the-man-of-many-v-run1,Danny Gans on Broadway: The Man of Many Voices,Neil Simon Theatre,1995-11-05,1995-11-12,week_range,False,1,,,,,2
+dave-chappelle-live-on-broadway-run1,Dave Chappelle Live on Broadway,Lunt-Fontanne Theatre,2019-07-14,2019-07-21,week_range,False,1,,,,,2
+david-byrne-s-american-utopia-run1,David Byrne's American Utopia,St. James Theatre,2019-10-06,2022-04-03,week_range,False,1,,,,,48
+david-copperfield-dreams-and-nightmares-run1,David Copperfield: Dreams and Nightmares,Martin Beck Theatre,1996-12-01,1996-12-29,week_range,False,1,,,,,5
+days-of-wine-and-roses-run1,Days Of Wine And Roses,Studio 54,2024-01-07,2024-03-31,week_range,False,1,,,,,13
+dead-accounts-run1,Dead Accounts,Music Box Theatre,2012-11-11,2013-01-06,week_range,False,1,,,,,9
+dead-outlaw-run1,Dead Outlaw,Longacre Theatre,2025-04-13,2025-06-29,week_range,False,1,,,,,12
+dear-evan-hansen-run1,Dear Evan Hansen,Music Box Theatre,2016-11-20,2022-09-18,week_range,False,1,,,,,213
+death-becomes-her-run1,Death Becomes Her,Lunt-Fontanne Theatre,2024-10-27,2026-06-28,week_range,False,1,,,,,88
+death-and-the-king-s-horseman-run1,Death and the King's Horseman,Vivian Beaumont Theater,1987-02-15,1987-03-29,week_range,False,1,,,,,7
+death-and-the-maiden-run1,Death and the Maiden,Brooks Atkinson Theatre,1992-02-23,1992-08-02,week_range,False,1,,,,,24
+death-of-a-salesman-run1,Death of a Salesman,Eugene O'Neill Theatre,1999-01-24,1999-11-07,week_range,True,1,,,,,40
+death-of-a-salesman-run2,Death of a Salesman,Hudson Theatre,2012-02-19,2023-01-15,week_range,True,2,,,,,34
+death-of-a-salesman-run3,Death of a Salesman,Winter Garden Theatre,2026-03-08,2026-08-09,week_range,True,3,,,,,23
+democracy-run1,Democracy,Brooks Atkinson Theatre,2004-11-07,2005-04-17,week_range,False,1,,,,,24
+derren-brown-secret-run1,Derren Brown: Secret,Cort Theatre,2019-09-08,2020-01-05,week_range,False,1,,,,,18
+design-for-living-run1,Design for Living,American Airlines Theatre,2001-02-18,2001-05-13,week_range,False,1,,,,,13
+desire-under-the-elms-run1,Desire Under the Elms,St. James Theatre,2009-04-19,2009-05-24,week_range,False,1,,,,,6
+deuce-run1,Deuce,Music Box Theatre,2007-04-15,2007-08-19,week_range,False,1,,,,,19
+diana-run1,Diana,Longacre Theatre,2021-11-07,2021-12-19,week_range,False,1,,,,,7
+dinner-at-eight-run1,Dinner at Eight,Vivian Beaumont Theater,2002-11-24,2003-01-26,week_range,False,1,,,,,10
+dirty-blonde-run1,Dirty Blonde,Helen Hayes Theatre,2000-04-16,2001-03-04,week_range,False,1,,,,,47
+dirty-rotten-scoundrels-run1,Dirty Rotten Scoundrels,Imperial Theatre,2005-02-06,2006-09-03,week_range,False,1,,,,,83
+disaster-run1,Disaster!,Nederlander Theatre,2016-02-14,2016-05-08,week_range,False,1,,,,,13
+disgraced-run1,Disgraced,Lyceum Theatre,2014-09-28,2015-03-01,week_range,False,1,,,,,23
+dividing-the-estate-run1,Dividing the Estate,Booth Theatre,2008-10-26,2009-01-04,week_range,False,1,,,,,11
+doctor-zhivago-run1,Doctor Zhivago,Broadway Theatre,2015-03-29,2015-05-10,week_range,False,1,,,,,7
+dog-day-afternoon-run1,Dog Day Afternoon,August Wilson Theatre,2026-03-15,2026-07-12,week_range,False,1,,,,,18
+don-t-dress-for-dinner-run1,Don't Dress For Dinner,American Airlines Theatre,2012-04-01,2012-06-17,week_range,False,1,,,,,12
+don-t-get-god-started-run1,Don't Get God Started,Longacre Theatre,1987-10-18,1988-01-10,week_range,False,1,,,,,13
+donny-marie-a-broadway-christmas-run1,Donny & Marie - A Broadway Christmas,Marquis Theatre,2010-12-12,2011-01-02,week_range,False,1,,,,,4
+doubles-run1,Doubles,Ritz Theatre,1985-06-09,1986-01-05,week_range,False,1,,,,,31
+doubt-run1,Doubt,Walter Kerr Theatre,2005-03-13,2024-04-21,week_range,False,1,,,,,81
+dr-seuss-how-the-grinch-stole-christmas-run1,Dr. Seuss' How the Grinch Stole Christmas!,Hilton Theatre,2006-10-29,2007-01-07,week_range,True,1,,,,,11
+dr-seuss-how-the-grinch-stole-christmas-run2,Dr. Seuss' How the Grinch Stole Christmas!,St. James Theatre,2007-11-04,2008-01-06,week_range,True,2,,,,,10
+dracula-the-musical-run1,"Dracula, the Musical",Belasco Theatre,2004-08-01,2005-01-02,week_range,False,1,,,,,23
+dream-run1,Dream,Royale Theatre,1997-03-16,1997-07-06,week_range,False,1,,,,,17
+dreamgirls-run1,Dreamgirls,Ambassador Theatre,1987-06-28,1987-11-29,week_range,False,1,,,,,23
+driving-miss-daisy-run1,Driving Miss Daisy,John Golden Theatre,2010-10-10,2011-04-10,week_range,False,1,,,,,27
+drowning-crow-run1,Drowning Crow,Biltmore Theatre,2004-02-01,2004-04-04,week_range,False,1,,,,,10
+eastern-standard-run1,Eastern Standard,John Golden Theatre,1988-12-25,1989-03-26,week_range,False,1,,,,,14
+eclipsed-run1,Eclipsed,John Golden Theatre,2016-02-28,2016-06-19,week_range,False,1,,,,,17
+el-mago-pop-run1,El Mago Pop,Ethel Barrymore Theatre,2023-08-20,2023-08-27,week_range,False,1,,,,,2
+elaine-stritch-at-liberty-run1,Elaine Stritch at Liberty,Neil Simon Theatre,2002-02-10,2002-05-26,week_range,False,1,,,,,16
+electra-run1,Electra,Ethel Barrymore Theatre,1998-11-22,1999-03-21,week_range,False,1,,,,,18
+elf-run1,Elf,Al Hirschfeld Theatre,2010-11-07,2011-01-02,week_range,True,1,,,,,9
+elf-run2,Elf,Al Hirschfeld Theatre,2012-11-11,2025-01-05,week_range,True,2,,,,,18
+elling-run1,Elling,Ethel Barrymore Theatre,2010-11-07,2010-11-28,week_range,False,1,,,,,4
+enchanted-april-run1,Enchanted April,Belasco Theatre,2003-04-13,2003-08-31,week_range,False,1,,,,,21
+end-of-the-rainbow-run1,End of the Rainbow,Belasco Theatre,2012-03-25,2012-08-19,week_range,False,1,,,,,22
+english-run1,English,Todd Haimes Theatre,2025-01-05,2025-03-02,week_range,False,1,,,,,9
+enron-run1,Enron,Broadhurst Theatre,2010-04-11,2010-05-09,week_range,False,1,,,,,5
+epic-proportions-run1,Epic Proportions,Helen Hayes Theatre,1999-09-12,1999-12-19,week_range,False,1,,,,,15
+equus-run1,Equus,Broadhurst Theatre,2008-09-07,2009-02-08,week_range,False,1,,,,,23
+escape-to-margaritaville-run1,Escape to Margaritaville,Marquis Theatre,2018-02-18,2018-07-01,week_range,False,1,,,,,20
+eugene-onegin-run1,Eugene Onegin,Martin Beck Theatre,1997-11-23,1997-11-23,week_range,False,1,,,,,1
+eureka-day-run1,Eureka Day,Samuel J. Friedman Theatre,2024-12-01,2025-02-16,week_range,False,1,,,,,12
+every-brilliant-thing-run1,Every Brilliant Thing,Hudson Theatre,2026-02-22,2026-08-09,week_range,False,1,,,,,25
+everyday-rapture-run1,Everyday Rapture,American Airlines Theatre,2010-04-25,2010-07-11,week_range,False,1,,,,,12
+evita-run1,Evita,Marquis Theatre,2012-03-18,2013-01-27,week_range,False,1,,,,,46
+execution-of-justice-run1,Execution of Justice,Virginia Theatre,1986-03-09,1986-03-23,week_range,False,1,,,,,3
+exit-the-king-run1,Exit the King,Ethel Barrymore Theatre,2009-03-08,2009-06-14,week_range,False,1,,,,,15
+face-value-run1,Face Value,Cort Theatre,1993-03-14,1993-03-14,week_range,False,1,,,,,1
+faith-healer-run1,Faith Healer,Booth Theatre,2006-04-23,2006-08-13,week_range,False,1,,,,,17
+fallen-angels-run1,Fallen Angels,Todd Haimes Theatre,2026-03-29,2026-06-07,week_range,False,1,,,,,11
+falsettos-run1,Falsettos,John Golden Theatre,1992-04-12,1993-06-27,week_range,True,1,,,,,64
+falsettos-run2,Falsettos,Walter Kerr Theatre,2016-10-02,2017-01-08,week_range,True,2,,,,,15
+farinelli-and-the-king-run1,Farinelli and the King,Belasco Theatre,2017-12-10,2018-03-25,week_range,False,1,,,,,16
+fat-ham-run1,Fat Ham,American Airlines Theatre,2023-03-26,2023-07-02,week_range,False,1,,,,,15
+fela-run1,Fela!,Eugene O'Neill Theatre,2009-10-25,2011-01-02,week_range,True,1,,,,,63
+fela-run2,Fela!,Al Hirschfeld Theatre,2012-07-15,2012-08-05,week_range,True,2,,,,,4
+fences-run1,Fences,46th Street Theatre,1987-03-22,1988-06-26,week_range,True,1,,,,,67
+fences-run2,Fences,Cort Theatre,2010-04-18,2010-07-11,week_range,True,2,,,,,13
+festen-run1,Festen,Music Box Theatre,2006-03-26,2006-05-21,week_range,False,1,,,,,9
+fiddler-on-the-roof-run1,Fiddler on the Roof,Gershwin Theatre,1990-11-04,1991-06-16,week_range,True,1,,,,,33
+fiddler-on-the-roof-run2,Fiddler on the Roof,Minskoff Theatre,2004-01-25,2006-01-08,week_range,True,2,,,,,103
+fiddler-on-the-roof-run3,Fiddler on the Roof,Broadway Theatre,2015-11-22,2017-01-01,week_range,True,3,,,,,58
+finding-neverland-run1,Finding Neverland,Lunt-Fontanne Theatre,2015-03-15,2016-08-21,week_range,False,1,,,,,75
+finian-s-rainbow-run1,Finian's Rainbow,St. James Theatre,2009-10-11,2010-01-17,week_range,False,1,,,,,15
+first-date-run1,First Date,Longacre Theatre,2013-07-14,2014-01-05,week_range,False,1,,,,,26
+fish-in-the-dark-run1,Fish in the Dark,Cort Theatre,2015-02-08,2015-08-02,week_range,False,1,,,,,26
+five-guys-named-moe-run1,Five Guys Named Moe,Eugene O'Neill Theatre,1992-03-22,1993-05-02,week_range,False,1,,,,,59
+flamenco-puro-run1,Flamenco Puro,Mark Hellinger Theatre,1986-10-19,1986-11-30,week_range,False,1,,,,,7
+flower-drum-song-run1,Flower Drum Song,Virginia Theatre,2002-09-29,2003-03-16,week_range,False,1,,,,,25
+floyd-collins-run1,Floyd Collins,Vivian Beaumont Theater,2025-03-30,2025-06-22,week_range,False,1,,,,,13
+flying-over-sunset-run1,Flying Over Sunset,Vivian Beaumont Theater,2021-11-14,2022-01-16,week_range,False,1,,,,,10
+follies-run1,Follies,Belasco Theatre,2001-03-11,2001-07-15,week_range,True,1,,,,,19
+follies-run2,Follies,Marquis Theatre,2011-08-07,2012-01-22,week_range,True,2,,,,,25
+fool-for-love-run1,Fool For Love,Samuel J. Friedman Theatre,2015-09-20,2015-12-13,week_range,False,1,,,,,13
+fool-moon-run1,Fool Moon,Richard Rodgers Theatre,1993-02-14,1993-09-05,week_range,True,1,,,,,30
+fool-moon-run2,Fool Moon,Ambassador Theatre,1995-10-22,1996-01-07,week_range,True,2,,,,,12
+fool-moon-run3,Fool Moon,Brooks Atkinson Theatre,1998-11-22,1999-01-03,week_range,True,3,,,,,7
+footloose-run1,Footloose,Richard Rodgers Theatre,1998-10-11,2000-07-02,week_range,False,1,,,,,91
+forever-tango-run1,Forever Tango,Marquis Theatre,1997-06-22,1998-08-02,week_range,True,1,,,,,58
+forever-tango-run2,Forever Tango,Sam S. Shubert Theatre,2004-07-25,2004-11-28,week_range,True,2,,,,,15
+forever-tango-run3,Forever Tango,Walter Kerr Theatre,2013-07-14,2013-09-15,week_range,True,3,,,,,10
+fortune-s-fool-run1,Fortune's Fool,Music Box Theatre,2002-03-10,2002-07-21,week_range,False,1,,,,,20
+fosse-run1,Fosse,Broadhurst Theatre,1998-12-27,2001-08-26,week_range,False,1,,,,,140
+four-baboons-adoring-the-sun-run1,Four Baboons Adoring the Sun,Vivian Beaumont Theater,1992-02-23,1992-04-19,week_range,False,1,,,,,9
+frankie-valli-and-the-four-seasons-on-br-run1,Frankie Valli and the Four Seasons On Broadway,Broadway Theatre,2012-10-21,2012-10-28,week_range,True,1,,,,,2
+frankie-valli-and-the-four-seasons-on-br-run2,Frankie Valli and the Four Seasons On Broadway,Lunt-Fontanne Theatre,2016-10-23,2016-10-30,week_range,True,2,,,,,2
+frankie-and-johnny-in-the-clair-de-lune-run1,Frankie and Johnny in the Clair de Lune,Belasco Theatre,2002-07-28,2003-03-09,week_range,True,1,,,,,33
+frankie-and-johnny-in-the-clair-de-lune-run2,Frankie and Johnny in the Clair de Lune,Broadhurst Theatre,2019-05-05,2019-07-28,week_range,True,2,,,,,13
+freak-run1,Freak,Cort Theatre,1998-01-25,1998-07-05,week_range,False,1,,,,,24
+freestyle-love-supreme-run1,Freestyle Love Supreme,Booth Theatre,2019-09-15,2022-01-02,week_range,False,1,,,,,31
+frost-nixon-run1,Frost/Nixon,Bernard B. Jacobs Theatre,2007-04-01,2007-08-19,week_range,False,1,,,,,21
+frozen-run1,Frozen,Circle in the Square Theatre,2004-05-02,2004-08-22,week_range,True,1,,,,,17
+frozen-run2,Frozen,St. James Theatre,2018-02-25,2020-03-08,week_range,True,2,,,,,107
+fully-committed-run1,Fully Committed,Lyceum Theatre,2016-04-03,2016-07-31,week_range,False,1,,,,,18
+fun-home-run1,Fun Home,Circle in the Square Theatre,2015-03-29,2016-09-11,week_range,False,1,,,,,76
+funny-girl-run1,Funny Girl,August Wilson Theatre,2022-03-27,2023-09-03,week_range,False,1,,,,,76
+gary-a-sequel-to-titus-andronicus-run1,Gary: A Sequel to Titus Andronicus,Booth Theatre,2019-03-17,2019-06-16,week_range,False,1,,,,,14
+gem-of-the-ocean-run1,Gem of the Ocean,Walter Kerr Theatre,2004-11-28,2005-02-06,week_range,False,1,,,,,11
+gentlemen-prefer-blondes-run1,Gentlemen Prefer Blondes,Lyceum Theatre,1995-04-02,1995-04-30,week_range,False,1,,,,,5
+george-gershwin-alone-run1,George Gershwin Alone,Helen Hayes Theatre,2001-04-22,2001-07-22,week_range,False,1,,,,,14
+gettin-the-band-back-together-run1,Gettin' the Band Back Together,Belasco Theatre,2018-07-22,2018-09-16,week_range,False,1,,,,,9
+getting-away-with-murder-run1,Getting Away with Murder,Broadhurst Theatre,1996-02-25,1996-03-31,week_range,False,1,,,,,6
+getting-married-run1,Getting Married,Circle in the Square Theatre,1991-06-09,1991-08-25,week_range,False,1,,,,,12
+getting-and-spending-run1,Getting and Spending,Helen Hayes Theatre,1998-10-11,1998-11-29,week_range,False,1,,,,,8
+ghetto-run1,Ghetto,Circle in the Square Theatre,1989-04-09,1989-05-28,week_range,False,1,,,,,8
+ghetto-klown-run1,Ghetto Klown,Lyceum Theatre,2011-02-27,2011-07-10,week_range,False,1,,,,,20
+ghost-the-musical-run1,Ghost The Musical,Lunt-Fontanne Theatre,2012-03-18,2012-08-19,week_range,False,1,,,,,23
+giant-run1,Giant,Music Box Theatre,2026-03-15,2026-06-28,week_range,False,1,,,,,16
+gigi-run1,Gigi,Neil Simon Theatre,2015-03-22,2015-06-21,week_range,False,1,,,,,14
+girl-from-the-north-country-run1,Girl From the North Country,Belasco Theatre,2020-02-09,2022-06-19,week_range,False,1,,,,,28
+glengarry-glen-ross-run1,Glengarry Glen Ross,Bernard B. Jacobs Theatre,2005-04-10,2005-08-28,week_range,True,1,,,,,21
+glengarry-glen-ross-run2,Glengarry Glen Ross,Palace Theatre,2012-10-21,2025-06-29,week_range,True,2,,,,,30
+glory-days-run1,Glory Days,Circle in the Square Theatre,2008-04-27,2008-05-11,week_range,False,1,,,,,3
+god-of-carnage-run1,God of Carnage,Bernard B. Jacobs Theatre,2009-03-01,2010-06-06,week_range,False,1,,,,,61
+godspell-run1,Godspell,Circle in the Square Theatre,2011-10-16,2012-06-24,week_range,False,1,,,,,37
+golda-s-balcony-run1,Golda's Balcony,Helen Hayes Theatre,2003-10-05,2005-01-02,week_range,False,1,,,,,65
+golden-boy-run1,Golden Boy,Belasco Theatre,2012-11-11,2013-01-20,week_range,False,1,,,,,11
+golden-child-run1,Golden Child,Longacre Theatre,1998-03-29,1998-05-31,week_range,False,1,,,,,10
+good-night-oscar-run1,"Good Night, Oscar",Belasco Theatre,2023-04-09,2023-08-27,week_range,False,1,,,,,21
+good-night-and-good-luck-run1,"Good Night, and Good Luck",Winter Garden Theatre,2025-03-16,2025-06-08,week_range,False,1,,,,,13
+good-people-run1,Good People,Samuel J. Friedman Theatre,2011-02-13,2011-05-29,week_range,False,1,,,,,16
+good-vibrations-run1,Good Vibrations,Eugene O'Neill Theatre,2004-12-26,2005-04-24,week_range,False,1,,,,,18
+grace-run1,Grace,Cort Theatre,2012-09-16,2013-01-06,week_range,False,1,,,,,17
+grand-horizons-run1,Grand Horizons,Helen Hayes Theater,2019-12-29,2020-03-01,week_range,False,1,,,,,10
+grand-hotel-run1,Grand Hotel,Gershwin Theatre,1989-10-22,1992-04-26,week_range,False,1,,,,,131
+gray-s-anatomy-run1,Gray's Anatomy,Vivian Beaumont Theater,1993-11-07,1994-07-03,week_range,False,1,,,,,15
+grease-run1,Grease,Eugene O'Neill Theatre,1994-04-24,1998-01-25,week_range,True,1,,,,,191
+grease-run2,Grease,Brooks Atkinson Theatre,2007-07-29,2009-01-04,week_range,True,2,,,,,76
+grey-gardens-run1,Grey Gardens,Walter Kerr Theatre,2006-10-08,2007-07-29,week_range,False,1,,,,,43
+grey-house-run1,Grey House,Lyceum Theatre,2023-04-30,2023-07-30,week_range,False,1,,,,,14
+grind-run1,Grind,Mark Hellinger Theatre,1985-06-09,1985-06-16,week_range,False,1,,,,,2
+groundhog-day-run1,Groundhog Day,August Wilson Theatre,2017-03-19,2017-09-17,week_range,False,1,,,,,27
+gutenberg-the-musical-run1,Gutenberg! The Musical!,James Earl Jones Theatre,2023-09-17,2024-01-28,week_range,False,1,,,,,20
+guys-and-dolls-run1,Guys and Dolls,Martin Beck Theatre,1992-03-22,1995-01-08,week_range,True,1,,,,,147
+guys-and-dolls-run2,Guys and Dolls,Nederlander Theatre,2009-02-08,2009-06-14,week_range,True,2,,,,,19
+gypsy-run1,Gypsy,St. James Theatre,1989-10-29,1991-07-28,week_range,True,1,,,,,78
+gypsy-run2,Gypsy,Sam S. Shubert Theatre,2003-04-06,2004-05-30,week_range,True,2,,,,,61
+gypsy-run3,Gypsy,St. James Theatre,2008-03-09,2025-08-17,week_range,True,3,,,,,84
+gypsy-passion-run1,Gypsy Passion,Plymouth Theatre,1992-11-22,1993-01-03,week_range,False,1,,,,,7
+hadestown-run1,Hadestown,Walter Kerr Theatre,2019-03-24,2026-08-16,week_range,False,1,,,,,309
+hair-run1,Hair,Al Hirschfeld Theatre,2009-03-08,2010-06-27,week_range,True,1,,,,,69
+hair-run2,Hair,St. James Theatre,2011-07-10,2011-09-11,week_range,True,2,,,,,10
+hairspray-run1,Hairspray,Neil Simon Theatre,2002-07-21,2009-01-04,week_range,False,1,,,,,338
+hamilton-run1,Hamilton,Richard Rodgers Theatre,2015-07-19,2026-08-16,week_range,False,1,,,,,498
+hamlet-run1,Hamlet,Criterion Center Stage Right,1992-03-15,1992-05-10,week_range,True,1,,,,,9
+hamlet-run2,Hamlet,Belasco Theatre,1995-04-16,1995-07-23,week_range,True,2,,,,,15
+hamlet-run3,Hamlet,Broadhurst Theatre,2009-09-13,2009-12-06,week_range,True,3,,,,,13
+hand-to-god-run1,Hand to God,Booth Theatre,2015-03-15,2016-01-03,week_range,False,1,,,,,42
+hands-on-a-hardbody-run1,Hands on a Hardbody,Brooks Atkinson Theatre,2013-02-24,2013-04-14,week_range,False,1,,,,,8
+hangmen-run1,Hangmen,John Golden Theatre,2020-03-01,2022-06-19,week_range,False,1,,,,,13
+harmony-run1,Harmony,Ethel Barrymore Theatre,2023-10-22,2024-02-04,week_range,False,1,,,,,16
+harry-connick-jr-in-concert-on-broadway-run1,"Harry Connick, Jr. in Concert on Broadway",Neil Simon Theatre,1990-11-25,1990-12-09,week_range,True,1,,,,,3
+harry-connick-jr-in-concert-on-broadway-run2,"Harry Connick, Jr. in Concert on Broadway",Neil Simon Theatre,2010-07-18,2010-08-01,week_range,True,2,,,,,3
+harry-connick-jr-a-celebration-of-cole-p-run1,"Harry Connick, Jr.-A Celebration of Cole Porter",Nederlander Theatre,2019-12-08,2019-12-29,week_range,False,1,,,,,4
+harry-potter-and-the-cursed-child-run1,Harry Potter and the Cursed Child,Lyric Theatre,2020-03-08,2026-08-16,week_range,False,1,,,,,249
+harry-potter-and-the-cursed-child-parts--run1,"Harry Potter and the Cursed Child, Parts One and Two",Lyric Theatre,2018-03-25,2020-03-01,week_range,False,1,,,,,102
+harvey-run1,Harvey,Studio 54,2012-05-20,2012-08-05,week_range,False,1,,,,,12
+having-our-say-run1,Having Our Say,Booth Theatre,1995-03-19,1995-12-31,week_range,False,1,,,,,42
+hay-fever-run1,Hay Fever,Music Box Theatre,1985-12-01,1986-03-30,week_range,False,1,,,,,18
+head-over-heels-run1,Head Over Heels,Hudson Theatre,2018-06-24,2019-01-06,week_range,False,1,,,,,29
+heartbreak-house-run1,Heartbreak House,American Airlines Theatre,2006-09-17,2006-12-17,week_range,False,1,,,,,14
+hedda-gabler-run1,Hedda Gabler,Criterion Center Stage Right,1994-06-12,1994-08-07,week_range,True,1,,,,,9
+hedda-gabler-run2,Hedda Gabler,Ambassador Theatre,2001-09-23,2002-01-13,week_range,True,2,,,,,17
+hedda-gabler-run3,Hedda Gabler,American Airlines Theatre,2009-01-11,2009-03-29,week_range,True,3,,,,,12
+hedwig-and-the-angry-inch-run1,Hedwig and the Angry Inch,Belasco Theatre,2014-03-30,2015-09-13,week_range,False,1,,,,,77
+heisenberg-run1,Heisenberg,Samuel J. Friedman Theatre,2016-09-25,2016-12-11,week_range,False,1,,,,,12
+hell-s-kitchen-run1,Hell's Kitchen,Sam S. Shubert Theatre,2024-03-31,2026-02-22,week_range,False,1,,,,,100
+hello-dolly-run1,"Hello, Dolly!",Lunt-Fontanne Theatre,1995-10-15,1996-01-28,week_range,True,1,,,,,16
+hello-dolly-run2,"Hello, Dolly!",Sam S. Shubert Theatre,2017-03-19,2018-08-26,week_range,True,2,,,,,76
+henry-iv-run1,Henry IV,Vivian Beaumont Theater,2003-11-02,2004-01-18,week_range,False,1,,,,,12
+here-lies-love-run1,Here Lies Love,Broadway Theatre,2023-06-18,2023-11-26,week_range,False,1,,,,,24
+high-run1,High,Booth Theatre,2011-03-27,2011-04-24,week_range,False,1,,,,,5
+high-fidelity-run1,High Fidelity,Imperial Theatre,2006-11-26,2006-12-17,week_range,False,1,,,,,4
+high-society-run1,High Society,St. James Theatre,1998-04-05,1998-08-30,week_range,False,1,,,,,22
+hillary-and-clinton-run1,Hillary and Clinton,John Golden Theatre,2019-03-17,2019-06-23,week_range,False,1,,,,,15
+hizzoner-run1,Hizzoner!,Longacre Theatre,1989-02-12,1989-03-05,week_range,False,1,,,,,4
+holiday-run1,Holiday,Circle in the Square Theatre,1995-11-19,1996-01-14,week_range,False,1,,,,,9
+holiday-inn-the-new-irving-berlin-musica-run1,"Holiday Inn, The New Irving Berlin Musical",Studio 54,2016-09-04,2017-01-15,week_range,False,1,,,,,20
+holler-if-ya-hear-me-run1,Holler If Ya Hear Me,Palace Theatre,2014-06-08,2014-07-20,week_range,False,1,,,,,7
+hollywood-arms-run1,Hollywood Arms,Cort Theatre,2002-10-13,2003-01-05,week_range,False,1,,,,,13
+home-run1,Home,Todd Haimes Theatre,2024-05-19,2024-07-21,week_range,False,1,,,,,10
+home-for-the-holidays-run1,Home for the Holidays,August Wilson Theatre,2017-11-19,2017-12-31,week_range,False,1,,,,,7
+honeymoon-in-vegas-run1,Honeymoon in Vegas,Nederlander Theatre,2014-11-23,2015-04-05,week_range,False,1,,,,,20
+honky-tonk-nights-run1,Honky Tonk Nights,Biltmore Theatre,1986-07-27,1986-08-10,week_range,False,1,,,,,3
+honour-run1,Honour,Belasco Theatre,1998-04-05,1998-06-14,week_range,False,1,,,,,11
+hot-feet-run1,Hot Feet,Hilton Theatre,2006-04-23,2006-07-23,week_range,False,1,,,,,14
+how-i-learned-to-drive-run1,How I Learned to Drive,Samuel J. Friedman Theatre,2022-04-03,2022-06-12,week_range,False,1,,,,,11
+how-to-dance-in-ohio-run1,How to Dance in Ohio,Belasco Theatre,2023-11-19,2024-02-11,week_range,False,1,,,,,13
+how-to-succeed-in-business-without-reall-run1,How to Succeed in Business Without Really Trying,Richard Rodgers Theatre,1995-03-12,1996-07-14,week_range,True,1,,,,,71
+how-to-succeed-in-business-without-reall-run2,How to Succeed in Business Without Really Trying,Al Hirschfeld Theatre,2011-02-27,2012-05-20,week_range,True,2,,,,,65
+hugh-jackman-back-on-broadway-run1,"Hugh Jackman, Back on Broadway",Broadhurst Theatre,2011-10-30,2012-01-01,week_range,False,1,,,,,10
+hughie-run1,Hughie,Circle in the Square Theatre,1996-07-28,1996-11-03,week_range,True,1,,,,,14
+hughie-run2,Hughie,Booth Theatre,2016-02-14,2016-03-27,week_range,True,2,,,,,7
+i-am-my-own-wife-run1,I Am My Own Wife,Lyceum Theatre,2003-11-16,2004-10-31,week_range,False,1,,,,,50
+i-hate-hamlet-run1,I Hate Hamlet,Walter Kerr Theatre,1991-03-24,1991-06-23,week_range,False,1,,,,,14
+i-need-that-run1,I Need That,American Airlines Theatre,2023-10-15,2023-12-31,week_range,False,1,,,,,12
+i-ll-eat-you-last-a-chat-with-sue-menger-run1,I'll Eat You Last: A Chat With Sue Mengers,Booth Theatre,2013-04-07,2013-06-30,week_range,False,1,,,,,13
+i-m-not-rappaport-run1,I'm Not Rappaport,Booth Theatre,1985-11-24,1988-01-17,week_range,True,1,,,,,113
+i-m-not-rappaport-run2,I'm Not Rappaport,Booth Theatre,2002-07-14,2002-09-08,week_range,True,2,,,,,9
+i-m-still-here-damn-it-run1,I'm Still Here...Damn It!,Booth Theatre,1998-10-25,1999-01-03,week_range,False,1,,,,,11
+ian-mckellen-a-knight-out-at-the-lyceum-run1,Ian McKellen: A Knight Out at the Lyceum,Lyceum Theatre,1994-06-26,1994-06-26,week_range,False,1,,,,,1
+if-you-ever-leave-me-i-m-going-with-you-run1,If You Ever Leave Me...I'm Going with You!,Cort Theatre,2001-07-22,2001-09-23,week_range,False,1,,,,,10
+if-then-run1,If/Then,Richard Rodgers Theatre,2014-03-09,2015-03-22,week_range,False,1,,,,,54
+il-divo-a-musical-affair-the-greatest-so-run1,Il Divo - A Musical Affair: The Greatest Songs of Broadway,Marquis Theatre,2013-11-17,2013-11-17,week_range,False,1,,,,,1
+illinoise-run1,Illinoise,St. James Theatre,2024-04-28,2024-08-11,week_range,False,1,,,,,16
+imaginary-friends-run1,Imaginary Friends,Ethel Barrymore Theatre,2002-12-01,2003-02-16,week_range,False,1,,,,,12
+impressionism-run1,Impressionism,Gerald Schoenfeld Theatre,2009-03-01,2009-05-10,week_range,False,1,,,,,11
+in-my-life-run1,In My Life,Music Box Theatre,2005-10-02,2005-12-11,week_range,False,1,,,,,11
+in-transit-run1,In Transit,Circle in the Square Theatre,2016-11-13,2017-04-16,week_range,False,1,,,,,23
+in-the-heights-run1,In the Heights,Richard Rodgers Theatre,2008-02-17,2011-01-09,week_range,False,1,,,,,152
+in-the-next-room-run1,In the Next Room,Lyceum Theatre,2009-10-25,2010-01-10,week_range,False,1,,,,,12
+in-the-summer-house-run1,In the Summer House,Vivian Beaumont Theater,1993-07-11,1993-08-22,week_range,False,1,,,,,7
+indecent-run1,Indecent,Cort Theatre,2017-04-09,2017-08-06,week_range,False,1,,,,,18
+indiscretions-run1,Indiscretions,Ethel Barrymore Theatre,1995-04-09,1995-11-05,week_range,False,1,,,,,31
+inherit-the-wind-run1,Inherit the Wind,Royale Theatre,1996-03-03,1996-05-12,week_range,True,1,,,,,11
+inherit-the-wind-run2,Inherit the Wind,Lyceum Theatre,2007-03-25,2007-07-08,week_range,True,2,,,,,16
+ink-run1,Ink,Samuel J. Friedman Theatre,2019-04-07,2019-07-07,week_range,False,1,,,,,14
+into-the-light-run1,Into the Light,Neil Simon Theatre,1986-10-12,1986-10-26,week_range,False,1,,,,,3
+into-the-woods-run1,Into the Woods,Martin Beck Theatre,1987-10-04,1989-09-03,week_range,True,1,,,,,101
+into-the-woods-run2,Into the Woods,Broadhurst Theatre,2002-04-14,2023-01-08,week_range,True,2,,,,,66
+irena-s-vow-run1,Irena's Vow,Walter Kerr Theatre,2009-03-15,2009-06-28,week_range,False,1,,,,,16
+irving-berlin-s-white-christmas-run1,Irving Berlin's White Christmas,Marquis Theatre,2008-11-16,2009-01-04,week_range,True,1,,,,,8
+irving-berlin-s-white-christmas-run2,Irving Berlin's White Christmas,Marquis Theatre,2009-11-15,2010-01-03,week_range,True,2,,,,,8
+is-he-dead-run1,Is He Dead?,Lyceum Theatre,2007-11-11,2008-03-09,week_range,False,1,,,,,18
+is-this-a-room-run1,Is This A Room,Lyceum Theatre,2021-09-26,2021-11-28,week_range,False,1,,,,,10
+it-ain-t-nothin-but-the-blues-run1,It Ain't Nothin' But the Blues,Ambassador Theatre,1999-04-25,2000-01-09,week_range,False,1,,,,,37
+it-shoulda-been-you-run1,It Shoulda Been You,Brooks Atkinson Theatre,2015-03-22,2015-08-09,week_range,False,1,,,,,21
+it-s-only-a-play-run1,It's Only a Play,Bernard B. Jacobs Theatre,2014-08-31,2015-06-07,week_range,False,1,,,,,41
+it-s-a-slippery-slope-run1,It's a Slippery Slope,Vivian Beaumont Theater,1996-11-03,1997-01-12,week_range,False,1,,,,,11
+ivanov-run1,Ivanov,Vivian Beaumont Theater,1997-10-26,1998-01-04,week_range,False,1,,,,,11
+job-run1,JOB,Helen Hayes Theatre,2024-07-21,2024-10-27,week_range,False,1,,,,,15
+jack-a-night-on-the-town-with-john-barry-run1,Jack: A Night on the Town with John Barrymore,Belasco Theatre,1996-04-21,1996-05-05,week_range,False,1,,,,,3
+jackie-run1,Jackie,Belasco Theatre,1997-10-12,1998-03-01,week_range,False,1,,,,,21
+jackie-mason-s-laughing-room-only-run1,Jackie Mason's Laughing Room Only,Brooks Atkinson Theatre,2003-10-26,2003-11-30,week_range,False,1,,,,,6
+jackie-mason-s-the-world-according-to-me-run1,Jackie Mason's The World According to Me!,Brooks Atkinson Theatre,1986-12-21,1989-01-01,week_range,False,1,,,,,90
+jackie-mason-brand-new-run1,Jackie Mason: Brand New,Neil Simon Theatre,1990-10-14,1991-06-30,week_range,False,1,,,,,38
+jackie-mason-freshly-squeezed-run1,Jackie Mason: Freshly Squeezed,Helen Hayes Theatre,2005-03-13,2005-09-04,week_range,False,1,,,,,26
+jackie-mason-politically-incorrect-run1,Jackie Mason: Politically Incorrect,John Golden Theatre,1994-03-27,1995-06-04,week_range,False,1,,,,,59
+jagged-little-pill-run1,Jagged Little Pill,Broadhurst Theatre,2019-11-03,2021-12-19,week_range,False,1,,,,,28
+jaja-s-african-hair-braiding-run1,Jaja’s African Hair Braiding,Samuel J. Friedman Theatre,2023-09-17,2023-11-19,week_range,False,1,,,,,10
+jake-s-women-run1,Jake's Women,Neil Simon Theatre,1992-03-15,1992-10-25,week_range,False,1,,,,,33
+james-joyce-s-the-dead-run1,James Joyce's The Dead,Belasco Theatre,1999-12-19,2000-04-16,week_range,False,1,,,,,18
+jane-eyre-run1,Jane Eyre,Brooks Atkinson Theatre,2000-11-12,2001-06-10,week_range,False,1,,,,,31
+jay-johnson-the-two-and-only-run1,Jay Johnson: The Two and Only,Helen Hayes Theatre,2006-09-24,2006-11-26,week_range,False,1,,,,,10
+jeff-ross-take-a-banana-for-the-ride-run1,Jeff Ross: Take a Banana For the Ride,Nederlander Theatre,2025-08-10,2025-09-28,week_range,False,1,,,,,8
+jekyll-hyde-run1,Jekyll & Hyde,Plymouth Theatre,1997-03-23,2001-01-07,week_range,True,1,,,,,199
+jekyll-hyde-run2,Jekyll & Hyde,Marquis Theatre,2013-04-07,2013-05-12,week_range,True,2,,,,,6
+jelly-s-last-jam-run1,Jelly's Last Jam,Virginia Theatre,1992-04-05,1993-09-05,week_range,False,1,,,,,75
+jerome-kern-goes-to-hollywood-run1,Jerome Kern Goes to Hollywood,Ritz Theatre,1986-01-19,1986-02-02,week_range,False,1,,,,,3
+jerome-robbins-broadway-run1,Jerome Robbins' Broadway,Imperial Theatre,1989-01-15,1990-09-02,week_range,False,1,,,,,86
+jerry-seinfeld-live-on-broadway-run1,Jerry Seinfeld: Live on Broadway,Broadhurst Theatre,1998-08-09,1998-08-09,week_range,False,1,,,,,1
+jerry-s-girls-run1,Jerry's Girls,St. James Theatre,1985-12-01,1986-04-20,week_range,False,1,,,,,20
+jersey-boys-run1,Jersey Boys,August Wilson Theatre,2005-10-09,2017-01-15,week_range,False,1,,,,,588
+jerusalem-run1,Jerusalem,Music Box Theatre,2011-04-03,2011-08-21,week_range,False,1,,,,,21
+jesus-christ-superstar-run1,Jesus Christ Superstar,Ford Center for the Performing Arts,2000-03-26,2000-09-03,week_range,True,1,,,,,24
+jesus-christ-superstar-run2,Jesus Christ Superstar,Neil Simon Theatre,2012-03-04,2012-07-01,week_range,True,2,,,,,18
+jitney-run1,Jitney,Samuel J. Friedman Theatre,2017-01-01,2017-03-12,week_range,False,1,,,,,11
+joe-turner-s-come-and-gone-run1,Joe Turner's Come and Gone,Ethel Barrymore Theatre,1988-03-20,1988-06-26,week_range,True,1,,,,,15
+joe-turner-s-come-and-gone-run2,Joe Turner's Come and Gone,Ethel Barrymore Theatre,2009-03-22,2026-07-26,week_range,True,2,,,,,30
+john-lithgow-stories-by-heart-run1,John Lithgow: Stories By Heart,American Airlines Theatre,2017-12-24,2018-03-04,week_range,False,1,,,,,11
+john-proctor-is-the-villain-run1,John Proctor is the Villain,Booth Theatre,2025-03-23,2025-09-07,week_range,False,1,,,,,25
+jonas-brothers-run1,Jonas Brothers,Marquis Theatre,2023-03-19,2023-03-19,week_range,False,1,,,,,1
+joseph-and-the-amazing-technicolor-dream-run1,Joseph and the Amazing Technicolor Dreamcoat,Minskoff Theatre,1993-10-31,1994-05-29,week_range,False,1,,,,,31
+journey-s-end-run1,Journey's End,Belasco Theatre,2007-02-11,2007-06-10,week_range,False,1,,,,,18
+juan-darien-run1,Juan Darien,Vivian Beaumont Theater,1996-11-10,1997-01-05,week_range,False,1,,,,,9
+judgment-at-nuremberg-run1,Judgment at Nuremberg,Longacre Theatre,2001-02-18,2001-05-13,week_range,False,1,,,,,13
+julia-sweeney-s-god-said-ha-run1,"Julia Sweeney's God Said ""Ha!""",Lyceum Theatre,1996-11-10,1996-12-08,week_range,False,1,,,,,5
+julius-caesar-run1,Julius Caesar,Belasco Theatre,2005-03-13,2005-06-12,week_range,False,1,,,,,14
+jumpers-run1,Jumpers,Brooks Atkinson Theatre,2004-04-11,2004-07-11,week_range,False,1,,,,,14
+junk-run1,Junk,Vivian Beaumont Theater,2017-10-08,2018-01-07,week_range,False,1,,,,,14
+juno-and-the-paycock-run1,Juno and the Paycock,John Golden Theatre,1988-06-19,1988-07-03,week_range,False,1,,,,,3
+just-for-us-run1,Just For Us,Hudson Theatre,2023-06-25,2023-08-20,week_range,False,1,,,,,9
+just-in-time-run1,Just in Time,Circle in the Square Theatre,2025-04-06,2026-08-16,week_range,False,1,,,,,72
+kpop-run1,KPOP,Circle in the Square Theatre,2022-10-16,2022-12-11,week_range,False,1,,,,,9
+kat-and-the-kings-run1,Kat and the Kings,Cort Theatre,1999-08-08,2000-01-02,week_range,False,1,,,,,22
+kathy-griffin-wants-a-tony-run1,Kathy Griffin Wants a Tony,Belasco Theatre,2011-03-13,2011-03-20,week_range,False,1,,,,,2
+kiki-herb-alive-on-broadway-run1,Kiki & Herb: Alive on Broadway,Helen Hayes Theatre,2006-08-13,2006-09-10,week_range,False,1,,,,,5
+kimberly-akimbo-run1,Kimberly Akimbo,Booth Theatre,2022-10-16,2024-04-28,week_range,False,1,,,,,81
+king-charles-iii-run1,King Charles III,Music Box Theatre,2015-10-11,2016-01-31,week_range,False,1,,,,,16
+king-david-run1,King David,New Amsterdam Theatre,1997-05-18,1997-05-25,week_range,False,1,,,,,2
+king-hedley-ii-run1,King Hedley II,Virginia Theatre,2001-04-15,2001-07-01,week_range,False,1,,,,,12
+king-kong-run1,King Kong,Broadway Theatre,2018-10-07,2019-08-18,week_range,False,1,,,,,46
+king-lear-run1,King Lear,Vivian Beaumont Theater,2004-02-15,2004-04-18,week_range,True,1,,,,,10
+king-lear-run2,King Lear,Cort Theatre,2019-03-03,2019-06-09,week_range,True,2,,,,,15
+kinky-boots-run1,Kinky Boots,Al Hirschfeld Theatre,2013-03-03,2019-04-07,week_range,False,1,,,,,318
+kiss-me-kate-run1,"Kiss Me, Kate",Martin Beck Theatre,1999-10-31,2001-12-30,week_range,True,1,,,,,114
+kiss-me-kate-run2,"Kiss Me, Kate",Studio 54,2019-02-17,2019-06-30,week_range,True,2,,,,,20
+kiss-of-the-spider-woman-run1,Kiss of the Spider Woman,Broadhurst Theatre,1993-04-25,1995-07-02,week_range,False,1,,,,,115
+kristin-chenoweth-for-the-girls-run1,Kristin Chenoweth: For The Girls,Nederlander Theatre,2019-11-17,2019-11-17,week_range,False,1,,,,,1
+kristin-chenoweth-my-love-letter-to-broa-run1,Kristin Chenoweth: My Love Letter to Broadway,Lunt-Fontanne Theatre,2016-11-06,2016-11-13,week_range,False,1,,,,,2
+la-bete-run1,La Bete,Eugene O'Neill Theatre,1991-02-03,1991-03-03,week_range,True,1,,,,,5
+la-bete-run2,La Bete,Music Box Theatre,2010-09-26,2011-01-09,week_range,True,2,,,,,16
+la-boheme-run1,La Boheme,Broadway Theatre,2002-12-01,2003-06-29,week_range,False,1,,,,,31
+la-cage-aux-folles-run1,La Cage aux Folles,Palace Theatre,1985-06-09,1987-11-15,week_range,True,1,,,,,128
+la-cage-aux-folles-run2,La Cage aux Folles,Marquis Theatre,2004-11-14,2005-06-26,week_range,True,2,,,,,33
+la-cage-aux-folles-run3,La Cage aux Folles,Longacre Theatre,2010-04-11,2011-05-01,week_range,True,3,,,,,56
+lackawanna-blues-run1,Lackawanna Blues,Samuel J. Friedman Theatre,2021-09-19,2021-11-14,week_range,False,1,,,,,9
+lady-day-at-emerson-s-bar-and-grill-run1,Lady Day at Emerson's Bar and Grill,Circle in the Square Theatre,2014-03-30,2014-10-05,week_range,False,1,,,,,27
+largely-new-york-run1,Largely New York,St. James Theatre,1989-04-23,1989-09-03,week_range,False,1,,,,,20
+late-nite-comic-run1,Late Nite Comic,Ritz Theatre,1987-10-04,1987-10-18,week_range,False,1,,,,,3
+latin-history-for-morons-run1,Latin History for Morons,Studio 54,2017-10-22,2018-02-25,week_range,False,1,,,,,19
+latinologues-run1,Latinologues,Helen Hayes Theatre,2005-09-18,2006-01-01,week_range,False,1,,,,,16
+laugh-whore-run1,Laugh Whore,Cort Theatre,2004-10-17,2005-01-02,week_range,False,1,,,,,12
+laughter-on-the-23rd-floor-run1,Laughter on the 23rd Floor,Richard Rodgers Theatre,1993-11-07,1994-08-28,week_range,False,1,,,,,43
+leader-of-the-pack-run1,Leader of the Pack,Ambassador Theatre,1985-06-09,1985-07-21,week_range,False,1,,,,,7
+leap-of-faith-run1,Leap of Faith,St. James Theatre,2012-04-08,2012-05-13,week_range,False,1,,,,,6
+left-on-tenth-run1,Left on Tenth,James Earl Jones Theatre,2024-09-29,2025-02-02,week_range,False,1,,,,,19
+legally-blonde-run1,Legally Blonde,Palace Theatre,2007-04-08,2008-10-19,week_range,False,1,,,,,81
+legs-diamond-run1,Legs Diamond,Mark Hellinger Theatre,1988-10-30,1989-02-19,week_range,False,1,,,,,17
+lempicka-run1,Lempicka,Longacre Theatre,2024-03-24,2024-05-19,week_range,False,1,,,,,9
+lend-me-a-tenor-run1,Lend Me a Tenor,Royale Theatre,1989-02-19,1990-04-22,week_range,True,1,,,,,62
+lend-me-a-tenor-run2,Lend Me a Tenor,Music Box Theatre,2010-03-14,2010-08-15,week_range,True,2,,,,,23
+lennon-run1,Lennon,Broadhurst Theatre,2005-07-10,2005-09-25,week_range,False,1,,,,,12
+leopoldstadt-run1,Leopoldstadt,Longacre Theatre,2022-09-18,2023-07-02,week_range,False,1,,,,,42
+les-liaisons-dangereuses-run1,Les Liaisons Dangereuses,Music Box Theatre,1987-04-26,1987-09-06,week_range,True,1,,,,,20
+les-liaisons-dangereuses-run2,Les Liaisons Dangereuses,American Airlines Theatre,2008-04-13,2008-07-06,week_range,True,2,,,,,13
+les-liaisons-dangereuses-run3,Les Liaisons Dangereuses,Booth Theatre,2016-10-09,2017-01-08,week_range,True,3,,,,,14
+les-miserables-run1,Les Miserables,Imperial Theatre,1987-03-01,2003-05-18,week_range,True,1,,,,,846
+les-miserables-run2,Les Miserables,Broadhurst Theatre,2006-10-29,2008-01-06,week_range,True,2,,,,,63
+les-miserables-run3,Les Miserables,Imperial Theatre,2014-03-02,2016-09-04,week_range,True,3,,,,,131
+lestat-run1,Lestat,Palace Theatre,2006-03-26,2006-05-28,week_range,False,1,,,,,10
+let-it-be-run1,Let It Be,St. James Theatre,2013-07-21,2013-09-01,week_range,False,1,,,,,7
+lettice-and-lovage-run1,Lettice and Lovage,Ethel Barrymore Theatre,1990-03-18,1990-12-23,week_range,False,1,,,,,41
+lewis-black-black-to-the-future-run1,Lewis Black: Black to the Future,Marquis Theatre,2016-09-18,2016-10-30,week_range,False,1,,,,,6
+lewis-black-running-on-empty-run1,Lewis Black: Running On Empty,Richard Rodgers Theatre,2012-10-14,2012-10-21,week_range,False,1,,,,,2
+liberation-run1,Liberation,James Earl Jones Theatre,2025-10-12,2026-02-01,week_range,False,1,,,,,17
+life-of-pi-run1,Life of Pi,Gerald Schoenfeld Theatre,2023-03-12,2023-07-23,week_range,False,1,,,,,20
+life-x-3-run1,Life x 3,Circle in the Square Theatre,2003-03-16,2003-06-29,week_range,False,1,,,,,16
+lillian-run1,Lillian,Ethel Barrymore Theatre,1986-01-12,1986-02-23,week_range,False,1,,,,,7
+linda-vista-run1,Linda Vista,Helen Hayes Theater,2019-09-22,2019-11-10,week_range,False,1,,,,,8
+little-bear-ridge-road-run1,Little Bear Ridge Road,Booth Theatre,2025-10-12,2025-12-21,week_range,False,1,,,,,11
+little-me-run1,Little Me,Criterion Center Stage Right,1998-10-11,1999-02-07,week_range,False,1,,,,,18
+little-shop-of-horrors-run1,Little Shop of Horrors,Virginia Theatre,2003-08-31,2004-08-22,week_range,False,1,,,,,52
+little-women-run1,Little Women,Virginia Theatre,2004-12-12,2005-05-22,week_range,False,1,,,,,24
+living-on-love-run1,Living on Love,Longacre Theatre,2015-04-05,2015-05-03,week_range,False,1,,,,,5
+liza-s-at-the-palace-run1,Liza's at the Palace....,Palace Theatre,2008-12-07,2009-01-04,week_range,False,1,,,,,5
+lobby-hero-run1,Lobby Hero,Helen Hayes Theater,2018-03-04,2018-05-13,week_range,False,1,,,,,11
+lombardi-run1,Lombardi,Circle in the Square Theatre,2010-09-26,2011-05-22,week_range,False,1,,,,,35
+london-assurance-run1,London Assurance,Criterion Center Stage Right,1997-04-20,1997-06-29,week_range,False,1,,,,,11
+long-day-s-journey-into-night-run1,Long Day's Journey Into Night,Broadhurst Theatre,1986-04-27,1986-06-29,week_range,True,1,,,,,10
+long-day-s-journey-into-night-run2,Long Day's Journey Into Night,Neil Simon Theatre,1988-06-12,1988-07-24,week_range,True,2,,,,,7
+long-day-s-journey-into-night-run3,Long Day's Journey Into Night,Plymouth Theatre,2003-04-27,2003-08-31,week_range,True,3,,,,,19
+long-day-s-journey-into-night-run4,Long Day's Journey Into Night,American Airlines Theatre,2016-04-03,2016-06-26,week_range,True,4,,,,,13
+looped-run1,Looped,Lyceum Theatre,2010-02-21,2010-04-11,week_range,False,1,,,,,8
+loot-run1,Loot,Music Box Theatre,1986-04-06,1986-06-29,week_range,False,1,,,,,13
+lord-of-the-dance-dangerous-games-run1,Lord of the Dance: Dangerous Games,Lyric Theatre,2015-11-08,2016-01-03,week_range,False,1,,,,,8
+losing-louie-run1,Losing Louie,Biltmore Theatre,2006-09-24,2006-11-26,week_range,False,1,,,,,10
+lost-in-yonkers-run1,Lost in Yonkers,Richard Rodgers Theatre,1991-02-17,1993-01-03,week_range,False,1,,,,,99
+love-letters-run1,Love Letters,Edison Theatre,1989-11-05,1990-01-21,week_range,True,1,,,,,12
+love-letters-run2,Love Letters,Brooks Atkinson Theatre,2014-09-14,2014-12-14,week_range,True,2,,,,,14
+love-thy-neighbor-run1,Love Thy Neighbor,Booth Theatre,1996-03-24,1997-01-05,week_range,False,1,,,,,41
+love-valour-compassion-run1,Love! Valour! Compassion!,Walter Kerr Theatre,1995-01-22,1995-09-17,week_range,False,1,,,,,35
+love-life-run1,Love/Life,Vivian Beaumont Theater,2005-05-01,2005-05-29,week_range,False,1,,,,,5
+lovemusik-run1,Lovemusik,Biltmore Theatre,2007-04-15,2007-06-24,week_range,False,1,,,,,11
+lucifer-s-child-run1,Lucifer's Child,Music Box Theatre,1991-03-31,1991-04-28,week_range,False,1,,,,,5
+lucky-guy-run1,Lucky Guy,Broadhurst Theatre,2013-03-03,2013-07-07,week_range,False,1,,,,,19
+lysistrata-jones-run1,Lysistrata Jones,Walter Kerr Theatre,2011-11-13,2012-01-08,week_range,False,1,,,,,9
+m-butterfly-run1,M. Butterfly,Eugene O'Neill Theatre,1988-03-13,1990-01-28,week_range,True,1,,,,,99
+m-butterfly-run2,M. Butterfly,Cort Theatre,2017-10-08,2017-12-17,week_range,True,2,,,,,11
+mj-the-musical-run1,MJ The Musical,Neil Simon Theatre,2021-12-12,2026-08-16,week_range,False,1,,,,,244
+ma-rainey-s-black-bottom-run1,Ma Rainey's Black Bottom,Royale Theatre,2003-01-26,2003-04-06,week_range,False,1,,,,,11
+macbeth-run1,Macbeth,Lyceum Theatre,1988-04-17,1988-06-26,week_range,True,1,,,,,11
+macbeth-run2,Macbeth,Music Box Theatre,2000-06-11,2000-06-25,week_range,True,2,,,,,3
+macbeth-run3,Macbeth,Lyceum Theatre,2008-03-30,2008-05-25,week_range,True,3,,,,,9
+macbeth-run4,Macbeth,Ethel Barrymore Theatre,2013-04-07,2022-07-10,week_range,True,4,,,,,41
+machinal-run1,Machinal,American Airlines Theatre,2013-12-22,2014-03-02,week_range,False,1,,,,,11
+magic-bird-run1,Magic/Bird,Longacre Theatre,2012-03-25,2012-05-13,week_range,False,1,,,,,8
+mail-run1,Mail,Music Box Theatre,1988-04-03,1988-05-15,week_range,False,1,,,,,7
+major-barbara-run1,Major Barbara,American Airlines Theatre,2001-06-17,2001-09-16,week_range,False,1,,,,,14
+mamma-mia-run1,Mamma Mia!,Broadhurst Theatre,2001-10-07,2026-02-01,week_range,False,1,,,,,754
+man-and-boy-run1,Man and Boy,American Airlines Theatre,2011-09-11,2011-11-27,week_range,False,1,,,,,12
+man-of-la-mancha-run1,Man of La Mancha,Marquis Theatre,1992-04-05,1992-07-26,week_range,True,1,,,,,17
+man-of-la-mancha-run2,Man of La Mancha,Martin Beck Theatre,2002-11-24,2003-08-31,week_range,True,2,,,,,41
+mandy-patinkin-in-concert-run1,Mandy Patinkin in Concert,Lyceum Theatre,1997-03-02,1997-03-23,week_range,False,1,,,,,4
+mandy-patinkin-in-concert-dress-casual-run1,"Mandy Patinkin in Concert: ""Dress Casual""",Helen Hayes Theatre,1989-07-30,1989-09-17,week_range,False,1,,,,,8
+mandy-patinkin-in-concert-mamaloshen-run1,"Mandy Patinkin in Concert: ""Mamaloshen""",Belasco Theatre,1998-10-18,1998-11-08,week_range,False,1,,,,,4
+manilow-broadway-run1,Manilow Broadway,Lunt-Fontanne Theatre,2019-07-28,2019-08-18,week_range,False,1,,,,,4
+manilow-on-broadway-run1,Manilow on Broadway,St. James Theatre,2013-01-20,2013-03-03,week_range,False,1,,,,,6
+marc-salem-s-mind-games-on-broadway-run1,Marc Salem's Mind Games on Broadway,Lyceum Theatre,2004-05-23,2004-11-28,week_range,False,1,,,,,24
+marie-christine-run1,Marie Christine,Vivian Beaumont Theater,1999-10-31,2000-01-09,week_range,False,1,,,,,11
+marjorie-prime-run1,Marjorie Prime,Hayes Theater,2025-11-23,2026-02-15,week_range,False,1,,,,,13
+mark-twain-tonight-run1,Mark Twain Tonight!,Brooks Atkinson Theatre,2005-06-12,2005-06-26,week_range,False,1,,,,,3
+marlene-run1,Marlene,Cort Theatre,1999-04-04,1999-05-02,week_range,False,1,,,,,5
+martin-short-fame-becomes-me-run1,Martin Short: Fame Becomes Me,Bernard B. Jacobs Theatre,2006-07-30,2007-01-07,week_range,False,1,,,,,24
+marvin-s-room-run1,Marvin's Room,American Airlines Theatre,2017-06-11,2017-08-27,week_range,False,1,,,,,12
+mary-jane-run1,Mary Jane,Samuel J. Friedman Theatre,2024-04-07,2024-06-30,week_range,False,1,,,,,13
+mary-poppins-run1,Mary Poppins,New Amsterdam Theatre,2006-10-15,2013-03-03,week_range,False,1,,,,,334
+mary-stuart-run1,Mary Stuart,Broadhurst Theatre,2009-04-05,2009-08-16,week_range,False,1,,,,,20
+master-class-run1,Master Class,John Golden Theatre,1995-10-29,1997-06-29,week_range,True,1,,,,,87
+master-class-run2,Master Class,Samuel J. Friedman Theatre,2011-06-19,2011-09-04,week_range,True,2,,,,,12
+mastergate-run1,Mastergate,Criterion Center Stage Right,1989-09-24,1989-12-10,week_range,False,1,,,,,12
+match-run1,Match,Plymouth Theatre,2004-03-14,2004-05-23,week_range,False,1,,,,,11
+matilda-the-musical-run1,Matilda The Musical,Sam S. Shubert Theatre,2013-03-10,2017-01-01,week_range,False,1,,,,,199
+matters-of-the-heart-run1,Matters of the Heart,Vivian Beaumont Theater,2000-10-15,2000-12-17,week_range,False,1,,,,,10
+mauritius-run1,Mauritius,Biltmore Theatre,2007-09-16,2007-11-25,week_range,False,1,,,,,11
+maybe-happy-ending-run1,Maybe Happy Ending,Belasco Theatre,2024-10-20,2026-08-16,week_range,False,1,,,,,96
+mcneal-run1,McNeal,Vivian Beaumont Theater,2024-09-08,2024-11-24,week_range,False,1,,,,,12
+me-and-my-girl-run1,Me and My Girl,Marquis Theatre,1986-08-03,1989-12-31,week_range,False,1,,,,,179
+mean-girls-run1,Mean Girls,August Wilson Theatre,2018-03-18,2020-03-08,week_range,False,1,,,,,104
+medea-run1,Medea,Longacre Theatre,1994-04-03,1994-06-26,week_range,True,1,,,,,13
+medea-run2,Medea,Brooks Atkinson Theatre,2002-12-08,2003-02-23,week_range,True,2,,,,,12
+meet-me-in-st-louis-run1,Meet Me in St. Louis,Gershwin Theatre,1989-10-22,1990-06-10,week_range,False,1,,,,,34
+mel-brooks-on-broadway-run1,Mel Brooks on Broadway,Lunt-Fontanne Theatre,2019-06-23,2019-06-23,week_range,False,1,,,,,1
+melissa-etheridge-my-window-run1,Melissa Etheridge: My Window,Circle in the Square Theatre,2023-09-17,2023-11-19,week_range,False,1,,,,,10
+memphis-run1,Memphis,Sam S. Shubert Theatre,2009-09-27,2012-08-05,week_range,False,1,,,,,150
+men-are-from-mars-women-are-from-venus-run1,"Men Are from Mars, Women Are from Venus",Gershwin Theatre,1997-02-02,1997-02-02,week_range,False,1,,,,,1
+merrily-we-roll-along-run1,Merrily We Roll Along,Hudson Theatre,2023-09-24,2024-07-07,week_range,False,1,,,,,42
+metamorphoses-run1,Metamorphoses,Circle in the Square Theatre,2002-02-24,2003-02-16,week_range,False,1,,,,,52
+metamorphosis-run1,Metamorphosis,Ethel Barrymore Theatre,1989-03-05,1989-07-02,week_range,False,1,,,,,13
+meteor-shower-run1,Meteor Shower,Booth Theatre,2017-11-05,2018-01-21,week_range,False,1,,,,,12
+metro-run1,Metro,Minskoff Theatre,1992-03-29,1992-04-26,week_range,False,1,,,,,5
+michael-feinstein-in-concert-run1,Michael Feinstein in Concert,Lyceum Theatre,1988-04-24,1988-06-12,week_range,False,1,,,,,8
+michael-feinstein-in-concert-isn-t-it-ro-run1,"Michael Feinstein in Concert: ""Isn't It Romantic""",Booth Theatre,1988-10-09,1988-11-06,week_range,False,1,,,,,5
+michael-feinstein-in-concert-piano-and-v-run1,Michael Feinstein in Concert: Piano and Voice,Lyceum Theatre,1990-10-07,1990-10-28,week_range,False,1,,,,,4
+michael-moore-the-terms-of-my-surrender-run1,Michael Moore: The Terms of My Surrender,Belasco Theatre,2017-07-30,2017-10-22,week_range,False,1,,,,,13
+mike-birbiglia-s-the-new-one-run1,Mike Birbiglia's The New One,Cort Theatre,2018-10-28,2019-01-20,week_range,False,1,,,,,13
+mike-birbiglia-the-old-man-the-pool-run1,Mike Birbiglia: The Old Man & the Pool,Vivian Beaumont Theater,2022-10-30,2023-01-15,week_range,False,1,,,,,12
+mike-tyson-undisputed-truth-run1,Mike Tyson: Undisputed Truth,Longacre Theatre,2012-08-05,2012-08-12,week_range,False,1,,,,,2
+million-dollar-quartet-run1,Million Dollar Quartet,Nederlander Theatre,2010-03-14,2011-06-12,week_range,False,1,,,,,66
+minnelli-on-minnelli-run1,Minnelli on Minnelli,Palace Theatre,1999-12-05,2000-01-02,week_range,False,1,,,,,5
+misery-run1,Misery,Broadhurst Theatre,2015-10-25,2016-02-14,week_range,False,1,,,,,16
+miss-margarida-s-way-run1,Miss Margarida's Way,Helen Hayes Theatre,1990-02-11,1990-02-25,week_range,False,1,,,,,3
+miss-saigon-run1,Miss Saigon,Broadway Theatre,1991-03-24,2001-01-28,week_range,True,1,,,,,515
+miss-saigon-run2,Miss Saigon,Broadway Theatre,2017-03-05,2018-01-14,week_range,True,2,,,,,46
+mixed-emotions-run1,Mixed Emotions,John Golden Theatre,1993-10-03,1993-11-28,week_range,False,1,,,,,9
+moon-over-buffalo-run1,Moon Over Buffalo,Martin Beck Theatre,1995-09-17,1996-06-30,week_range,False,1,,,,,42
+more-to-love-run1,More to Love,Eugene O'Neill Theatre,1998-10-04,1998-10-18,week_range,False,1,,,,,3
+morning-s-at-seven-run1,Morning's at Seven,Lyceum Theatre,2002-03-31,2002-07-28,week_range,False,1,,,,,18
+morning-noon-and-night-run1,"Morning, Noon and Night",Vivian Beaumont Theater,1999-10-31,2000-01-09,week_range,False,1,,,,,11
+morrissey-run1,Morrissey,Lunt-Fontanne Theatre,2019-05-12,2019-05-12,week_range,False,1,,,,,1
+mort-sahl-on-broadway-run1,Mort Sahl on Broadway!,Neil Simon Theatre,1987-10-11,1987-11-01,week_range,False,1,,,,,4
+moscow-circus-cirk-valentin-run1,Moscow Circus - Cirk Valentin,Gershwin Theatre,1991-11-10,1991-12-01,week_range,False,1,,,,,4
+mostly-sondheim-run1,Mostly Sondheim,Vivian Beaumont Theater,2001-12-30,2002-08-25,week_range,False,1,,,,,18
+mother-play-run1,Mother Play,Hayes Theater,2024-04-07,2024-06-16,week_range,False,1,,,,,11
+mothers-and-sons-run1,Mothers and Sons,John Golden Theatre,2014-02-23,2014-06-22,week_range,False,1,,,,,18
+motown-the-musical-run1,Motown The Musical,Lunt-Fontanne Theatre,2013-03-17,2015-01-18,week_range,True,1,,,,,97
+motown-the-musical-run2,Motown The Musical,Nederlander Theatre,2016-07-17,2016-07-31,week_range,True,2,,,,,3
+moulin-rouge-the-musical-run1,Moulin Rouge! The Musical,Al Hirschfeld Theatre,2020-03-08,2026-08-16,week_range,False,1,,,,,257
+moulin-rouge-the-musical-run1,Moulin Rouge! The Musical!,Al Hirschfeld Theatre,2019-06-30,2020-03-01,week_range,False,1,,,,,36
+movin-out-run1,Movin' Out,Richard Rodgers Theatre,2002-10-06,2005-12-11,week_range,False,1,,,,,167
+mr-saturday-night-run1,Mr. Saturday Night,Nederlander Theatre,2022-04-03,2022-09-04,week_range,False,1,,,,,22
+mrs-doubtfire-run1,Mrs. Doubtfire,Stephen Sondheim Theatre,2021-10-24,2022-05-29,week_range,False,1,,,,,18
+mrs-warren-s-profession-run1,Mrs. Warren's Profession,American Airlines Theatre,2010-09-05,2010-11-28,week_range,False,1,,,,,13
+much-ado-about-everything-run1,Much Ado About Everything,John Golden Theatre,1999-11-21,2000-07-30,week_range,False,1,,,,,37
+mule-bone-run1,Mule Bone,Ethel Barrymore Theatre,1991-01-20,1991-04-14,week_range,False,1,,,,,13
+mummenschanz-the-new-show-run1,"Mummenschanz: ""The New Show""",Helen Hayes Theatre,1986-06-22,1986-10-26,week_range,False,1,,,,,19
+my-fair-lady-run1,My Fair Lady,Virginia Theatre,1993-11-28,1994-05-01,week_range,True,1,,,,,23
+my-fair-lady-run2,My Fair Lady,Vivian Beaumont Theater,2018-03-18,2019-07-07,week_range,True,2,,,,,69
+my-favorite-year-run1,My Favorite Year,Vivian Beaumont Theater,1992-11-01,1993-01-10,week_range,False,1,,,,,11
+my-name-is-lucy-barton-run1,My Name is Lucy Barton,Samuel J. Friedman Theatre,2020-01-05,2020-03-01,week_range,False,1,,,,,9
+my-thing-of-love-run1,My Thing of Love,Martin Beck Theatre,1995-04-23,1995-05-14,week_range,False,1,,,,,4
+natasha-pierre-the-great-comet-of-1812-run1,"Natasha, Pierre & The Great Comet of 1812",Imperial Theatre,2016-10-23,2017-09-03,week_range,False,1,,,,,46
+network-run1,Network,Belasco Theatre,2018-11-11,2019-06-09,week_range,False,1,,,,,30
+never-gonna-dance-run1,Never Gonna Dance,Broadhurst Theatre,2003-11-02,2004-02-15,week_range,False,1,,,,,16
+new-york-new-york-run1,"New York, New York",St. James Theatre,2023-03-26,2023-07-30,week_range,False,1,,,,,19
+newsies-run1,Newsies,Nederlander Theatre,2012-03-18,2014-08-24,week_range,False,1,,,,,128
+next-fall-run1,Next Fall,Helen Hayes Theatre,2010-02-21,2010-07-04,week_range,False,1,,,,,20
+next-to-normal-run1,Next to Normal,Booth Theatre,2009-03-29,2011-01-16,week_range,False,1,,,,,95
+nice-work-if-you-can-get-it-run1,Nice Work If You Can Get It,Imperial Theatre,2012-04-01,2013-06-16,week_range,False,1,,,,,64
+nick-nora-run1,Nick & Nora,Marquis Theatre,1991-10-13,1991-12-15,week_range,False,1,,,,,10
+night-must-fall-run1,Night Must Fall,Helen Hayes Theatre,1999-02-07,1999-06-27,week_range,False,1,,,,,20
+nine-run1,Nine,Eugene O'Neill Theatre,2003-03-23,2003-12-14,week_range,False,1,,,,,39
+no-man-s-land-run1,No Man's Land,Criterion Center Stage Right,1994-01-09,1994-03-20,week_range,False,1,,,,,11
+no-man-s-land-waiting-for-godot-run1,No Man's Land / Waiting for Godot,Cort Theatre,2013-10-27,2014-03-30,week_range,False,1,,,,,23
+noises-off-run1,Noises Off,Brooks Atkinson Theatre,2001-10-21,2002-09-01,week_range,True,1,,,,,46
+noises-off-run2,Noises Off,American Airlines Theatre,2015-12-20,2016-03-13,week_range,True,2,,,,,12
+not-about-nightingales-run1,Not About Nightingales,Circle in the Square Theatre,1999-02-14,1999-06-13,week_range,False,1,,,,,18
+november-run1,November,Ethel Barrymore Theatre,2007-12-23,2008-07-13,week_range,False,1,,,,,30
+oba-oba-run1,Oba Oba,Ambassador Theatre,1988-03-20,1988-05-08,week_range,False,1,,,,,8
+oba-oba-90-run1,Oba Oba '90,Marquis Theatre,1990-03-11,1990-04-22,week_range,True,1,,,,,7
+oba-oba-90-run2,Oba Oba '90,Marquis Theatre,1992-09-13,1992-10-18,week_range,True,2,,,,,6
+oedipus-run1,Oedipus,Studio 54,2025-11-02,2026-02-08,week_range,False,1,,,,,15
+of-mice-and-men-run1,Of Mice and Men,Longacre Theatre,2014-03-23,2014-07-27,week_range,False,1,,,,,19
+oh-coward-run1,Oh Coward!,Helen Hayes Theatre,1986-11-09,1987-01-04,week_range,False,1,,,,,9
+oh-calcutta-run1,Oh! Calcutta!,Edison Theatre,1985-06-09,1989-08-06,week_range,False,1,,,,,218
+oh-hello-on-broadway-run1,"Oh, Hello on Broadway",Lyceum Theatre,2016-09-25,2017-01-22,week_range,False,1,,,,,18
+oh-kay-run1,"Oh, Kay!",Lunt-Fontanne Theatre,1990-10-21,1991-04-14,week_range,False,1,,,,,14
+oh-mary-run1,"Oh, Mary!",Lyceum Theatre,2024-06-30,2026-08-16,week_range,False,1,,,,,112
+ohio-state-murders-run1,Ohio State Murders,James Earl Jones Theatre,2022-11-13,2023-01-15,week_range,False,1,,,,,10
+oklahoma-run1,Oklahoma!,Circle in the Square Theatre,2019-03-24,2020-01-19,week_range,False,1,,,,,44
+old-acquaintance-run1,Old Acquaintance,American Airlines Theatre,2007-06-03,2007-08-19,week_range,False,1,,,,,12
+old-times-run1,Old Times,American Airlines Theatre,2015-09-20,2015-11-29,week_range,False,1,,,,,11
+oldest-living-confederate-widow-tells-al-run1,Oldest Living Confederate Widow Tells All,Longacre Theatre,2003-11-02,2003-11-23,week_range,False,1,,,,,4
+oleanna-run1,Oleanna,John Golden Theatre,2009-10-04,2009-12-06,week_range,False,1,,,,,10
+on-borrowed-time-run1,On Borrowed Time,Circle in the Square Theatre,1991-09-22,1992-01-05,week_range,False,1,,,,,16
+on-golden-pond-run1,On Golden Pond,Cort Theatre,2005-03-27,2005-06-26,week_range,False,1,,,,,14
+on-your-feet-run1,On Your Feet!,Marquis Theatre,2015-10-11,2017-08-20,week_range,False,1,,,,,97
+on-a-clear-day-you-can-see-forever-run1,On a Clear Day You Can See Forever,St. James Theatre,2011-11-13,2012-01-29,week_range,False,1,,,,,12
+on-the-town-run1,On the Town,Gershwin Theatre,1998-10-25,1999-01-17,week_range,True,1,,,,,13
+on-the-town-run2,On the Town,Lyric Theatre,2014-09-21,2015-09-06,week_range,True,2,,,,,51
+on-the-twentieth-century-run1,On the Twentieth Century,American Airlines Theatre,2015-02-15,2015-07-19,week_range,False,1,,,,,23
+on-the-waterfront-run1,On the Waterfront,Brooks Atkinson Theatre,1995-04-23,1995-05-07,week_range,False,1,,,,,3
+once-run1,Once,Bernard B. Jacobs Theatre,2012-03-04,2015-01-04,week_range,False,1,,,,,149
+once-on-this-island-run1,Once On This Island,Booth Theatre,1990-10-07,1991-12-01,week_range,True,1,,,,,61
+once-on-this-island-run2,Once On This Island,Circle in the Square Theatre,2017-11-12,2019-01-06,week_range,True,2,,,,,61
+once-upon-a-one-more-time-run1,Once Upon A One More Time,Marquis Theatre,2023-05-14,2023-09-03,week_range,False,1,,,,,17
+once-upon-a-mattress-run1,Once Upon a Mattress,Broadhurst Theatre,1996-11-24,2024-12-01,week_range,False,1,,,,,46
+one-flew-over-the-cuckoo-s-nest-run1,One Flew Over the Cuckoo's Nest,Royale Theatre,2001-03-18,2001-07-29,week_range,False,1,,,,,20
+one-man-two-guvnors-run1,"One Man, Two Guvnors",Music Box Theatre,2012-04-08,2012-09-02,week_range,False,1,,,,,22
+one-mo-time-run1,One Mo' Time,Longacre Theatre,2002-02-24,2002-03-24,week_range,False,1,,,,,5
+operation-mincemeat-run1,Operation Mincemeat,John Golden Theatre,2025-02-16,2026-08-16,week_range,False,1,,,,,79
+orphans-run1,Orphans,Gerald Schoenfeld Theatre,2013-03-31,2013-05-19,week_range,False,1,,,,,8
+orpheus-descending-run1,Orpheus Descending,Neil Simon Theatre,1989-09-17,1989-12-17,week_range,False,1,,,,,14
+oslo-run1,Oslo,Vivian Beaumont Theater,2017-03-26,2017-07-16,week_range,False,1,,,,,17
+othello-run1,Othello,Ethel Barrymore Theatre,2025-03-02,2025-06-08,week_range,False,1,,,,,15
+other-desert-cities-run1,Other Desert Cities,Booth Theatre,2011-10-16,2012-06-17,week_range,False,1,,,,,36
+our-country-s-good-run1,Our Country's Good,Nederlander Theatre,1991-04-21,1991-06-09,week_range,False,1,,,,,8
+our-mother-s-brief-affair-run1,Our Mother's Brief Affair,Samuel J. Friedman Theatre,2016-01-03,2016-03-06,week_range,False,1,,,,,10
+our-town-run1,Our Town,Lyceum Theatre,1988-11-13,1989-04-02,week_range,True,1,,,,,21
+our-town-run2,Our Town,Ethel Barrymore Theatre,2002-11-24,2025-01-19,week_range,True,2,,,,,28
+outside-mullingar-run1,Outside Mullingar,Samuel J. Friedman Theatre,2014-01-05,2014-03-16,week_range,False,1,,,,,11
+potus-or-behind-every-great-dumbass-are--run1,"POTUS: Or, Behind Every Great Dumbass Are Seven Women Trying to Keep Him Alive",Sam S. Shubert Theatre,2022-04-17,2022-08-14,week_range,False,1,,,,,18
+pacific-overtures-run1,Pacific Overtures,Studio 54,2004-11-14,2005-01-30,week_range,False,1,,,,,12
+pal-joey-run1,Pal Joey,Studio 54,2008-11-16,2009-03-01,week_range,False,1,,,,,16
+parade-run1,Parade,Bernard B. Jacobs Theatre,1998-11-15,2023-08-06,week_range,False,1,,,,,40
+paradise-square-run1,Paradise Square,Ethel Barrymore Theatre,2022-03-20,2022-07-17,week_range,False,1,,,,,17
+paranormal-activity-run1,Paranormal Activity,August Wilson Theatre,2026-08-16,2026-08-16,week_range,False,1,,,,,1
+park-your-car-in-harvard-yard-run1,Park Your Car in Harvard Yard,Music Box Theatre,1991-11-03,1992-02-23,week_range,False,1,,,,,17
+pass-over-run1,Pass Over,August Wilson Theatre,2021-08-08,2021-10-10,week_range,False,1,,,,,10
+passing-strange-run1,Passing Strange,Belasco Theatre,2008-02-10,2008-07-20,week_range,False,1,,,,,24
+passion-run1,Passion,Plymouth Theatre,1994-03-27,1995-01-08,week_range,False,1,,,,,42
+patriots-run1,Patriots,Ethel Barrymore Theatre,2024-04-07,2024-06-23,week_range,False,1,,,,,12
+patti-labelle-on-broadway-run1,Patti LaBelle on Broadway,St. James Theatre,1998-01-18,1998-01-25,week_range,False,1,,,,,2
+patti-lupone-on-broadway-run1,Patti LuPone on Broadway,Walter Kerr Theatre,1995-10-08,1995-11-26,week_range,False,1,,,,,8
+paul-robeson-run1,Paul Robeson,John Golden Theatre,1988-09-25,1988-10-09,week_range,True,1,,,,,3
+paul-robeson-run2,Paul Robeson,Longacre Theatre,1995-12-24,1995-12-31,week_range,True,2,,,,,2
+penn-teller-run1,Penn & Teller,Ritz Theatre,1987-11-29,1988-03-20,week_range,False,1,,,,,16
+penn-teller-on-broadway-run1,Penn & Teller On Broadway,Marquis Theatre,2015-07-12,2015-08-16,week_range,False,1,,,,,6
+penn-teller-the-refrigerator-tour-run1,Penn & Teller: The Refrigerator Tour,Eugene O'Neill Theatre,1991-03-31,1991-06-30,week_range,False,1,,,,,14
+peter-pan-run1,Peter Pan,Lunt-Fontanne Theatre,1990-12-16,1991-01-20,week_range,True,1,,,,,6
+peter-pan-run2,Peter Pan,Minskoff Theatre,1991-12-01,1992-01-05,week_range,True,2,,,,,6
+peter-pan-run3,Peter Pan,Gershwin Theatre,1998-11-22,1999-08-29,week_range,True,3,,,,,28
+peter-pan-goes-wrong-run1,Peter Pan Goes Wrong,Ethel Barrymore Theatre,2023-03-19,2023-07-23,week_range,False,1,,,,,19
+peter-and-the-starcatcher-run1,Peter and the Starcatcher,Brooks Atkinson Theatre,2012-04-01,2013-01-20,week_range,False,1,,,,,43
+philadelphia-here-i-come-run1,"Philadelphia, Here I Come!",Criterion Center Stage Right,1994-08-21,1994-10-23,week_range,False,1,,,,,10
+picnic-run1,Picnic,Criterion Center Stage Right,1994-04-03,1994-05-29,week_range,True,1,,,,,9
+picnic-run2,Picnic,American Airlines Theatre,2012-12-16,2013-02-24,week_range,True,2,,,,,11
+pictures-from-home-run1,Pictures From Home,Studio 54,2023-01-15,2023-04-30,week_range,False,1,,,,,16
+pippin-run1,Pippin,Music Box Theatre,2013-03-24,2015-01-04,week_range,False,1,,,,,94
+pirates-the-penzance-musical-run1,Pirates! The Penzance Musical,Todd Haimes Theatre,2025-04-06,2025-07-27,week_range,False,1,,,,,17
+play-on-run1,Play On!,Brooks Atkinson Theatre,1997-03-09,1997-05-11,week_range,False,1,,,,,10
+plaza-suite-run1,Plaza Suite,Hudson Theatre,2022-02-27,2022-07-10,week_range,False,1,,,,,20
+porgy-and-bess-run1,Porgy and Bess,Richard Rodgers Theatre,2011-12-18,2012-09-23,week_range,False,1,,,,,41
+prayer-for-the-french-republic-run1,Prayer For The French Republic,Samuel J. Friedman Theatre,2023-12-24,2024-03-03,week_range,False,1,,,,,11
+precious-sons-run1,Precious Sons,Longacre Theatre,1986-03-02,1986-05-11,week_range,False,1,,,,,11
+prelude-to-a-kiss-run1,Prelude to a Kiss,Helen Hayes Theatre,1990-04-29,1991-05-19,week_range,True,1,,,,,56
+prelude-to-a-kiss-run2,Prelude to a Kiss,American Airlines Theatre,2007-02-18,2007-04-29,week_range,True,2,,,,,11
+present-laughter-run1,Present Laughter,Walter Kerr Theatre,1996-10-27,1997-04-20,week_range,True,1,,,,,26
+present-laughter-run2,Present Laughter,American Airlines Theatre,2010-01-03,2010-03-21,week_range,True,2,,,,,12
+present-laughter-run3,Present Laughter,St. James Theatre,2017-03-12,2017-07-02,week_range,True,3,,,,,17
+pretty-woman-the-musical-run1,Pretty Woman: The Musical,Nederlander Theatre,2018-07-22,2019-08-18,week_range,False,1,,,,,57
+prima-facie-run1,Prima Facie,John Golden Theatre,2023-04-16,2023-07-02,week_range,False,1,,,,,12
+primo-run1,Primo,Music Box Theatre,2005-07-10,2005-08-14,week_range,False,1,,,,,6
+prince-of-broadway-run1,Prince of Broadway,Samuel J. Friedman Theatre,2017-08-06,2017-10-29,week_range,False,1,,,,,13
+prince-of-central-park-run1,Prince of Central Park,Belasco Theatre,1989-10-29,1989-11-12,week_range,False,1,,,,,3
+priscilla-queen-of-the-desert-run1,Priscilla Queen of the Desert,Palace Theatre,2011-03-06,2012-06-24,week_range,False,1,,,,,69
+private-lives-run1,Private Lives,Broadhurst Theatre,1992-02-16,1992-03-22,week_range,True,1,,,,,6
+private-lives-run2,Private Lives,Richard Rodgers Theatre,2002-04-21,2002-09-01,week_range,True,2,,,,,20
+private-lives-run3,Private Lives,Music Box Theatre,2011-11-06,2012-01-01,week_range,True,3,,,,,9
+promises-promises-run1,"Promises, Promises",Broadway Theatre,2010-03-28,2011-01-02,week_range,False,1,,,,,41
+proof-run1,Proof,Walter Kerr Theatre,2000-10-15,2026-07-19,week_range,False,1,,,,,133
+proposals-run1,Proposals,Broadhurst Theatre,1997-11-02,1998-01-11,week_range,False,1,,,,,11
+prune-danish-run1,Prune Danish,Royale Theatre,2002-10-13,2002-12-01,week_range,False,1,,,,,8
+prymate-run1,Prymate,Longacre Theatre,2004-04-18,2004-05-09,week_range,False,1,,,,,4
+punch-run1,Punch,Samuel J. Friedman Theatre,2025-09-14,2025-11-02,week_range,False,1,,,,,8
+pure-yanni-run1,Pure Yanni,Lunt-Fontanne Theatre,2019-06-02,2019-06-02,week_range,False,1,,,,,1
+purlie-victorious-run1,Purlie Victorious,Music Box Theatre,2023-09-10,2024-02-04,week_range,False,1,,,,,22
+purpose-run1,Purpose,Hayes Theater,2025-03-02,2025-08-31,week_range,False,1,,,,,27
+putting-it-together-run1,Putting It Together,Ethel Barrymore Theatre,1999-10-31,2000-02-20,week_range,False,1,,,,,17
+pygmalion-run1,Pygmalion,Plymouth Theatre,1987-04-19,1987-08-02,week_range,True,1,,,,,16
+pygmalion-run2,Pygmalion,American Airlines Theatre,2007-09-23,2007-12-16,week_range,True,2,,,,,13
+qed-run1,QED,Vivian Beaumont Theater,2001-10-21,2002-06-16,week_range,False,1,,,,,28
+rabbit-hole-run1,Rabbit Hole,Biltmore Theatre,2006-01-15,2006-04-09,week_range,False,1,,,,,13
+race-run1,Race,Ethel Barrymore Theatre,2009-11-22,2010-08-22,week_range,False,1,,,,,40
+racing-demon-run1,Racing Demon,Vivian Beaumont Theater,1995-11-12,1995-12-31,week_range,False,1,,,,,8
+radio-golf-run1,Radio Golf,Cort Theatre,2007-04-22,2007-07-01,week_range,False,1,,,,,11
+raffi-run1,Raffi,Gershwin Theatre,1993-04-11,1993-04-11,week_range,False,1,,,,,1
+raggedy-ann-run1,Raggedy Ann,Nederlander Theatre,1986-10-05,1986-10-19,week_range,False,1,,,,,3
+rags-run1,Rags,Mark Hellinger Theatre,1986-08-10,1986-08-24,week_range,False,1,,,,,3
+ragtime-run1,Ragtime,Ford Center for the Performing Arts,1997-12-28,2000-01-16,week_range,True,1,,,,,108
+ragtime-run2,Ragtime,Vivian Beaumont Theater,2009-10-25,2026-08-16,week_range,True,2,,,,,59
+rain-a-tribute-to-the-beatles-run1,Rain: A Tribute to the Beatles,Brooks Atkinson Theatre,2010-10-24,2011-07-31,week_range,False,1,,,,,38
+real-women-have-curves-run1,Real Women Have Curves,James Earl Jones Theatre,2025-04-06,2025-06-29,week_range,False,1,,,,,13
+reasons-to-be-pretty-run1,Reasons to Be Pretty,Lyceum Theatre,2009-03-15,2009-06-14,week_range,False,1,,,,,14
+reckless-run1,Reckless,Biltmore Theatre,2004-09-26,2004-12-19,week_range,False,1,,,,,13
+red-run1,Red,John Golden Theatre,2010-03-14,2010-06-27,week_range,False,1,,,,,16
+redwood-run1,Redwood,Nederlander Theatre,2025-01-26,2025-05-18,week_range,False,1,,,,,17
+redwood-curtain-run1,Redwood Curtain,Brooks Atkinson Theatre,1993-03-21,1993-05-02,week_range,False,1,,,,,7
+regina-spektor-live-on-broadway-run1,Regina Spektor: Live on Broadway,Lunt-Fontanne Theatre,2019-06-30,2019-06-30,week_range,False,1,,,,,1
+relatively-speaking-run1,Relatively Speaking,Brooks Atkinson Theatre,2011-09-25,2012-01-29,week_range,False,1,,,,,19
+rent-run1,Rent,Nederlander Theatre,1996-04-21,2008-09-07,week_range,False,1,,,,,647
+ring-round-the-moon-run1,Ring Round the Moon,Belasco Theatre,1999-04-04,1999-06-27,week_range,False,1,,,,,13
+ring-of-fire-run1,Ring of Fire,Ethel Barrymore Theatre,2006-02-12,2006-04-30,week_range,False,1,,,,,12
+riverdance-on-broadway-run1,Riverdance - on Broadway,Gershwin Theatre,2000-03-05,2001-08-26,week_range,False,1,,,,,78
+rob-becker-s-defending-the-caveman-run1,Rob Becker's Defending the Caveman,Booth Theatre,1995-03-05,1997-06-22,week_range,False,1,,,,,116
+rob-lake-magic-with-special-guests-the-m-run1,Rob Lake Magic with Special Guests The Muppets,Broadhurst Theatre,2025-11-02,2025-11-16,week_range,False,1,,,,,3
+rock-n-roll-run1,Rock 'n' Roll,Bernard B. Jacobs Theatre,2007-10-21,2008-03-09,week_range,False,1,,,,,21
+rock-of-ages-run1,Rock of Ages,Helen Hayes Theatre,2009-03-22,2015-01-18,week_range,False,1,,,,,295
+rocktopia-run1,Rocktopia,Broadway Theatre,2018-03-25,2018-04-29,week_range,False,1,,,,,6
+rocky-run1,Rocky,Winter Garden Theatre,2014-02-16,2014-08-17,week_range,False,1,,,,,27
+romance-romance-run1,Romance / Romance,Helen Hayes Theatre,1988-04-24,1989-01-15,week_range,False,1,,,,,39
+romeo-and-juliet-run1,Romeo and Juliet,Circle in the Square Theatre,2013-08-25,2025-02-16,week_range,False,1,,,,,37
+rose-run1,Rose,Lyceum Theatre,2000-04-02,2000-05-21,week_range,False,1,,,,,8
+rowan-atkinson-at-the-atkinson-run1,Rowan Atkinson at the Atkinson,Brooks Atkinson Theatre,1986-10-12,1986-10-19,week_range,False,1,,,,,2
+roza-run1,Roza,Royale Theatre,1987-09-20,1987-10-11,week_range,False,1,,,,,4
+ruben-clay-s-first-annual-christmas-caro-run1,Ruben & Clay's First Annual Christmas Carol Family Fun Pageant Spectacular Reunion Show,Imperial Theatre,2018-12-09,2018-12-30,week_range,False,1,,,,,4
+rumors-run1,Rumors,Ethel Barrymore Theatre,1988-11-13,1990-02-25,week_range,False,1,,,,,68
+run-for-your-wife-run1,Run for Your Wife,Virginia Theatre,1989-02-26,1989-04-16,week_range,False,1,,,,,8
+russell-simmons-def-poetry-jam-run1,Russell Simmons Def Poetry Jam,Longacre Theatre,2002-11-03,2003-05-04,week_range,False,1,,,,,27
+six-the-musical-run1,SIX: The Musical,Lena Horne Theatre,2020-02-16,2026-08-16,week_range,False,1,,,,,260
+sacrilege-run1,Sacrilege,Belasco Theatre,1995-10-29,1995-11-19,week_range,False,1,,,,,4
+safe-sex-run1,Safe Sex,Lyceum Theatre,1987-03-22,1987-04-12,week_range,False,1,,,,,4
+saint-joan-run1,Saint Joan,Lyceum Theatre,1993-01-24,1993-03-14,week_range,True,1,,,,,8
+saint-joan-run2,Saint Joan,Samuel J. Friedman Theatre,2018-04-08,2018-06-10,week_range,True,2,,,,,10
+sally-marr-and-her-escorts-run1,Sally Marr...and Her Escorts,Helen Hayes Theatre,1994-04-17,1994-06-19,week_range,False,1,,,,,10
+salome-run1,Salome,Ethel Barrymore Theatre,2003-04-13,2003-06-15,week_range,False,1,,,,,10
+sarafina-run1,Sarafina!,Cort Theatre,1988-01-24,1989-07-02,week_range,False,1,,,,,76
+saturday-night-fever-run1,Saturday Night Fever,Minskoff Theatre,1999-10-03,2000-12-31,week_range,False,1,,,,,66
+say-goodnight-gracie-run1,"Say Goodnight, Gracie",Helen Hayes Theatre,2002-09-22,2003-08-24,week_range,False,1,,,,,49
+scandalous-the-life-and-trials-of-aimee--run1,Scandalous: The Life and Trials of Aimee Semple McPherson,Neil Simon Theatre,2012-10-14,2012-12-09,week_range,False,1,,,,,9
+schmigadoon-run1,Schmigadoon!,Nederlander Theatre,2026-04-05,2026-08-16,week_range,False,1,,,,,20
+school-of-rock-the-musical-run1,School of Rock - The Musical,Winter Garden Theatre,2015-11-15,2019-01-20,week_range,False,1,,,,,166
+sea-wall-a-life-run1,Sea Wall/A Life,Hudson Theatre,2019-07-28,2019-09-29,week_range,False,1,,,,,10
+search-and-destroy-run1,Search and Destroy,Circle in the Square Theatre,1992-02-09,1992-04-05,week_range,False,1,,,,,9
+seascape-run1,Seascape,Booth Theatre,2005-10-30,2006-01-08,week_range,False,1,,,,,11
+seminar-run1,Seminar,John Golden Theatre,2011-10-30,2012-05-06,week_range,False,1,,,,,28
+senator-joe-run1,Senator Joe,Neil Simon Theatre,1989-01-08,1989-01-08,week_range,False,1,,,,,1
+serious-money-run1,Serious Money,Royale Theatre,1988-01-24,1988-02-21,week_range,False,1,,,,,5
+seussical-run1,Seussical,Richard Rodgers Theatre,2000-11-05,2001-05-20,week_range,False,1,,,,,29
+seven-guitars-run1,Seven Guitars,Walter Kerr Theatre,1996-03-17,1996-09-08,week_range,False,1,,,,,26
+sex-and-longing-run1,Sex and Longing,Cort Theatre,1996-09-15,1996-11-17,week_range,False,1,,,,,10
+sexaholix-run1,Sexaholix,Royale Theatre,2001-10-14,2002-02-10,week_range,True,1,,,,,18
+sexaholix-run2,Sexaholix,Broadway Theatre,2003-11-16,2003-12-07,week_range,True,2,,,,,4
+shadowlands-run1,Shadowlands,Brooks Atkinson Theatre,1990-11-04,1991-04-07,week_range,False,1,,,,,23
+shakespeare-for-my-father-run1,Shakespeare for My Father,Helen Hayes Theatre,1993-04-25,1994-01-02,week_range,False,1,,,,,37
+shatner-s-world-we-just-live-in-it-run1,Shatner's World: We Just Live in It,Music Box Theatre,2012-02-19,2012-03-04,week_range,False,1,,,,,3
+she-loves-me-run1,She Loves Me,Brooks Atkinson Theatre,1993-05-16,1994-06-19,week_range,True,1,,,,,50
+she-loves-me-run2,She Loves Me,Studio 54,2016-02-21,2016-07-10,week_range,True,2,,,,,21
+shenandoah-run1,Shenandoah,Virginia Theatre,1989-07-30,1989-09-03,week_range,False,1,,,,,6
+sherlock-s-last-case-run1,Sherlock's Last Case,Nederlander Theatre,1987-08-09,1987-12-06,week_range,False,1,,,,,18
+shimada-run1,Shimada,Broadhurst Theatre,1992-04-12,1992-04-26,week_range,False,1,,,,,3
+shining-city-run1,Shining City,Biltmore Theatre,2006-04-23,2006-07-16,week_range,False,1,,,,,13
+shirley-valentine-run1,Shirley Valentine,Booth Theatre,1989-02-12,1989-11-26,week_range,False,1,,,,,42
+shogun-the-musical-run1,"Shogun, the Musical",Marquis Theatre,1990-11-04,1991-01-20,week_range,False,1,,,,,12
+show-boat-run1,Show Boat,Gershwin Theatre,1994-09-25,1997-01-05,week_range,False,1,,,,,120
+shrek-the-musical-run1,Shrek the Musical,Broadway Theatre,2008-11-09,2010-01-03,week_range,False,1,,,,,61
+shucked-run1,Shucked,Nederlander Theatre,2023-03-12,2024-01-14,week_range,False,1,,,,,45
+shuffle-along-or-the-making-of-the-music-run1,"Shuffle Along, or the Making of the Musical Sensation of 1921 and All That Followed",Music Box Theatre,2016-03-20,2016-07-24,week_range,False,1,,,,,19
+sid-caesar-company-run1,Sid Caesar & Company,John Golden Theatre,1989-10-29,1989-11-05,week_range,False,1,,,,,2
+side-man-run1,Side Man,John Golden Theatre,1998-06-07,1999-10-31,week_range,False,1,,,,,68
+side-show-run1,Side Show,Richard Rodgers Theatre,1997-09-21,1998-01-04,week_range,True,1,,,,,16
+side-show-run2,Side Show,St. James Theatre,2014-11-02,2015-01-04,week_range,True,2,,,,,10
+sight-unseen-run1,Sight Unseen,Biltmore Theatre,2004-05-09,2004-07-25,week_range,False,1,,,,,12
+significant-other-run1,Significant Other,Booth Theatre,2017-02-19,2017-04-23,week_range,False,1,,,,,10
+singin-in-the-rain-run1,Singin' in the Rain,Gershwin Theatre,1985-06-09,1986-05-18,week_range,False,1,,,,,50
+sister-act-run1,Sister Act,Broadway Theatre,2011-03-27,2012-08-26,week_range,False,1,,,,,75
+six-dance-lessons-in-six-weeks-run1,Six Dance Lessons in Six Weeks,Belasco Theatre,2003-10-12,2003-11-23,week_range,False,1,,,,,7
+six-degrees-of-separation-run1,Six Degrees of Separation,Vivian Beaumont Theater,1990-11-04,1992-01-05,week_range,True,1,,,,,62
+six-degrees-of-separation-run2,Six Degrees of Separation,Ethel Barrymore Theatre,2017-04-09,2017-06-18,week_range,True,2,,,,,11
+sixteen-wounded-run1,Sixteen Wounded,Walter Kerr Theatre,2004-03-28,2004-04-25,week_range,False,1,,,,,5
+skeleton-crew-run1,Skeleton Crew,Samuel J. Friedman Theatre,2022-01-02,2022-02-20,week_range,False,1,,,,,7
+skylight-run1,Skylight,Royale Theatre,1996-09-15,1996-12-29,week_range,True,1,,,,,16
+skylight-run2,Skylight,John Golden Theatre,2015-03-15,2015-06-21,week_range,True,2,,,,,14
+slava-s-snowshow-run1,Slava's Snowshow,Helen Hayes Theatre,2008-12-07,2009-01-04,week_range,True,1,,,,,5
+slava-s-snowshow-run2,Slava's Snowshow,Stephen Sondheim Theatre,2019-11-17,2020-01-05,week_range,True,2,,,,,8
+slave-play-run1,Slave Play,John Golden Theatre,2019-09-15,2022-01-23,week_range,False,1,,,,,28
+sleight-of-hand-run1,Sleight of Hand,Cort Theatre,1987-04-12,1987-05-10,week_range,False,1,,,,,5
+sly-fox-run1,Sly Fox,Ethel Barrymore Theatre,2004-03-14,2004-08-29,week_range,False,1,,,,,25
+smash-run1,Smash,Imperial Theatre,2025-03-16,2025-06-22,week_range,False,1,,,,,15
+smile-run1,Smile,Lunt-Fontanne Theatre,1986-11-16,1987-01-04,week_range,False,1,,,,,8
+smokey-joe-s-cafe-run1,Smokey Joe's Cafe,Virginia Theatre,1995-02-12,2000-01-16,week_range,False,1,,,,,256
+so-long-on-lonely-street-run1,So Long on Lonely Street,Jack Lawrence Theatre,1986-03-30,1986-05-18,week_range,False,1,,,,,8
+social-security-run1,Social Security,Ethel Barrymore Theatre,1986-03-30,1987-03-22,week_range,False,1,,,,,52
+solitary-confinement-run1,Solitary Confinement,Nederlander Theatre,1992-11-01,1992-11-29,week_range,False,1,,,,,5
+some-americans-abroad-run1,Some Americans Abroad,Vivian Beaumont Theater,1990-04-29,1990-06-17,week_range,False,1,,,,,8
+some-like-it-hot-run1,Some Like It Hot,Sam S. Shubert Theatre,2022-11-06,2023-12-31,week_range,False,1,,,,,61
+someone-who-ll-watch-over-me-run1,Someone Who'll Watch Over Me,Booth Theatre,1992-11-22,1993-06-13,week_range,False,1,,,,,30
+something-rotten-run1,Something Rotten!,St. James Theatre,2015-03-29,2017-01-01,week_range,False,1,,,,,92
+sondheim-on-sondheim-run1,Sondheim on Sondheim,Studio 54,2010-03-21,2010-06-27,week_range,False,1,,,,,15
+song-and-dance-run1,Song and Dance,Royale Theatre,1985-09-08,1986-11-09,week_range,False,1,,,,,62
+soul-doctor-run1,Soul Doctor,Circle in the Square Theatre,2013-07-21,2013-10-13,week_range,False,1,,,,,13
+soul-of-shaolin-run1,Soul of Shaolin,Marquis Theatre,2009-01-18,2009-02-01,week_range,False,1,,,,,3
+south-pacific-run1,South Pacific,Vivian Beaumont Theater,2008-03-02,2010-08-22,week_range,False,1,,,,,130
+souvenir-run1,Souvenir,Lyceum Theatre,2005-10-30,2006-01-08,week_range,False,1,,,,,11
+spamalot-run1,Spamalot,Sam S. Shubert Theatre,2005-02-20,2024-04-07,week_range,False,1,,,,,227
+speed-the-plow-run1,Speed-the-Plow,Royale Theatre,1988-04-10,1989-01-01,week_range,True,1,,,,,39
+speed-the-plow-run2,Speed-the-Plow,Ethel Barrymore Theatre,2008-10-05,2009-02-22,week_range,True,2,,,,,21
+spider-man-turn-off-the-dark-run1,Spider-Man Turn Off the Dark,Foxwoods Theatre,2010-11-28,2014-01-05,week_range,False,1,,,,,160
+spoils-of-war-run1,Spoils of War,Music Box Theatre,1988-10-30,1988-12-11,week_range,False,1,,,,,7
+spongebob-squarepants-the-broadway-music-run1,"SpongeBob SquarePants, The Broadway Musical",Palace Theatre,2017-11-12,2018-09-16,week_range,False,1,,,,,45
+spring-awakening-run1,Spring Awakening,Eugene O'Neill Theatre,2006-11-19,2009-01-18,week_range,True,1,,,,,114
+spring-awakening-run2,Spring Awakening,Brooks Atkinson Theatre,2015-09-13,2016-01-24,week_range,True,2,,,,,19
+springsteen-on-broadway-run1,Springsteen On Broadway,Walter Kerr Theatre,2017-10-08,2018-12-16,week_range,False,1,,,,,52
+squonk-run1,Squonk,Helen Hayes Theatre,2000-02-13,2000-03-26,week_range,False,1,,,,,7
+stand-up-tragedy-run1,Stand-Up Tragedy,Criterion Center Stage Right,1990-09-30,1990-10-21,week_range,False,1,,,,,4
+stanley-run1,Stanley,Circle in the Square Theatre,1997-02-09,1997-04-27,week_range,False,1,,,,,12
+stardust-run1,Stardust,Biltmore Theatre,1987-02-08,1987-05-17,week_range,False,1,,,,,15
+starlight-express-run1,Starlight Express,Gershwin Theatre,1987-03-01,1989-01-08,week_range,False,1,,,,,98
+starmites-run1,Starmites,Criterion Center Stage Right,1989-03-26,1989-06-18,week_range,False,1,,,,,13
+state-fair-run1,State Fair,Music Box Theatre,1996-03-24,1996-06-30,week_range,False,1,,,,,15
+steel-magnolias-run1,Steel Magnolias,Lyceum Theatre,2005-03-20,2005-07-31,week_range,False,1,,,,,20
+steel-pier-run1,Steel Pier,Richard Rodgers Theatre,1997-03-30,1997-06-29,week_range,False,1,,,,,14
+stephen-sondheim-s-old-friends-run1,Stephen Sondheim's Old Friends,Samuel J. Friedman Theatre,2025-03-30,2025-06-29,week_range,False,1,,,,,14
+stepping-out-run1,Stepping Out,John Golden Theatre,1986-12-28,1987-03-15,week_range,False,1,,,,,12
+stereophonic-run1,Stereophonic,John Golden Theatre,2024-04-07,2025-01-12,week_range,False,1,,,,,41
+stick-fly-run1,Stick Fly,Cort Theatre,2011-11-20,2012-02-26,week_range,False,1,,,,,15
+stones-in-his-pockets-run1,Stones in His Pockets,John Golden Theatre,2001-03-25,2001-09-23,week_range,False,1,,,,,27
+straight-white-men-run1,Straight White Men,Helen Hayes Theater,2018-07-01,2018-09-09,week_range,False,1,,,,,11
+stranger-things-the-first-shadow-run1,Stranger Things: The First Shadow,Marquis Theatre,2025-03-30,2026-08-16,week_range,False,1,,,,,72
+street-corner-symphony-run1,Street Corner Symphony,Brooks Atkinson Theatre,1997-11-02,1998-02-01,week_range,False,1,,,,,14
+suffs-run1,Suffs,Music Box Theatre,2024-03-31,2025-01-05,week_range,False,1,,,,,41
+summer-and-smoke-run1,Summer and Smoke,Criterion Center Stage Right,1996-08-18,1996-10-20,week_range,False,1,,,,,10
+summer-1976-run1,"Summer, 1976",Samuel J. Friedman Theatre,2023-04-09,2023-06-18,week_range,False,1,,,,,11
+summer-the-donna-summer-musical-run1,Summer: The Donna Summer Musical,Lunt-Fontanne Theatre,2018-04-01,2018-12-30,week_range,False,1,,,,,40
+sunday-in-the-park-with-george-run1,Sunday in the Park with George,Booth Theatre,1985-06-09,1985-10-13,week_range,True,1,,,,,19
+sunday-in-the-park-with-george-run2,Sunday in the Park with George,Studio 54,2008-01-27,2008-06-29,week_range,True,2,,,,,23
+sunday-in-the-park-with-george-run3,Sunday in the Park with George,Hudson Theatre,2017-02-12,2017-04-23,week_range,True,3,,,,,10
+sunset-boulevard-run1,Sunset Boulevard,Minskoff Theatre,1994-11-06,1997-03-23,week_range,True,1,,,,,125
+sunset-boulevard-run2,Sunset Boulevard,St. James Theatre,2017-02-05,2025-07-20,week_range,True,2,,,,,64
+superior-donuts-run1,Superior Donuts,Music Box Theatre,2009-09-20,2010-01-03,week_range,False,1,,,,,16
+swan-lake-run1,Swan Lake,Neil Simon Theatre,1998-09-27,1999-01-24,week_range,False,1,,,,,18
+sweat-run1,Sweat,Studio 54,2017-03-05,2017-06-25,week_range,False,1,,,,,17
+sweeney-todd-run1,Sweeney Todd,Circle in the Square Theatre,1989-08-06,1990-02-25,week_range,True,1,,,,,30
+sweeney-todd-run2,Sweeney Todd,Lunt-Fontanne Theatre,2005-10-09,2024-05-05,week_range,True,2,,,,,111
+sweet-charity-run1,Sweet Charity,Minskoff Theatre,1986-04-20,1987-03-15,week_range,True,1,,,,,48
+sweet-charity-run2,Sweet Charity,Al Hirschfeld Theatre,2005-04-17,2006-01-01,week_range,True,2,,,,,38
+sweet-smell-of-success-run1,Sweet Smell of Success,Martin Beck Theatre,2002-02-24,2002-06-16,week_range,False,1,,,,,17
+sweet-sue-run1,Sweet Sue,Royale Theatre,1986-12-28,1987-05-31,week_range,False,1,,,,,23
+swept-away-run1,Swept Away,Longacre Theatre,2024-11-03,2024-12-29,week_range,False,1,,,,,9
+swing-run1,Swing!,St. James Theatre,1999-11-07,2001-01-14,week_range,False,1,,,,,63
+swinging-on-a-star-run1,Swinging on a Star,Music Box Theatre,1995-10-08,1996-01-14,week_range,False,1,,,,,15
+sylvia-run1,Sylvia,Cort Theatre,2015-10-04,2016-01-03,week_range,False,1,,,,,13
+taboo-run1,Taboo,Plymouth Theatre,2003-11-02,2004-02-08,week_range,False,1,,,,,15
+take-me-out-run1,Take Me Out,Walter Kerr Theatre,2003-02-09,2023-02-05,week_range,False,1,,,,,77
+taking-sides-run1,Taking Sides,Brooks Atkinson Theatre,1991-02-03,1991-04-28,week_range,True,1,,,,,13
+taking-sides-run2,Taking Sides,Brooks Atkinson Theatre,1996-10-06,1996-12-29,week_range,True,2,,,,,13
+talk-radio-run1,Talk Radio,Longacre Theatre,2007-02-18,2007-06-24,week_range,False,1,,,,,19
+taller-than-a-dwarf-run1,Taller Than a Dwarf,Longacre Theatre,2000-03-26,2000-06-11,week_range,False,1,,,,,12
+tammy-faye-run1,Tammy Faye,Palace Theatre,2024-10-20,2024-12-08,week_range,False,1,,,,,8
+tango-argentino-run1,Tango Argentino,Mark Hellinger Theatre,1985-10-13,1986-03-30,week_range,True,1,,,,,25
+tango-argentino-run2,Tango Argentino,Gershwin Theatre,1999-11-14,2000-01-09,week_range,True,2,,,,,9
+tango-pasion-run1,Tango Pasion,Longacre Theatre,1993-04-25,1993-05-02,week_range,False,1,,,,,2
+tartuffe-run1,Tartuffe,Circle in the Square Theatre,1996-05-12,1996-06-23,week_range,True,1,,,,,7
+tartuffe-run2,Tartuffe,American Airlines Theatre,2002-12-08,2003-02-23,week_range,True,2,,,,,12
+tarzan-run1,Tarzan,Richard Rodgers Theatre,2006-03-26,2007-07-08,week_range,False,1,,,,,68
+teddy-amp-alice-run1,Teddy &amp; Alice,Minskoff Theatre,1987-11-08,1988-01-17,week_range,False,1,,,,,11
+that-championship-season-run1,That Championship Season,Bernard B. Jacobs Theatre,2011-02-13,2011-05-29,week_range,False,1,,,,,16
+the-25th-annual-putnam-county-spelling-b-run1,The 25th Annual Putnam County Spelling Bee,Circle in the Square Theatre,2005-04-17,2008-01-20,week_range,False,1,,,,,145
+the-39-steps-run1,The 39 Steps,Helen Hayes Theatre,2008-01-06,2010-01-10,week_range,False,1,,,,,100
+the-addams-family-run1,The Addams Family,Lunt-Fontanne Theatre,2010-03-14,2012-01-01,week_range,False,1,,,,,95
+the-adventures-of-tom-sawyer-run1,The Adventures of Tom Sawyer,Minskoff Theatre,2001-04-01,2001-05-13,week_range,False,1,,,,,7
+the-american-plan-run1,The American Plan,Samuel J. Friedman Theatre,2009-01-04,2009-03-22,week_range,False,1,,,,,12
+the-anarchist-run1,The Anarchist,John Golden Theatre,2012-11-18,2012-12-16,week_range,False,1,,,,,5
+the-apple-doesn-t-fall-run1,The Apple Doesn't Fall...,Lyceum Theatre,1996-03-31,1996-04-14,week_range,False,1,,,,,3
+the-apple-tree-run1,The Apple Tree,Studio 54,2006-12-03,2007-03-11,week_range,False,1,,,,,15
+the-assembled-parties-run1,The Assembled Parties,Samuel J. Friedman Theatre,2013-03-24,2013-07-28,week_range,False,1,,,,,19
+the-audience-run1,The Audience,Gerald Schoenfeld Theatre,2015-02-15,2015-06-28,week_range,False,1,,,,,20
+the-balusters-run1,The Balusters,Samuel J. Friedman Theatre,2026-04-05,2026-06-21,week_range,False,1,,,,,12
+the-band-s-visit-run1,The Band's Visit,Ethel Barrymore Theatre,2017-10-08,2019-04-07,week_range,False,1,,,,,79
+the-beauty-queen-of-leenane-run1,The Beauty Queen of Leenane,Walter Kerr Theatre,1998-04-19,1999-03-14,week_range,False,1,,,,,48
+the-best-little-whorehouse-goes-public-run1,The Best Little Whorehouse Goes Public,Lunt-Fontanne Theatre,1994-04-17,1994-05-22,week_range,False,1,,,,,6
+the-best-man-run1,The Best Man,Virginia Theatre,2000-09-10,2000-12-31,week_range,True,1,,,,,17
+the-best-man-run2,The Best Man,Gerald Schoenfeld Theatre,2012-03-11,2012-09-09,week_range,True,2,,,,,27
+the-big-knife-run1,The Big Knife,American Airlines Theatre,2013-03-24,2013-06-02,week_range,False,1,,,,,11
+the-big-love-run1,The Big Love,Plymouth Theatre,1991-02-24,1991-04-07,week_range,False,1,,,,,7
+the-blonde-in-the-thunderbird-run1,The Blonde in the Thunderbird,Brooks Atkinson Theatre,2005-07-10,2005-07-24,week_range,False,1,,,,,3
+the-blue-room-run1,The Blue Room,Cort Theatre,1998-11-29,1999-02-28,week_range,False,1,,,,,14
+the-book-of-mormon-run1,The Book of Mormon,Eugene O'Neill Theatre,2011-02-27,2026-08-16,week_range,False,1,,,,,718
+the-boy-from-oz-run1,The Boy from Oz,Imperial Theatre,2003-09-21,2004-09-12,week_range,False,1,,,,,51
+the-boys-choir-of-harlem-and-friends-run1,The Boys Choir of Harlem and Friends,Richard Rodgers Theatre,1993-01-17,1993-01-31,week_range,False,1,,,,,3
+the-boys-from-syracuse-run1,The Boys from Syracuse,American Airlines Theatre,2002-07-28,2002-10-20,week_range,False,1,,,,,13
+the-boys-in-autumn-run1,The Boys in Autumn,Circle in the Square Theatre,1986-04-13,1986-06-29,week_range,False,1,,,,,12
+the-boys-in-the-band-run1,The Boys in the Band,Booth Theatre,2018-05-06,2018-08-12,week_range,False,1,,,,,15
+the-boys-of-winter-run1,The Boys of Winter,Biltmore Theatre,1985-11-10,1985-12-08,week_range,False,1,,,,,5
+the-bridges-of-madison-county-run1,The Bridges of Madison County,Gerald Schoenfeld Theatre,2014-01-19,2014-05-18,week_range,False,1,,,,,18
+the-caine-mutiny-court-martial-run1,The Caine Mutiny Court-Martial,Gerald Schoenfeld Theatre,2006-04-16,2006-05-21,week_range,False,1,,,,,6
+the-capeman-run1,The Capeman,Marquis Theatre,1997-12-07,1998-03-29,week_range,False,1,,,,,17
+the-caretaker-run1,The Caretaker,Circle in the Square Theatre,1986-01-12,1986-03-09,week_range,True,1,,,,,9
+the-caretaker-run2,The Caretaker,American Airlines Theatre,2003-10-26,2004-01-04,week_range,True,2,,,,,11
+the-cemetery-club-run1,The Cemetery Club,Brooks Atkinson Theatre,1990-05-06,1990-07-01,week_range,False,1,,,,,9
+the-chairs-run1,The Chairs,John Golden Theatre,1998-03-29,1998-06-14,week_range,False,1,,,,,12
+the-cher-show-run1,The Cher Show,Neil Simon Theatre,2018-11-04,2019-08-18,week_range,False,1,,,,,42
+the-cherry-orchard-run1,The Cherry Orchard,Martin Beck Theatre,1997-11-02,1997-11-09,week_range,True,1,,,,,2
+the-cherry-orchard-run2,The Cherry Orchard,American Airlines Theatre,2016-09-18,2016-12-04,week_range,True,2,,,,,12
+the-children-run1,The Children,Samuel J. Friedman Theatre,2017-12-03,2018-02-04,week_range,False,1,,,,,10
+the-circle-run1,The Circle,Ambassador Theatre,1989-11-19,1990-05-20,week_range,False,1,,,,,27
+the-civil-war-run1,The Civil War,St. James Theatre,1999-03-28,1999-06-13,week_range,False,1,,,,,12
+the-coast-of-utopia-run1,The Coast of Utopia,Vivian Beaumont Theater,2006-10-22,2007-05-13,week_range,False,1,,,,,29
+the-collaboration-run1,The Collaboration,Samuel J. Friedman Theatre,2022-12-04,2023-02-12,week_range,False,1,,,,,10
+the-color-purple-run1,The Color Purple,Broadway Theatre,2005-11-06,2008-02-24,week_range,True,1,,,,,121
+the-color-purple-run2,The Color Purple,Bernard B. Jacobs Theatre,2015-11-15,2017-01-08,week_range,True,2,,,,,60
+the-columnist-run1,The Columnist,Samuel J. Friedman Theatre,2012-04-08,2012-07-08,week_range,False,1,,,,,14
+the-comedy-of-errors-run1,The Comedy of Errors,Vivian Beaumont Theater,1987-05-17,1987-07-26,week_range,False,1,,,,,11
+the-constant-wife-run1,The Constant Wife,American Airlines Theatre,2005-05-29,2005-08-21,week_range,False,1,,,,,13
+the-cottage-run1,The Cottage,Hayes Theater,2023-07-09,2023-10-29,week_range,False,1,,,,,17
+the-country-girl-run1,The Country Girl,Bernard B. Jacobs Theatre,2008-04-06,2008-07-20,week_range,False,1,,,,,16
+the-country-house-run1,The Country House,Samuel J. Friedman Theatre,2014-09-14,2014-11-23,week_range,False,1,,,,,11
+the-cripple-of-inishmaan-run1,The Cripple of Inishmaan,Cort Theatre,2014-04-13,2014-07-20,week_range,False,1,,,,,15
+the-crucible-run1,The Crucible,Belasco Theatre,1991-11-24,1992-01-05,week_range,True,1,,,,,7
+the-crucible-run2,The Crucible,Virginia Theatre,2002-02-17,2002-06-09,week_range,True,2,,,,,17
+the-crucible-run3,The Crucible,Walter Kerr Theatre,2016-03-06,2016-07-17,week_range,True,3,,,,,20
+the-curious-incident-of-the-dog-in-the-n-run1,The Curious Incident of the Dog in the Night-Time,Ethel Barrymore Theatre,2014-09-14,2016-09-04,week_range,False,1,,,,,103
+the-deep-blue-sea-run1,The Deep Blue Sea,Criterion Center Stage Right,1998-03-01,1998-05-17,week_range,False,1,,,,,12
+the-devil-s-disciple-run1,The Devil's Disciple,Circle in the Square Theatre,1988-10-23,1989-02-19,week_range,False,1,,,,,18
+the-diary-of-anne-frank-run1,The Diary of Anne Frank,Music Box Theatre,1997-11-23,1998-06-14,week_range,False,1,,,,,30
+the-dinner-party-run1,The Dinner Party,Music Box Theatre,2000-10-08,2001-09-02,week_range,False,1,,,,,48
+the-drowsy-chaperone-run1,The Drowsy Chaperone,Marquis Theatre,2006-04-09,2007-12-30,week_range,False,1,,,,,91
+the-elephant-man-run1,The Elephant Man,Royale Theatre,2002-03-31,2002-06-02,week_range,True,1,,,,,10
+the-elephant-man-run2,The Elephant Man,Booth Theatre,2014-11-09,2015-02-22,week_range,True,2,,,,,16
+the-encounter-run1,The Encounter,John Golden Theatre,2016-09-25,2017-01-08,week_range,False,1,,,,,16
+the-farnsworth-invention-run1,The Farnsworth Invention,Music Box Theatre,2007-10-21,2008-03-02,week_range,False,1,,,,,20
+the-father-run1,The Father,Criterion Center Stage Right,1995-12-17,1996-02-25,week_range,True,1,,,,,11
+the-father-run2,The Father,Samuel J. Friedman Theatre,2016-03-27,2016-06-19,week_range,True,2,,,,,13
+the-fear-of-13-run1,The Fear of 13,James Earl Jones Theatre,2026-03-22,2026-06-28,week_range,False,1,,,,,15
+the-ferryman-run1,The Ferryman,Bernard B. Jacobs Theatre,2018-10-07,2019-07-07,week_range,False,1,,,,,40
+the-flowering-peach-run1,The Flowering Peach,Lyceum Theatre,1994-03-13,1994-04-24,week_range,False,1,,,,,7
+the-flying-karamazov-brothers-do-the-imp-run1,"The Flying Karamazov Brothers ""Do the Impossible""",Helen Hayes Theatre,1994-11-20,1995-01-01,week_range,False,1,,,,,7
+the-flying-karamazov-brothers-juggling-a-run1,"The Flying Karamazov Brothers ""Juggling and Cheap Theatrics""",Vivian Beaumont Theater,1986-03-30,1986-04-20,week_range,False,1,,,,,4
+the-frogs-run1,The Frogs,Vivian Beaumont Theater,2004-06-27,2004-10-10,week_range,False,1,,,,,16
+the-front-page-run1,The Front Page,Vivian Beaumont Theater,1986-11-02,1987-01-11,week_range,True,1,,,,,11
+the-front-page-run2,The Front Page,Broadhurst Theatre,2016-09-25,2017-01-29,week_range,True,2,,,,,19
+the-full-monty-run1,The Full Monty,Eugene O'Neill Theatre,2000-10-01,2002-09-01,week_range,False,1,,,,,101
+the-gathering-run1,The Gathering,Cort Theatre,2001-04-15,2001-05-13,week_range,False,1,,,,,5
+the-gershwins-fascinating-rhythm-run1,The Gershwins' Fascinating Rhythm,Longacre Theatre,1999-04-04,1999-05-09,week_range,False,1,,,,,6
+the-gin-game-run1,The Gin Game,Lyceum Theatre,1997-04-06,1997-08-31,week_range,True,1,,,,,21
+the-gin-game-run2,The Gin Game,John Golden Theatre,2015-09-27,2016-01-10,week_range,True,2,,,,,15
+the-glass-menagerie-run1,The Glass Menagerie,Criterion Center Stage Right,1994-10-30,1995-01-01,week_range,True,1,,,,,10
+the-glass-menagerie-run2,The Glass Menagerie,Ethel Barrymore Theatre,2005-02-27,2005-07-03,week_range,True,2,,,,,19
+the-glass-menagerie-run3,The Glass Menagerie,Booth Theatre,2013-09-08,2014-02-23,week_range,True,3,,,,,25
+the-glass-menagerie-run4,The Glass Menagerie,Belasco Theatre,2017-02-12,2017-05-21,week_range,True,4,,,,,15
+the-goat-or-who-is-sylvia-run1,"The Goat, or Who Is Sylvia?",John Golden Theatre,2002-02-17,2002-12-15,week_range,False,1,,,,,43
+the-good-body-run1,The Good Body,Booth Theatre,2004-10-24,2004-12-19,week_range,False,1,,,,,9
+the-goodbye-girl-run1,The Goodbye Girl,Marquis Theatre,1993-02-14,1993-08-15,week_range,False,1,,,,,27
+the-gospel-at-colonus-run1,The Gospel at Colonus,Lunt-Fontanne Theatre,1988-03-13,1988-05-15,week_range,False,1,,,,,10
+the-government-inspector-run1,The Government Inspector,Lyceum Theatre,1993-12-26,1994-02-06,week_range,False,1,,,,,7
+the-graduate-run1,The Graduate,Plymouth Theatre,2002-03-17,2003-03-02,week_range,False,1,,,,,51
+the-grapes-of-wrath-run1,The Grapes of Wrath,Cort Theatre,1990-03-18,1990-09-02,week_range,False,1,,,,,25
+the-great-gatsby-run1,The Great Gatsby,Broadway Theatre,2024-03-31,2026-08-16,week_range,False,1,,,,,125
+the-great-society-run1,The Great Society,Vivian Beaumont Theater,2019-09-08,2019-12-01,week_range,False,1,,,,,13
+the-green-bird-run1,The Green Bird,Cort Theatre,2000-04-02,2000-06-04,week_range,False,1,,,,,10
+the-heart-of-rock-and-roll-run1,The Heart of Rock and Roll,James Earl Jones Theatre,2024-03-31,2024-06-23,week_range,False,1,,,,,13
+the-heidi-chronicles-run1,The Heidi Chronicles,Music Box Theatre,2015-03-01,2015-05-03,week_range,False,1,,,,,10
+the-height-of-the-storm-run1,The Height of the Storm,Samuel J. Friedman Theatre,2019-09-15,2019-11-24,week_range,False,1,,,,,11
+the-heiress-run1,The Heiress,Cort Theatre,1995-02-12,1995-12-31,week_range,True,1,,,,,47
+the-heiress-run2,The Heiress,Walter Kerr Theatre,2012-10-07,2013-02-10,week_range,True,2,,,,,19
+the-herbal-bed-run1,The Herbal Bed,Eugene O'Neill Theatre,1998-03-29,1998-04-26,week_range,False,1,,,,,5
+the-high-rollers-social-and-pleasure-clu-run1,The High Rollers Social and Pleasure Club,Helen Hayes Theatre,1992-04-12,1992-05-03,week_range,False,1,,,,,4
+the-hills-of-california-run1,The Hills of California,Broadhurst Theatre,2024-09-15,2024-12-22,week_range,False,1,,,,,15
+the-history-boys-run1,The History Boys,Broadhurst Theatre,2006-04-16,2006-10-01,week_range,False,1,,,,,25
+the-homecoming-run1,The Homecoming,Criterion Center Stage Right,1991-10-13,1991-12-08,week_range,True,1,,,,,9
+the-homecoming-run2,The Homecoming,Cort Theatre,2007-12-09,2008-04-13,week_range,True,2,,,,,19
+the-house-of-blue-leaves-run1,The House of Blue Leaves,Plymouth Theatre,1986-05-04,1987-03-15,week_range,True,1,,,,,44
+the-house-of-blue-leaves-run2,The House of Blue Leaves,Walter Kerr Theatre,2011-04-10,2011-06-26,week_range,True,2,,,,,12
+the-humans-run1,The Humans,Gerald Schoenfeld Theatre,2016-01-24,2017-01-15,week_range,False,1,,,,,50
+the-iceman-cometh-run1,The Iceman Cometh,Lunt-Fontanne Theatre,1985-09-22,1985-12-01,week_range,True,1,,,,,11
+the-iceman-cometh-run2,The Iceman Cometh,Brooks Atkinson Theatre,1999-04-04,1999-07-18,week_range,True,2,,,,,16
+the-iceman-cometh-run3,The Iceman Cometh,Bernard B. Jacobs Theatre,2018-03-25,2018-07-01,week_range,True,3,,,,,15
+the-illusionists-live-on-broadway-run1,The Illusionists - Live On Broadway,New Amsterdam Theatre,2015-11-22,2016-01-03,week_range,False,1,,,,,6
+the-illusionists-magic-of-the-holidays-run1,The Illusionists - Magic Of The Holidays,Marquis Theatre,2018-11-25,2018-12-30,week_range,True,1,,,,,6
+the-illusionists-magic-of-the-holidays-run2,The Illusionists - Magic Of The Holidays,Neil Simon Theatre,2019-12-01,2020-01-05,week_range,True,2,,,,,6
+the-illusionists-turn-of-the-century-run1,The Illusionists - Turn of the Century,Palace Theatre,2016-11-27,2017-01-01,week_range,False,1,,,,,6
+the-illusionists-witness-the-impossible-run1,The Illusionists - Witness the Impossible,Marquis Theatre,2014-11-30,2015-01-04,week_range,False,1,,,,,6
+the-importance-of-being-earnest-run1,The Importance of Being Earnest,American Airlines Theatre,2010-12-19,2011-06-26,week_range,False,1,,,,,28
+the-inheritance-run1,The Inheritance,Ethel Barrymore Theatre,2019-09-29,2020-03-08,week_range,False,1,,,,,24
+the-invention-of-love-run1,The Invention of Love,Lyceum Theatre,2001-03-04,2001-07-01,week_range,False,1,,,,,18
+the-judas-kiss-run1,The Judas Kiss,Broadhurst Theatre,1998-04-26,1998-08-02,week_range,False,1,,,,,15
+the-kentucky-cycle-run1,The Kentucky Cycle,Royale Theatre,1993-11-07,1993-12-12,week_range,False,1,,,,,6
+the-king-and-i-run1,The King and I,Broadway Theatre,1985-06-09,1985-06-30,week_range,True,1,,,,,4
+the-king-and-i-run2,The King and I,Neil Simon Theatre,1996-03-24,1998-02-22,week_range,True,2,,,,,101
+the-king-and-i-run3,The King and I,Vivian Beaumont Theater,2015-03-15,2016-06-26,week_range,True,3,,,,,67
+the-kite-runner-run1,The Kite Runner,Hayes Theater,2022-07-10,2022-10-30,week_range,False,1,,,,,17
+the-last-five-years-run1,The Last Five Years,Hudson Theatre,2025-03-23,2025-06-22,week_range,False,1,,,,,14
+the-last-night-of-ballyhoo-run1,The Last Night of Ballyhoo,Helen Hayes Theatre,1997-02-09,1998-06-28,week_range,False,1,,,,,73
+the-last-ship-run1,The Last Ship,Neil Simon Theatre,2014-10-05,2015-01-25,week_range,False,1,,,,,17
+the-lehman-trilogy-run1,The Lehman Trilogy,Nederlander Theatre,2020-03-08,2022-01-02,week_range,False,1,,,,,16
+the-lieutenant-of-inishmore-run1,The Lieutenant of Inishmore,Lyceum Theatre,2006-04-23,2006-09-03,week_range,False,1,,,,,20
+the-life-run1,The Life,Ethel Barrymore Theatre,1997-04-13,1998-06-07,week_range,False,1,,,,,61
+the-life-and-adventures-of-nicholas-nick-run1,The Life and Adventures of Nicholas Nickleby,Broadhurst Theatre,1986-08-24,1986-10-12,week_range,False,1,,,,,8
+the-lifespan-of-a-fact-run1,The Lifespan of a Fact,Studio 54,2018-09-23,2019-01-13,week_range,False,1,,,,,17
+the-light-in-the-piazza-run1,The Light in the Piazza,Vivian Beaumont Theater,2005-03-20,2006-07-02,week_range,False,1,,,,,68
+the-lightning-thief-the-percy-jackson-mu-run1,The Lightning Thief: The Percy Jackson Musical,Longacre Theatre,2019-09-22,2020-01-05,week_range,False,1,,,,,16
+the-lion-king-run1,The Lion King,Minskoff Theatre,1997-10-19,2026-08-16,week_range,False,1,,,,,1423
+the-lion-in-winter-run1,The Lion in Winter,Criterion Center Stage Right,1999-02-21,1999-05-30,week_range,False,1,,,,,15
+the-little-dog-laughed-run1,The Little Dog Laughed,Cort Theatre,2006-10-29,2007-02-18,week_range,False,1,,,,,17
+the-little-foxes-run1,The Little Foxes,Vivian Beaumont Theater,1997-04-06,1997-06-15,week_range,True,1,,,,,11
+the-little-foxes-run2,The Little Foxes,Samuel J. Friedman Theatre,2017-04-02,2017-07-02,week_range,True,2,,,,,14
+the-little-mermaid-run1,The Little Mermaid,Lunt-Fontanne Theatre,2007-11-04,2009-08-30,week_range,False,1,,,,,96
+the-little-prince-run1,The Little Prince,Broadway Theatre,2022-04-03,2022-05-08,week_range,False,1,,,,,6
+the-lonesome-west-run1,The Lonesome West,Lyceum Theatre,1999-04-25,1999-06-13,week_range,False,1,,,,,8
+the-look-of-love-run1,The Look of Love,Brooks Atkinson Theatre,2003-04-06,2003-06-15,week_range,False,1,,,,,11
+the-lost-boys-run1,The Lost Boys,Palace Theatre,2026-03-29,2026-08-16,week_range,False,1,,,,,21
+the-lyons-run1,The Lyons,Cort Theatre,2012-04-08,2012-07-01,week_range,False,1,,,,,13
+the-man-who-came-to-dinner-run1,The Man Who Came to Dinner,American Airlines Theatre,2000-07-02,2000-10-08,week_range,False,1,,,,,15
+the-man-who-had-all-the-luck-run1,The Man Who Had All the Luck,American Airlines Theatre,2002-04-21,2002-06-30,week_range,False,1,,,,,11
+the-marriage-of-figaro-run1,The Marriage of Figaro,Circle in the Square Theatre,1985-09-22,1985-12-15,week_range,False,1,,,,,13
+the-marriage-of-kitty-run1,The Marriage of Kitty,Comedy Theatre,1995-01-15,1995-03-26,week_range,False,1,,,,,11
+the-master-builder-run1,The Master Builder,Belasco Theatre,1992-03-15,1992-04-26,week_range,False,1,,,,,7
+the-merchant-of-venice-run1,The Merchant of Venice,46th Street Theatre,1989-12-03,1990-03-11,week_range,True,1,,,,,15
+the-merchant-of-venice-run2,The Merchant of Venice,Broadhurst Theatre,2010-10-24,2011-02-20,week_range,True,2,,,,,15
+the-mikado-run1,The Mikado,Virginia Theatre,1987-04-05,1987-05-03,week_range,False,1,,,,,5
+the-minutes-run1,The Minutes,Studio 54,2020-03-01,2022-07-24,week_range,False,1,,,,,19
+the-miracle-worker-run1,The Miracle Worker,Circle in the Square Theatre,2010-02-14,2010-04-04,week_range,False,1,,,,,8
+the-miser-run1,The Miser,Circle in the Square Theatre,1990-09-23,1990-12-30,week_range,False,1,,,,,15
+the-most-happy-fella-run1,The Most Happy Fella,Booth Theatre,1992-01-26,1992-08-30,week_range,False,1,,,,,32
+the-motherf-ker-with-the-hat-run1,The Motherf**ker With the Hat,Gerald Schoenfeld Theatre,2011-03-20,2011-07-17,week_range,False,1,,,,,18
+the-mountaintop-run1,The Mountaintop,Bernard B. Jacobs Theatre,2011-09-25,2012-01-22,week_range,False,1,,,,,18
+the-music-man-run1,The Music Man,Neil Simon Theatre,2000-04-09,2023-01-15,week_range,False,1,,,,,145
+the-musical-comedy-murders-of-1940-run1,The Musical Comedy Murders of 1940,Longacre Theatre,1987-04-05,1987-08-02,week_range,False,1,,,,,18
+the-mystery-of-charles-dickens-run1,The Mystery of Charles Dickens,Belasco Theatre,2002-04-21,2002-05-12,week_range,False,1,,,,,4
+the-mystery-of-edwin-drood-run1,The Mystery of Edwin Drood,Imperial Theatre,1985-11-17,1987-05-17,week_range,True,1,,,,,79
+the-mystery-of-edwin-drood-run2,The Mystery of Edwin Drood,Studio 54,2012-10-21,2013-03-10,week_range,True,2,,,,,21
+the-nance-run1,The Nance,Lyceum Theatre,2013-03-24,2013-08-11,week_range,False,1,,,,,21
+the-nap-run1,The Nap,Samuel J. Friedman Theatre,2018-09-09,2018-11-11,week_range,False,1,,,,,10
+the-nerd-run1,The Nerd,Helen Hayes Theatre,1985-10-20,1985-11-10,week_range,True,1,,,,,4
+the-nerd-run2,The Nerd,Helen Hayes Theatre,1987-03-15,1988-04-10,week_range,True,2,,,,,57
+the-night-of-the-iguana-run1,The Night of the Iguana,Circle in the Square Theatre,1988-06-19,1988-09-04,week_range,True,1,,,,,12
+the-night-of-the-iguana-run2,The Night of the Iguana,Criterion Center Stage Right,1996-03-10,1996-05-19,week_range,True,2,,,,,11
+the-normal-heart-run1,The Normal Heart,John Golden Theatre,2011-04-24,2011-07-10,week_range,False,1,,,,,12
+the-norman-conquests-run1,The Norman Conquests,Circle in the Square Theatre,2009-04-12,2009-07-26,week_range,False,1,,,,,16
+the-notebook-run1,The Notebook,Gerald Schoenfeld Theatre,2024-02-11,2024-12-15,week_range,False,1,,,,,45
+the-odd-couple-run1,The Odd Couple,Broadhurst Theatre,1985-06-09,1986-02-23,week_range,True,1,,,,,38
+the-odd-couple-run2,The Odd Couple,Brooks Atkinson Theatre,2005-10-09,2006-06-04,week_range,True,2,,,,,35
+the-old-neighborhood-run1,The Old Neighborhood,Booth Theatre,1997-11-16,1998-05-10,week_range,False,1,,,,,26
+the-other-place-run1,The Other Place,Samuel J. Friedman Theatre,2012-12-16,2013-03-03,week_range,False,1,,,,,12
+the-outsiders-run1,The Outsiders,Bernard B. Jacobs Theatre,2024-03-17,2026-08-16,week_range,False,1,,,,,127
+the-pajama-game-run1,The Pajama Game,American Airlines Theatre,2006-01-22,2006-06-18,week_range,False,1,,,,,22
+the-parisian-woman-run1,The Parisian Woman,Hudson Theatre,2017-11-12,2018-03-11,week_range,False,1,,,,,18
+the-pee-wee-herman-show-run1,The Pee-wee Herman Show,Stephen Sondheim Theatre,2010-10-31,2011-01-02,week_range,False,1,,,,,10
+the-people-in-the-picture-run1,The People in the Picture,Studio 54,2011-04-03,2011-06-19,week_range,False,1,,,,,12
+the-performers-run1,The Performers,Longacre Theatre,2012-10-28,2012-11-18,week_range,False,1,,,,,4
+the-petition-run1,The Petition,John Golden Theatre,1986-04-20,1986-06-29,week_range,False,1,,,,,11
+the-phantom-of-the-opera-run1,The Phantom of the Opera,Majestic Theatre,1988-01-10,2023-04-16,week_range,False,1,,,,,1756
+the-philanthropist-run1,The Philanthropist,American Airlines Theatre,2009-04-12,2009-06-28,week_range,False,1,,,,,12
+the-piano-lesson-run1,The Piano Lesson,Walter Kerr Theatre,1990-04-15,2023-01-29,week_range,False,1,,,,,61
+the-picture-of-dorian-gray-run1,The Picture of Dorian Gray,Music Box Theatre,2025-03-16,2025-06-29,week_range,False,1,,,,,16
+the-pillowman-run1,The Pillowman,Booth Theatre,2005-03-27,2005-09-18,week_range,False,1,,,,,26
+the-pirate-queen-run1,The Pirate Queen,Hilton Theatre,2007-03-11,2007-06-17,week_range,False,1,,,,,15
+the-pitmen-painters-run1,The Pitmen Painters,Samuel J. Friedman Theatre,2010-09-19,2010-12-12,week_range,False,1,,,,,13
+the-play-that-goes-wrong-run1,The Play That Goes Wrong,Lyceum Theatre,2017-03-12,2019-01-06,week_range,False,1,,,,,96
+the-play-what-i-wrote-run1,The Play What I Wrote,Lyceum Theatre,2003-03-09,2003-06-15,week_range,False,1,,,,,15
+the-play-s-the-thing-run1,The Play's the Thing,Criterion Center Stage Right,1995-06-18,1995-08-20,week_range,False,1,,,,,10
+the-present-run1,The Present,Ethel Barrymore Theatre,2016-12-18,2017-03-19,week_range,False,1,,,,,14
+the-price-run1,The Price,Criterion Center Stage Right,1992-05-24,1992-07-19,week_range,True,1,,,,,9
+the-price-run2,The Price,Royale Theatre,1999-10-31,2000-03-05,week_range,True,2,,,,,19
+the-price-run3,The Price,American Airlines Theatre,2017-02-19,2017-05-14,week_range,True,3,,,,,13
+the-producers-run1,The Producers,St. James Theatre,2001-03-25,2007-04-22,week_range,False,1,,,,,318
+the-prom-run1,The Prom,Longacre Theatre,2018-10-28,2019-08-11,week_range,False,1,,,,,42
+the-queen-of-versailles-run1,The Queen of Versailles,St. James Theatre,2025-10-12,2025-12-21,week_range,False,1,,,,,11
+the-rainmaker-run1,The Rainmaker,Brooks Atkinson Theatre,1999-10-24,2000-01-23,week_range,False,1,,,,,14
+the-rascals-once-upon-a-dream-run1,The Rascals: Once Upon a Dream,Richard Rodgers Theatre,2013-04-21,2013-05-05,week_range,False,1,,,,,3
+the-real-inspector-hound-and-the-fifteen-run1,The Real Inspector Hound and the Fifteen Minute Hamlet,Criterion Center Stage Right,1992-08-02,1992-10-04,week_range,False,1,,,,,10
+the-real-thing-run1,The Real Thing,Ethel Barrymore Theatre,2000-04-02,2000-08-13,week_range,True,1,,,,,20
+the-real-thing-run2,The Real Thing,American Airlines Theatre,2014-10-05,2015-01-04,week_range,True,2,,,,,14
+the-realistic-joneses-run1,The Realistic Joneses,Lyceum Theatre,2014-03-16,2014-07-06,week_range,False,1,,,,,17
+the-red-shoes-run1,The Red Shoes,Gershwin Theatre,1993-11-07,1993-12-19,week_range,False,1,,,,,7
+the-regard-of-flight-run1,The Regard of Flight,Vivian Beaumont Theater,1987-04-12,1987-04-26,week_range,False,1,,,,,3
+the-rehearsal-run1,The Rehearsal,Criterion Center Stage Right,1996-11-03,1997-01-12,week_range,False,1,,,,,11
+the-retreat-from-moscow-run1,The Retreat from Moscow,Booth Theatre,2003-10-05,2004-02-29,week_range,False,1,,,,,22
+the-ride-down-mt-morgan-run1,The Ride Down Mt. Morgan,Ambassador Theatre,2000-03-26,2000-07-23,week_range,False,1,,,,,18
+the-rise-and-fall-of-little-voice-run1,The Rise and Fall of Little Voice,Neil Simon Theatre,1994-04-17,1994-05-08,week_range,False,1,,,,,4
+the-ritz-run1,The Ritz,Studio 54,2007-09-16,2007-12-09,week_range,False,1,,,,,13
+the-rivals-run1,The Rivals,Vivian Beaumont Theater,2004-11-28,2005-01-23,week_range,False,1,,,,,9
+the-river-run1,The River,Circle in the Square Theatre,2014-11-02,2015-02-08,week_range,False,1,,,,,15
+the-road-to-mecca-run1,The Road to Mecca,American Airlines Theatre,2011-12-18,2012-03-04,week_range,False,1,,,,,12
+the-rocky-horror-show-run1,The Rocky Horror Show,Circle in the Square Theatre,2000-10-22,2026-08-16,week_range,False,1,,,,,80
+the-roommate-run1,The Roommate,Booth Theatre,2024-09-01,2024-12-15,week_range,False,1,,,,,16
+the-rose-tattoo-run1,The Rose Tattoo,Circle in the Square Theatre,1995-04-23,1995-07-02,week_range,True,1,,,,,11
+the-rose-tattoo-run2,The Rose Tattoo,American Airlines Theatre,2019-09-22,2019-12-08,week_range,True,2,,,,,12
+the-royal-family-run1,The Royal Family,Samuel J. Friedman Theatre,2009-09-20,2009-12-13,week_range,False,1,,,,,13
+the-scarlet-pimpernel-run1,The Scarlet Pimpernel,Neil Simon Theatre,1997-10-12,2000-01-02,week_range,False,1,,,,,103
+the-school-for-scandal-run1,The School for Scandal,Lyceum Theatre,1995-11-19,1995-12-17,week_range,False,1,,,,,5
+the-scottsboro-boys-run1,The Scottsboro Boys,Lyceum Theatre,2010-10-10,2010-12-12,week_range,False,1,,,,,10
+the-seafarer-run1,The Seafarer,Booth Theatre,2007-11-04,2008-03-30,week_range,False,1,,,,,22
+the-seagull-run1,The Seagull,Lyceum Theatre,1992-11-22,1993-01-10,week_range,True,1,,,,,8
+the-seagull-run2,The Seagull,Walter Kerr Theatre,2008-09-21,2008-12-21,week_range,True,2,,,,,14
+the-search-for-signs-of-intelligent-life-run1,The Search for Signs of Intelligent Life in the Universe,Plymouth Theatre,1985-09-15,1986-10-05,week_range,True,1,,,,,55
+the-search-for-signs-of-intelligent-life-run2,The Search for Signs of Intelligent Life in the Universe,Booth Theatre,2000-11-12,2001-05-20,week_range,True,2,,,,,28
+the-secret-garden-run1,The Secret Garden,St. James Theatre,1991-04-07,1993-01-03,week_range,False,1,,,,,92
+the-secret-rapture-run1,The Secret Rapture,Ethel Barrymore Theatre,1989-10-15,1989-11-05,week_range,False,1,,,,,4
+the-shadow-box-run1,The Shadow Box,Circle in the Square Theatre,1994-11-06,1995-01-01,week_range,False,1,,,,,9
+the-shark-is-broken-run1,The Shark is Broken,John Golden Theatre,2023-07-30,2023-11-19,week_range,False,1,,,,,17
+the-show-off-run1,The Show Off,Criterion Center Stage Right,1992-10-18,1992-12-13,week_range,False,1,,,,,9
+the-sign-in-sidney-brustein-s-window-run1,The Sign in Sidney Brustein's Window,James Earl Jones Theatre,2023-04-30,2023-07-02,week_range,False,1,,,,,10
+the-sisters-rosensweig-run1,The Sisters Rosensweig,Ethel Barrymore Theatre,1993-03-07,1994-07-17,week_range,False,1,,,,,72
+the-skin-of-our-teeth-run1,The Skin of Our Teeth,Vivian Beaumont Theater,2022-04-03,2022-05-29,week_range,False,1,,,,,9
+the-smell-of-the-kill-run1,The Smell of the Kill,Helen Hayes Theatre,2002-03-10,2002-04-28,week_range,False,1,,,,,8
+the-snow-geese-run1,The Snow Geese,Samuel J. Friedman Theatre,2013-10-06,2013-12-15,week_range,False,1,,,,,11
+the-song-of-jacob-zulu-run1,The Song of Jacob Zulu,Plymouth Theatre,1993-03-21,1993-05-09,week_range,False,1,,,,,8
+the-sound-inside-run1,The Sound Inside,Studio 54,2019-09-15,2020-01-12,week_range,False,1,,,,,18
+the-sound-of-music-run1,The Sound of Music,Martin Beck Theatre,1998-02-08,1999-06-20,week_range,False,1,,,,,72
+the-speed-of-darkness-run1,The Speed of Darkness,Belasco Theatre,1991-02-17,1991-03-31,week_range,False,1,,,,,7
+the-story-of-my-life-run1,The Story of My Life,Booth Theatre,2009-02-08,2009-02-22,week_range,False,1,,,,,3
+the-sunshine-boys-run1,The Sunshine Boys,Lyceum Theatre,1997-11-30,1998-06-28,week_range,False,1,,,,,31
+the-tale-of-the-allergist-s-wife-run1,The Tale of the Allergist's Wife,Ethel Barrymore Theatre,2000-10-15,2002-09-15,week_range,False,1,,,,,101
+the-tap-dance-kid-run1,The Tap Dance Kid,Minskoff Theatre,1985-06-09,1985-08-11,week_range,False,1,,,,,10
+the-tempest-run1,The Tempest,Broadhurst Theatre,1995-10-15,1995-12-31,week_range,False,1,,,,,12
+the-temptations-the-four-tops-on-broadwa-run1,The Temptations & The Four Tops On Broadway,Palace Theatre,2015-01-04,2015-01-04,week_range,False,1,,,,,1
+the-tenth-man-run1,The Tenth Man,Vivian Beaumont Theater,1989-11-12,1990-01-14,week_range,False,1,,,,,10
+the-testament-of-mary-run1,The Testament of Mary,Walter Kerr Theatre,2013-03-31,2013-05-05,week_range,False,1,,,,,6
+the-thanksgiving-play-run1,The Thanksgiving Play,Hayes Theater,2023-03-26,2023-06-11,week_range,False,1,,,,,12
+the-three-sisters-run1,The Three Sisters,Criterion Center Stage Right,1997-01-26,1997-04-06,week_range,False,1,,,,,11
+the-times-they-are-a-changin-run1,The Times They Are A-Changin',Brooks Atkinson Theatre,2006-10-01,2006-11-19,week_range,False,1,,,,,8
+the-trip-to-bountiful-run1,The Trip to Bountiful,Stephen Sondheim Theatre,2013-03-31,2013-10-13,week_range,False,1,,,,,29
+the-twilight-of-the-golds-run1,The Twilight of the Golds,Booth Theatre,1993-10-10,1993-11-14,week_range,False,1,,,,,6
+the-velocity-of-autumn-run1,The Velocity of Autumn,Booth Theatre,2014-04-06,2014-05-04,week_range,False,1,,,,,5
+the-vertical-hour-run1,The Vertical Hour,Music Box Theatre,2006-11-12,2007-03-11,week_range,False,1,,,,,18
+the-violet-hour-run1,The Violet Hour,Biltmore Theatre,2003-10-19,2003-12-21,week_range,False,1,,,,,10
+the-visit-run1,The Visit,Criterion Center Stage Right,1992-01-05,1992-03-01,week_range,True,1,,,,,9
+the-visit-run2,The Visit,Lyceum Theatre,2015-03-29,2015-06-14,week_range,True,2,,,,,12
+the-waverly-gallery-run1,The Waverly Gallery,John Golden Theatre,2018-09-30,2019-01-27,week_range,False,1,,,,,18
+the-wedding-singer-run1,The Wedding Singer,Al Hirschfeld Theatre,2006-04-02,2006-12-31,week_range,False,1,,,,,40
+the-weir-run1,The Weir,Walter Kerr Theatre,1999-03-28,1999-11-28,week_range,False,1,,,,,36
+the-who-s-tommy-run1,The Who's Tommy,St. James Theatre,1993-04-04,2024-07-21,week_range,False,1,,,,,136
+the-wild-party-run1,The Wild Party,Virginia Theatre,2000-03-12,2000-06-11,week_range,False,1,,,,,14
+the-will-rogers-follies-run1,The Will Rogers Follies,Palace Theatre,1991-04-07,1993-09-05,week_range,False,1,,,,,127
+the-winslow-boy-run1,The Winslow Boy,American Airlines Theatre,2013-09-22,2013-12-01,week_range,False,1,,,,,11
+the-wiz-run1,The Wiz,Marquis Theatre,2024-03-31,2024-08-18,week_range,False,1,,,,,21
+the-woman-in-white-run1,The Woman in White,Marquis Theatre,2005-10-30,2006-02-19,week_range,False,1,,,,,17
+the-women-run1,The Women,American Airlines Theatre,2001-10-14,2002-01-13,week_range,False,1,,,,,14
+the-year-of-magical-thinking-run1,The Year of Magical Thinking,Booth Theatre,2007-03-11,2007-08-26,week_range,False,1,,,,,24
+the-young-man-from-atlanta-run1,The Young Man from Atlanta,Longacre Theatre,1997-03-16,1997-06-08,week_range,False,1,,,,,13
+therese-raquin-run1,Therese Raquin,Studio 54,2015-10-04,2016-01-03,week_range,False,1,,,,,13
+this-is-our-youth-run1,This Is Our Youth,Cort Theatre,2014-08-24,2015-01-04,week_range,False,1,,,,,20
+thoroughly-modern-millie-run1,Thoroughly Modern Millie,Marquis Theatre,2002-03-24,2004-06-20,week_range,False,1,,,,,118
+those-were-the-days-run1,Those Were the Days,Edison Theatre,1990-10-28,1991-02-24,week_range,False,1,,,,,18
+thou-shalt-not-run1,Thou Shalt Not,Plymouth Theatre,2001-09-30,2002-01-06,week_range,False,1,,,,,15
+thoughts-of-a-colored-man-run1,Thoughts of a Colored Man,John Golden Theatre,2021-10-03,2021-12-26,week_range,False,1,,,,,13
+three-days-of-rain-run1,Three Days of Rain,Bernard B. Jacobs Theatre,2006-04-02,2006-06-18,week_range,False,1,,,,,12
+three-men-on-a-horse-run1,Three Men on a Horse,Lyceum Theatre,1993-03-28,1993-05-16,week_range,False,1,,,,,8
+three-tall-women-run1,Three Tall Women,John Golden Theatre,2018-03-04,2018-06-24,week_range,False,1,,,,,17
+threepenny-opera-run1,Threepenny Opera,Lunt-Fontanne Theatre,1989-10-22,1989-12-31,week_range,True,1,,,,,11
+threepenny-opera-run2,Threepenny Opera,Studio 54,2006-03-26,2006-06-25,week_range,True,2,,,,,14
+thurgood-run1,Thurgood,Booth Theatre,2008-04-13,2008-08-17,week_range,False,1,,,,,19
+time-stands-still-run1,Time Stands Still,Cort Theatre,2010-01-10,2010-03-28,week_range,True,1,,,,,12
+time-stands-still-run2,Time Stands Still,Cort Theatre,2010-09-26,2011-01-30,week_range,True,2,,,,,19
+time-and-the-conways-run1,Time and the Conways,American Airlines Theatre,2017-09-17,2017-11-26,week_range,False,1,,,,,11
+timon-of-athens-run1,Timon of Athens,Lyceum Theatre,1993-10-24,1993-12-05,week_range,False,1,,,,,7
+tina-the-tina-turner-musical-run1,Tina: The Tina Turner Musical,Lunt-Fontanne Theatre,2019-10-13,2022-08-14,week_range,False,1,,,,,67
+titanic-run1,Titanic,Lunt-Fontanne Theatre,1997-03-30,1999-03-28,week_range,False,1,,,,,105
+titan-que-run1,Titaníque,St. James Theatre,2026-03-29,2026-08-16,week_range,False,1,,,,,21
+to-be-or-not-to-be-run1,To Be Or Not to Be,Samuel J. Friedman Theatre,2008-09-21,2008-11-16,week_range,False,1,,,,,9
+to-kill-a-mockingbird-run1,To Kill A Mockingbird,Sam S. Shubert Theatre,2018-11-04,2022-01-16,week_range,False,1,,,,,86
+tommy-tune-tonite-run1,Tommy Tune Tonite!,Gershwin Theatre,1992-12-27,1993-01-03,week_range,False,1,,,,,2
+tootsie-run1,Tootsie,Marquis Theatre,2019-03-31,2020-01-05,week_range,False,1,,,,,41
+top-girls-run1,Top Girls,Biltmore Theatre,2008-04-20,2008-06-29,week_range,False,1,,,,,11
+topdog-underdog-run1,Topdog / Underdog,Ambassador Theatre,2002-03-17,2002-08-11,week_range,False,1,,,,,22
+topdog-underdog-run1,Topdog/Underdog,John Golden Theatre,2022-10-02,2023-01-15,week_range,False,1,,,,,16
+torch-song-run1,Torch Song,Helen Hayes Theater,2018-10-14,2019-01-06,week_range,False,1,,,,,13
+translations-run1,Translations,Plymouth Theatre,1995-03-12,1995-04-09,week_range,True,1,,,,,5
+translations-run2,Translations,Biltmore Theatre,2007-01-07,2007-03-11,week_range,True,2,,,,,10
+travesties-run1,Travesties,American Airlines Theatre,2018-04-01,2018-06-17,week_range,False,1,,,,,12
+triumph-of-love-run1,Triumph of Love,Royale Theatre,1997-09-28,1998-01-04,week_range,False,1,,,,,15
+trouble-in-mind-run1,Trouble in Mind,American Airlines Theatre,2021-10-31,2022-01-09,week_range,False,1,,,,,11
+tru-run1,Tru,Booth Theatre,1989-12-03,1990-09-02,week_range,False,1,,,,,40
+true-west-run1,True West,Circle in the Square Theatre,2000-02-20,2000-07-30,week_range,True,1,,,,,24
+true-west-run2,True West,American Airlines Theatre,2018-12-30,2019-03-17,week_range,True,2,,,,,12
+truly-blessed-run1,Truly Blessed,Longacre Theatre,1990-04-15,1990-05-20,week_range,False,1,,,,,6
+tuck-everlasting-run1,Tuck Everlasting,Broadhurst Theatre,2016-04-03,2016-05-29,week_range,False,1,,,,,9
+twelfth-night-run1,Twelfth Night,St. James Theatre,1997-09-07,1997-09-07,week_range,True,1,,,,,1
+twelfth-night-run2,Twelfth Night,Vivian Beaumont Theater,1998-06-21,1998-08-30,week_range,True,2,,,,,11
+twelfth-night-run3,Twelfth Night,St. James Theatre,1999-10-03,1999-10-03,week_range,True,3,,,,,1
+twelfth-night-richard-iii-run1,Twelfth Night / Richard III,Belasco Theatre,2013-10-20,2014-02-16,week_range,False,1,,,,,18
+twelve-angry-men-run1,Twelve Angry Men,American Airlines Theatre,2004-10-03,2005-05-15,week_range,False,1,,,,,33
+twentieth-century-run1,Twentieth Century,American Airlines Theatre,2004-03-07,2004-06-06,week_range,False,1,,,,,14
+twilight-los-angeles-1992-run1,"Twilight: Los Angeles, 1992",Cort Theatre,1994-04-10,1994-06-19,week_range,False,1,,,,,11
+two-shakespearean-actors-run1,Two Shakespearean Actors,Cort Theatre,1991-12-22,1992-02-09,week_range,False,1,,,,,8
+two-strangers-carry-a-cake-across-new-yo-run1,Two Strangers (Carry a Cake Across New York),Longacre Theatre,2025-11-02,2026-08-16,week_range,False,1,,,,,42
+two-trains-running-run1,Two Trains Running,Walter Kerr Theatre,1992-04-12,1992-08-30,week_range,False,1,,,,,21
+uncle-vanya-run1,Uncle Vanya,Circle in the Square Theatre,1995-02-05,1995-03-19,week_range,True,1,,,,,7
+uncle-vanya-run2,Uncle Vanya,Vivian Beaumont Theater,2000-04-09,2024-06-16,week_range,True,2,,,,,21
+uptown-it-s-hot-run1,Uptown...It's Hot!,Lunt-Fontanne Theatre,1986-01-19,1986-02-16,week_range,False,1,,,,,5
+urban-cowboy-run1,Urban Cowboy,Broadhurst Theatre,2003-03-02,2003-05-18,week_range,False,1,,,,,12
+urinetown-the-musical-run1,Urinetown The Musical,Henry Miller's Theatre,2001-09-02,2004-01-18,week_range,False,1,,,,,125
+vanya-and-sonia-and-masha-and-spike-run1,Vanya and Sonia and Masha and Spike,John Golden Theatre,2013-03-10,2013-08-25,week_range,False,1,,,,,25
+venus-in-fur-run1,Venus in Fur,Lyceum Theatre,2011-10-16,2012-06-17,week_range,False,1,,,,,29
+via-dolorosa-run1,Via Dolorosa,Booth Theatre,1999-03-07,1999-06-13,week_range,False,1,,,,,15
+victor-victoria-run1,Victor / Victoria,Marquis Theatre,1995-10-08,1997-07-27,week_range,False,1,,,,,95
+vincent-in-brixton-run1,Vincent in Brixton,John Golden Theatre,2003-02-16,2003-05-04,week_range,False,1,,,,,12
+violet-run1,Violet,American Airlines Theatre,2014-03-30,2014-08-10,week_range,False,1,,,,,20
+voices-in-the-dark-run1,Voices in the Dark,Longacre Theatre,1999-08-01,1999-10-10,week_range,False,1,,,,,11
+wait-until-dark-run1,Wait Until Dark,Brooks Atkinson Theatre,1998-03-29,1998-06-28,week_range,False,1,,,,,14
+waiting-for-godot-run1,Waiting for Godot,Hudson Theatre,2009-04-05,2026-01-04,week_range,False,1,,,,,32
+waiting-in-the-wings-run1,Waiting in the Wings,Eugene O'Neill Theatre,1999-12-05,2000-05-28,week_range,False,1,,,,,26
+waitress-run1,Waitress,Brooks Atkinson Theatre,2016-03-27,2021-12-26,week_range,False,1,,,,,215
+walking-with-ghosts-run1,Walking with Ghosts,Music Box Theatre,2022-10-23,2022-11-20,week_range,False,1,,,,,5
+war-horse-run1,War Horse,Vivian Beaumont Theater,2011-03-20,2013-01-06,week_range,False,1,,,,,95
+war-paint-run1,War Paint,Nederlander Theatre,2017-03-12,2017-11-05,week_range,False,1,,,,,34
+water-for-elephants-run1,Water For Elephants,Imperial Theatre,2024-02-25,2024-12-08,week_range,False,1,,,,,42
+welcome-to-the-club-run1,Welcome to the Club,Music Box Theatre,1989-04-02,1989-04-23,week_range,False,1,,,,,4
+well-run1,Well,Longacre Theatre,2006-03-12,2006-05-14,week_range,False,1,,,,,10
+west-side-story-run1,West Side Story,Palace Theatre,2009-03-01,2011-01-02,week_range,True,1,,,,,97
+west-side-story-run2,West Side Story,Broadway Theatre,2019-12-15,2020-03-08,week_range,True,2,,,,,13
+what-the-constitution-means-to-me-run1,What the Constitution Means to Me,Helen Hayes Theater,2019-03-17,2019-08-25,week_range,False,1,,,,,24
+what-s-wrong-with-this-picture-run1,What's Wrong with This Picture?,Brooks Atkinson Theatre,1994-11-20,1994-12-18,week_range,False,1,,,,,5
+who-s-afraid-of-virginia-woolf-run1,Who's Afraid of Virginia Woolf?,Longacre Theatre,2005-03-13,2005-09-04,week_range,True,1,,,,,26
+who-s-afraid-of-virginia-woolf-run2,Who's Afraid of Virginia Woolf?,Booth Theatre,2012-09-30,2013-03-03,week_range,True,2,,,,,23
+who-s-afraid-of-virginia-woolf-run3,Who's Afraid of Virginia Woolf?,Booth Theatre,2020-03-08,2020-03-08,week_range,True,3,,,,,1
+whoopi-run1,Whoopi,Lyceum Theatre,2004-11-07,2005-01-30,week_range,False,1,,,,,13
+wicked-run1,Wicked,Gershwin Theatre,2003-10-12,2026-08-16,week_range,False,1,,,,,1113
+wild-honey-run1,Wild Honey,Virginia Theatre,1986-12-14,1987-01-11,week_range,False,1,,,,,5
+wilder-wilder-wilder-run1,"Wilder, Wilder, Wilder",Circle in the Square Theatre,1993-04-11,1993-05-16,week_range,False,1,,,,,6
+wind-in-the-willows-run1,Wind in the Willows,Nederlander Theatre,1985-12-01,1985-12-22,week_range,False,1,,,,,4
+wishful-drinking-run1,Wishful Drinking,Studio 54,2009-09-27,2010-01-17,week_range,False,1,,,,,17
+wit-run1,Wit,Samuel J. Friedman Theatre,2012-01-08,2012-03-18,week_range,False,1,,,,,11
+wolf-hall-parts-1-2-run1,Wolf Hall: Parts 1 & 2,Winter Garden Theatre,2015-03-22,2015-07-05,week_range,False,1,,,,,16
+women-on-the-verge-of-a-nervous-breakdow-run1,Women on the Verge of a Nervous Breakdown,Belasco Theatre,2010-10-10,2011-01-02,week_range,False,1,,,,,13
+wonderful-tennessee-run1,Wonderful Tennessee,Plymouth Theatre,1993-10-10,1993-10-31,week_range,False,1,,,,,4
+wonderful-town-run1,Wonderful Town,Al Hirschfeld Theatre,2003-11-09,2005-01-30,week_range,False,1,,,,,65
+wonderland-run1,Wonderland,Marquis Theatre,2011-03-27,2011-05-15,week_range,False,1,,,,,8
+wrong-mountain-run1,Wrong Mountain,Eugene O'Neill Theatre,2000-01-02,2000-02-06,week_range,False,1,,,,,6
+xanadu-run1,Xanadu,Helen Hayes Theatre,2007-05-27,2008-09-28,week_range,False,1,,,,,71
+yellow-face-run1,Yellow Face,Todd Haimes Theatre,2024-09-15,2024-11-24,week_range,False,1,,,,,11
+you-can-t-take-it-with-you-run1,You Can't Take It With You,Longacre Theatre,2014-08-31,2015-02-22,week_range,False,1,,,,,26
+you-never-can-tell-run1,You Never Can Tell,Circle in the Square Theatre,1986-09-21,1987-01-25,week_range,False,1,,,,,19
+you-re-welcome-america-run1,You're Welcome America,Cort Theatre,2009-01-25,2009-03-15,week_range,False,1,,,,,8
+you-re-a-good-man-charlie-brown-run1,"You're a Good Man, Charlie Brown",Ambassador Theatre,1999-01-24,1999-06-13,week_range,False,1,,,,,21
+young-frankenstein-run1,Young Frankenstein,Hilton Theatre,2007-10-14,2009-01-04,week_range,False,1,,,,,65
+zoya-s-apartment-run1,Zoya's Apartment,Circle in the Square Theatre,1990-04-29,1990-06-17,week_range,False,1,,,,,8
+title-of-show-run1,[title of show],Lyceum Theatre,2008-07-06,2008-10-12,week_range,False,1,,,,,15
+for-colored-girls-who-have-considered-su-run1,for colored girls who have considered suicide/when the rainbow is enuf,Booth Theatre,2022-04-03,2022-06-05,week_range,False,1,,,,,10
