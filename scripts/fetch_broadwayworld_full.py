@@ -110,7 +110,15 @@ def find_show_slug(title, session, letter_cache):
     """title이 뭐든(폐막작 포함) 찾을 수 있도록 grossesbyshow.php?letter=<A-Z> A-Z
     인덱스 페이지를 사용. (이전 버전은 grosses.php를 썼는데, 거기는 '현재 상연 중'인
     쇼만 나와서 대부분의 과거/폐막 쇼를 못 찾는 문제가 있었음 - 실제 확인됨)
-    letter_cache: {letter: soup} 형태로 한 번 받아온 글자 페이지는 재사용."""
+    letter_cache: {letter: soup} 형태로 한 번 받아온 글자 페이지는 재사용.
+
+    반환값: (slug, is_ambiguous) 튜플. 동일 제목으로 grossesbyshow.php에 매치가
+    여러 개 있으면(=완전히 같은 이름으로 재상연된 리바이벌 - 실제로 BroadwayWorld가
+    "Cabaret" 같은 원제와 "Cabaret at the Kit Kat Club" 같은 리바이벌 전용 개명 제목을
+    따로 등재하는 경우가 많지만, 재개명 없이 완전히 동일한 제목을 쓰는 리바이벌도
+    있어서 이 경우를 위한 방어 로직) 첫 번째 매치를 쓰되 is_ambiguous=True로 표시함 -
+    이 표시는 fetch_show_page 등 이후 단계에서 얻는 opening_date/cast 등이 어느
+    프로덕션 것인지 확신할 수 없다는 뜻이라, target 빌더가 신뢰도를 낮춰 잡는 데 씀."""
     first_char = title.strip()[0].upper() if title.strip() else ""
     letter = first_char if first_char.isalpha() else "1"  # 숫자/기호로 시작하면 '#' 페이지(letter=1)
 
@@ -120,13 +128,19 @@ def find_show_slug(title, session, letter_cache):
 
     soup = letter_cache[letter]
     if soup is None:
-        return None
+        return None, False
 
     target_norm = re.sub(r"[^A-Z0-9]", "", title.upper())
+    matches = []
     for a in soup.select("a[href^='/grosses/']"):
         if re.sub(r"[^A-Z0-9]", "", a.get_text(strip=True).upper()) == target_norm:
-            return a["href"].split("/grosses/")[-1]
-    return None
+            matches.append(a["href"].split("/grosses/")[-1])
+
+    if not matches:
+        return None, False
+    is_ambiguous = len(set(matches)) > 1
+    return matches[0], is_ambiguous
+
 
 
 def title_slug(title):
@@ -354,9 +368,10 @@ def main():
     for i, title in enumerate(titles, 1):
         try:
             slug = slugify(title)
+            title_ambiguous = False
             test = session.head(f"{BASE}/grosses/{slug}", headers=HEADERS, timeout=30)
             if test.status_code != 200:
-                found = find_show_slug(title, session, letter_cache)
+                found, title_ambiguous = find_show_slug(title, session, letter_cache)
                 if found:
                     slug = found
                 else:
@@ -378,6 +393,10 @@ def main():
             genre = genre_map.get(slug, "") or genre_guess
 
             cast_str = "; ".join(f"{name} as {', '.join(roles)}" if roles else name for name, roles in cast_entries)
+            # 상위 1~2명만 별도로 뽑음 - 리바이벌 유튜브 검색 쿼리에 배우 이름을 넣어
+            # 같은 제목의 다른 시기 프로덕션과 구분하는 정확도를 높이기 위함
+            # (cast.php 페이지는 보통 주연부터 나열되는 걸로 확인해서 순서 그대로 앞에서 자름)
+            lead_cast_str = "; ".join(name for name, _roles in cast_entries[:2])
             creative_str = "; ".join(f"{name} ({role})" for name, role in creative_entries)
             producer_str = "; ".join(name for name, role in creative_entries if "producer" in role.lower())
 
@@ -385,6 +404,9 @@ def main():
                 "title": title,
                 "slug": slug,
                 "showid": showid,
+                "title_ambiguous": title_ambiguous,  # True면 동일 제목 리바이벌이 여러 개 있어서
+                                                       # 이 메타(opening_date/cast 등)가 정확히
+                                                       # 어느 프로덕션 것인지 확신할 수 없음
                 "genre": genre,
                 "first_preview": meta.get("first_preview", ""),
                 "opening_date": meta.get("opening_date", ""),
@@ -392,6 +414,7 @@ def main():
                 "based_on": meta.get("based_on", ""),
                 "n_articles_total": meta.get("n_articles_total", ""),
                 "cast": cast_str,
+                "lead_cast": lead_cast_str,
                 "creative_team": creative_str,
                 "producer": producer_str,
                 **award_bonus,  # 시상식별 동적 컬럼(예: tony_awards_wins, drama_desk_awards_nominations 등) + award_bodies_detail
@@ -403,7 +426,8 @@ def main():
                   f"genre={genre}, cast={len(cast_entries)}명, creative={len(creative_entries)}명, "
                   f"producer={'있음' if producer_str else '없음'}, "
                   f"awards={n_award_wins}승/{n_award_noms}노미, "
-                  f"based_on={meta.get('based_on') or '원작 없음/오리지널'}")
+                  f"based_on={meta.get('based_on') or '원작 없음/오리지널'}"
+                  + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else ""))
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
