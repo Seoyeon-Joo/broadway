@@ -106,6 +106,56 @@ def make_session():
     return session
 
 
+MIN_EXPECTED_LINKS = 10  # 정상적인 글자 인덱스 페이지라면 이보다 훨씬 많은 쇼가 있어야 함
+                          # (한 글자로 시작하는 브로드웨이 역대 쇼가 10개 미만일 리 없음 -
+                          # 이보다 적으면 진짜 빈 페이지가 아니라 차단/안내 페이지로 간주)
+
+
+def fetch_letter_index(session, letter, max_retries=3):
+    """grossesbyshow.php?letter=<X> 인덱스 페이지를 받아옴.
+
+    *** 왜 상태코드 200만으로는 부족한가 ***
+    실제로 유명 쇼(Oklahoma!, SIX: The Musical, Nine 등)가 대거 "슬러그 못 찾음"으로
+    나온 걸 보고 원인을 추적한 결과: BroadwayWorld가 요청이 몰리면 429가 아니라
+    "200 OK + 속도를 늦춰달라는 안내/차단 페이지"로 응답하는 것으로 보임. 예전
+    코드는 resp.status_code == 200이면 무조건 정상 응답으로 캐싱했는데, 그러면
+    이 빈 안내 페이지가 letter_cache에 그대로 박제되어서 그 글자로 시작하는
+    나머지 쇼 전부가 이후 계속 실패함(실제로 O/S/T로 시작하는 쇼들이 무더기로
+    몰려서 실패한 게 이 패턴과 일치).
+
+    그래서 실제 쇼 링크 개수(MIN_EXPECTED_LINKS 미만이면 의심)까지 확인하고,
+    부족하면 캐싱하지 않고 잠깐 대기 후 재시도함. 그래도 계속 부족하면 어쩔 수
+    없이 None을 반환(캐싱은 안 함 - 다음 쇼가 같은 글자를 다시 시도할 때 새로
+    받아오게 해서, 언젠가 정상 응답이 오면 그때부터라도 살아나게 함)."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = session.get(f"{BASE}/grossesbyshow.php", params={"letter": letter},
+                                headers=HEADERS, timeout=30)
+        except requests.RequestException as e:
+            print(f"    [letter={letter} 인덱스 요청 실패, 시도 {attempt}/{max_retries}] {e}")
+            time.sleep(2 * attempt)
+            continue
+
+        if resp.status_code != 200:
+            print(f"    [letter={letter} 인덱스 상태코드 {resp.status_code}, "
+                  f"시도 {attempt}/{max_retries}]")
+            time.sleep(2 * attempt)
+            continue
+
+        soup = BeautifulSoup(resp.text, "html.parser")
+        n_links = len(soup.select("a[href^='/grosses/']"))
+        if n_links >= MIN_EXPECTED_LINKS:
+            return soup
+
+        print(f"    [letter={letter} 인덱스에 쇼 링크가 {n_links}개뿐 - 차단/안내 "
+              f"페이지로 의심, 시도 {attempt}/{max_retries}]")
+        time.sleep(3 * attempt)  # 429 KOPIS 경험상 백오프 필요
+
+    print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
+          f"이번엔 포기(캐싱 안 함, 다음 쇼가 다시 시도함)]")
+    return None
+
+
 def find_show_slug(title, session, letter_cache):
     """title이 뭐든(폐막작 포함) 찾을 수 있도록 grossesbyshow.php?letter=<A-Z> A-Z
     인덱스 페이지를 사용. (이전 버전은 grosses.php를 썼는데, 거기는 '현재 상연 중'인
@@ -131,10 +181,12 @@ def find_show_slug(title, session, letter_cache):
     letter = first_char if first_char.isalpha() else "1"  # 숫자/기호로 시작하면 '#' 페이지(letter=1)
 
     if letter not in letter_cache:
-        resp = session.get(f"{BASE}/grossesbyshow.php", params={"letter": letter}, headers=HEADERS, timeout=30)
-        letter_cache[letter] = BeautifulSoup(resp.text, "html.parser") if resp.status_code == 200 else None
+        result = fetch_letter_index(session, letter)
+        if result is not None:
+            letter_cache[letter] = result
+        # None이면 캐싱 안 함 - 다음 쇼가 같은 글자를 다시 시도하게 둠
 
-    soup = letter_cache[letter]
+    soup = letter_cache.get(letter)
     if soup is None:
         return None, False, ""
 
