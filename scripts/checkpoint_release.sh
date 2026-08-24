@@ -12,6 +12,15 @@
 #   "최신 데이터 = 이 Release" 상태를 유지함. Release가 없으면 새로 만듦.
 #   업로드 실패 시 최대 3회 재시도, 다 실패하면 ::error:: 로 표시하고 exit 1
 #   (예전 git push 재시도 버그처럼 조용히 넘어가지 않게 함).
+#
+# *** 0바이트 파일은 업로드 대상에서 제외 ***
+#   실제로 겪은 버그: 이번 실행에서 처리한 게 하나도 없는 shard의
+#   checkpoint(.processed.txt)가 0바이트로 생성되는데, 이걸 그대로 업로드하면
+#   `gh release upload`가 "HTTP 400: Bad Content-Length"로 실패함(빈 파일의
+#   멀티파트 업로드를 gh/GitHub API가 제대로 처리 못 하는 것으로 보임). 한
+#   호출에 여러 파일을 같이 올리면 그 중 하나만 0바이트여도 전체 호출이
+#   실패해서, 정상 파일(예: shard_N.csv)까지 덩달아 안 올라감 - 그래서 파일
+#   존재 여부뿐 아니라 크기도 확인해서 0바이트면 조용히 건너뜀.
 set -euo pipefail
 
 if [ "$#" -lt 2 ]; then
@@ -25,10 +34,13 @@ files=("$@")
 
 existing_files=()
 for f in "${files[@]}"; do
-  if [ -f "$f" ]; then
-    existing_files+=("$f")
-  else
+  if [ ! -f "$f" ]; then
     echo "경고: '$f' 파일이 없어서 이번 업로드에서 제외함"
+  elif [ ! -s "$f" ]; then
+    echo "경고: '$f' 파일이 0바이트라서 이번 업로드에서 제외함 (gh release upload가 " \
+         "빈 파일에서 Bad Content-Length 오류를 내서 아예 안 올림)"
+  else
+    existing_files+=("$f")
   fi
 done
 

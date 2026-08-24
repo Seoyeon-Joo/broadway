@@ -196,6 +196,19 @@ def build_targets_legacy(df):
     return agg[OUT_COLUMNS]
 
 
+# 유튜브 첫 영상("Me at the zoo")이 올라온 날짜. 이보다 먼저 폐연한 공연은
+# 당대 유튜브 영상이 존재할 수 없으니(유튜브 자체가 없었으니) target에서 제외함.
+# still-running(closing_date 없음)인 run은 당연히 안 걸러짐.
+YOUTUBE_LAUNCH_DATE = pd.Timestamp("2005-04-23")
+
+
+def filter_pre_youtube_runs(targets_df):
+    closing_ts = pd.to_datetime(targets_df["closing_date"], errors="coerce")
+    keep_mask = closing_ts.isna() | (closing_ts >= YOUTUBE_LAUNCH_DATE)
+    n_excluded = int((~keep_mask).sum())
+    return targets_df[keep_mask].reset_index(drop=True), n_excluded
+
+
 def build_targets(broadway_path):
     df = pd.read_csv(broadway_path, sep=None, engine="python", encoding="utf-8-sig")
     df.columns = [c.strip().lstrip("\ufeff") for c in df.columns]
@@ -212,9 +225,19 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--broadway", default="data/broadway.csv")
     ap.add_argument("--out", default="data/broadway_youtube_targets.csv")
+    ap.add_argument("--include-pre-youtube", action="store_true",
+                     help="유튜브 개설(2005-04-23) 이전에 폐연한 공연도 포함 (기본은 제외)")
     args = ap.parse_args()
 
     targets = build_targets(args.broadway)
+    n_before_date_filter = len(targets)
+
+    if not args.include_pre_youtube:
+        targets, n_excluded = filter_pre_youtube_runs(targets)
+        if n_excluded:
+            print(f"유튜브 개설 이전 폐연 공연 {n_excluded}개 제외 "
+                  f"({n_before_date_filter} -> {len(targets)}개 run)")
+
     targets.to_csv(args.out, index=False, encoding="utf-8-sig")
 
     n_revival_shows = targets[targets["is_revival"]]["show"].nunique()
