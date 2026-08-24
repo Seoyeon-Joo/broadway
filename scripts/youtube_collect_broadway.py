@@ -152,24 +152,54 @@ def robust_get(session, url, params, key_pool, max_cycles=3):
         return {"error": {"message": err_msg}}
 
 
-def search_videos(session, key_pool, query, max_results=25):
-    params = {
-        "q": query,
-        "part": "snippet",
-        "type": "video",
-        "maxResults": min(max_results, 50),
-        "relevanceLanguage": "en",
-        "regionCode": "US",
-        "order": "relevance",
-    }
+def search_videos(session, key_pool, query, max_pages=6, results_per_page=50, target_count=None):
+    """search.list는 호출 1번에 100유닛 고정이고 maxResults를 50까지 올려도 비용이
+    똑같음 - 그래서 항상 50으로 요청함(이전엔 15로 받아서 같은 비용에 결과를 1/3만
+    받고 있었음).
+
+    *** 적응형 페이지네이션 ***
+    페이지가 꽉 찼을 때만(=results_per_page개를 그대로 다 채워서 받았을 때만) 다음
+    페이지를 요청하고, 안 채워지면 그 자리에서 멈춤. 즉 인기 많은 쇼(검색 결과가
+    풍부한 쇼)는 페이지가 계속 꽉 차니까 자연스럽게 max_pages까지 더 깊이 받고,
+    비인기 쇼는 첫 페이지부터 안 차서 바로 멈춤.
+
+    *** target_count: 이 run에 아직 몇 개 더 필요한지 ***
+    process_target이 "이 run에서 limit_per_show까지 아직 몇 개 남았는지"를 넘겨주면,
+    누적 결과가 그 개수에 도달하는 즉시 멈춤(설령 max_pages에 안 닿았고 페이지가
+    계속 꽉 차더라도). 이게 없으면 max_pages를 크게 잡았을 때 초인기 쇼(Hamilton,
+    Wicked 등)가 이미 충분히 모았는데도 같은 쿼리 안에서 계속 페이지를 넘겨서
+    쿼터를 낭비함 - 이 체크 덕분에 max_pages는 사실상 "이론적 최대치"일 뿐이고
+    실제 지출은 항상 needed 만큼으로 수렴함.
+    max_pages는 그래도 남겨둠 - target_count가 None인 호출(테스트 등)이나,
+    YouTube 자체가 정말 결과가 무한히 많다고 우길 때의 최후 안전판."""
     video_ids = []
-    data = robust_get(session, f"{API_BASE}/search", params, key_pool)
-    if "error" in data:
-        return video_ids
-    for item in data.get("items", []):
-        vid = item.get("id", {}).get("videoId")
-        if vid:
-            video_ids.append(vid)
+    page_token = None
+    for _ in range(max_pages):
+        if target_count is not None and len(video_ids) >= target_count:
+            break
+        params = {
+            "q": query,
+            "part": "snippet",
+            "type": "video",
+            "maxResults": min(results_per_page, 50),
+            "relevanceLanguage": "en",
+            "regionCode": "US",
+            "order": "relevance",
+        }
+        if page_token:
+            params["pageToken"] = page_token
+        data = robust_get(session, f"{API_BASE}/search", params, key_pool)
+        if "error" in data:
+            break
+        items = data.get("items", [])
+        for item in items:
+            vid = item.get("id", {}).get("videoId")
+            if vid:
+                video_ids.append(vid)
+        page_token = data.get("nextPageToken")
+        page_was_full = len(items) >= min(results_per_page, 50)
+        if not page_token or not page_was_full:
+            break  # 다음 페이지가 없거나(nextPageToken 없음), 이번 페이지가 안 찼으면(더 볼 게 없다는 신호) 멈춤
     return video_ids
 
 
@@ -306,7 +336,7 @@ def video_belongs_to_run(published, opening, date_source):
 
 
 def process_target(session, key_pool, target, limit_per_show, csv_writer,
-                    fetched_details_cache, written_pairs):
+                    fetched_details_cache, written_pairs, max_pages_per_query=2):
     show = target["show"]
     run_id = target["run_id"]
     opening = parse_date(target.get("opening_date", ""))
@@ -314,9 +344,11 @@ def process_target(session, key_pool, target, limit_per_show, csv_writer,
 
     all_ids_this_run = {}  # video_id -> query_used (first hit)
     for query in build_queries_for_target(target):
-        if len(all_ids_this_run) >= limit_per_show:
+        remaining = limit_per_show - len(all_ids_this_run)
+        if remaining <= 0:
             break
-        ids = search_videos(session, key_pool, query, max_results=15)
+        ids = search_videos(session, key_pool, query, max_pages=max_pages_per_query,
+                             target_count=remaining)
         for vid in ids:
             if vid not in all_ids_this_run:
                 all_ids_this_run[vid] = query
@@ -387,6 +419,12 @@ def main():
                      help="이번 실행에서 처리할 최대 run 개수 (GitHub Actions 시간 제한 대비)")
     ap.add_argument("--limit-per-show", type=int, default=60,
                      help="run 하나당 최대 수집 영상 개수")
+    ap.add_argument("--max-pages-per-query", type=int, default=20,
+                     help="쿼리 하나당 최대 몇 페이지까지 갈 수 있는지의 이론적 상한 "
+                          "(페이지당 100유닛). --limit-per-show에 도달하면 그 전에 "
+                          "항상 먼저 멈추니(target_count 체크), 이 값을 크게 잡아도 "
+                          "실제 지출은 늘지 않음 - YouTube가 정말 무한히 결과를 준다고 "
+                          "우기는 극단적 상황에서만 의미 있는 최후 안전판")
     ap.add_argument("--api-key", default=None, help="단일 키 직접 지정 (테스트용)")
     args = ap.parse_args()
 
@@ -435,7 +473,8 @@ def main():
             try:
                 n_rows = process_target(
                     session, key_pool, target, args.limit_per_show, writer,
-                    fetched_details_cache, written_pairs
+                    fetched_details_cache, written_pairs,
+                    max_pages_per_query=args.max_pages_per_query
                 )
             except QuotaExceededError as e:
                 print(f"  중단: {e}")

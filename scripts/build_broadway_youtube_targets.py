@@ -38,7 +38,8 @@ import pandas as pd
 OUT_COLUMNS = [
     "run_id", "show", "theatre", "opening_date", "closing_date", "date_source",
     "is_revival", "revival_rank", "genre", "based_on", "lead_cast",
-    "title_ambiguous", "n_weeks_observed",
+    "title_ambiguous", "possible_run_merge_issue", "max_internal_gap_weeks",
+    "n_weeks_observed",
 ]
 
 
@@ -50,6 +51,44 @@ def slugify(text):
 def most_common(s):
     s = s.dropna()
     return s.mode().iloc[0] if not s.empty else pd.NA
+
+
+def compute_max_gap_weeks(df):
+    """(show, run_number) 그룹 내에서 관측된 week_ending들 사이 최대 공백(주)을 계산.
+    calculate_revival_flags.py가 이미 코로나 셧다운 공백(~78주)은 걸러내고 run을
+    나누는 걸로 알고 있는데, 그런데도 남아있는 큰 공백은 실제로 서로 다른
+    프로덕션(예: 2014년 리바이벌과 2024년 리바이벌)이 하나의 run_number로
+    잘못 합쳐졌을 가능성이 높다는 신호임 (실제로 Cabaret에서 발견됨 - 2014~2015
+    Studio 54 공연과 2024~2025 August Wilson Theatre 공연이 run_number=3
+    하나로 묶여 있었음, 극장도 바뀌었는데 감지가 안 됨)."""
+    gaps = {}
+    for (show, run_number), grp in df.groupby(["show", "run_number"], dropna=False):
+        weeks = grp["week_ending"].dropna().sort_values()
+        if len(weeks) < 2:
+            gaps[(show, run_number)] = 0
+            continue
+        max_gap_days = weeks.diff().dt.days.max()
+        gaps[(show, run_number)] = max_gap_days / 7
+    return gaps
+
+
+def dedupe_run_ids(agg):
+    """run_id가 우연히 충돌하는 경우(예: 슬러그 40자 절단 때문에 서로 다른 두
+    쇼 제목이 같은 슬러그로 잘리는 경우 - 실제로 'Ain't Too Proud-...'와
+    'Ain't Too Proud—...'가 하이픈/엠대시 차이만으로 겹친 사례가 있었음, 코로나
+    셧다운 전후로 Playbill 표기가 미묘하게 바뀐 게 원인으로 추정) 뒤쪽 항목에
+    -2, -3 접미사를 붙여 유일성을 강제로 보장함."""
+    seen = {}
+    new_ids = []
+    for rid in agg["run_id"]:
+        if rid not in seen:
+            seen[rid] = 1
+            new_ids.append(rid)
+        else:
+            seen[rid] += 1
+            new_ids.append(f"{rid}-dup{seen[rid]}")
+    agg["run_id"] = new_ids
+    return agg
 
 
 def build_targets_with_run_number(df):
@@ -81,6 +120,14 @@ def build_targets_with_run_number(df):
         agg_spec["show_closing_date"] = ("closing_date", most_common)
 
     agg = df.groupby(["show", "run_number"], dropna=False).agg(**agg_spec).reset_index()
+
+    gap_map = compute_max_gap_weeks(df)
+    agg["max_internal_gap_weeks"] = agg.apply(
+        lambda r: gap_map.get((r["show"], r["run_number"]), 0), axis=1
+    )
+    # 코로나 셧다운(~78주)은 calculate_revival_flags.py가 이미 감안했다고 가정하고,
+    # 그보다 확실히 큰 공백(2년=104주)만 "다른 프로덕션이 섞였을 수 있음"으로 표시
+    agg["possible_run_merge_issue"] = agg["max_internal_gap_weeks"] > 104
 
     # 날짜/극장 우선순위: run_* (history 매칭, 지금은 실질적으로 안 씀) > show-level (title 병합) > week_ending 근사
     def pick(row):
@@ -120,6 +167,8 @@ def build_targets_with_run_number(df):
         agg["run_id"] = agg.apply(
             lambda r: f"{slugify(r['show'])}-run{int(r['run_number'])}", axis=1
         )
+
+    agg = dedupe_run_ids(agg)
 
     for col in ("opening_date", "closing_date"):
         # format="mixed" 필수: run_opening_date는 BroadwayWorld 표기("March 19, 1998")고
@@ -253,6 +302,14 @@ def main():
               f"다른 프로덕션이 BroadwayWorld에 여럿 있어서 opening_date/극장 값이 어느 쪽 "
               f"것인지 불확실해요 - youtube_collect_broadway.py가 이 표시로 날짜 필터 버퍼를 "
               f"넉넉하게 잡아요")
+    n_merge_issues = int(targets["possible_run_merge_issue"].sum())
+    if n_merge_issues:
+        print(f"  [확인 필요] possible_run_merge_issue=True인 run {n_merge_issues}개 - "
+              f"관측 주차 사이에 2년 넘는 공백이 있어요. 서로 다른 프로덕션이 하나의 "
+              f"run_number로 잘못 합쳐졌을 가능성이 높아요(calculate_revival_flags.py 쪽 "
+              f"확인 권장). 아래 run_id로 직접 확인해보세요:")
+        for rid in targets[targets["possible_run_merge_issue"]]["run_id"].tolist():
+            print(f"    - {rid}")
 
 
 if __name__ == "__main__":

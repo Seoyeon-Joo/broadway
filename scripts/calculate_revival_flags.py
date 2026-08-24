@@ -31,8 +31,18 @@ def assign_run(g, gap_days, exclude_shutdown_gap):
 
     if exclude_shutdown_gap:
         prev_week = g["week_ending"].shift(1)
-        is_shutdown_gap = (prev_week <= SHUTDOWN_GAP_START + pd.Timedelta(days=14)) & (
-            g["week_ending"] >= SHUTDOWN_GAP_END - pd.Timedelta(days=14)
+        # 버그 수정: 예전엔 "prev_week가 셧다운 시작 이전"이고 "week_ending이 셧다운
+        # 종료 이후"라는 한쪽 방향 조건이라, 셧다운 기간을 통째로 감싸버리는 훨씬 큰
+        # 공백(예: 2015년 종연 -> 2024년 재개막)까지 전부 "셧다운 공백"으로 오분류됨
+        # (Cabaret에서 실제로 발견 - 2014~2015 Studio 54 공연과 2024~2025 August
+        # Wilson Theatre 공연이 run_number 하나로 잘못 합쳐졌었음). 진짜 셧다운
+        # 공백이려면 공백의 양쪽 끝이 전부 셧다운 시작/종료 시점에 바짝 붙어있어야
+        # 함 - 그래서 양방향 범위 체크로 바꿈.
+        is_shutdown_gap = (
+            (prev_week >= SHUTDOWN_GAP_START - pd.Timedelta(days=14))
+            & (prev_week <= SHUTDOWN_GAP_START + pd.Timedelta(days=14))
+            & (g["week_ending"] >= SHUTDOWN_GAP_END - pd.Timedelta(days=14))
+            & (g["week_ending"] <= SHUTDOWN_GAP_END + pd.Timedelta(days=14))
         )
         gap_flag = gap_flag & ~is_shutdown_gap.fillna(False)
 
