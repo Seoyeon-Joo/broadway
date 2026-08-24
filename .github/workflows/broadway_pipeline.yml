@@ -31,6 +31,17 @@ name: Broadway Data Pipeline (Playbill + BroadwayWorld)
 # data/ 폴더 자체는 이제 리포지토리에는 커밋하지 않음 - 최신 데이터는 항상
 # Releases 탭(예: https://github.com/Seoyeon-Joo/broadway/releases/tag/broadway-data)
 # 에서 받아야 함.
+#
+# *** 2026-08-24 수정: 2단계 슬러그 매칭 관련 ***
+# fetch_broadwayworld_full.py의 letter-index 차단 감지 로직이 U/Y/Z처럼 원래
+# 쇼 개수가 적은 글자(직접 확인: U=5개/Y=6개/Z=2개)를 차단으로 오판해서, 그 글자로
+# 시작하는 쇼(Urinetown, You're a Good Man Charlie Brown, Zoya's Apartment 등)가
+# 전부 "슬러그 못 찾음"으로 스킵되던 버그를 고침. 매칭 로직에도 콜론/쉼표 없이
+# 부제가 생략되거나 반대로 BWW 쪽에만 부제가 붙는 케이스(예: "Urinetown The
+# Musical" -> BWW "URINETOWN")를 잡는 접두어 근사 매칭(prefix_fallback) 폴백을
+# 추가함. 스킵된 쇼는 broadwayworld_full.csv에 기록되지 않으므로 --existing 로직상
+# 자동으로 다음 실행에 재시도됨 - 별도 재처리 스텝 불필요. 2단계 결과 요약에서
+# title_match_type 분포(특히 prefix_fallback 건수)를 매번 확인할 것.
 on:
   schedule:
     - cron: "0 15 * * 1"  # 매주 월요일 UTC 15:00 (KST 화요일 00:00) - 일요일 마감 데이터 반영 후
@@ -118,6 +129,10 @@ jobs:
           echo "broadwayworld_full.csv 행 수:"
           wc -l data/broadwayworld_full.csv
           head -5 data/broadwayworld_full.csv
+          echo ""
+          echo "title_match_type 분포 (colon_stripped/comma_stripped는 부제 생략 근사 매칭,"
+          echo "prefix_fallback은 오매칭 가능성이 가장 높은 단계라 특히 검토 권장):"
+          python3 scripts/_print_match_type_summary.py
 
       # ---------- 3단계: 메타데이터를 broadway.csv에 병합 ----------
       - name: Step 3 - Merge genre/cast/creative_team/producer into broadway.csv
