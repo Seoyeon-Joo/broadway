@@ -111,9 +111,16 @@ def make_session():
     return session
 
 
-MIN_EXPECTED_LINKS = 10  # 정상적인 글자 인덱스 페이지라면 이보다 훨씬 많은 쇼가 있어야 함
-                          # (한 글자로 시작하는 브로드웨이 역대 쇼가 10개 미만일 리 없음 -
-                          # 이보다 적으면 진짜 빈 페이지가 아니라 차단/안내 페이지로 간주)
+MIN_EXPECTED_LINKS = 10  # 참고용 기준치일 뿐 차단 판정에는 안 씀(아래 주석 참고).
+                          # 대부분의 글자 인덱스는 이보다 훨씬 많은 쇼가 있지만,
+                          # 실제로 확인해보니 U(5개)/Y(6개)/Z(2개)처럼 원래 이
+                          # 기준보다 적은 게 정상인 글자도 있음. 그래서 이 값보다
+                          # 적다고 재시도/차단 취급하면 U/Y/Z로 시작하는 쇼가
+                          # (Urinetown, You're a Good Man Charlie Brown,
+                          # Young Frankenstein, Zoya's Apartment 등 실존하는 쇼
+                          # 포함) 통째로 "슬러그 못 찾음"으로 스킵되는 오탐이 남.
+                          # (2026-08-24, https://www.broadwayworld.com/grossesbyshow.php?letter=u
+                          # 등을 직접 열어서 U=5/Y=6/Z=2가 실제 전체 목록임을 확인함)
 
 
 def fetch_letter_index(session, letter, max_retries=3):
@@ -121,17 +128,31 @@ def fetch_letter_index(session, letter, max_retries=3):
 
     *** 왜 상태코드 200만으로는 부족한가 ***
     실제로 유명 쇼(Oklahoma!, SIX: The Musical, Nine 등)가 대거 "슬러그 못 찾음"으로
-    나온 걸 보고 원인을 추적한 결과: BroadwayWorld가 요청이 몰리면 429가 아니라
+    나온 적이 있어서 원인을 추적한 결과: BroadwayWorld가 요청이 몰리면 429가 아니라
     "200 OK + 속도를 늦춰달라는 안내/차단 페이지"로 응답하는 것으로 보임. 예전
     코드는 resp.status_code == 200이면 무조건 정상 응답으로 캐싱했는데, 그러면
     이 빈 안내 페이지가 letter_cache에 그대로 박제되어서 그 글자로 시작하는
-    나머지 쇼 전부가 이후 계속 실패함(실제로 O/S/T로 시작하는 쇼들이 무더기로
-    몰려서 실패한 게 이 패턴과 일치).
+    나머지 쇼 전부가 이후 계속 실패함.
 
-    그래서 실제 쇼 링크 개수(MIN_EXPECTED_LINKS 미만이면 의심)까지 확인하고,
-    부족하면 캐싱하지 않고 잠깐 대기 후 재시도함. 그래도 계속 부족하면 어쩔 수
-    없이 None을 반환(캐싱은 안 함 - 다음 쇼가 같은 글자를 다시 시도할 때 새로
-    받아오게 해서, 언젠가 정상 응답이 오면 그때부터라도 살아나게 함)."""
+    *** 링크 개수가 적다고 차단으로 판정하면 안 되는 이유 (2026-08-24 수정) ***
+    이전 버전은 "링크가 MIN_EXPECTED_LINKS(10개) 미만이면 차단/안내 페이지"로 보고
+    최대 3회 재시도 후 포기(None 반환, 캐싱 안 함)했음. 근데 U/Y/Z 인덱스 페이지를
+    직접 열어서 확인해보니 이건 오탐이었음 - U=5개, Y=6개, Z=2개가 그 글자로
+    시작하는 쇼의 "실제 전체 개수"였고, 3번 재시도해도 매번 똑같은(정상) 응답이
+    돌아온 것뿐이었음. 그 결과 이 세 글자로 시작하는 모든 쇼(Urinetown, You're a
+    Good Man Charlie Brown, Young Frankenstein, Zoya's Apartment 등 실존 쇼 포함)가
+    letter_cache에 아예 못 들어가서 매번 새로 요청하며 "슬러그 못 찾음"으로 스킵됐음.
+
+    그래서 이제는 링크 개수 대신 아래 두 가지만 확인함:
+      1. 상태코드 200
+      2. <title> 태그가 요청한 letter와 실제로 일치 (다른 글자 페이지가 캐시/프록시
+         문제로 잘못 오는 경우를 걸러내기 위함 - 이 문제도 실제로 관찰된 적 있음:
+         letter=U로 요청했는데 letter=A 페이지 내용이 돌아온 사례)
+    링크가 0개인 경우만 "진짜로 이상한 응답"으로 보고 재시도하고, 그 외엔 링크
+    개수와 무관하게(1개든 50개든) 정상 응답으로 받아들여 캐싱함. 링크 수가 적을
+    땐 그냥 참고용으로 로그만 남김 - 그 글자가 원래 적은 건지 나중에 데이터로
+    확인할 수 있게."""
+    expected_title_frag = f"Broadway Grosses by Show: {letter.upper()}"
     for attempt in range(1, max_retries + 1):
         try:
             resp = session.get(f"{BASE}/grossesbyshow.php", params={"letter": letter},
@@ -148,47 +169,34 @@ def fetch_letter_index(session, letter, max_retries=3):
             continue
 
         soup = BeautifulSoup(resp.text, "html.parser")
-        n_links = len(soup.select("a[href*='/grosses/']"))
-        # CSS 셀렉터가 우연히 안 맞는 건지, 아니면 원본 HTML 자체에 이 텍스트가
-        # 아예 없는 건지(=자바스크립트가 나중에 채워넣는 구조로 최근 바뀌었을 가능성)
-        # 구분하기 위해 셀렉터와 무관한 단순 문자열 카운트도 같이 확인
-        raw_substring_count = resp.text.count("/grosses/")
-        if n_links >= MIN_EXPECTED_LINKS:
-            return soup
-
-        # 실제로 뭘 받았는지 원문 일부를 같이 찍음 - Cloudflare 차단 페이지인지,
-        # 진짜 빈 HTML인지, 완전히 다른 내용인지 다음 로그에서 바로 판단할 수 있게
         title_tag = soup.find("title")
         page_title = title_tag.get_text(strip=True) if title_tag else "(title 태그 없음)"
-        print(f"    [letter={letter} 인덱스에 쇼 링크가 {n_links}개뿐 - 차단/안내 "
-              f"페이지로 의심, 시도 {attempt}/{max_retries}] "
-              f"응답 길이={len(resp.text)}자, <title>={page_title!r}, "
-              f"원본에서 '/grosses/' 문자열 등장 횟수={raw_substring_count}, "
-              f"본문 앞부분: {resp.text[:300]!r}")
-        if raw_substring_count == 0:
-            # '/grosses/'가 원본에 아예 없음 -> 자바스크립트가 나중에 채워넣는
-            # 구조일 가능성이 높음. 'grosses'라는 단어 자체는 어디 있는지,
-            # <body> 시작 부분엔 뭐가 있는지 추가로 덤프해서 구조 파악
-            grosses_idx = resp.text.lower().find("grosses")
-            context = resp.text[max(0, grosses_idx-100):grosses_idx+200] if grosses_idx != -1 else "(어디에도 없음)"
-            body_idx = resp.text.find("<body")
-            body_snippet = resp.text[body_idx:body_idx+500] if body_idx != -1 else "(<body> 태그 못 찾음)"
-            print(f"      -> 'grosses' 단어 주변 문맥: {context!r}")
-            print(f"      -> <body> 시작 부분: {body_snippet!r}")
-        else:
-            # '/grosses/'가 원본에 있긴 한데(raw_substring_count번) CSS 셀렉터가
-            # 못 잡음 -> <a href=...> 태그가 아닌 다른 형태(예: <script> 안의 JSON,
-            # data-* 속성 등)로 들어있을 가능성이 높음. 실제로 어디에 어떤 모양으로
-            # 있는지 앞쪽 몇 개를 그대로 보여줌
-            idx = 0
-            for i in range(min(3, raw_substring_count)):
-                idx = resp.text.find("/grosses/", idx)
-                if idx == -1:
-                    break
-                snippet = resp.text[max(0, idx-120):idx+80]
-                print(f"      -> '/grosses/' 등장 #{i+1} 주변 문맥: {snippet!r}")
-                idx += len("/grosses/")
-        time.sleep(3 * attempt)  # 429 KOPIS 경험상 백오프 필요
+
+        if expected_title_frag not in page_title:
+            # 요청한 글자와 실제로 받은 페이지가 다름 - 캐시/프록시 쪽 문제로
+            # 보이므로 캐싱하지 않고 재시도
+            print(f"    [letter={letter} 요청했는데 실제 응답 <title>={page_title!r} - "
+                  f"다른 글자 페이지로 의심, 시도 {attempt}/{max_retries}]")
+            time.sleep(2 * attempt)
+            continue
+
+        n_links = len(soup.select("a[href*='/grosses/']"))
+        if n_links == 0:
+            # <title>은 맞는데 쇼 링크가 정말 하나도 없는 건 여전히 이상한 상황
+            # (모든 글자에 최소 1개는 있는 게 정상) - 이 경우만 진짜로 재시도
+            raw_substring_count = resp.text.count("/grosses/")
+            print(f"    [letter={letter} 인덱스에 쇼 링크가 0개 - 이상 응답 의심, "
+                  f"시도 {attempt}/{max_retries}] 응답 길이={len(resp.text)}자, "
+                  f"<title>={page_title!r}, 원본 '/grosses/' 등장 횟수={raw_substring_count}, "
+                  f"본문 앞부분: {resp.text[:300]!r}")
+            time.sleep(3 * attempt)
+            continue
+
+        if n_links < MIN_EXPECTED_LINKS:
+            # 차단 취급하지 않고 그냥 참고 로그만 남김 - U/Y/Z처럼 원래 적을 수 있음
+            print(f"    [letter={letter} 인덱스 링크 {n_links}개 - 참고: 이 글자는 "
+                  f"원래 쇼가 적어서 정상일 수 있음(차단 아님, 재시도 안 함)]")
+        return soup
 
     print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
           f"이번엔 포기(캐싱 안 함, 다음 쇼가 다시 시도함)]")
@@ -201,21 +209,38 @@ def find_show_slug(title, session, letter_cache):
     쇼만 나와서 대부분의 과거/폐막 쇼를 못 찾는 문제가 있었음 - 실제 확인됨)
     letter_cache: {letter: soup} 형태로 한 번 받아온 글자 페이지는 재사용.
 
-    매칭 2단계:
+    매칭 4단계 (숫자가 커질수록 근사 매칭이라 신뢰도가 낮아짐):
       1. 완전 일치 (영숫자만 남기고 비교)
-      2. 그래도 못 찾으면, 제목에 콜론(:)이 있는 경우 콜론 앞부분만으로 재시도.
-         실제로 확인된 사례: Playbill/broadway.csv엔 "Danny Gans on Broadway: The
-         Man of Many Voices"로 풀네임이 들어있는데, BroadwayWorld grosses 인덱스엔
-         부제 없이 "Danny Gans On Broadway"로만 등재돼 있어서 완전일치가 실패했음.
-         이런 축약 등재가 흔해서 콜론 기준 폴백을 추가함.
+      2. 콜론(:) 앞부분만으로 재시도. 실제로 확인된 사례: Playbill/broadway.csv엔
+         "Danny Gans on Broadway: The Man of Many Voices"로 풀네임이 들어있는데,
+         BroadwayWorld grosses 인덱스엔 부제 없이 "Danny Gans On Broadway"로만
+         등재돼 있어서 완전일치가 실패했음.
+      3. 쉼표(,) 앞부분만으로 재시도. 2와 같은 패턴인데 구분자가 쉼표인 경우
+         (콜론 폴백만으로는 못 잡음).
+      4. 접두어 포함 매칭. 2/3은 구분자(:,)가 있을 때만 동작하는데, 구분자 없이
+         그냥 단어가 붙어서 생략/추가되는 경우도 실제로 있었음:
+           - "Urinetown The Musical" -> BWW엔 "URINETOWN"으로만 등재(우리 제목이
+             BWW쪽보다 긺 - BWW 텍스트가 우리 제목의 접두어)
+           - "You're Welcome America" -> BWW엔 "YOU'RE WELCOME AMERICA. A FINAL
+             NIGHT WITH GEORGE W. BUSH"로 등재(반대로 BWW쪽이 더 긺 - 우리 제목이
+             BWW 텍스트의 접두어)
+         그래서 정규화한 문자열끼리 둘 중 하나가 다른 하나로 시작하면 후보로 인정.
+         전혀 다른 짧은 제목이 우연히 접두어로 걸리는 걸 막기 위해 최소 길이(8자)와
+         길이 비율(짧은 쪽이 긴 쪽의 30% 이상) 조건을 둠. 비율 기준은 실제 사례로
+         보정함 - "URINETOWN"(9자) vs "URINETOWNTHEMUSICAL"(20자)는 비율 0.45,
+         "YOUREWELCOMEAMERICA"(19자) vs BWW의 긴 표기(46자)는 비율 0.41이라 0.5
+         기준을 쓰면 이 두 실제 사례가 모두 걸러져버려서 0.3으로 낮춤. 이 단계는
+         오매칭 가능성이 가장 높아서 title_ambiguous/match_type을 통해 신뢰도를
+         낮춰 표시함.
 
     반환값: (slug, is_ambiguous, match_type) 튜플.
       - is_ambiguous: 동일 제목으로 매치가 여러 개 있으면 True (=완전히 같은 이름으로
         재상연된 리바이벌 방어 로직 - BroadwayWorld가 "Cabaret at the Kit Kat Club"처럼
         리바이벌을 아예 개명해서 따로 등재하는 경우가 많지만, 개명 없는 경우도 있음).
         첫 번째 매치를 쓰되 이 플래그로 표시해서 target 빌더가 신뢰도를 낮춰 잡게 함.
-      - match_type: "exact" 또는 "colon_stripped" - 후자는 부제를 뗀 근사 매칭이라
-        완전히 다른 쇼를 잘못 골랐을 여지가 exact보다 약간 더 있음을 표시."""
+      - match_type: "exact" / "colon_stripped" / "comma_stripped" / "prefix_fallback".
+        exact가 아닐수록 완전히 다른 쇼를 잘못 골랐을 여지가 커짐(특히
+        prefix_fallback은 반드시 사람이 한 번 눈으로 검토하는 걸 권장)."""
     first_char = title.strip()[0].upper() if title.strip() else ""
     letter = first_char if first_char.isalpha() else "1"  # 숫자/기호로 시작하면 '#' 페이지(letter=1)
 
@@ -245,6 +270,32 @@ def find_show_slug(title, session, letter_cache):
         if stripped:
             matches = find_all(norm(stripped))
             match_type = "colon_stripped"
+
+    if not matches and "," in title:
+        stripped = title.split(",")[0].strip()
+        if stripped:
+            matches = find_all(norm(stripped))
+            match_type = "comma_stripped"
+
+    if not matches:
+        title_norm = norm(title)
+        if len(title_norm) >= 8:
+            MIN_PREFIX_LEN = 8
+            MIN_PREFIX_RATIO = 0.3
+            candidates = []
+            for a in links:
+                link_norm = norm(a.get_text(strip=True))
+                if not link_norm:
+                    continue
+                shorter, longer = (link_norm, title_norm) if len(link_norm) <= len(title_norm) \
+                    else (title_norm, link_norm)
+                if len(shorter) < MIN_PREFIX_LEN:
+                    continue
+                if longer.startswith(shorter) and len(shorter) / len(longer) >= MIN_PREFIX_RATIO:
+                    candidates.append(a["href"].split("/grosses/")[-1])
+            if candidates:
+                matches = candidates
+                match_type = "prefix_fallback"
 
     if not matches:
         return None, False, ""
@@ -522,8 +573,9 @@ def main():
                 "title_ambiguous": title_ambiguous,  # True면 동일 제목 리바이벌이 여러 개 있어서
                                                        # 이 메타(opening_date/cast 등)가 정확히
                                                        # 어느 프로덕션 것인지 확신할 수 없음
-                "title_match_type": match_type,  # direct/exact/colon_stripped - colon_stripped는
-                                                   # 부제를 뗀 근사 매칭이라 살짝 덜 확실함
+                "title_match_type": match_type,  # direct/exact/colon_stripped/comma_stripped/
+                                                   # prefix_fallback - 뒤로 갈수록 근사 매칭이라
+                                                   # 덜 확실함(특히 prefix_fallback은 검토 권장)
                 "genre": genre,
                 "first_preview": meta.get("first_preview", ""),
                 "opening_date": meta.get("opening_date", ""),
@@ -545,7 +597,8 @@ def main():
                   f"awards={n_award_wins}승/{n_award_noms}노미, "
                   f"based_on={meta.get('based_on') or '원작 없음/오리지널'}"
                   + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else "")
-                  + (" [부제 생략 매칭]" if match_type == "colon_stripped" else ""))
+                  + (" [부제 생략 매칭]" if match_type in ("colon_stripped", "comma_stripped") else "")
+                  + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else ""))
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
