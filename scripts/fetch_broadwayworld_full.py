@@ -175,6 +175,19 @@ def fetch_letter_index(session, letter, max_retries=3):
             body_snippet = resp.text[body_idx:body_idx+500] if body_idx != -1 else "(<body> 태그 못 찾음)"
             print(f"      -> 'grosses' 단어 주변 문맥: {context!r}")
             print(f"      -> <body> 시작 부분: {body_snippet!r}")
+        else:
+            # '/grosses/'가 원본에 있긴 한데(raw_substring_count번) CSS 셀렉터가
+            # 못 잡음 -> <a href=...> 태그가 아닌 다른 형태(예: <script> 안의 JSON,
+            # data-* 속성 등)로 들어있을 가능성이 높음. 실제로 어디에 어떤 모양으로
+            # 있는지 앞쪽 몇 개를 그대로 보여줌
+            idx = 0
+            for i in range(min(3, raw_substring_count)):
+                idx = resp.text.find("/grosses/", idx)
+                if idx == -1:
+                    break
+                snippet = resp.text[max(0, idx-120):idx+80]
+                print(f"      -> '/grosses/' 등장 #{i+1} 주변 문맥: {snippet!r}")
+                idx += len("/grosses/")
         time.sleep(3 * attempt)  # 429 KOPIS 경험상 백오프 필요
 
     print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
