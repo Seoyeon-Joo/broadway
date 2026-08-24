@@ -206,6 +206,21 @@ def fetch_letter_index(session, letter, max_retries=3):
             # 차단 취급하지 않고 그냥 참고 로그만 남김 - U/Y/Z처럼 원래 적을 수 있음
             print(f"    [letter={letter} 인덱스 링크 {n_links}개 - 참고: 이 글자는 "
                   f"원래 쇼가 적어서 정상일 수 있음(차단 아님, 재시도 안 함)]")
+
+        if letter == "1":
+            # *** 2026-08-24 진단용 추가 ***
+            # letter=1("#" 페이지)로 라우팅한 게 맞는지, 그리고 실제로 어떤 쇼들이
+            # 여기 들어있는지 아직 실제 파이프라인 실행 환경에서 확인된 적이 없음
+            # (제가 가진 웹 조회 도구로는 이 URL만 캐시가 꼬여서 매번 다른 글자의
+            # 페이지가 섞여 나옴 - 실제 GitHub Actions 러너의 요청과는 무관한
+            # 도구 쪽 문제로 보임). 그래서 여기서 실제로 받은 링크 텍스트 전체를
+            # 한 번 찍어서, 다음 실행 로그에서 우리가 세운 라우팅 가정
+            # ("따옴표/&/숫자로 시작하는 제목은 전부 여기로 온다")이 실제 사이트
+            # 분류와 맞는지 눈으로 바로 확인할 수 있게 함. "#" 페이지는 보통
+            # 항목 수가 많지 않을 것으로 예상되니 로그 부담은 적음.
+            all_link_texts = [a.get_text(strip=True) for a in soup.select("a[href*='/grosses/']")]
+            print(f"    [letter=1(#) 페이지 실제 쇼 목록 {len(all_link_texts)}개 (진단용): "
+                  f"{all_link_texts}]")
         return soup
 
     print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
