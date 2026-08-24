@@ -151,8 +151,18 @@ def fetch_letter_index(session, letter, max_retries=3):
     링크가 0개인 경우만 "진짜로 이상한 응답"으로 보고 재시도하고, 그 외엔 링크
     개수와 무관하게(1개든 50개든) 정상 응답으로 받아들여 캐싱함. 링크 수가 적을
     땐 그냥 참고용으로 로그만 남김 - 그 글자가 원래 적은 건지 나중에 데이터로
-    확인할 수 있게."""
-    expected_title_frag = f"Broadway Grosses by Show: {letter.upper()}"
+    확인할 수 있게.
+
+    *** letter="1"의 <title> 표시가 "1"이 아니라 "#"인 문제 (2026-08-24 추가 수정) ***
+    숫자/기호로 시작하는 쇼는 letter=1로 요청하는데, 실제 페이지 <title>은
+    "Broadway Grosses by Show: 1"이 아니라 "Broadway Grosses by Show: # — A-Z
+    Index"로 옴(실제 파이프라인 로그로 확인됨: '"Master Harold"...and the Boys',
+    '& Juliet', '3 from Brooklyn' 등 letter=1에 해당하는 쇼가 전부 "다른 글자
+    페이지로 의심"에 걸려 매번 3회 재시도 후 포기했음 - 위 title 일치 검사가 "1"과
+    "#"를 비교해서 항상 실패했던 것). 그래서 letter="1"일 때만 기대 표시를 "#"로
+    바꿔서 비교함."""
+    display_letter = "#" if letter == "1" else letter.upper()
+    expected_title_frag = f"Broadway Grosses by Show: {display_letter}"
     for attempt in range(1, max_retries + 1):
         try:
             resp = session.get(f"{BASE}/grossesbyshow.php", params={"letter": letter},
