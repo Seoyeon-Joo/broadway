@@ -148,7 +148,7 @@ def fetch_letter_index(session, letter, max_retries=3):
             continue
 
         soup = BeautifulSoup(resp.text, "html.parser")
-        n_links = len(soup.select("a[href^='/grosses/']"))
+        n_links = len(soup.select("a[href*='/grosses/']"))
         # CSS 셀렉터가 우연히 안 맞는 건지, 아니면 원본 HTML 자체에 이 텍스트가
         # 아예 없는 건지(=자바스크립트가 나중에 채워넣는 구조로 최근 바뀌었을 가능성)
         # 구분하기 위해 셀렉터와 무관한 단순 문자열 카운트도 같이 확인
@@ -232,7 +232,7 @@ def find_show_slug(title, session, letter_cache):
     def norm(s):
         return re.sub(r"[^A-Z0-9]", "", s.upper())
 
-    links = soup.select("a[href^='/grosses/']")
+    links = soup.select("a[href*='/grosses/']")
 
     def find_all(target_norm):
         return [a["href"].split("/grosses/")[-1] for a in links if norm(a.get_text(strip=True)) == target_norm]
@@ -268,7 +268,7 @@ def fetch_genre_map(session):
     resp = session.get(f"{BASE}/grosses.php", headers=HEADERS, timeout=30)
     soup = BeautifulSoup(resp.text, "html.parser")
     genre_map = {}
-    for a in soup.select("a[href^='/grosses/']"):
+    for a in soup.select("a[href*='/grosses/']"):
         t = a.get("title", "")
         if t in ("Musical", "Play"):
             genre_map[a["href"].split("/grosses/")[-1]] = t
