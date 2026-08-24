@@ -149,6 +149,10 @@ def fetch_letter_index(session, letter, max_retries=3):
 
         soup = BeautifulSoup(resp.text, "html.parser")
         n_links = len(soup.select("a[href^='/grosses/']"))
+        # CSS 셀렉터가 우연히 안 맞는 건지, 아니면 원본 HTML 자체에 이 텍스트가
+        # 아예 없는 건지(=자바스크립트가 나중에 채워넣는 구조로 최근 바뀌었을 가능성)
+        # 구분하기 위해 셀렉터와 무관한 단순 문자열 카운트도 같이 확인
+        raw_substring_count = resp.text.count("/grosses/")
         if n_links >= MIN_EXPECTED_LINKS:
             return soup
 
@@ -159,7 +163,18 @@ def fetch_letter_index(session, letter, max_retries=3):
         print(f"    [letter={letter} 인덱스에 쇼 링크가 {n_links}개뿐 - 차단/안내 "
               f"페이지로 의심, 시도 {attempt}/{max_retries}] "
               f"응답 길이={len(resp.text)}자, <title>={page_title!r}, "
+              f"원본에서 '/grosses/' 문자열 등장 횟수={raw_substring_count}, "
               f"본문 앞부분: {resp.text[:300]!r}")
+        if raw_substring_count == 0:
+            # '/grosses/'가 원본에 아예 없음 -> 자바스크립트가 나중에 채워넣는
+            # 구조일 가능성이 높음. 'grosses'라는 단어 자체는 어디 있는지,
+            # <body> 시작 부분엔 뭐가 있는지 추가로 덤프해서 구조 파악
+            grosses_idx = resp.text.lower().find("grosses")
+            context = resp.text[max(0, grosses_idx-100):grosses_idx+200] if grosses_idx != -1 else "(어디에도 없음)"
+            body_idx = resp.text.find("<body")
+            body_snippet = resp.text[body_idx:body_idx+500] if body_idx != -1 else "(<body> 태그 못 찾음)"
+            print(f"      -> 'grosses' 단어 주변 문맥: {context!r}")
+            print(f"      -> <body> 시작 부분: {body_snippet!r}")
         time.sleep(3 * attempt)  # 429 KOPIS 경험상 백오프 필요
 
     print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
