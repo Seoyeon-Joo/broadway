@@ -60,28 +60,66 @@ def title_slug(title):
 
 def make_session():
     session = requests.Session()
-    retry = Retry(total=3, backoff_factor=1.5, status_forcelist=[429, 500, 502, 503, 504],
+    # *** 2026-08-24 수정: 429가 이어질 때 재시도 예산을 늘림 ***
+    # 실제로 리뷰 페이지에서 리다이렉트 실패가 이어지다가 이후 거의 모든 요청이
+    # 429를 맞기 시작한 사례가 있었음(로그로 확인: Bring It On부터 Riverdance까지
+    # 연속 429). backoff_factor=1.5/total=3으로는 한 번 트립된 레이트리밋에서
+    # 회복이 안 됐음 - total과 backoff를 늘려서 서버가 풀어줄 시간을 더 줌.
+    # urllib3 Retry는 기본으로 429 응답의 Retry-After 헤더를 존중하므로, 서버가
+    # 값을 보내주면 그 시간만큼은 자동으로 기다림.
+    retry = Retry(total=6, backoff_factor=3, status_forcelist=[429, 500, 502, 503, 504],
                   allowed_methods=["GET"])
     session.mount("https://", HTTPAdapter(max_retries=retry))
     session.mount("http://", HTTPAdapter(max_retries=retry))
+    # 리다이렉트 루프(실제 확인됨: 특정 slug로 요청하면 서버가 계속 다른
+    # article= 파라미터를 붙이며 자기 자신으로 되돌아오는 응답을 반복함)에 빠졌을 때
+    # 기본값 30홉까지 기다리지 않고 빨리 실패해서 폴백 slug 시도로 넘어가게 함
+    session.max_redirects = 8
     return session
 
 
 def fetch_ratings(title, showid, session, slug=None):
     """slug가 주어지면(broadwayworld_full.csv에서 이미 검증된 값) 그걸 우선 쓰고,
-    없을 때만 title_slug()로 추측함."""
-    url_slug = slug if slug else title_slug(title)
-    url = f"{BASE}/reviews/{url_slug}"
-    resp = session.get(url, params={"id": showid}, headers=HEADERS, timeout=30)
-    if resp.status_code != 200 and slug:
-        # 검증된 slug로도 실패했으면 혹시 몰라 로컬 추측 슬러그로 한 번 더 시도
-        # (예: broadwayworld_full.csv의 slug가 오래돼서 사이트 쪽 URL이 바뀐 경우 등)
+    없을 때만 title_slug()로 추측함.
+
+    *** 2026-08-24 수정: 예외가 나도 폴백 slug를 반드시 시도하게 함 ***
+    예전엔 상태코드가 200이 아닌 "정상적으로 응답은 왔지만 실패"인 경우에만
+    폴백을 시도했음. 근데 실제로는 검증된 slug로 요청했을 때 TooManyRedirects
+    (리다이렉트 루프 - BWW 서버가 article= 파라미터를 계속 덧붙이며 자기 자신으로
+    되돌아가는 응답을 반복하는 걸로 보임) 같은 예외가 session.get() 단계에서
+    바로 터져서 상태코드 체크까지 가지도 못하고 함수 전체가 죽는 사례가 있었음
+    (실제 로그: 'A Beautiful Noise...', 'Sweeney Todd' 등 다수가 이걸로 통째로
+    스킵됨). 그래서 이제 첫 번째 요청 자체를 try/except로 감싸서, 예외가 나도
+    폴백 slug 시도로 넘어가게 하고, 폴백까지 실패하면 그때 조용히 빈 결과를
+    반환함(호출부에서 예외로 죽지 않고, 이 쇼는 n_critic_reviews가 비어서
+    다음 실행에서 자동 재시도됨 - 기존 재시도 로직과 동일).
+
+    반환값에 rate_limited를 추가함: urllib3 Retry가 429로 재시도를 전부
+    소진하면 예외 메시지에 '429'가 남는데, 이걸로 "이 쇼가 실패한 게 아니라
+    BWW가 지금 이 IP 자체를 막고 있다"는 신호를 호출부(main)에 전달해서,
+    남은 쇼들을 같은 벽에 계속 부딪히게 두지 않고 잠깐 쉬었다 가게 함."""
+    def try_get(url_slug):
+        try:
+            r = session.get(f"{BASE}/reviews/{url_slug}", params={"id": showid},
+                             headers=HEADERS, timeout=30)
+        except requests.exceptions.RequestException as e:
+            is_rate_limited = "429" in str(e)
+            return None, is_rate_limited
+        return (r if r.status_code == 200 else None), (r.status_code == 429)
+
+    resp = None
+    rate_limited = False
+    if slug:
+        resp, rl = try_get(slug)
+        rate_limited = rate_limited or rl
+    if resp is None:
         fallback_slug = title_slug(title)
-        if fallback_slug != url_slug:
-            resp = session.get(f"{BASE}/reviews/{fallback_slug}", params={"id": showid},
-                                headers=HEADERS, timeout=30)
-    if resp.status_code != 200:
-        return {}, []
+        if fallback_slug != slug:
+            resp, rl = try_get(fallback_slug)
+            rate_limited = rate_limited or rl
+
+    if resp is None:
+        return {}, [], rate_limited
     soup = BeautifulSoup(resp.text, "html.parser")
     text = soup.get_text(" ", strip=True)
 
@@ -126,7 +164,7 @@ def fetch_ratings(title, showid, session, slug=None):
             "date": date,
             "snippet": snippet,
         })
-    return ratings, review_rows
+    return ratings, review_rows, False
 
 
 def main():
@@ -204,9 +242,10 @@ def main():
     rows = []
     n_errors = 0
     n_detail_files = 0
+    n_rate_limited = 0
     for i, (title, showid, slug) in enumerate(pairs, 1):
         try:
-            ratings, review_rows = fetch_ratings(title, showid, session, slug=slug)
+            ratings, review_rows, rate_limited = fetch_ratings(title, showid, session, slug=slug)
             row = {"title": title, "showid": showid, **ratings}
             rows.append(row)
 
@@ -221,13 +260,29 @@ def main():
 
             print(f"[{i}/{len(pairs)}] '{title}' -> critics={ratings.get('critics_rating', '')}, "
                   f"readers={ratings.get('readers_rating', '')}, "
-                  f"reviews={ratings.get('n_critic_reviews', 0)}건 (본문 {len(review_rows)}건 저장)")
+                  f"reviews={ratings.get('n_critic_reviews', 0)}건 (본문 {len(review_rows)}건 저장)"
+                  + (" [429 감지 - 냉각 대기 후 계속]" if rate_limited else ""))
+
+            if rate_limited:
+                # *** 2026-08-24 추가: 429 폭주 냉각 로직 ***
+                # 실제로 리뷰 페이지에서 한 번 429가 뜨기 시작하면 이후 거의 모든
+                # 요청이 연달아 429를 맞는 패턴이 확인됨(로그: Bring It On부터
+                # Riverdance까지 연속 실패). 그때마다 재시도 예산(Retry total=6)을
+                # 매번 다 태우면서도 결과가 안 나오면 시간만 낭비하니까, 429가
+                # 감지되면 남은 쇼로 넘어가기 전에 한 번 길게(60초) 쉬어서 서버
+                # 레이트리밋이 풀릴 시간을 줌. 그래도 계속 429가 나면 매번 60초씩
+                # 쉬면서 진행하되(무한정 기다리진 않음), 총 429 감지 횟수를 마지막
+                # 요약에 남겨서 다음 실행 때 sleep을 더 늘려야 하는지 판단하게 함.
+                n_rate_limited += 1
+                print(f"    [429 냉각 대기 60초...]")
+                time.sleep(60)
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(pairs)}] '{title}' -> 오류 발생, 스킵: {e}")
         time.sleep(args.sleep)
 
-    print(f"\n처리 중 오류 {n_errors}건, 리뷰 상세 파일 {n_detail_files}개 생성 ({reviews_detail_dir})")
+    print(f"\n처리 중 오류 {n_errors}건, 429 감지 {n_rate_limited}건, "
+          f"리뷰 상세 파일 {n_detail_files}개 생성 ({reviews_detail_dir})")
 
     if not rows:
         print("수집된 데이터가 없어요.")
