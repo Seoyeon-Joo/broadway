@@ -45,6 +45,14 @@ SCORE_NEAR_RE = re.compile(r"\b(\d{1,2})\b")
 
 
 def title_slug(title):
+    """예전엔 이 로컬 함수로 슬러그를 새로 추측했는데, BroadwayWorld의 실제 규칙과
+    미묘하게 달라서(예: '!' 같은 문장부호를 그냥 삭제하는데, 실제 사이트는 하이픈으로
+    바꿈 - 'Mark Twain Tonight!' -> 실제 URL은 'Mark-Twain-Tonight-'인데 이 함수는
+    'Mark-Twain-Tonight'를 만들어서 404가 났었음) 조용히 404가 나면 예외 없이 빈
+    결과({}, [])를 반환하고 그 행이 그대로 저장돼서, 다음 실행에서 '이미 처리함'으로
+    스킵되어 영원히 평점이 안 채워지는 문제가 있었음 (실제로 49개 쇼에서 확인됨).
+    이제 이 함수는 fetch_broadwayworld_full.py가 실제 사이트 인덱스에서 검증한
+    slug가 없을 때(구버전 broadwayworld_full.csv 등)만 쓰는 폴백으로 남겨둠."""
     s = re.sub(r"[^\w\s-]", "", title).strip()
     s = re.sub(r"\s+", "-", s)
     return s
@@ -59,9 +67,19 @@ def make_session():
     return session
 
 
-def fetch_ratings(title, showid, session):
-    url = f"{BASE}/reviews/{title_slug(title)}"
+def fetch_ratings(title, showid, session, slug=None):
+    """slug가 주어지면(broadwayworld_full.csv에서 이미 검증된 값) 그걸 우선 쓰고,
+    없을 때만 title_slug()로 추측함."""
+    url_slug = slug if slug else title_slug(title)
+    url = f"{BASE}/reviews/{url_slug}"
     resp = session.get(url, params={"id": showid}, headers=HEADERS, timeout=30)
+    if resp.status_code != 200 and slug:
+        # 검증된 slug로도 실패했으면 혹시 몰라 로컬 추측 슬러그로 한 번 더 시도
+        # (예: broadwayworld_full.csv의 slug가 오래돼서 사이트 쪽 URL이 바뀐 경우 등)
+        fallback_slug = title_slug(title)
+        if fallback_slug != url_slug:
+            resp = session.get(f"{BASE}/reviews/{fallback_slug}", params={"id": showid},
+                                headers=HEADERS, timeout=30)
     if resp.status_code != 200:
         return {}, []
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -134,7 +152,7 @@ def main():
         pairs = []
         for s in args.shows:
             title, _, showid = s.rpartition(":")
-            pairs.append((title, showid))
+            pairs.append((title, showid, None))  # 테스트 경로는 slug 없이 title_slug() 폴백만 씀
     elif args.raw and args.showids:
         raw = pd.read_csv(args.raw, sep=None, engine="python", encoding="utf-8-sig")
         raw.columns = [c.strip().lstrip("\ufeff") for c in raw.columns]
@@ -143,8 +161,12 @@ def main():
         meta = pd.read_csv(args.showids, sep=None, engine="python", encoding="utf-8-sig")
         meta.columns = [c.strip().lstrip("\ufeff") for c in meta.columns]
         title_to_id = dict(zip(meta["title"], meta["showid"]))
+        # broadwayworld_full.csv에 이미 검증된 slug가 있으면 그걸 씀 (로컬에서 다시
+        # 추측하다가 실제 사이트 규칙과 안 맞아서 404 나던 문제 방지 - 아래 설명 참고)
+        title_to_slug = dict(zip(meta["title"], meta.get("slug", pd.Series(dtype=object))))
 
-        pairs = [(t, title_to_id.get(t)) for t in titles if title_to_id.get(t) and pd.notna(title_to_id.get(t))]
+        pairs = [(t, title_to_id.get(t), title_to_slug.get(t))
+                 for t in titles if title_to_id.get(t) and pd.notna(title_to_id.get(t))]
         print(f"showid가 있는 쇼 {len(pairs)}/{len(titles)}개만 처리 가능 (나머지는 먼저 "
               f"fetch_broadwayworld_full.py로 showid부터 확보해야 함)")
     else:
@@ -153,10 +175,23 @@ def main():
     existing_df = None
     if args.existing and os.path.isfile(args.existing):
         existing_df = pd.read_csv(args.existing, sep=None, engine="python", encoding="utf-8-sig")
-        already_done = set(existing_df["title"])
+        # *** 중요: '이미 시도한 title'이 아니라 '진짜로 값을 얻은 title'만 완료로 침 ***
+        # 예전 버전은 title이 존재하기만 하면 무조건 스킵했는데, 그러면 슬러그가
+        # 틀려서 404로 빈 값만 저장된 쇼(실제로 49개 확인됨)가 영원히 재시도 안 되고
+        # 방치됨. n_critic_reviews가 실제 숫자(0 포함)로 채워진 것만 "완료"로 인정하고,
+        # NaN인 title은 다시 시도 대상에 넣음 - 슬러그 폴백 로직과 합쳐지면 이번
+        # 실행에서 자동으로 복구됨.
+        if "n_critic_reviews" in existing_df.columns:
+            done_mask = existing_df["n_critic_reviews"].notna()
+        else:
+            done_mask = pd.Series(True, index=existing_df.index)  # 구버전 파일 호환
+        already_done = set(existing_df.loc[done_mask, "title"])
+        n_retry = existing_df.loc[~done_mask, "title"].nunique() if "n_critic_reviews" in existing_df.columns else 0
         before = len(pairs)
-        pairs = [(t, sid) for t, sid in pairs if t not in already_done]
-        print(f"기존 {len(already_done)}개 쇼는 건너뜀 ({before} -> {len(pairs)}개 신규 처리 대상)")
+        pairs = [(t, sid, slug) for t, sid, slug in pairs if t not in already_done]
+        print(f"기존 {len(already_done)}개 쇼는 완료로 건너뜀"
+              + (f" (이전에 실패해서 재시도 대상인 쇼 {n_retry}개는 포함됨)" if n_retry else "")
+              + f" ({before} -> {len(pairs)}개 처리 대상)")
 
     if args.limit:
         pairs = pairs[: args.limit]
@@ -169,9 +204,9 @@ def main():
     rows = []
     n_errors = 0
     n_detail_files = 0
-    for i, (title, showid) in enumerate(pairs, 1):
+    for i, (title, showid, slug) in enumerate(pairs, 1):
         try:
-            ratings, review_rows = fetch_ratings(title, showid, session)
+            ratings, review_rows = fetch_ratings(title, showid, session, slug=slug)
             row = {"title": title, "showid": showid, **ratings}
             rows.append(row)
 
