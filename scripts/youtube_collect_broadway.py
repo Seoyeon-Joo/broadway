@@ -266,11 +266,50 @@ def load_targets(path, shard_index, num_shards):
     return rows
 
 
-def load_processed(path):
+def load_processed(path, current_limit_per_show):
+    """체크포인트 파일에서 '완전히 재시도 불필요'한 run만 걸러서 반환.
+
+    *** 왜 CSV 형식(run_id,n_collected,limit_used)으로 바꿨나 ***
+    예전엔 run_id 한 줄만 기록해서 "처리 완료 = 영원히 스킵"이었는데, 그러면
+    나중에 --limit-per-show를 올려도 이미 처리된 run은 그냥 넘어가버려서
+    "예전엔 40개 캡에 걸려서 못 받은 나머지"를 절대 못 받아옴. 이제 그 run에서
+    실제로 몇 개 모았는지(n_collected)와 그때 상한이 뭐였는지(limit_used)를 같이
+    기록해서, n_collected >= limit_used(=캡에 걸려서 끊긴 것으로 추정)이고
+    현재 --limit-per-show가 그때보다 크면 다시 시도 대상에 넣음. 반대로
+    n_collected < limit_used(=검색 결과가 자연스럽게 바닥나서 끝난 것)면 상한을
+    올려도 더 나올 게 없으니 여전히 스킵함 - 쓸데없는 재검색으로 쿼터 낭비하는 걸
+    막음.
+
+    예전 버전(plain-text, run_id 한 줄씩)으로 만들어진 체크포인트 파일도 그대로
+    읽을 수 있게 폴백 처리함 - 그런 줄은 컬럼 정보가 없으니 보수적으로 "완료,
+    재시도 안 함"으로 취급함(예전 동작과 동일하게 유지, 데이터 손실 없음)."""
     if not os.path.isfile(path):
         return set()
-    with open(path, encoding="utf-8") as f:
-        return set(line.strip() for line in f if line.strip())
+
+    fully_done = set()
+    with open(path, newline="", encoding="utf-8") as f:
+        first_line = f.readline()
+        f.seek(0)
+        is_csv = first_line.startswith("run_id,")
+        if is_csv:
+            for row in csv.DictReader(f):
+                try:
+                    n_collected = int(row.get("n_collected", 0))
+                    limit_used = int(row.get("limit_used", 0))
+                except (TypeError, ValueError):
+                    fully_done.add(row["run_id"])
+                    continue
+                was_capped = n_collected >= limit_used and limit_used > 0
+                if was_capped and current_limit_per_show > limit_used:
+                    continue  # 캡에 걸렸었고 이번엔 상한을 올렸으니 재시도 대상에 남김
+                fully_done.add(row["run_id"])
+        else:
+            # 구버전 plain-text 체크포인트 - 줄마다 run_id 하나, 정보 없으니 완료로 취급
+            for line in f:
+                line = line.strip()
+                if line:
+                    fully_done.add(line)
+    return fully_done
 
 
 def parse_date(s):
@@ -446,10 +485,10 @@ def main():
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
 
     targets = load_targets(args.targets, args.shard_index, args.num_shards)
-    processed_run_ids = load_processed(checkpoint_path)
+    processed_run_ids = load_processed(checkpoint_path, args.limit_per_show)
     remaining = [t for t in targets if t["run_id"] not in processed_run_ids]
     print(f"[shard {args.shard_index}/{args.num_shards}] 총 {len(targets)}개 중 "
-          f"{len(remaining)}개 미처리, 이번 실행 한도 {args.limit}개")
+          f"{len(remaining)}개 미처리(재시도 대상 포함), 이번 실행 한도 {args.limit}개")
 
     out_exists = os.path.isfile(args.out)
     written_pairs = set()
@@ -460,11 +499,16 @@ def main():
 
     fetched_details_cache = {}
     mode = "a" if out_exists else "w"
+    checkpoint_is_new = not os.path.isfile(checkpoint_path)
     with open(args.out, mode, newline="", encoding="utf-8-sig") as out_f, \
-         open(checkpoint_path, "a", encoding="utf-8") as ckpt_f:
+         open(checkpoint_path, "a", newline="", encoding="utf-8") as ckpt_f:
         writer = csv.DictWriter(out_f, fieldnames=FIELDNAMES)
         if not out_exists:
             writer.writeheader()
+
+        ckpt_writer = csv.writer(ckpt_f)
+        if checkpoint_is_new:
+            ckpt_writer.writerow(["run_id", "n_collected", "limit_used"])
 
         n_done = 0
         for target in remaining:
@@ -479,9 +523,14 @@ def main():
             except QuotaExceededError as e:
                 print(f"  중단: {e}")
                 break
+            # n_collected는 '이번에 새로 쓴 개수'가 아니라 '이 run에서 지금까지 누적
+            # 수집된 총 개수' (재시도로 몇 번을 거쳤든 written_pairs에 다 쌓여있음) -
+            # limit_used와 비교해서 다음에 상한을 올렸을 때 재시도할지 판단하는 데 씀
+            n_total_for_run = sum(1 for (rid, _) in written_pairs if rid == target["run_id"])
             print(f"  [{n_done+1}/{min(len(remaining), args.limit)}] "
-                  f"'{target['show']}' ({target['run_id']}) -> {n_rows}건 신규 수집")
-            ckpt_f.write(target["run_id"] + "\n")
+                  f"'{target['show']}' ({target['run_id']}) -> {n_rows}건 신규 수집 "
+                  f"(누적 {n_total_for_run}건)")
+            ckpt_writer.writerow([target["run_id"], n_total_for_run, args.limit_per_show])
             ckpt_f.flush()
             n_done += 1
             if len(fetched_details_cache) > 5000:
