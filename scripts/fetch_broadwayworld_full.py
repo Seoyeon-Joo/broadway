@@ -268,6 +268,20 @@ def find_show_slug(title, session, letter_cache):
         prefix_fallback은 반드시 사람이 한 번 눈으로 검토하는 걸 권장)."""
     first_char = title.strip()[0].upper() if title.strip() else ""
     letter = first_char if first_char.isalpha() else "1"  # 숫자/기호로 시작하면 '#' 페이지(letter=1)
+    # *** 2026-08-24 수정: 기호로 시작하는 제목의 실제 분류 규칙 ***
+    # letter=1("#") 페이지를 실제로 열어보니 '110 IN THE SHADE', '13', '1776',
+    # '1984', '33 VARIATIONS', '42ND STREET'(x2), '45 SECONDS FROM BROADWAY',
+    # '700 SUNDAYS', '9 TO 5' 딱 10개뿐이었고, 전부 진짜 숫자로 시작하는 제목이었음.
+    # '"Master Harold"...and the Boys'나 '& Juliet'처럼 따옴표/앰퍼샌드로 시작하는
+    # 제목은 여기 전혀 없었음 - BWW는 이런 제목을 앞의 기호를 무시하고 그 다음
+    # 나오는 진짜 알파벳으로 분류함('"Master Harold"...' -> M, '& Juliet' -> J).
+    # 그래서 "알파벳이 아니면 무조건 letter=1"이 아니라, 앞에서부터 기호를 건너뛰고
+    # 처음 나오는 알파벳/숫자를 찾아서 그걸로 라우팅함. 끝까지 기호만 있거나 그
+    # 다음이 숫자면(예: 진짜 '3 from Brooklyn'처럼 숫자로 시작) letter=1로 감.
+    if not first_char.isalpha():
+        stripped_lead = re.sub(r"^[^A-Za-z0-9]+", "", title.strip())
+        next_char = stripped_lead[0].upper() if stripped_lead else ""
+        letter = next_char if next_char.isalpha() else "1"
 
     if letter not in letter_cache:
         result = fetch_letter_index(session, letter)
@@ -301,6 +315,17 @@ def find_show_slug(title, session, letter_cache):
         if stripped:
             matches = find_all(norm(stripped))
             match_type = "comma_stripped"
+
+    if not matches and "&" in title:
+        # *** 2026-08-24 추가: '&' vs 'AND' 표기 차이 ***
+        # 'Bonnie & Clyde'류 제목이 정상적인 글자(B)로 라우팅됐는데도 매칭이 안 되는
+        # 사례가 있었음. norm()이 '&'를 통째로 제거하니 "Bonnie & Clyde"는
+        # "BONNIECLYDE"가 되는데, BWW가 이 제목을 실제로 "Bonnie And Clyde"라고
+        # 풀어 쓰면 "BONNIEANDCLYDE"가 되어 안 맞음. '&'를 'AND'로 바꿔서 한 번 더
+        # 시도함.
+        and_variant = title.replace("&", "AND")
+        matches = find_all(norm(and_variant))
+        match_type = "ampersand_as_and"
 
     if not matches:
         title_norm = norm(title)
@@ -623,6 +648,7 @@ def main():
                   f"based_on={meta.get('based_on') or '원작 없음/오리지널'}"
                   + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else "")
                   + (" [부제 생략 매칭]" if match_type in ("colon_stripped", "comma_stripped") else "")
+                  + (" [& -> AND 표기 차이 매칭]" if match_type == "ampersand_as_and" else "")
                   + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else ""))
         except Exception as e:
             n_errors += 1
