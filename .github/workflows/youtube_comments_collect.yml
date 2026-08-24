@@ -1,0 +1,185 @@
+name: Broadway YouTube 댓글 수집 (병렬)
+
+# *** 저장 방식: youtube_collect_broadway.yml과 동일한 패턴 ***
+# data/youtube_broadway_merged.csv는 "broadway-youtube-data" Release에 있으므로 거기서
+# 받아옴. 이 워크플로가 만드는 결과물(shard별 댓글 CSV, 최종 병합본)은 별도 Release
+# "broadway-youtube-comments"에 올림 - 기존 두 Release(broadway-data,
+# broadway-youtube-data)와 섞이지 않게 태그를 분리함.
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "shard당 처리할 최대 영상 개수"
+        default: "300"
+      max_comments_per_video:
+        description: "영상 하나당 최대 수집 댓글 개수(top-level 기준)"
+        default: "200"
+  schedule:
+    # youtube_collect_broadway.yml과 같은 quota 풀(YOUTUBE_API_KEYS)을 공유하므로,
+    # 영상 검색/수집이 다 끝난 뒤에 돌게 시간을 8시간씩 밀어서 배치함(quota 리셋
+    # 직후 0/8/16시간대는 영상 수집이 먼저 쓰고, 그 사이 시간대에 댓글 수집이
+    # 나머지 quota를 씀). 서머타임 종료 시 밀어야 하는 것도 동일하게 적용됨.
+    - cron: "0 11 * * *"    # UTC 11:00 = 한국시간 20:00
+    - cron: "0 19 * * *"    # UTC 19:00 = 한국시간 다음날 04:00
+    - cron: "0 3 * * *"     # UTC 03:00 = 한국시간 12:00
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  YOUTUBE_DATA_TAG: broadway-youtube-data       # youtube_collect_broadway.yml이 관리
+  COMMENTS_DATA_TAG: broadway-youtube-comments  # 이 워크플로가 관리하는 별도 Release
+
+jobs:
+  build_targets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+
+      - name: youtube_broadway_merged.csv를 broadway-youtube-data Release에서 받아오기
+        run: |
+          mkdir -p data
+          # youtube_collect_broadway.yml에서 겪었던 것과 같은 이유로 진단 메시지 추가
+          # (2026-08-24) - Release/asset이 없을 때 원인을 바로 알 수 있게 함.
+          if ! gh release view "$YOUTUBE_DATA_TAG" >/dev/null 2>&1; then
+            echo "::error::'$YOUTUBE_DATA_TAG' Release가 아직 없습니다. " \
+                 "youtube_collect_broadway.yml의 merge 잡이 한 번도 성공하지 " \
+                 "않았을 수 있습니다 - 그 워크플로를 먼저 성공시켜야 합니다."
+            exit 1
+          fi
+          if ! gh release download "$YOUTUBE_DATA_TAG" --dir data \
+            --pattern "youtube_broadway_merged.csv" --clobber; then
+            echo "::error::'$YOUTUBE_DATA_TAG' Release에 " \
+                 "'youtube_broadway_merged.csv' asset이 없습니다. 아래는 현재 asset " \
+                 "목록입니다:"
+            gh release view "$YOUTUBE_DATA_TAG" --json assets \
+              --jq '.assets[].name' || echo "(asset 목록을 못 가져옴)"
+            exit 1
+          fi
+          echo "받아온 youtube_broadway_merged.csv 행 수:"
+          wc -l data/youtube_broadway_merged.csv
+
+      - name: 영상 목록 -> 댓글 수집 대상(고유 video_id) 생성
+        run: |
+          python scripts/build_youtube_comment_targets.py \
+            --merged data/youtube_broadway_merged.csv \
+            --out data/youtube_comment_targets.csv
+
+      - name: 대상 리스트를 broadway-youtube-comments Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$COMMENTS_DATA_TAG" data/youtube_comment_targets.csv
+
+  collect:
+    needs: build_targets
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+
+      - name: 대상 리스트 + (있다면) 이 shard의 기존 진행 상황 받아오기
+        run: |
+          mkdir -p data data/youtube_comments
+          gh release download "$COMMENTS_DATA_TAG" --dir data \
+            --pattern "youtube_comment_targets.csv" --clobber
+          # 지난 실행에서 이 shard가 이미 모아둔 결과 + 체크포인트가 있으면 이어서 진행
+          # (없으면 첫 실행이라 실패하는 게 정상 - 조용히 넘어감)
+          gh release download "$COMMENTS_DATA_TAG" --dir data/youtube_comments \
+            --pattern "shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
+            echo "이 shard의 기존 데이터 없음 (첫 실행)"
+
+      - name: 이번 shard가 쓸 API 키 묶음 고르기
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          # youtube_collect_broadway.yml과 동일한 라운드로빈 배분 (키 858개를 20개
+          # shard에 고르게 나눔, shard당 약 43개) - 같은 quota 풀을 쓰는 두 워크플로가
+          # 서로 다른 시간대에 돌게 cron을 분리해뒀으니 키 배분 방식은 그대로 재사용.
+          IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          TOTAL=${#KEYS[@]}
+          INDEX=${{ matrix.shard }}
+          NUM_SHARDS=20
+          SELECTED=()
+          for ((i=INDEX; i<TOTAL; i+=NUM_SHARDS)); do
+            SELECTED+=("${KEYS[$i]}")
+          done
+          if [ "${#SELECTED[@]}" -eq 0 ]; then
+            echo "shard $INDEX 에 배정된 키가 없어요 (전체 키 $TOTAL 개)."
+            exit 1
+          fi
+          echo "shard $INDEX: 키 ${#SELECTED[@]}개 배정됨 (전체 $TOTAL 개 중)"
+          SELECTED_STR=$(IFS=','; echo "${SELECTED[*]}")
+          echo "SHARD_YOUTUBE_KEYS=$SELECTED_STR" >> "$GITHUB_ENV"
+
+      - name: 댓글 수집
+        env:
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEYS }}
+        run: |
+          python scripts/fetch_youtube_comments.py \
+            --targets data/youtube_comment_targets.csv \
+            --out data/youtube_comments/shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} \
+            --num-shards 20 \
+            --limit "${{ github.event.inputs.limit || '300' }}" \
+            --max-comments-per-video "${{ github.event.inputs.max_comments_per_video || '200' }}"
+
+      - name: 결과를 broadway-youtube-comments Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$COMMENTS_DATA_TAG" \
+            data/youtube_comments/shard_${{ matrix.shard }}.csv \
+            data/youtube_comments/shard_${{ matrix.shard }}.processed.txt
+
+  merge:
+    needs: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+
+      - name: 20개 shard 결과 전부 받아오기
+        run: |
+          mkdir -p data/youtube_comments
+          if ! gh release download "$COMMENTS_DATA_TAG" --dir data/youtube_comments \
+            --pattern "shard_*.csv" --clobber; then
+            echo "::error::'$COMMENTS_DATA_TAG' Release에 shard_*.csv가 하나도 " \
+                 "없습니다. collect 잡의 20개 shard가 전부 실패했거나 업로드가 " \
+                 "아직 안 됐을 수 있습니다. 아래는 현재 asset 목록입니다:"
+            gh release view "$COMMENTS_DATA_TAG" --json assets \
+              --jq '.assets[].name' || echo "(asset 목록을 못 가져옴 - Release 자체가 없을 수 있음)"
+            exit 1
+          fi
+          echo "받아온 shard 파일:"
+          ls -la data/youtube_comments/
+
+      - name: shard 병합
+        run: |
+          python scripts/merge_youtube_comment_shards.py \
+            --shard-dir data/youtube_comments \
+            --out data/youtube_comments_merged.csv
+
+      - name: 병합 결과를 broadway-youtube-comments Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$COMMENTS_DATA_TAG" data/youtube_comments_merged.csv
+
+      - name: 안전망 - Actions 아티팩트로도 보관 (30일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: broadway-youtube-comments-merged
+          path: data/youtube_comments_merged.csv
+          retention-days: 30
+          if-no-files-found: ignore
