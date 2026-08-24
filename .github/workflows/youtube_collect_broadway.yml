@@ -17,7 +17,16 @@ on:
         description: "run 하나당 최대 수집 영상 개수"
         default: "60"
   schedule:
-    - cron: "0 18 * * *"  # 매일 UTC 18:00 = KST 03:00
+    # YouTube API 일일 quota는 태평양시간(PT) 자정에 리셋됨. 지금(8월, 하절기)은
+    # PDT(UTC-7)라 PT 자정 = UTC 07:00 = 한국시간 16:00. 이 시점 직후부터 8시간
+    # 간격으로 하루 3번 실행 (KOPIS 파이프라인과 동일 패턴) - quota를 새로 받은
+    # 직후부터 바로 소진 시작해서, 하루 안에서 최대한 여러 라운드로 나눠 돎.
+    # 주의: 11월 초(서머타임 종료) PST(UTC-8)로 바뀌면 PT 자정이 UTC 08:00로
+    # 한 시간 밀리니, 그때 아래 세 시각도 한 시간씩 밀어줘야 정확히 리셋 직후에
+    # 맞음 (한 시간 어긋나도 파이프라인이 깨지진 않음 - 그냥 약간 덜 최적).
+    - cron: "0 7 * * *"    # UTC 07:00 = 한국시간 16:00 (quota 리셋 직후, 1회차)
+    - cron: "0 15 * * *"   # UTC 15:00 = 한국시간 00:00 (다음날, 2회차)
+    - cron: "0 23 * * *"   # UTC 23:00 = 한국시간 08:00 (다음날, 3회차)
 
 permissions:
   contents: write
@@ -79,22 +88,33 @@ jobs:
             --pattern "shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
             echo "이 shard의 기존 데이터 없음 (첫 실행)"
 
-      - name: 이번 shard가 쓸 API 키 고르기
+      - name: 이번 shard가 쓸 API 키 묶음 고르기
         env:
           YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
         run: |
+          # 키 858개를 20개 shard에 라운드로빈으로 고르게 나눔 (shard당 ~43개).
+          # 예전엔 shard당 키 1개(KEYS[shard_index])만 배정했는데, 그러면 그 키
+          # 쿼터가 소진되는 순간 KeyPool이 로테이션할 곳이 없어서 그냥 멈춰버림
+          # (KOPIS 파이프라인에서 이미 shard당 30개 이상씩 묶어 쓰던 방식으로 맞춤).
           IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          TOTAL=${#KEYS[@]}
           INDEX=${{ matrix.shard }}
-          SELECTED="${KEYS[$INDEX]}"
-          if [ -z "$SELECTED" ]; then
-            echo "shard $INDEX 에 해당하는 키가 없어요."
+          NUM_SHARDS=20
+          SELECTED=()
+          for ((i=INDEX; i<TOTAL; i+=NUM_SHARDS)); do
+            SELECTED+=("${KEYS[$i]}")
+          done
+          if [ "${#SELECTED[@]}" -eq 0 ]; then
+            echo "shard $INDEX 에 배정된 키가 없어요 (전체 키 $TOTAL 개)."
             exit 1
           fi
-          echo "SHARD_YOUTUBE_KEY=$SELECTED" >> "$GITHUB_ENV"
+          echo "shard $INDEX: 키 ${#SELECTED[@]}개 배정됨 (전체 $TOTAL 개 중)"
+          SELECTED_STR=$(IFS=','; echo "${SELECTED[*]}")
+          echo "SHARD_YOUTUBE_KEYS=$SELECTED_STR" >> "$GITHUB_ENV"
 
       - name: 영상 수집
         env:
-          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEY }}
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEYS }}
         run: |
           python scripts/youtube_collect_broadway.py \
             --targets data/broadway_youtube_targets.csv \
