@@ -27,6 +27,7 @@ import argparse
 import os
 import re
 import time
+import unicodedata
 
 import pandas as pd
 import requests
@@ -294,6 +295,19 @@ def find_show_slug(title, session, letter_cache):
         return None, False, ""
 
     def norm(s):
+        # *** 2026-08-24 수정: 악센트 문자(É, È 등) 처리 버그 ***
+        # 예전엔 정규식 [^A-Z0-9]로 영숫자만 남겼는데, 이러면 악센트 붙은 문자가
+        # "다른 문자로 치환"이 아니라 "통째로 삭제"돼버림. 예를 들어 "MISÉRABLES"
+        # -> "MISRABLES"(E가 통째로 사라짐)가 되는데, 우리 쪽 제목("Les
+        # Miserables", 악센트 없는 영어 표기)은 "LESMISERABLES"로 정규화되어 서로
+        # 안 맞았음. 실제로 BWW 카탈로그 전체를 훑어서 확인한 사례:
+        # 'Les Miserables' vs 'LES MISÉRABLES', 'Amelie' vs 'AMÉLIE',
+        # 'La Boheme' vs 'LA BOHÈME', 'Therese Raquin' vs 'THÉRÈSE RAQUIN' -
+        # 전부 이 버그로 매칭이 깨졌었음. unicodedata.normalize("NFKD", ...)로
+        # 악센트 문자를 "기본 문자 + 결합 분음 부호"로 분해한 뒤, 분음 부호만
+        # (유니코드 카테고리 Mn) 제거하면 É -> E처럼 원하는 치환이 됨.
+        s = unicodedata.normalize("NFKD", s)
+        s = "".join(c for c in s if not unicodedata.combining(c))
         return re.sub(r"[^A-Z0-9]", "", s.upper())
 
     links = soup.select("a[href*='/grosses/']")
