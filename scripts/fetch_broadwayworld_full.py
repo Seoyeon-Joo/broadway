@@ -35,9 +35,14 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 BASE = "https://www.broadwayworld.com"
+# User-Agent만 있으면 봇으로 더 쉽게 잡히는 것으로 보여서(실제로 유명 쇼들이
+# 대거 빈 응답을 받은 정황), 실제 브라우저가 보내는 헤더 세트에 가깝게 보강함
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.broadwayworld.com/grosses.php",
 }
 
 PERSON_RE = re.compile(r"^/people/(?!character/)[^/]+/?$")
@@ -138,7 +143,7 @@ def fetch_letter_index(session, letter, max_retries=3):
 
         if resp.status_code != 200:
             print(f"    [letter={letter} 인덱스 상태코드 {resp.status_code}, "
-                  f"시도 {attempt}/{max_retries}]")
+                  f"시도 {attempt}/{max_retries}] 응답 앞부분: {resp.text[:300]!r}")
             time.sleep(2 * attempt)
             continue
 
@@ -147,8 +152,14 @@ def fetch_letter_index(session, letter, max_retries=3):
         if n_links >= MIN_EXPECTED_LINKS:
             return soup
 
+        # 실제로 뭘 받았는지 원문 일부를 같이 찍음 - Cloudflare 차단 페이지인지,
+        # 진짜 빈 HTML인지, 완전히 다른 내용인지 다음 로그에서 바로 판단할 수 있게
+        title_tag = soup.find("title")
+        page_title = title_tag.get_text(strip=True) if title_tag else "(title 태그 없음)"
         print(f"    [letter={letter} 인덱스에 쇼 링크가 {n_links}개뿐 - 차단/안내 "
-              f"페이지로 의심, 시도 {attempt}/{max_retries}]")
+              f"페이지로 의심, 시도 {attempt}/{max_retries}] "
+              f"응답 길이={len(resp.text)}자, <title>={page_title!r}, "
+              f"본문 앞부분: {resp.text[:300]!r}")
         time.sleep(3 * attempt)  # 429 KOPIS 경험상 백오프 필요
 
     print(f"    [letter={letter} 인덱스 {max_retries}회 재시도 후에도 비정상 - "
@@ -402,7 +413,10 @@ def main():
                      help="기존 broadwayworld_full.csv 경로. 지정하면 그 안에 이미 있는 title은 건너뜀")
     ap.add_argument("--out-dir", default="data")
     ap.add_argument("--limit", type=int, default=None, help="테스트용 처리 개수 제한")
-    ap.add_argument("--sleep", type=float, default=1.0)
+    ap.add_argument("--sleep", type=float, default=2.0,
+                     help="요청 사이 대기 시간(초). 실제로 짧은 sleep(1.0)으로 296개 "
+                          "연달아 돌렸더니 BroadwayWorld가 빈/차단 응답을 대거 준 정황이 "
+                          "있어서 기본값을 늘림")
     args = ap.parse_args()
 
     session = make_session()
