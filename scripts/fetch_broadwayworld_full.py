@@ -361,6 +361,38 @@ def find_show_slug(title, session, letter_cache):
                 matches = candidates
                 match_type = "prefix_fallback"
 
+    if not matches and not first_char.isalpha() and session is not None:
+        # *** 2026-08-24 추가: '&'/따옴표로 시작하는 제목은 letter 인덱스에 아예
+        # 없을 수 있음 ***
+        # 실제로 grossesbyshow.php?letter=j 페이지를 통째로 열어서 확인해보니,
+        # "JUDGMENT AT NUREMBERG" 바로 다음이 "JULIUS CAESAR"로 이어지고
+        # "& JULIET"은 아예 없었음. 즉 BWW의 A-Z 브라우징 인덱스 자체가 '&'로
+        # 시작하는 제목을 (문자를 무시하고 재분류하는 게 아니라) 통째로 안 실어줌 -
+        # "Compare shows" 검색창의 자동완성 목록엔 있었지만, 그건 이 브라우징
+        # 인덱스와는 다른 별도의 검색 시스템이었던 것으로 보임. 반면 실제 개별
+        # 페이지(https://www.broadwayworld.com/grosses/JULIET)는 존재함이 직접
+        # 확인됨. 그래서 letter 인덱스로는 원천적으로 못 찾는 이런 케이스를 위해,
+        # 앞의 기호를 지운 제목으로 slug를 직접 만들어서 /grosses/<slug> 페이지에
+        # 바로 접속해보는 최후 수단을 추가함. fetch_bww_reviews.py의 슬러그 추측
+        # 폴백과 같은 발상.
+        stripped_for_probe = re.sub(r"^[^A-Za-z0-9]+", "", title.strip())
+        guess_slug = re.sub(r"[^A-Za-z0-9]+", "-", stripped_for_probe).strip("-").upper()
+        if guess_slug:
+            try:
+                probe_resp = session.get(f"{BASE}/grosses/{guess_slug}", headers=HEADERS, timeout=20)
+            except requests.RequestException:
+                probe_resp = None
+            if probe_resp is not None and probe_resp.status_code == 200:
+                probe_soup = BeautifulSoup(probe_resp.text, "html.parser")
+                probe_title_tag = probe_soup.find("title")
+                probe_title = probe_title_tag.get_text(strip=True) if probe_title_tag else ""
+                # 엉뚱한 페이지(홈으로 리다이렉트 등)로 빠진 게 아닌지 최소 확인:
+                # <title>이 실제로 "Broadway Grosses" 문구를 포함하는지만 체크
+                # (완전 일치까진 요구 안 함 - 페이지 제목 표기가 조금씩 다를 수 있어서)
+                if "Broadway Grosses" in probe_title:
+                    matches = [guess_slug]
+                    match_type = "direct_url_probe"
+
     if not matches:
         return None, False, ""
     is_ambiguous = len(set(matches)) > 1
@@ -663,7 +695,8 @@ def main():
                   + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else "")
                   + (" [부제 생략 매칭]" if match_type in ("colon_stripped", "comma_stripped") else "")
                   + (" [& -> AND 표기 차이 매칭]" if match_type == "ampersand_as_and" else "")
-                  + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else ""))
+                  + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else "")
+                  + (" [직접 URL 확인 매칭]" if match_type == "direct_url_probe" else ""))
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
