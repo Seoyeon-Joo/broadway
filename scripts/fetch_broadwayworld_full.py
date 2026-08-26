@@ -47,6 +47,28 @@ HEADERS = {
     "Referer": "https://www.broadwayworld.com/grosses.php",
 }
 
+# *** 2026-08-24 추가: BWW 자체 데이터의 오탈자 때문에 매칭이 안 되는 소수 케이스 ***
+# 사이트 전체 쇼 카탈로그를 사람이 직접 대조하는 과정에서 확인된, 일반 규칙으로는
+# (안전하게는) 잡을 수 없는 BWW 쪽 오탈자 3건. 예를 들어 우리 제목은 정확한 철자
+# "Baghdad"인데 BWW 인덱스엔 "BAGDHAD"(글자 순서가 뒤바뀜)로 등재돼 있음 - 이런
+# 편집 거리 기반 오탈자 교정을 일반 규칙으로 만들면 전혀 다른 쇼를 오매칭할 위험이
+# 너무 커서(실제로 접두어 매칭 문턱을 살짝만 낮췄다가도 오매칭이 나온 적 있음),
+# 사람이 직접 확인한 이 소수 사례만 명시적으로 하드코딩함.
+#
+# 값은 최종 슬러그가 아니라 "실제 페이지에서 검색할 정규화된 텍스트"임 - BWW의
+# href 슬러그 생성 규칙(기호마다 하이픈 하나씩 vs 통째로 삭제 등)이 케이스마다
+# 달라서 슬러그 자체를 직접 추측하면 틀릴 위험이 있음. 대신 이 키워드로 그 시점에
+# 실제로 받아온 페이지 안에서 링크를 찾게 해서, href는 항상 진짜 페이지에서
+# 추출되게 함(다른 모든 매칭 방식과 동일한 안전장치).
+KNOWN_BWW_TYPO_OVERRIDES = {
+    # "Bengal Tiger at the Baghdad Zoo" -> BWW: "BENGAL TIGER AT THE BAGDHAD ZOO"
+    "BENGALTIGERATTHEBAGHDADZOO": "BENGALTIGERATTHEBAGDHADZOO",
+    # "Sid Caesar & Company" -> BWW: "SID CEASAR AND COMPANY"
+    "SIDCAESARANDCOMPANY": "SIDCEASARANDCOMPANY",
+    # "Ian McKellen: A Knight Out at the Lyceum" -> BWW: "IAN MCKELLAN: KNIGHTOUT"
+    "IANMCKELLENAKNIGHTOUTATTHELYCEUM": "IANMCKELLANKNIGHTOUT",
+}
+
 PERSON_RE = re.compile(r"^/people/(?!character/)[^/]+/?$")
 CHARACTER_RE = re.compile(r"^/people/character/([^/]+)-(\d+)/?$")
 SHOWID_RE = re.compile(r"showid=(\d+)")
@@ -540,6 +562,15 @@ def find_show_slug(title, session, letter_cache):
                     matches = [guess_slug]
                     match_type = "direct_url_probe"
 
+    if not matches and norm(title) in KNOWN_BWW_TYPO_OVERRIDES:
+        # *** 2026-08-24 추가: 확인된 BWW 오탈자 표로 마지막 시도 ***
+        # 다른 방법이 다 실패했을 때만 이 표를 참고함. 슬러그를 직접 넣지 않고
+        # override 텍스트로 그 letter 페이지 안에서 다시 검색하는 이유는 파일
+        # 상단 KNOWN_BWW_TYPO_OVERRIDES 정의부 주석 참고 - href는 항상 실제로
+        # 받아온 페이지에서 추출해야 안전함.
+        matches = cross_letter_find(KNOWN_BWW_TYPO_OVERRIDES[norm(title)])
+        match_type = "known_typo_override"
+
     if not matches:
         return None, False, ""
     is_ambiguous = len(set(matches)) > 1
@@ -846,7 +877,8 @@ def main():
                                                           "leading_article_stripped",
                                                           "trailing_suffix_stripped") else "")
                   + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else "")
-                  + (" [직접 URL 확인 매칭]" if match_type == "direct_url_probe" else ""))
+                  + (" [직접 URL 확인 매칭]" if match_type == "direct_url_probe" else "")
+                  + (" [BWW 오탈자 수동 확인 매칭]" if match_type == "known_typo_override" else ""))
         except Exception as e:
             n_errors += 1
             print(f"[{i}/{len(titles)}] '{title}' -> 오류 발생, 스킵: {e}")
