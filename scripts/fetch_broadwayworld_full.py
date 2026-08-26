@@ -24,6 +24,7 @@ Usage:
   python fetch_broadwayworld_full.py --shows "Wicked" "Hamilton" --out-dir . --limit 2  # 테스트용
 """
 import argparse
+import html
 import os
 import re
 import time
@@ -306,23 +307,103 @@ def find_show_slug(title, session, letter_cache):
         # 전부 이 버그로 매칭이 깨졌었음. unicodedata.normalize("NFKD", ...)로
         # 악센트 문자를 "기본 문자 + 결합 분음 부호"로 분해한 뒤, 분음 부호만
         # (유니코드 카테고리 Mn) 제거하면 É -> E처럼 원하는 치환이 됨.
+        #
+        # *** 2026-08-24 추가 수정: HTML 엔티티 미해제 버그 ***
+        # 'Teddy &amp; Alice' 같은 제목이 CSV에 HTML 인코딩된 채로("&amp;") 들어있는
+        # 경우가 실제로 있었음. 예전 정규식은 '&'/';'는 지워도 'amp'는 알파벳이라
+        # 그대로 남겨서 "TEDDYAMPALICE"처럼 글자가 깨진 문자열이 됨(카탈로그 쪽
+        # "TEDDY AND ALICE"와 전혀 안 맞음). html.unescape()로 먼저 풀어줘야 함.
+        #
+        # *** 2026-08-24 추가 수정: '&' vs 'AND' 양방향 처리 ***
+        # 예전엔 title.replace("&","AND")로 우리 제목 쪽만 변환하는 폴백이 있었는데,
+        # 반대 방향 사례가 실제로 있었음: 우리 제목은 "Lady Day at Emerson's Bar
+        # and Grill"(and로 풀어씀)인데 카탈로그는 "LADY DAY AT EMERSON'S BAR &
+        # GRILL"(기호 그대로)이라 반대 방향 변환이 없으면 여전히 안 맞았음. 그래서
+        # 아예 norm() 안에서 둘 다 표준형('AND')으로 통일해서 양쪽 다 자동으로
+        # 맞게 함 - 더 이상 방향별 폴백을 따로 안 만들어도 됨.
+        s = html.unescape(s)
+        s = re.sub(r"\s*&\s*", " AND ", s)
         s = unicodedata.normalize("NFKD", s)
         s = "".join(c for c in s if not unicodedata.combining(c))
         return re.sub(r"[^A-Z0-9]", "", s.upper())
+
+    def strip_leading_article(s):
+        return re.sub(r"^(THE|A|AN)\s+", "", s.strip(), flags=re.IGNORECASE)
+
+    COMMON_TRAILING_SUFFIXES = [
+        " THE MUSICAL", " A NEW MUSICAL", " THE NEW MUSICAL",
+        " ON BROADWAY", " THE PLAY",
+    ]
+
+    def strip_trailing_suffix(s):
+        su = s.strip()
+        for suf in COMMON_TRAILING_SUFFIXES:
+            if su.upper().endswith(suf):
+                return su[: -len(suf)].strip(" !")
+        return su
 
     links = soup.select("a[href*='/grosses/']")
 
     def find_all(target_norm):
         return [a["href"].split("/grosses/")[-1] for a in links if norm(a.get_text(strip=True)) == target_norm]
 
+    def cross_letter_find(candidate_title):
+        """*** 2026-08-24 추가: 폴백 후보가 원래 글자와 다른 글자로 시작할 때 ***
+        possessive_suffix_stripped/colon_suffix_stripped/leading_article_stripped는
+        변형된 후보 제목이 원래 제목과 다른 글자로 시작하는 경우가 흔함(예:
+        "The Best Man"(T) -> 실제 카탈로그엔 "Gore Vidal's The Best Man"(G)로
+        등재). 지금까지는 원래 letter의 페이지 안에서만 후보를 찾았는데, 그러면
+        이런 "글자가 아예 다른" 경우는 애초에 그 페이지를 받아온 적이 없어서
+        구조적으로 못 찾음. 그래서 후보 자신의 글자를 다시 계산해서, 필요하면
+        그 글자의 페이지를 추가로 받아와 그 안에서도 찾아봄. (letter_cache는
+        여러 쇼 처리에 걸쳐 재사용되는 딕셔너리라, 한 번 받아온 페이지는 다른
+        쇼 처리할 때도 계속 재사용됨 - 추가 요청이 매번 발생하진 않음.)"""
+        cand_first = candidate_title.strip()[0].upper() if candidate_title.strip() else ""
+        if cand_first.isalpha():
+            cand_letter = cand_first
+        else:
+            cand_stripped = re.sub(r"^[^A-Za-z0-9]+", "", candidate_title.strip())
+            cand_next = cand_stripped[0].upper() if cand_stripped else ""
+            cand_letter = cand_next if cand_next.isalpha() else "1"
+
+        target_norm = norm(candidate_title)
+        found = find_all(target_norm)  # 원래(현재) 페이지에서 먼저 시도
+        if found or cand_letter == letter:
+            return found
+
+        if cand_letter not in letter_cache and session is not None:
+            result = fetch_letter_index(session, cand_letter)
+            if result is not None:
+                letter_cache[cand_letter] = result
+        cand_soup = letter_cache.get(cand_letter)
+        if cand_soup is None:
+            return []
+        cand_links = cand_soup.select("a[href*='/grosses/']")
+        return [a["href"].split("/grosses/")[-1] for a in cand_links
+                if norm(a.get_text(strip=True)) == target_norm]
+
     matches = find_all(norm(title))
     match_type = "exact"
 
     if not matches and ":" in title:
+        # 콜론 앞부분만으로 시도 (예: "Danny Gans on Broadway: The Man of Many
+        # Voices" -> BWW엔 "Danny Gans On Broadway"로만 등재)
         stripped = title.split(":")[0].strip()
         if stripped:
             matches = find_all(norm(stripped))
             match_type = "colon_stripped"
+
+    if not matches and ":" in title:
+        # *** 2026-08-24 추가: 콜론 뒷부분으로도 시도 ***
+        # "공연자: 쇼제목" 형식의 코미디/콘서트 스페셜이 실제로 여러 개 있었음 -
+        # BWW엔 공연자 이름 없이 쇼 제목만 등재된 경우: "Lewis Black: Black to the
+        # Future" -> "BLACK TO THE FUTURE", "Michael Moore: The Terms of My
+        # Surrender" -> "THE TERMS OF MY SURRENDER". 앞부분(공연자 이름) 폴백만
+        # 있었을 땐 이런 경우를 못 잡았음.
+        stripped = title.split(":", 1)[1].strip()
+        if stripped:
+            matches = cross_letter_find(stripped)
+            match_type = "colon_suffix_stripped"
 
     if not matches and "," in title:
         stripped = title.split(",")[0].strip()
@@ -330,22 +411,87 @@ def find_show_slug(title, session, letter_cache):
             matches = find_all(norm(stripped))
             match_type = "comma_stripped"
 
-    if not matches and "&" in title:
-        # *** 2026-08-24 추가: '&' vs 'AND' 표기 차이 ***
-        # 'Bonnie & Clyde'류 제목이 정상적인 글자(B)로 라우팅됐는데도 매칭이 안 되는
-        # 사례가 있었음. norm()이 '&'를 통째로 제거하니 "Bonnie & Clyde"는
-        # "BONNIECLYDE"가 되는데, BWW가 이 제목을 실제로 "Bonnie And Clyde"라고
-        # 풀어 쓰면 "BONNIEANDCLYDE"가 되어 안 맞음. '&'를 'AND'로 바꿔서 한 번 더
-        # 시도함.
-        and_variant = title.replace("&", "AND")
-        matches = find_all(norm(and_variant))
-        match_type = "ampersand_as_and"
+    if not matches:
+        # *** 2026-08-24 추가: 소유격 접두사("X's Y" -> "Y") 뒷부분 매칭 ***
+        # 실제로 흔한 패턴: "Andre Heller's Wonderhouse" -> BWW엔 "WONDERHOUSE"로만,
+        # "David Byrne's American Utopia" -> "AMERICAN UTOPIA"로만, "Julia
+        # Sweeney's God Said Ha!" -> "GOD SAID HA"로만, "Rob Becker's Defending
+        # the Caveman" -> "DEFENDING THE CAVEMAN"으로만 등재. 인물 이름 뒤에
+        # "'s "가 붙고 그 뒤가 실제 쇼 제목인 경우가 많아서, 그 부분만 떼어 재시도.
+        possessive_match = re.search(r"'s\s+(.+)$", title)
+        if possessive_match:
+            stripped = possessive_match.group(1).strip()
+            if stripped:
+                matches = cross_letter_find(stripped)
+                match_type = "possessive_suffix_stripped"
+
+    if not matches:
+        # *** 2026-08-24 추가: 앞의 관사(THE/A/AN) 유무 차이 ***
+        # "The Nerd" -> "NERD", "The Best Man" -> catalog가 오히려 더 긴 경우도
+        # 있지만("GORE VIDAL'S THE BEST MAN", 이건 위 소유격 폴백이 반대 방향이라
+        # 못 잡음 - 이 케이스는 아래 접두어 매칭으로 감), 반대로 우리 제목엔
+        # 없는데 BWW 쪽에 "THE"가 붙어 있는 경우도 있음("Will Rogers' Follies" ->
+        # "WILL ROGERS' FOLLIES", 이건 원래도 맞았음). 양쪽 다 관사를 뗀 채로
+        # 비교해서 놓치는 경우가 없게 함.
+        title_no_article = strip_leading_article(title)
+        if title_no_article != title:
+            matches = cross_letter_find(title_no_article)
+            match_type = "leading_article_stripped"
+
+    if not matches:
+        # *** 2026-08-24 추가: 흔한 부제 접미사("THE MUSICAL" 등) 제거 후 재시도 ***
+        # "Ghost The Musical" -> "GHOST", "MJ The Musical" -> "MJ", "Matilda The
+        # Musical" -> "MATILDA"처럼 끝에 흔한 장르 표기가 붙는 경우가 많음.
+        # 접두어 근사 매칭(prefix_fallback)의 최소 길이 문턱(8자) 때문에 "MJ"
+        # 같은 짧은 제목은 거기서 못 잡히는데, 이렇게 정확히 정의된 접미사만
+        # 떼고 완전 일치를 시도하는 건 임의 부분일치가 아니라서 훨씬 안전함.
+        # (이 폴백은 "끝"만 자르므로 원래 글자가 그대로 유지되어 cross_letter_find가
+        # 필요 없음.)
+        title_no_suffix = strip_trailing_suffix(title)
+        if title_no_suffix != title.strip():
+            matches = find_all(norm(title_no_suffix))
+            match_type = "trailing_suffix_stripped"
 
     if not matches:
         title_norm = norm(title)
         if len(title_norm) >= 8:
+            # *** 2026-08-24 검토: 최소 길이를 한때 6으로 낮췄다가 8로 되돌림 ***
+            # Matilda The Musical(카탈로그 MATILDA, 7자)/Dream(우리 제목 자체가
+            # 5자) 같은 진짜 매칭을 더 잡으려고 6으로 낮춰봤는데, 실제 카탈로그로
+            # 검증하는 과정에서 진짜 오매칭이 나오는 걸 확인함:
+            #   - "Dancin'" -> 엉뚱하게 "DANCING AT LUGHNASA"(전혀 다른 연극)로 매칭
+            #   - "Jackie" -> 엉뚱하게 "Jackie Mason: Brand New"(다른 코미디언 쇼)로
+            #     매칭(카탈로그에 진짜 정답인 "JACKIE: AN AMERICAN LIFE"가 따로
+            #     있었는데도 그게 아니라 먼저 걸린 후보를 그냥 집어버림)
+            # 8에서는 이런 오매칭이 하나도 안 나왔어서 다시 8로 되돌림. Matilda/Dream
+            # 처럼 8자 미만이라 놓치는 진짜 쇼는 접두어 매칭 대신 개별 확인 대상으로
+            # 남겨두는 게 안전함 - 몇 개 놓치는 것보다 조용히 틀린 값이 들어가는 게
+            # 연구 데이터로는 훨씬 나쁨.
             MIN_PREFIX_LEN = 8
-            MIN_PREFIX_RATIO = 0.3
+            # *** 2026-08-24 수정: 0.3 -> 0.25 ***
+            # 'Purlie Victorious' -> 카탈로그 실제 항목 'PURLIE VICTORIOUS: A
+            # NON-CONFEDERATE ROMP THROUGH THE COTTON PATCH'과 비교하면 비율이
+            # 0.2857로, 기존 0.3 문턱을 근소하게 못 넘어서 놓치고 있었음(실제
+            # 사이트 전체 카탈로그를 받아서 확인한 사례). 0.25로 낮춰서 이런
+            # "부제가 아주 긴" 경우까지 잡음.
+            MIN_PREFIX_RATIO = 0.25
+            # *** 2026-08-24 추가: 접두어(prefix)뿐 아니라 접미어(suffix)도 확인 ***
+            # "The Best Man" -> 카탈로그 "GORE VIDAL'S THE BEST MAN"처럼, 저자/인물
+            # 이름이 뒤가 아니라 앞에 붙어서 우리 제목이 카탈로그 항목의 "뒷부분"과
+            # 일치하는 경우가 실제로 있었음. startswith()만 확인하면 이런 접미어
+            # 관계는 놓침 - endswith()도 같이 확인함.
+            #
+            # *** 2026-08-24 추가: 너무 흔한 단어로 끝나는 접미어 매칭 차단 ***
+            # endswith()를 추가했더니 실제로 오매칭이 하나 나왔음: "Basia on
+            # Broadway"가 그냥 "BROADWAY"라는 짧고 아주 흔한 단어로 끝난다는
+            # 이유만으로 그 이름 그대로인 별개의 쇼("BROADWAY")에 잘못 매칭됨.
+            # "X on Broadway", "X the Musical"처럼 흔한 관용구로 끝나는 제목이
+            # 많아서, 매칭 후보(짧은 쪽)가 이렇게 흔한 단어 자체이면 위험도가
+            # 크게 높아짐 - 그런 경우는 후보에서 제외함.
+            GENERIC_SUFFIX_BLOCKLIST = {
+                "BROADWAY", "MUSICAL", "THEMUSICAL", "SHOW", "TOUR", "LIVE",
+                "CONCERT", "TONIGHT", "PLAY",
+            }
             candidates = []
             for a in links:
                 link_norm = norm(a.get_text(strip=True))
@@ -353,9 +499,10 @@ def find_show_slug(title, session, letter_cache):
                     continue
                 shorter, longer = (link_norm, title_norm) if len(link_norm) <= len(title_norm) \
                     else (title_norm, link_norm)
-                if len(shorter) < MIN_PREFIX_LEN:
+                if len(shorter) < MIN_PREFIX_LEN or shorter in GENERIC_SUFFIX_BLOCKLIST:
                     continue
-                if longer.startswith(shorter) and len(shorter) / len(longer) >= MIN_PREFIX_RATIO:
+                if (longer.startswith(shorter) or longer.endswith(shorter)) \
+                        and len(shorter) / len(longer) >= MIN_PREFIX_RATIO:
                     candidates.append(a["href"].split("/grosses/")[-1])
             if candidates:
                 matches = candidates
@@ -693,8 +840,11 @@ def main():
                   f"awards={n_award_wins}승/{n_award_noms}노미, "
                   f"based_on={meta.get('based_on') or '원작 없음/오리지널'}"
                   + (" [주의: 동일 제목 리바이벌 다수 -> 메타 신뢰도 낮음]" if title_ambiguous else "")
-                  + (" [부제 생략 매칭]" if match_type in ("colon_stripped", "comma_stripped") else "")
-                  + (" [& -> AND 표기 차이 매칭]" if match_type == "ampersand_as_and" else "")
+                  + (" [부제 생략 매칭]" if match_type in ("colon_stripped", "comma_stripped",
+                                                          "colon_suffix_stripped",
+                                                          "possessive_suffix_stripped",
+                                                          "leading_article_stripped",
+                                                          "trailing_suffix_stripped") else "")
                   + (" [접두어 근사 매칭 - 검토 권장]" if match_type == "prefix_fallback" else "")
                   + (" [직접 URL 확인 매칭]" if match_type == "direct_url_probe" else ""))
         except Exception as e:
