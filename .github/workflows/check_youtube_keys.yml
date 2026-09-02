@@ -1,0 +1,56 @@
+name: Check YouTube API Keys
+
+on:
+  workflow_dispatch:  # 수동 실행 버튼으로만 트리거
+
+jobs:
+  check-keys:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Write keys to file (no log output)
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          # 키 내용은 절대 echo/print 하지 않음 — 파일로만 기록
+          printf '%s' "$YOUTUBE_API_KEYS" > keys.txt
+          echo "키 파일 작성 완료 (내용은 로그에 표시하지 않음)"
+
+      - name: Run key validity check
+        run: python scripts/check_youtube_keys.py keys.txt
+
+      - name: Print summary counts only
+        run: |
+          echo "### 결과 요약" >> $GITHUB_STEP_SUMMARY
+          for f in dead_keys alive_keys quota_keys forbidden_other_keys other_keys network_error_keys; do
+            if [ -f "${f}.txt" ]; then
+              count=$(wc -l < "${f}.txt")
+              echo "- ${f}: ${count}개" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+      - name: Remove raw keys.txt before upload
+        run: rm -f keys.txt
+
+      - name: Upload results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-key-check-results
+          path: |
+            dead_keys.txt
+            alive_keys.txt
+            quota_keys.txt
+            forbidden_other_keys.txt
+            other_keys.txt
+            network_error_keys.txt
+          retention-days: 7
