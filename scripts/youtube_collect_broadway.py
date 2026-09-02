@@ -97,18 +97,32 @@ def iso8601_duration_to_seconds(duration):
 
 
 class KeyPool:
-    """콤마로 이어붙인 여러 API 키를 순환하며 429/quota 오류 시 다음 키로 넘어감."""
+    """콤마로 이어붙인 여러 API 키를 순환하며 429/quota 오류 시 다음 키로 넘어감.
+    한 번 "API key not valid"로 확인된 키는 dead 세트에 넣고 이후 완전히 건너뜀
+    (죽은 키에 idx가 멈춰서 로테이션이 정지하는 문제 방지)."""
 
     def __init__(self, keys):
         self.keys = keys
         self.idx = 0
+        self.dead = set()
 
     def current(self):
-        return self.keys[self.idx % len(self.keys)]
+        n = len(self.keys)
+        checked = 0
+        while checked < n:
+            k = self.keys[self.idx % n]
+            if k not in self.dead:
+                return k
+            self.idx += 1
+            checked += 1
+        raise QuotaExceededError("모든 키가 죽었거나(dead) 소진됨")
 
     def rotate(self):
         self.idx += 1
         return self.current()
+
+    def mark_dead(self, key):
+        self.dead.add(key)
 
 
 def robust_get(session, url, params, key_pool, max_cycles=3):
@@ -133,6 +147,21 @@ def robust_get(session, url, params, key_pool, max_cycles=3):
             err_msg = resp.json().get("error", {}).get("message", "")
         except Exception:
             err_msg = resp.text[:200]
+
+        is_key_invalid = resp.status_code == 400 and "API key not valid" in err_msg
+
+        if is_key_invalid:
+            # 이 키는 죽었음이 확정됐으니 앞으로 완전히 건너뜀 (idx만 옮기고 마는
+            # 게 아니라 dead 세트에 등록 -> 다음 current() 호출부터 자동 스킵)
+            dead_key = params["key"]
+            key_pool.mark_dead(dead_key)
+            print(f"    [죽은 키 감지, 영구 스킵] index={key_pool.idx % len(key_pool.keys)} "
+                  f"(현재 dead 키 {len(key_pool.dead)}개)")
+            key_pool.rotate()
+            cycles += 1
+            if cycles > max_cycles * len(key_pool.keys):
+                raise QuotaExceededError(f"모든 키 무효/소진 추정: {err_msg}")
+            continue
 
         if resp.status_code in (403, 429) and (
             "quota" in err_msg.lower() or resp.status_code == 429
