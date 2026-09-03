@@ -485,9 +485,9 @@ def main():
     ap.add_argument("--num-shards", type=int, default=1)
     ap.add_argument("--limit", type=int, default=200,
                      help="이번 실행에서 처리할 최대 run 개수 (GitHub Actions 시간 제한 대비)")
-    ap.add_argument("--limit-per-show", type=int, default=60,
+    ap.add_argument("--limit-per-show", type=int, default=100000,
                      help="run 하나당 최대 수집 영상 개수")
-    ap.add_argument("--max-pages-per-query", type=int, default=20,
+    ap.add_argument("--max-pages-per-query", type=int, default=1000,
                      help="쿼리 하나당 최대 몇 페이지까지 갈 수 있는지의 이론적 상한 "
                           "(페이지당 100유닛). --limit-per-show에 도달하면 그 전에 "
                           "항상 먼저 멈추니(target_count 체크), 이 값을 크게 잡아도 "
