@@ -15,7 +15,10 @@ on:
         default: "80"
       limit_per_show:
         description: "run 하나당 최대 수집 영상 개수"
-        default: "60"
+        default: "100000"
+      max_pages_per_query:
+        description: "쿼리 하나당 최대 페이지 수 (페이지당 50개, 100유닛)"
+        default: "1000"
   schedule:
     # YouTube API 일일 quota는 태평양시간(PT) 자정에 리셋됨. 지금(8월, 하절기)은
     # PDT(UTC-7)라 PT 자정 = UTC 07:00 = 한국시간 16:00. 이 시점 직후부터 8시간
@@ -122,7 +125,8 @@ jobs:
             --shard-index ${{ matrix.shard }} \
             --num-shards 20 \
             --limit "${{ github.event.inputs.limit || '80' }}" \
-            --limit-per-show "${{ github.event.inputs.limit_per_show || '60' }}"
+            --limit-per-show "${{ github.event.inputs.limit_per_show || '100000' }}" \
+            --max-pages-per-query "${{ github.event.inputs.max_pages_per_query || '1000' }}"
 
       - name: 결과를 broadway-youtube-data Release에 업로드
         run: |
