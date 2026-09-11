@@ -1,0 +1,40 @@
+name: Collect YouTube Video Stats
+
+on:
+  workflow_dispatch: {}   # Actions 탭에서 수동 실행
+  schedule:
+    # 하루 3번 자동 실행 (quota 초과로 못 끝난 부분을 이어서 처리)
+    # 필요 없으면 이 schedule 블록은 지우고 workflow_dispatch만 남겨도 됨
+    - cron: "30 2,10,18 * * *"
+
+permissions:
+  contents: write   # 결과 CSV를 repo에 커밋하기 위해 필요
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Run collector
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: python scripts/collect_video_stats.py --config config_video_stats.yml
+
+      - name: Commit updated data
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/youtube_video_stats.csv data/youtube_video_stats_checkpoint.csv
+          git diff --cached --quiet || git commit -m "Update YouTube video stats [skip ci]"
+          git push
