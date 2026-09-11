@@ -25,7 +25,7 @@ jobs:
       - name: Run collector
         env:
           YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
-        run: python youtube_collect_metadata.py --config config.yml
+        run: python scripts/youtube_collect_metadata.py --config config.yml
 
       # 결과 파일을 Actions 아티팩트로 업로드 (Actions 탭 > 실행 결과에서 다운로드)
       - name: Upload result as artifact
