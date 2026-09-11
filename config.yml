@@ -1,0 +1,20 @@
+# collect_video_metadata 설정 파일
+
+# 입력: video_url 컬럼이 있는 CSV (repo 기준 상대경로)
+input_csv: data/youtube_video_urls.csv
+
+# 출력: title, description, channel_title 등이 채워진 최종 결과 CSV
+output_csv: data/youtube_video_metadata.csv
+
+# 진행 상황 저장용 체크포인트 (중간에 quota 초과로 멈춰도 이 파일 기준으로 이어서 수집)
+checkpoint_csv: data/youtube_video_metadata_checkpoint.csv
+
+# YouTube Data API videos.list 한 번 호출당 최대 id 개수 (API 제한상 50이 최대)
+batch_size: 50
+
+# 각 배치 호출 사이 대기 시간(초). 너무 빠르게 연속 호출하면 간헐적으로 차단될 수 있어 약간 여유를 둠
+sleep_seconds: 0.5
+
+# 한 번 실행(run)당 처리할 최대 배치 수. 0이면 무제한(끝까지 처리)
+# GitHub Actions 실행 시간 제한(기본 6시간)이나 quota 상황에 맞춰 조절 가능
+max_batches_per_run: 0
