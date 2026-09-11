@@ -1,0 +1,47 @@
+name: Collect YouTube Video Metadata
+
+on:
+  # Actions 탭에서 수동으로 "Run workflow" 버튼으로 실행
+  workflow_dispatch:
+  # 필요하면 스케줄도 켤 수 있음 (기본은 주석 처리)
+  # schedule:
+  #   - cron: "0 18 * * *"   # 매일 UTC 18:00 (KST 03:00)
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pandas requests pyyaml
+
+      - name: Run collector
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: python youtube_collect_metadata.py --config config.yml
+
+      # 결과 파일을 Actions 아티팩트로 업로드 (Actions 탭 > 실행 결과에서 다운로드)
+      - name: Upload result as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-metadata
+          path: |
+            data/youtube_video_metadata.csv
+            data/youtube_video_metadata_checkpoint.csv
+          if-no-files-found: warn
+
+      # (선택) 결과를 레포에 그대로 커밋해서 남기고 싶을 때 - 필요 없으면 이 스텝 삭제
+      - name: Commit results back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/youtube_video_metadata.csv data/youtube_video_metadata_checkpoint.csv
+          git diff --cached --quiet || git commit -m "Update YouTube video metadata"
+          git push

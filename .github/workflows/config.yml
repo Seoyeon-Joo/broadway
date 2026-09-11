@@ -1,11 +1,11 @@
 # youtube_collect_metadata.py 설정 파일
 
 # 입력 파일: video_url 컬럼을 포함한 CSV (예: youtube_video_urls.csv)
-input_csv: "youtube_video_urls.csv"
+input_csv: "data/youtube_video_urls.csv"
 # 결과가 저장될 CSV
-output_csv: "youtube_video_metadata.csv"
+output_csv: "data/youtube_video_metadata.csv"
 # 중간 저장(체크포인트) 파일 — 중단 후 재실행 시 이미 수집한 영상은 건너뜀
-checkpoint_csv: "youtube_video_metadata_checkpoint.csv"
+checkpoint_csv: "data/youtube_video_metadata_checkpoint.csv"
 
 # YouTube Data API v3 키
 # - 환경변수 하나에 키를 콤마(,)로 여러 개 넣으면 쿼터 초과 시 자동으로 다음 키로 넘어갑니다.
