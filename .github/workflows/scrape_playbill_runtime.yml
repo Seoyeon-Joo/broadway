@@ -1,0 +1,39 @@
+name: Scrape Broadway Running Times
+
+on:
+  workflow_dispatch: {}   # 수동 실행 (Actions 탭에서 Run workflow 버튼)
+  # 필요하면 주기적으로 자동 실행하고 싶을 때 아래 주석 해제
+  # schedule:
+  #   - cron: '0 3 * * 1'   # 매주 월요일 03:00 UTC
+
+permissions:
+  contents: write   # 결과 CSV를 리포에 커밋하기 위해 필요
+
+jobs:
+  scrape-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run Playbill runtime scraper
+        run: python scripts/scrape_playbill_runtime.py
+        working-directory: .
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/show_runtime_lookup.csv
+          git diff --staged --quiet || git commit -m "Update show_runtime_lookup.csv [automated]"
+          git push
