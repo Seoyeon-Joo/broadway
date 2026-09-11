@@ -1,0 +1,40 @@
+# youtube_collect_metadata.py 설정 파일
+
+# 입력 파일: video_url 컬럼을 포함한 CSV (예: youtube_video_urls.csv)
+input_csv: "youtube_video_urls.csv"
+# 결과가 저장될 CSV
+output_csv: "youtube_video_metadata.csv"
+# 중간 저장(체크포인트) 파일 — 중단 후 재실행 시 이미 수집한 영상은 건너뜀
+checkpoint_csv: "youtube_video_metadata_checkpoint.csv"
+
+# YouTube Data API v3 키
+# - 환경변수 하나에 키를 콤마(,)로 여러 개 넣으면 쿼터 초과 시 자동으로 다음 키로 넘어갑니다.
+# - 예: export YOUTUBE_API_KEYS="key1,key2,key3"
+api_key_env: "YOUTUBE_API_KEYS"
+
+# videos.list 호출 시 한 번에 조회할 video_id 개수 (YouTube API 한도: 최대 50)
+batch_size: 50
+
+# API 호출 사이 대기 시간(초) — 과도한 요청 방지
+request_delay_sec: 0.2
+
+# 일시적 오류(네트워크/5xx) 재시도 횟수
+max_retries: 3
+retry_backoff_sec: 5
+
+# 몇 배치마다 중간 결과를 checkpoint_csv에 저장할지
+save_every_n_batches: 5
+
+# 수집할 컬럼 (참고용 — 실제 매핑은 스크립트 내부에서 처리)
+fields:
+  - video_id
+  - video_url
+  - video_title
+  - description        # 축약 없이 snippet.description 전체
+  - channel_name
+  - published_at
+  - duration_sec
+  - duration_min
+  - view_count
+  - like_count
+  - comment_count
