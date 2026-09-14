@@ -1,0 +1,71 @@
+name: Scrape Playbill Synopsis (Shows List)
+
+on:
+  workflow_dispatch:
+    inputs:
+      shows_csv:
+        description: "공연 목록 CSV 경로 (repo 기준)"
+        required: false
+        default: "data/broadway_shows_list.csv"
+      youtube_csv:
+        description: "유튜브 데이터 CSV 경로 (커버리지 체크용, repo 기준)"
+        required: false
+        default: "data/broadway_youtube_merged_cleaned_v2.csv"
+      overrides_csv:
+        description: "수동 URL override CSV 경로 (repo 기준)"
+        required: false
+        default: "data/playbill_url_overrides.csv"
+      output_csv:
+        description: "스크래핑 결과를 저장할 CSV 경로"
+        required: false
+        default: "data/playbill_scraped.csv"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Check show-name coverage against YouTube data
+        run: |
+          python scripts/compare_youtube_coverage.py \
+            --shows "${{ github.event.inputs.shows_csv }}" \
+            --youtube "${{ github.event.inputs.youtube_csv }}" \
+            --output data/show_coverage_report.csv
+
+      - name: Scrape Playbill synopsis + running time
+        run: |
+          python scripts/scrape_playbill_shows.py \
+            --shows "${{ github.event.inputs.shows_csv }}" \
+            --overrides "${{ github.event.inputs.overrides_csv }}" \
+            --output "${{ github.event.inputs.output_csv }}" \
+            --unresolved data/playbill_unresolved.csv
+
+      - name: Upload results as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: playbill-scrape-results
+          path: |
+            ${{ github.event.inputs.output_csv }}
+            data/playbill_unresolved.csv
+            data/show_coverage_report.csv
+
+      - name: Commit results back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "${{ github.event.inputs.output_csv }}" data/playbill_unresolved.csv data/show_coverage_report.csv
+          git diff --quiet --cached || git commit -m "Update Playbill scrape + coverage results [skip ci]"
+          git push
