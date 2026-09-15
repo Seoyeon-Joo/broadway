@@ -94,6 +94,15 @@ QUERY_CATEGORIES = {
         '"{show}" bootleg',
         '"{show}" complete performance',
     ],
+    "highlights": [
+        # condensed(전체 줄거리 압축)와는 다르게 일부 넘버/장면만 발췌한
+        # 프로모션성 콘텐츠 - trailer에 가까운 성격이라 별도 카테고리로 분리.
+        # 나중에 query_category로 condensed/trailer 어느 쪽에 합칠지 결정 가능.
+        '"{show}" highlights',
+        '"{show}" musical highlights',
+        '"{show}" song highlights',
+        '"{show}" play highlights',
+    ],
 }
 
 SHORTS_CANDIDATE_MAX_SEC = 180  # Shorts 최대 길이(2024~ 3분) 이하만 URL로 최종 확인
@@ -143,17 +152,25 @@ class KeyPool:
         self.dead.add(key)
 
 
-def robust_get(session, url, params, key_pool, max_cycles=3):
-    """429/quota 오류 시 키를 순환하며 재시도, 그 외 네트워크 오류는 지수 백오프."""
+def robust_get(session, url, params, key_pool, max_cycles=3, max_network_retries=8):
+    """429/quota 오류 시 키를 순환하며 재시도, 그 외 네트워크 오류는 지수 백오프
+    (최대 max_network_retries회 - 예전엔 상한이 없어서 네트워크가 불안정하면
+    조용히 계속 도는 버그가 있었음, 실행 로그가 안 찍혀서 '멈춘 것처럼' 보일 수 있음)."""
     cycles = 0
     backoff = 1.0
+    network_retries = 0
     while True:
         params = dict(params)
         params["key"] = key_pool.current()
         try:
             resp = session.get(url, params=params, timeout=20)
         except requests.RequestException as e:
-            print(f"    [네트워크 오류] {e} - {backoff:.0f}초 후 재시도")
+            network_retries += 1
+            if network_retries > max_network_retries:
+                print(f"    [네트워크 오류 {max_network_retries}회 초과, 이 쿼리 포기] {e}")
+                return {"error": {"message": f"network retries exceeded: {e}"}}
+            print(f"    [네트워크 오류 {network_retries}/{max_network_retries}] {e} - "
+                  f"{backoff:.0f}초 후 재시도")
             time.sleep(backoff)
             backoff = min(backoff * 2, 60)
             continue
