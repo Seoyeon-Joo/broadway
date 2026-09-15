@@ -14,14 +14,14 @@ on:
       max_comments_per_video:
         description: "영상 하나당 최대 수집 댓글 개수(top-level 기준)"
         default: "200"
-  schedule:
+  #schedule:
     # youtube_collect_broadway.yml과 같은 quota 풀(YOUTUBE_API_KEYS)을 공유하므로,
     # 영상 검색/수집이 다 끝난 뒤에 돌게 시간을 8시간씩 밀어서 배치함(quota 리셋
     # 직후 0/8/16시간대는 영상 수집이 먼저 쓰고, 그 사이 시간대에 댓글 수집이
     # 나머지 quota를 씀). 서머타임 종료 시 밀어야 하는 것도 동일하게 적용됨.
-    - cron: "0 11 * * *"    # UTC 11:00 = 한국시간 20:00
-    - cron: "0 19 * * *"    # UTC 19:00 = 한국시간 다음날 04:00
-    - cron: "0 3 * * *"     # UTC 03:00 = 한국시간 12:00
+    #- cron: "0 11 * * *"    # UTC 11:00 = 한국시간 20:00
+    #- cron: "0 19 * * *"    # UTC 19:00 = 한국시간 다음날 04:00
+    #- cron: "0 3 * * *"     # UTC 03:00 = 한국시간 12:00
 
 permissions:
   contents: write
