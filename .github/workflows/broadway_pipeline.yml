@@ -43,8 +43,8 @@ name: Broadway Data Pipeline (Playbill + BroadwayWorld)
 # 자동으로 다음 실행에 재시도됨 - 별도 재처리 스텝 불필요. 2단계 결과 요약에서
 # title_match_type 분포(특히 prefix_fallback 건수)를 매번 확인할 것.
 on:
-  schedule:
-    - cron: "0 15 * * 1"  # 매주 월요일 UTC 15:00 (KST 화요일 00:00) - 일요일 마감 데이터 반영 후
+  #schedule:
+   #- cron: "0 15 * * 1"  # 매주 월요일 UTC 15:00 (KST 화요일 00:00) - 일요일 마감 데이터 반영 후
   workflow_dispatch:
     inputs:
       sleep_seconds:
