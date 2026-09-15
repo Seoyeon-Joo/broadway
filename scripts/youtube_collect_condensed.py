@@ -567,6 +567,11 @@ def main():
     print(f"[shard {args.shard_index}/{args.num_shards}] 총 {len(targets)}개 중 "
           f"{len(remaining)}개 미처리(재시도 대상 포함), 이번 실행 한도 {args.limit}개")
 
+    if not remaining:
+        print("이 shard는 이미 다 수집됐어요 - 새로 쓸 게 없어서 헤더 검사 없이 종료합니다.")
+        print(f"완료: 0개 run 처리, 결과 -> {args.out}")
+        return
+
     out_exists = os.path.isfile(args.out)
     written_pairs = set()
     if out_exists:
