@@ -1,0 +1,133 @@
+name: Broadway YouTube Condensed Content 수집 (병렬)
+
+# youtube_collect_broadway.yml과 동일한 구조/Release 저장 패턴을 재사용.
+# 단, 같은 YOUTUBE_DATA_TAG("broadway-youtube-data") Release 안에 파일명만
+# condensed_shard_N.csv로 다르게 올려서 기존 shard_N.csv(범용 쿼리 결과)와
+# 충돌 없이 공존시킴. targets 리스트(broadway_youtube_targets.csv)는
+# build_targets 잡을 새로 돌리지 않고 기존 Release에 있는 걸 그대로 받아 씀.
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "shard당 처리할 최대 run 개수"
+        default: "80"
+      limit_per_show:
+        description: "run 하나당 최대 수집 영상 개수 (낮아야 다 찾으면 남은 쿼리를 건너뜀)"
+        default: "200"
+      max_pages_per_query:
+        description: "쿼리 하나당 최대 페이지 수 (페이지당 50개, 100유닛)"
+        default: "2"
+  schedule:
+    # 기존 youtube_collect_broadway.yml과 겹치지 않게 45분 오프셋 (같은 quota를
+    # 공유하는 API 키 풀이라 한 워크플로가 다 쓰는 도중 다른 워크플로가 끼어들면
+    # 429 로테이션만 늘어나고 낭비되니, 시간을 살짝 띄움)
+    - cron: "45 7 * * *"
+    - cron: "45 15 * * *"
+    - cron: "45 23 * * *"
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  YOUTUBE_DATA_TAG: broadway-youtube-data
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+
+      - name: target 리스트 + (있다면) 이 shard의 기존 진행 상황 받아오기
+        run: |
+          mkdir -p data data/youtube_condensed
+          gh release download "$YOUTUBE_DATA_TAG" --dir data \
+            --pattern "broadway_youtube_targets.csv" --clobber
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_condensed \
+            --pattern "condensed_shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
+            echo "이 shard의 기존 데이터 없음 (첫 실행)"
+
+      - name: 이번 shard가 쓸 API 키 묶음 고르기
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          TOTAL=${#KEYS[@]}
+          INDEX=${{ matrix.shard }}
+          NUM_SHARDS=20
+          SELECTED=()
+          for ((i=INDEX; i<TOTAL; i+=NUM_SHARDS)); do
+            SELECTED+=("${KEYS[$i]}")
+          done
+          if [ "${#SELECTED[@]}" -eq 0 ]; then
+            echo "shard $INDEX 에 배정된 키가 없어요 (전체 키 $TOTAL 개)."
+            exit 1
+          fi
+          echo "shard $INDEX: 키 ${#SELECTED[@]}개 배정됨 (전체 $TOTAL 개 중)"
+          SELECTED_STR=$(IFS=','; echo "${SELECTED[*]}")
+          echo "SHARD_YOUTUBE_KEYS=$SELECTED_STR" >> "$GITHUB_ENV"
+
+      - name: condensed content 영상 수집
+        env:
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEYS }}
+        run: |
+          python -u scripts/youtube_collect_condensed.py \
+            --targets data/broadway_youtube_targets.csv \
+            --out data/youtube_condensed/condensed_shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} \
+            --num-shards 20 \
+            --limit "${{ github.event.inputs.limit || '80' }}" \
+            --limit-per-show "${{ github.event.inputs.limit_per_show || '200' }}" \
+            --max-pages-per-query "${{ github.event.inputs.max_pages_per_query || '2' }}"
+
+      - name: 결과를 broadway-youtube-data Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" \
+            data/youtube_condensed/condensed_shard_${{ matrix.shard }}.csv \
+            data/youtube_condensed/condensed_shard_${{ matrix.shard }}.processed.txt
+
+  merge:
+    needs: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+
+      - name: 20개 shard 결과 전부 받아오기
+        run: |
+          mkdir -p data/youtube_condensed
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_condensed \
+            --pattern "condensed_shard_*.csv" --clobber
+          echo "받아온 shard 파일:"
+          ls -la data/youtube_condensed/
+
+      - name: shard 병합
+        run: |
+          python scripts/merge_condensed_youtube_shards.py \
+            --shard-dir data/youtube_condensed \
+            --out data/youtube_condensed_merged.csv
+
+      - name: 병합 결과를 broadway-youtube-data Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" data/youtube_condensed_merged.csv
+
+      - name: 안전망 - Actions 아티팩트로도 보관 (30일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: broadway-youtube-condensed-merged
+          path: data/youtube_condensed_merged.csv
+          retention-days: 30
+          if-no-files-found: ignore
