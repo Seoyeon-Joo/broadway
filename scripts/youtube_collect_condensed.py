@@ -571,7 +571,21 @@ def main():
     written_pairs = set()
     if out_exists:
         with open(args.out, newline="", encoding="utf-8-sig") as f:
-            for row in csv.DictReader(f):
+            reader = csv.DictReader(f)
+            existing_header = reader.fieldnames or []
+            if existing_header != FIELDNAMES:
+                print(
+                    "오류: 기존 출력 파일의 헤더가 지금 스크립트의 FIELDNAMES와 달라요.\n"
+                    f"  파일: {args.out}\n"
+                    f"  파일 헤더 ({len(existing_header)}개): {existing_header}\n"
+                    f"  현재 FIELDNAMES ({len(FIELDNAMES)}개): {FIELDNAMES}\n"
+                    "  -> 스키마가 바뀌기 전에 만들어진 구버전 파일로 보여요. 이 상태로 계속 "
+                    "append하면 컬럼 수가 안 맞아 파일이 깨져요(pandas ParserError).\n"
+                    "  -> Release/로컬에서 이 파일과 대응하는 .processed.txt 체크포인트를 "
+                    "지우고 처음부터 다시 수집하세요."
+                )
+                sys.exit(1)
+            for row in reader:
                 written_pairs.add((row.get("run_id", ""), row.get("video_id", "")))
 
     fetched_details_cache = {}

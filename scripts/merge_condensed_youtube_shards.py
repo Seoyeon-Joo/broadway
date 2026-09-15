@@ -30,12 +30,20 @@ def main():
         return
 
     frames = []
+    skipped = []
     for f in files:
         try:
             df = pd.read_csv(f, encoding="utf-8-sig", low_memory=False)
             frames.append(df)
         except pd.errors.EmptyDataError:
             print(f"  [빈 파일 건너뜀] {f}")
+        except pd.errors.ParserError as e:
+            print(f"  [깨진 파일 건너뜀 - 컬럼 수 불일치, 확인 필요] {f}\n    {e}")
+            skipped.append(f)
+
+    if not frames:
+        print("병합할 수 있는 shard가 하나도 없어요.")
+        return
 
     merged = pd.concat(frames, ignore_index=True)
     before = len(merged)
@@ -43,6 +51,11 @@ def main():
     after = len(merged)
 
     merged.to_csv(args.out, index=False, encoding="utf-8-sig")
+    if skipped:
+        print(f"\n주의: {len(skipped)}개 shard 파일을 건너뛰었어요 - 이 파일들은 병합 결과에 "
+              f"안 들어갔으니 스키마 문제 해결 후 다시 수집해서 채워야 해요:")
+        for f in skipped:
+            print(f"  - {f}")
     print(f"{len(files)}개 shard 병합 -> {args.out}")
     print(f"  총 {before}행 -> 중복 제거 후 {after}행 ({before - after}건 제거)")
     print(f"  고유 run 수: {merged['run_id'].nunique()}")
