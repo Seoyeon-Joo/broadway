@@ -2,10 +2,10 @@ name: Collect YouTube Video Stats
 
 on:
   workflow_dispatch: {}   # Actions 탭에서 수동 실행
-  schedule:
+  #schedule:
     # 하루 3번 자동 실행 (quota 초과로 못 끝난 부분을 이어서 처리)
     # 필요 없으면 이 schedule 블록은 지우고 workflow_dispatch만 남겨도 됨
-    - cron: "30 2,10,18 * * *"
+    #- cron: "30 2,10,18 * * *"
 
 permissions:
   contents: write   # 결과 CSV를 repo에 커밋하기 위해 필요
