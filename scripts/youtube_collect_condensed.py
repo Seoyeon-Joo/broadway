@@ -7,22 +7,29 @@ youtube_collect_broadway.py와 같은 targets CSV(data/broadway_youtube_targets.
 
 기존 스크립트와의 차이
 ---------------------
-  - QUERY_TEMPLATES를 4개 카테고리(condensed / review / trailer / full_uncut)로 교체
+  - QUERY_TEMPLATES를 5개 카테고리(condensed / review / trailer / full_uncut / highlights)로 교체
   - 각 행에 query_category 컬럼 추가 -> 나중에 title 정규식 없이도 어떤 의도로
     검색되어 걸린 영상인지 바로 알 수 있음 (단, 실제 콘텐츠가 검색 의도와
     다를 수 있으니 최종 판별은 여전히 title 정규식 재검증 필요 - QA 단계 참고)
   - is_shorts_guess(duration<=60초 추정)에 더해 is_shorts 추가:
     duration<=180초인 후보만 /shorts/{video_id} URL을 direct 요청해서
     리다이렉트 여부로 실제 Shorts인지 최종 확인 (Shorts는 2024년부터 최대 3분)
+  - 출력 컬럼명/형식을 broadway_youtube_merged_cleaned_v5.csv와 처음부터 동일하게
+    맞춤(losing_date, vedio_url, channel, published_date, duration(m:ss),
+    comment_count 뒤 공백까지) -> 별도 변환 스크립트 없이 바로 v5.csv에 이어붙이거나
+    align_and_merge_condensed.py로 dedup 병합 가능. query_category -> is_condensed
+    (1~5)도 수집 시점에 바로 채워짐
 
 수집 필드
 ---------
-run_id, show, theatre, opening_date, closing_date, query_used, query_category,
-video_id, video_title, description, channel_id, channel_name, published_at,
-duration_sec, duration_min, is_shorts_guess, is_shorts,
-view_count, like_count, comment_count,
+run_id, show, theatre, opening_date, losing_date, date_source,
+query_used, query_category, is_condensed,
+video_id, video_title, description, channel_id, channel,
+published_date, duration, duration_sec, duration_min,
+is_shorts_guess, is_shorts,
+view_count, like_count, "comment_count " (trailing space, v5 표기 그대로),
 channel_subscriber_count, channel_video_count, hidden_subscriber_count,
-video_url, days_since_opening, is_post_closing
+vedio_url, days_since_opening, is_post_closing
 
 사용 예시
 --------
@@ -46,15 +53,26 @@ API_BASE = "https://www.googleapis.com/youtube/v3"
 YT_BASE = "https://www.youtube.com"
 
 FIELDNAMES = [
-    "run_id", "show", "theatre", "opening_date", "closing_date", "date_source",
-    "query_used", "query_category",
-    "video_id", "video_title", "description", "channel_id", "channel_name",
-    "published_at", "duration_sec", "duration_min",
+    "run_id", "show", "theatre", "opening_date", "losing_date", "date_source",
+    "query_used", "query_category", "is_condensed",
+    "video_id", "video_title", "description", "channel_id", "channel",
+    "published_date", "duration", "duration_sec", "duration_min",
     "is_shorts_guess", "is_shorts",
-    "view_count", "like_count", "comment_count",
+    "view_count", "like_count", "comment_count ",
     "channel_subscriber_count", "channel_video_count", "hidden_subscriber_count",
-    "video_url", "days_since_opening", "is_post_closing",
+    "vedio_url", "days_since_opening", "is_post_closing",
 ]
+
+# query_category -> is_condensed 매핑 (v5.csv의 기존 라벨 체계 그대로 확장)
+#   condensed(1)/review(2)/full_uncut(3)은 v5에서 쓰던 값 그대로,
+#   trailer(4)/highlights(5)는 이번에 새로 추가된 카테고리
+QUERY_CATEGORY_TO_IS_CONDENSED = {
+    "condensed": "1",
+    "review": "2",
+    "full_uncut": "3",
+    "trailer": "4",
+    "highlights": "5",
+}
 
 # *** condensed content 전용 쿼리 - 4개 카테고리 ***
 # 카테고리별로 쿼리를 나눠서 query_category 컬럼에 기록. 검색 자체가 목적별로
@@ -122,6 +140,18 @@ def iso8601_duration_to_seconds(duration):
         return 0
     h, mnt, s = (int(x) if x else 0 for x in m.groups())
     return h * 3600 + mnt * 60 + s
+
+
+def seconds_to_mmss(sec):
+    """v5.csv의 duration 표기(m:ss, 1시간 넘으면 h:mm:ss)와 동일한 형식으로 변환."""
+    if not sec or sec <= 0:
+        return ""
+    sec = int(sec)
+    h, rem = divmod(sec, 3600)
+    m, s = divmod(rem, 60)
+    if h:
+        return f"{h}:{m:02d}:{s:02d}"
+    return f"{m}:{s:02d}"
 
 
 class KeyPool:
@@ -268,14 +298,15 @@ def get_video_details(session, key_pool, video_ids):
                 "video_title": sn.get("title", ""),
                 "description": sn.get("description", ""),
                 "channel_id": sn.get("channelId", ""),
-                "channel_name": sn.get("channelTitle", ""),
-                "published_at": sn.get("publishedAt", ""),
+                "channel": sn.get("channelTitle", ""),
+                "published_date": sn.get("publishedAt", ""),
+                "duration": seconds_to_mmss(duration_sec),
                 "duration_sec": duration_sec,
                 "duration_min": round(duration_sec / 60, 2),
                 "is_shorts_guess": 1 if (duration_sec > 0 and duration_sec <= 60) else 0,
                 "view_count": st.get("viewCount", ""),
                 "like_count": st.get("likeCount", ""),
-                "comment_count": st.get("commentCount", ""),
+                "comment_count ": st.get("commentCount", ""),
             }
         time.sleep(0.1)
     return results
@@ -465,7 +496,7 @@ def process_target(session, key_pool, target, limit_per_show, csv_writer,
         d = fetched_details_cache.get(vid)
         if not d:
             continue
-        published = parse_date(d.get("published_at", ""))
+        published = parse_date(d.get("published_date", ""))
         if not video_belongs_to_run(published, opening, target.get("date_source", "")):
             continue
 
@@ -482,12 +513,13 @@ def process_target(session, key_pool, target, limit_per_show, csv_writer,
             "show": show,
             "theatre": target.get("theatre", ""),
             "opening_date": target.get("opening_date", ""),
-            "closing_date": target.get("closing_date", ""),
+            "losing_date": target.get("closing_date", ""),
             "date_source": target.get("date_source", ""),
             "query_used": query_used,
             "query_category": category,
+            "is_condensed": QUERY_CATEGORY_TO_IS_CONDENSED.get(category, ""),
             "video_id": vid,
-            "video_url": f"https://www.youtube.com/watch?v={vid}",
+            "vedio_url": f"https://www.youtube.com/watch?v={vid}",
             "days_since_opening": days_since_opening,
             "is_post_closing": is_post_closing,
             **d,
