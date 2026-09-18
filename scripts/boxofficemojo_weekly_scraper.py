@@ -30,6 +30,7 @@ import time
 import random
 import re
 import sys
+import os
 from datetime import datetime
 
 import requests
@@ -39,7 +40,8 @@ import pandas as pd
 YEARS = [2021, 2022, 2023, 2024, 2025, 2026]  # 원하는 연도 범위로 수정하세요
 MAX_WEEKS = 53                  # ISO 주차 최대치 (53주까지 있는 해도 있음)
 DELAY_RANGE = (2.5, 5.0)        # 요청 사이 랜덤 지연(초) - 너무 줄이지 마세요
-OUTPUT_CSV = f"boxofficemojo_weekly_{min(YEARS)}_{max(YEARS)}.csv"
+OUTPUT_DIR = "data"              # broadway 파이프라인과 동일하게 data/ 폴더에 저장
+OUTPUT_CSV = os.path.join(OUTPUT_DIR, f"boxofficemojo_weekly_{min(YEARS)}_{max(YEARS)}.csv")
 
 HEADERS = {
     "User-Agent": (
@@ -147,8 +149,6 @@ def main():
         sys.exit(1)
 
     result = pd.concat(all_frames, ignore_index=True)
-
-    # 컬럼명이 페이지마다 살짝 다를 수 있어 존재하는 것만 정제
     for col in MONEY_COLS:
         if col in result.columns:
             result[col] = result[col].apply(clean_money)
@@ -159,6 +159,7 @@ def main():
         if col in result.columns:
             result[col] = result[col].apply(clean_int)
 
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     result.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
     print(f"\n완료: 성공 {total_ok}주 / 실패 {total_fail}주")
     print(f"저장 위치: {OUTPUT_CSV} (총 {len(result)}행)")
