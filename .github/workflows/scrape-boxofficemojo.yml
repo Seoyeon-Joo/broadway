@@ -1,0 +1,60 @@
+# .github/workflows/scrape-boxofficemojo.yml
+#
+# 사용법
+# ------
+# 1. 이 파일을 저장소의 .github/workflows/ 폴더 안에 넣으세요.
+#    (예: Seoyeon-Joo/broadway/.github/workflows/scrape-boxofficemojo.yml)
+# 2. boxofficemojo_weekly_scraper.py 를 저장소 루트(또는 scripts/ 폴더)에 넣으세요.
+#    스크립트 안의 OUTPUT_CSV 경로가 아래 결과물 경로와 일치하는지 확인하세요.
+# 3. GitHub 저장소 > Actions 탭에서 수동 실행(Run workflow)하거나,
+#    아래 schedule(cron)에 따라 매주 자동으로 실행됩니다.
+# 4. 실행이 끝나면 결과 CSV가 자동으로 커밋되어 저장소에 쌓입니다.
+#
+# 주의
+# ----
+# - cron은 UTC 기준입니다. "0 18 * * 1" = 매주 월요일 UTC 18:00 = 한국시간(KST) 화요일 03:00.
+# - 과거 연도를 한 번에 많이 긁을 땐(YEARS 리스트가 길 때) GitHub Actions의
+#   기본 job 제한 시간(6시간)을 넘지 않는지 확인하세요. 넘을 것 같으면 연도를
+#   나눠서 여러 워크플로우로 쪼개는 걸 추천합니다.
+#   (2021~2026, 약 300주 기준: 지연시간 포함 약 20~25분 소요 예상)
+
+name: Scrape Box Office Mojo Weekly Data
+
+on:
+  workflow_dispatch:        # Actions 탭에서 수동 실행 버튼
+  schedule:
+    - cron: "0 18 * * 1"    # 매주 월요일 UTC 18:00 (KST 화요일 03:00) 자동 실행
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90   # 2021~2026 (약 300주) 기준 여유있게 설정
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 라이브러리 설치
+        run: pip install requests pandas lxml beautifulsoup4
+
+      - name: 크롤러 실행
+        run: python boxofficemojo_weekly_scraper.py
+
+      - name: 결과 파일을 아티팩트로 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: boxofficemojo-weekly-csv
+          path: boxofficemojo_weekly_*.csv
+
+      - name: 결과 CSV를 저장소에 커밋 (선택)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add boxofficemojo_weekly_*.csv
+          git diff --staged --quiet || git commit -m "chore: update boxofficemojo weekly data ($(date -u +'%Y-%m-%d'))"
+          git push
