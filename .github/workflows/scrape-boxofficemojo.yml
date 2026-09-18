@@ -43,18 +43,18 @@ jobs:
         run: pip install requests pandas lxml beautifulsoup4
 
       - name: 크롤러 실행
-        run: python boxofficemojo_weekly_scraper.py
+        run: python scripts/boxofficemojo_weekly_scraper.py
 
       - name: 결과 파일을 아티팩트로 업로드
         uses: actions/upload-artifact@v4
         with:
           name: boxofficemojo-weekly-csv
-          path: boxofficemojo_weekly_*.csv
+          path: data/boxofficemojo_weekly_*.csv
 
       - name: 결과 CSV를 저장소에 커밋 (선택)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add boxofficemojo_weekly_*.csv
+          git add data/boxofficemojo_weekly_*.csv
           git diff --staged --quiet || git commit -m "chore: update boxofficemojo weekly data ($(date -u +'%Y-%m-%d'))"
           git push
