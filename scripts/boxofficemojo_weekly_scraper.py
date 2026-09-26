@@ -93,6 +93,23 @@ def clean_int(val):
         return None
 
 
+class BlockedError(RuntimeError):
+    """사이트가 로봇으로 판단해 캡차/차단 페이지를 돌려준 경우."""
+    pass
+
+
+# HTTP 200이 와도 실제로는 캡차/차단 페이지인 경우가 있음.
+# Amazon/IMDb 계열 사이트가 자주 쓰는 봇 감지 신호들을 확인해서 조기에 구분한다.
+BLOCK_MARKERS = [
+    "Robot Check",
+    "captcha",
+    "To discuss automated access",
+    "window.csa",
+    "csa.plugin",
+    "Enter the characters you see below",
+]
+
+
 def fetch_week_table(year: int, week: int) -> pd.DataFrame | None:
     """한 주차 페이지를 가져와 표를 DataFrame으로 반환. 실패 시 None."""
     url = f"https://www.boxofficemojo.com/weekly/{year}W{week:02d}/"
@@ -101,8 +118,19 @@ def fetch_week_table(year: int, week: int) -> pd.DataFrame | None:
     if resp.status_code != 200:
         raise RuntimeError(f"HTTP {resp.status_code}")
 
+    # 봇 감지/차단 페이지인지 먼저 확인 (본문 앞부분 5000자만 검사해도 충분)
+    body_head = resp.text[:5000]
+    if any(marker in body_head for marker in BLOCK_MARKERS):
+        raise BlockedError(
+            "봇 차단 페이지로 응답받음 (실제 데이터 아님) - "
+            "이 실행 환경의 IP가 차단되었을 가능성이 높음"
+        )
+
     # pandas.read_html이 페이지 내 모든 <table>을 파싱해줌
-    tables = pd.read_html(resp.text)
+    try:
+        tables = pd.read_html(resp.text)
+    except ValueError:
+        raise RuntimeError("표를 찾지 못함 (페이지 구조가 예상과 다름 - 차단 가능성 있음)")
     if not tables:
         raise RuntimeError("표를 찾지 못함")
 
@@ -126,6 +154,8 @@ def fetch_week_table(year: int, week: int) -> pd.DataFrame | None:
 def main():
     all_frames = []
     total_ok, total_fail = 0, 0
+    consecutive_blocks = 0
+    BLOCK_STOP_THRESHOLD = 3  # 연속으로 이만큼 차단당하면 더 돌 필요 없이 조기 종료
 
     for year in YEARS:
         for week in range(1, MAX_WEEKS + 1):
@@ -135,11 +165,25 @@ def main():
                 if df is not None and len(df) > 0:
                     all_frames.append(df)
                     total_ok += 1
+                    consecutive_blocks = 0
                     print(f"[OK]   {year}W{week:02d} - {len(df)}행")
                 else:
                     print(f"[SKIP] {year}W{week:02d} - 빈 표")
+            except BlockedError as e:
+                total_fail += 1
+                consecutive_blocks += 1
+                print(f"[BLOCKED] {year}W{week:02d} - {e}")
+                if consecutive_blocks >= BLOCK_STOP_THRESHOLD:
+                    print(
+                        f"\n연속 {BLOCK_STOP_THRESHOLD}회 봇 차단 감지 - 이 실행 환경(IP)에서는 "
+                        "더 시도해도 소용없어 보여 조기 종료합니다.\n"
+                        "해결책: 이 스크립트를 GitHub Actions 대신 개인 PC(로컬)에서 실행해보세요. "
+                        "데이터센터 IP 대역이 아닌 가정용 IP는 차단을 피할 가능성이 높습니다."
+                    )
+                    sys.exit(2)
             except Exception as e:
                 total_fail += 1
+                consecutive_blocks = 0
                 print(f"[FAIL] {year}W{week:02d} - {e}")
 
             time.sleep(random.uniform(*DELAY_RANGE))
