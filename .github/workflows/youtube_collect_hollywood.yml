@@ -1,0 +1,144 @@
+name: Hollywood YouTube Condensed Content 수집 (병렬)
+
+# Broadway의 youtube_collect_condensed.yml과 같은 구조:
+#   - 20개 shard 병렬 수집 -> 각 shard 결과를 Release에 덮어쓰기 저장(checkpoint_release.sh)
+#   - 다음 실행 때 Release에서 shard 파일 + .processed.txt 체크포인트를 받아 이어서 수집
+#   - merge 잡이 20개 shard를 합쳐 hollywood_youtube_merged.csv로 올림
+#
+# Broadway와 다른 점:
+#   - 타깃 리스트(data/hollywood_youtube_targets.csv)는 Release가 아니라 저장소에
+#     커밋된 파일을 그대로 씀 (2,854행이라 작음). 영화 목록을 바꾸면
+#     scripts/build_hollywood_youtube_targets.py로 다시 만들어 커밋하면 됨.
+#   - 결과는 hollywood-youtube-data Release에 저장.
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "shard당 처리할 최대 영화 수"
+        default: "50"
+      limit_per_show:
+        description: "영화 1편당 최대 수집 영상 수"
+        default: "200"
+      max_pages_per_query:
+        description: "쿼리 하나당 최대 페이지 수 (페이지당 50개, 100유닛)"
+        default: "2"
+  schedule:
+    # 같은 YOUTUBE_API_KEYS를 Broadway 저장소와 같이 쓴다면 quota가 겹치므로
+    # Broadway condensed 수집(45 7/15/23 UTC)과 시간을 띄워둠.
+    # UTC 기준: 03:15 / 11:15 / 19:15 = KST 12:15 / 20:15 / 04:15
+    - cron: "15 3 * * *"
+    - cron: "15 11 * * *"
+    - cron: "15 19 * * *"
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  YOUTUBE_DATA_TAG: hollywood-youtube-data
+  NUM_SHARDS: 20
+  # schedule(cron) 실행 때는 github.event.inputs가 비어 있으므로 여기 값이 쓰임.
+  # 기본값을 바꿀 땐 위 workflow_dispatch default와 여기 둘 다 고쳐야 함.
+  DEFAULT_LIMIT: "50"
+  DEFAULT_LIMIT_PER_SHOW: "200"
+  DEFAULT_MAX_PAGES: "2"
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+
+      - name: (있다면) 이 shard의 기존 진행 상황 받아오기
+        run: |
+          mkdir -p data/youtube_hollywood
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_hollywood \
+            --pattern "shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
+            echo "이 shard의 기존 데이터 없음 (첫 실행)"
+
+      - name: 이번 shard가 쓸 API 키 묶음 고르기
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          TOTAL=${#KEYS[@]}
+          INDEX=${{ matrix.shard }}
+          SELECTED=()
+          for ((i=INDEX; i<TOTAL; i+=NUM_SHARDS)); do
+            SELECTED+=("${KEYS[$i]}")
+          done
+          if [ "${#SELECTED[@]}" -eq 0 ]; then
+            echo "shard $INDEX 에 배정된 키가 없어요 (전체 키 $TOTAL 개)."
+            exit 1
+          fi
+          echo "shard $INDEX: 키 ${#SELECTED[@]}개 배정됨 (전체 $TOTAL 개 중)"
+          SELECTED_STR=$(IFS=','; echo "${SELECTED[*]}")
+          echo "::add-mask::$SELECTED_STR"
+          echo "SHARD_YOUTUBE_KEYS=$SELECTED_STR" >> "$GITHUB_ENV"
+
+      - name: 영화 YouTube 영상 수집
+        env:
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEYS }}
+        run: |
+          python -u scripts/youtube_collect_hollywood.py \
+            --targets data/hollywood_youtube_targets.csv \
+            --out data/youtube_hollywood/shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} \
+            --num-shards "$NUM_SHARDS" \
+            --limit "${{ github.event.inputs.limit || env.DEFAULT_LIMIT }}" \
+            --limit-per-show "${{ github.event.inputs.limit_per_show || env.DEFAULT_LIMIT_PER_SHOW }}" \
+            --max-pages-per-query "${{ github.event.inputs.max_pages_per_query || env.DEFAULT_MAX_PAGES }}"
+
+      - name: 결과를 hollywood-youtube-data Release에 업로드
+        if: always()
+        run: |
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" \
+            data/youtube_hollywood/shard_${{ matrix.shard }}.csv \
+            data/youtube_hollywood/shard_${{ matrix.shard }}.processed.txt
+
+  merge:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+
+      - name: 20개 shard 결과 전부 받아오기
+        run: |
+          mkdir -p data/youtube_hollywood
+          gh release download "$YOUTUBE_DATA_TAG" --dir data/youtube_hollywood \
+            --pattern "shard_*.csv" --clobber
+          ls -la data/youtube_hollywood/
+
+      - name: shard 병합
+        run: |
+          python scripts/merge_hollywood_youtube_shards.py \
+            --shard-dir data/youtube_hollywood \
+            --out data/hollywood_youtube_merged.csv \
+            --targets data/hollywood_youtube_targets.csv
+
+      - name: 병합 결과를 hollywood-youtube-data Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$YOUTUBE_DATA_TAG" data/hollywood_youtube_merged.csv
+
+      - name: 안전망 - Actions 아티팩트로도 보관 (30일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hollywood-youtube-merged
+          path: data/hollywood_youtube_merged.csv
+          retention-days: 30
+          if-no-files-found: ignore
