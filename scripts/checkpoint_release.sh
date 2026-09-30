@@ -2,13 +2,13 @@
 # checkpoint_release.sh <tag> <path1> [path2 ...]
 #
 # 왜 git commit 대신 Release 업로드로 바꿨나:
-#   data/broadway.csv가 136MB로 커져서 GitHub의 git push 파일 크기 제한(100MB)에
+#   (broadway 저장소에서 옮겨온 스크립트) data/broadway.csv가 136MB로 커져서 GitHub의 git push 파일 크기 제한(100MB)에
 #   걸림. 그래서 전 단계 파이프라인은 8단계가 전부 "성공"으로 표시돼도 실제로는
 #   커밋이 하나도 안 됐음(push가 매번 조용히 실패). Release 자산은 파일당 2GB까지
 #   허용되고 git 히스토리에도 안 쌓여서 이 문제를 근본적으로 피할 수 있음.
 #
 # 동작 방식:
-#   같은 태그(예: broadway-data)에 매번 같은 파일명으로 덮어써서(--clobber)
+#   같은 태그(예: hollywood-youtube-data)에 매번 같은 파일명으로 덮어써서(--clobber)
 #   "최신 데이터 = 이 Release" 상태를 유지함. Release가 없으면 새로 만듦.
 #   업로드 실패 시 최대 3회 재시도, 다 실패하면 ::error:: 로 표시하고 exit 1
 #   (예전 git push 재시도 버그처럼 조용히 넘어가지 않게 함).
@@ -49,10 +49,14 @@ if [ "${#existing_files[@]}" -eq 0 ]; then
   exit 0
 fi
 
+# 첫 실행 땐 20개 shard가 동시에 Release를 만들려고 해서 "already exists"로 실패하는
+# shard가 생길 수 있음 -> 만들기 실패해도 이미 생겨 있으면 그대로 진행.
 if ! gh release view "$tag" >/dev/null 2>&1; then
-  gh release create "$tag" \
+  sleep $((RANDOM % 10))
+  gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" \
     --title "$tag" \
-    --notes "Broadway 파이프라인이 자동으로 생성하는 최신 데이터 파일들. 매주 월요일(UTC) 갱신됨. 같은 파일명은 매번 덮어쓰기 됨(과거 버전은 남지 않음)."
+    --notes "Hollywood YouTube 수집 파이프라인이 자동으로 올리는 shard/병합 파일들. 같은 파일명은 매번 덮어쓰기 됨(과거 버전은 남지 않음)." \
+    || gh release view "$tag" >/dev/null
 fi
 
 for attempt in 1 2 3; do
