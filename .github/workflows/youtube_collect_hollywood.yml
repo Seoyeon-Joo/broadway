@@ -22,13 +22,13 @@ on:
       max_pages_per_query:
         description: "쿼리 하나당 최대 페이지 수 (페이지당 50개, 100유닛)"
         default: "2"
-  schedule:
+  #schedule:
     # 같은 YOUTUBE_API_KEYS를 Broadway 저장소와 같이 쓴다면 quota가 겹치므로
     # Broadway condensed 수집(45 7/15/23 UTC)과 시간을 띄워둠.
     # UTC 기준: 03:15 / 11:15 / 19:15 = KST 12:15 / 20:15 / 04:15
-    - cron: "15 3 * * *"
-    - cron: "15 11 * * *"
-    - cron: "15 19 * * *"
+    #- cron: "15 3 * * *"
+    #- cron: "15 11 * * *"
+    #- cron: "15 19 * * *"
 
 permissions:
   contents: write
