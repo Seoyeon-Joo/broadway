@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import io
+import signal
 import re
 import time
 from pathlib import Path
@@ -132,25 +133,28 @@ BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 
 
 def _get_once(url: str):
-    r = session.get(url, timeout=90, allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+    r = session.get(url, timeout=(20, 90), allow_redirects=True, headers={"User-Agent": BROWSER_UA})
     r.raise_for_status()
     return r
 
 
 _last_archive = [0.0]
+ARCHIVE_STATS = {"ok": 0, "miss": 0, "429": 0}
 
 
 def _archive_get(url: str):
-    """GET from web.archive.org with pacing and 429 back-off."""
-    for attempt in range(4):
-        wait = 6 - (time.time() - _last_archive[0])
+    """GET from web.archive.org: >=5s between requests, one short retry on 429."""
+    for attempt in range(2):
+        wait = 5 - (time.time() - _last_archive[0])
         if wait > 0:
             time.sleep(wait)
         _last_archive[0] = time.time()
-        r = session.get(url, timeout=120, allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+        r = session.get(url, timeout=(20, 90), allow_redirects=True, headers={"User-Agent": BROWSER_UA})
         if r.status_code == 429:
-            time.sleep(int(r.headers.get("Retry-After", 0) or 0) or 30 * (attempt + 1))
-            continue
+            ARCHIVE_STATS["429"] += 1
+            if attempt == 0:
+                time.sleep(min(int(r.headers.get("Retry-After", 0) or 0), 60) or 20)
+                continue
         r.raise_for_status()
         return r
     r.raise_for_status()
@@ -164,9 +168,11 @@ def wayback_get(url: str):
     try:
         r = _archive_get(f"https://web.archive.org/web/2026id_/{url}")
         r.wayback = True
+        ARCHIVE_STATS["ok"] += 1
         print(f"    wayback ok: {url}")
         return r
     except Exception as e:  # noqa: BLE001
+        ARCHIVE_STATS["miss"] += 1
         print(f"    wayback miss: {url} ({type(e).__name__})")
         return None
 
@@ -334,7 +340,7 @@ def _fetch_drive(url: str):
     import tempfile
     import gdown
     with tempfile.TemporaryDirectory() as td:
-        out = gdown.download(id=fid, output=f"{td}/f", quiet=True)
+        out = gdown.download(id=fid, output=f"{td}/f", quiet=True, timeout=120)
         if not out:
             raise ValueError("Google Drive download refused (not public?)")
         raw = Path(out).read_bytes()
@@ -367,7 +373,12 @@ def _fetch_box(url: str):
 
 
 # ----------------------------------------------------------------- main
+def _alarm(signum, frame):
+    raise TimeoutError("per-candidate time limit")
+
+
 def main():
+    signal.signal(signal.SIGALRM, _alarm)
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", default="data/movie_list.xlsx")
     ap.add_argument("--release-years", default="data/hollywood.xlsx")
@@ -377,6 +388,7 @@ def main():
     ap.add_argument("--fuzzy", type=int, default=92)
     ap.add_argument("--max-tries", type=int, default=4, help="candidates tried per movie")
     ap.add_argument("--match-only", action="store_true")
+    ap.add_argument("--per-try-timeout", type=int, default=480, help="seconds per candidate")
     ap.add_argument("--titles", default="", help="only these movie titles (separated by |), for debugging")
     a = ap.parse_args()
 
@@ -396,6 +408,9 @@ def main():
     raw_dir.mkdir(parents=True, exist_ok=True)
 
     rows = []
+    partial = Path(a.output).with_suffix(".partial.csv")
+    partial.parent.mkdir(parents=True, exist_ok=True)
+    partial.unlink(missing_ok=True)
     for _, mv in movies.iterrows():
         mid, title = mv["movie_id"], str(mv["movie_title"]).strip()
         ry = rel.get(mid)
@@ -410,7 +425,11 @@ def main():
             tried = []
             for c in cands[: a.max_tries]:
                 try:
-                    text, raw, ext, final = fetch_script(c, title)
+                    signal.alarm(a.per_try_timeout)  # hard cap per candidate (hung server / huge OCR)
+                    try:
+                        text, raw, ext, final = fetch_script(c, title)
+                    finally:
+                        signal.alarm(0)
                     ok = len(text) >= MIN_CHARS
                     tried.append(f"{c['source']}:{'ok' if ok else f'short({len(text)})'}")
                     if ok:
@@ -426,19 +445,22 @@ def main():
                     tried.append(f"{c['source']}:err({type(e).__name__}: {str(e)[:60]})")
                 time.sleep(1.5)
             row["tried"] = " ; ".join(tried)
-            print(f"  [{row['status']}] {title} ({ry}) <- {row['source'] or '-'} | {row['tried']}")
+            print(f"  [{row['status']}] {title} ({ry}) <- {row['source'] or '-'} | {row['tried']}", flush=True)
         elif cands:
             c = cands[0]
             row.update(source=c["source"], matched_title=c["title"], match_score=c["score"],
                        year_check=c["year_check"], script_url=c["url"], script_info=c["info"][:300])
         rows.append(row)
+        if row["status"] != "no_match":  # keep progress on disk in case the job is cut off
+            pd.DataFrame([row]).to_csv(partial, mode="a", header=not partial.exists(),
+                                       index=False, encoding="utf-8-sig")
 
     res = pd.DataFrame(rows)
     Path(a.output).parent.mkdir(parents=True, exist_ok=True)
     res.to_excel(a.output, index=False)
     st = res["status"].value_counts().to_dict()
     src = res.loc[res["status"] == "ok", "source"].value_counts().to_dict()
-    print(f"::notice::movies={len(res)} | status={st} | ok by source={src} | OCR used={len(OCR_USED)}")
+    print(f"::notice::movies={len(res)} | status={st} | ok by source={src} | OCR used={len(OCR_USED)} | wayback={ARCHIVE_STATS}")
     failed = res[res["status"] == "download_failed"]
     if len(failed):
         print(f"::notice::download_failed ({len(failed)}): {failed['movie_title'].tolist()[:60]}")
