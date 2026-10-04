@@ -1,0 +1,116 @@
+{
+ "www_waltdisneystudiosawards_com_.html": {
+  "url": "https://www.waltdisneystudiosawards.com/",
+  "status": 200,
+  "final": "https://debut.disney.com/fyc/twds-awards",
+  "len": 217019
+ },
+ "www_waltdisneystudiosawards_com_scripts_.html": {
+  "url": "https://www.waltdisneystudiosawards.com/scripts/",
+  "status": 200,
+  "final": "https://debut.disney.com/fyc/twds-awards",
+  "len": 217019
+ },
+ "www_wbawards_com_.html": {
+  "url": "https://www.wbawards.com/",
+  "status": 200,
+  "final": "https://www.wbawards.com/",
+  "len": 5006
+ },
+ "www_wbawards_com_scripts_.html": {
+  "url": "https://www.wbawards.com/scripts/",
+  "status": 200,
+  "final": "https://www.wbawards.com/scripts/",
+  "len": 0
+ },
+ "universalpicturesawards_com_.html": {
+  "url": "https://universalpicturesawards.com/",
+  "status": 200,
+  "final": "https://universalpicturesawards.com/",
+  "len": 10508
+ },
+ "www_sonypicturesawards_com_.html": {
+  "url": "https://www.sonypicturesawards.com/",
+  "error": "HTTPSConnectionPool(host='www.sonypicturesawards.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.sonypicturesawards.com', port=443) at 0x7f84470feb50>, 'Connection to www.sonypicturesawards.com timed out. (connect timeout=60)'))"
+ },
+ "www_sonyclassics_com_awards_information_.html": {
+  "url": "https://www.sonyclassics.com/awards-information/",
+  "status": 200,
+  "final": "https://www.sonyclassics.com/",
+  "len": 92691
+ },
+ "paramountpicturesfyc_com_.html": {
+  "url": "https://paramountpicturesfyc.com/",
+  "status": 200,
+  "final": "https://paramountpicturesfyc.com/",
+  "len": 10774
+ },
+ "amazonmgmstudiosguilds_com_.html": {
+  "url": "https://amazonmgmstudiosguilds.com/",
+  "status": 200,
+  "final": "https://amazonmgmstudiosguilds.com/",
+  "len": 33564
+ },
+ "film_netflixawards_com_.html": {
+  "url": "https://film.netflixawards.com/",
+  "status": 200,
+  "final": "https://film.netflixawards.com/",
+  "len": 110918
+ },
+ "a24awards_com_.html": {
+  "url": "https://a24awards.com/",
+  "status": 200,
+  "final": "https://a24awards.com/",
+  "len": 20046
+ },
+ "www_focusfeaturesguilds_com_.html": {
+  "url": "https://www.focusfeaturesguilds.com/",
+  "status": 200,
+  "final": "https://focusfeaturesguilds.com/home",
+  "len": 13906
+ },
+ "lionsgateawards_com_.html": {
+  "url": "https://lionsgateawards.com/",
+  "status": 200,
+  "final": "https://www.lionsgateawards.com/",
+  "len": 2186
+ },
+ "www_searchlightpictures_com_fyc_.html": {
+  "url": "https://www.searchlightpictures.com/fyc/",
+  "status": 200,
+  "final": "https://debut.disney.com/fyc/searchlight",
+  "len": 217019
+ },
+ "www_appletvplusfyc_com_.html": {
+  "url": "https://www.appletvplusfyc.com/",
+  "error": "HTTPSConnectionPool(host='www.appletvplusfyc.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.appletvplusfyc.com', port=443): Failed to resolve 'www.appletvplusfyc.com' ([Errno -2] Name or service not known)\"))"
+ },
+ "neonawards_com_.html": {
+  "url": "https://neonawards.com/",
+  "error": "HTTPSConnectionPool(host='neonawards.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='neonawards.com', port=443): Failed to resolve 'neonawards.com' ([Errno -2] Name or service not known)\"))"
+ },
+ "www_mubiawards_com_.html": {
+  "url": "https://www.mubiawards.com/",
+  "status": 404,
+  "final": "https://www.mubiawards.com/",
+  "len": 39451
+ },
+ "bleeckerstreetmedia_com_guilds.html": {
+  "url": "https://bleeckerstreetmedia.com/guilds",
+  "status": 200,
+  "final": "https://guilds.bleeckerstreetmedia.com/",
+  "len": 15834
+ },
+ "www_ifcfilmsawards_com_.html": {
+  "url": "https://www.ifcfilmsawards.com/",
+  "status": 200,
+  "final": "https://www.independentfilmco.com/",
+  "len": 77599
+ },
+ "www_magpictures_com_fyc_.html": {
+  "url": "https://www.magpictures.com/fyc/",
+  "status": 404,
+  "final": "https://www.magpictures.com/fyc/",
+  "len": 1245
+ }
+}

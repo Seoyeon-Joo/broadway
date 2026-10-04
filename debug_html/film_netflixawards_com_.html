@@ -1,0 +1,1213 @@
+<!DOCTYPE html><html lang="en-US"><script>
+    const api = 'https://netflix-fyc.rsvp.api.realpie.com/api/v1';
+    const host = 'film.netflixawards.com';
+</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Netflix FYC | Films</title><meta name="description" content="Explore beloved films with exclusive content from Netflix&#039;s awards contenders for your consideration, including featurettes, scripts &amp; Q&amp;As."><meta name="viewport" content="width=device-width,initial-scale=1" /><meta http-equiv="X-UA-Compatible" content="IE=Edge" /><meta http-equiv="Content-Language" content="en_US,es_US" /><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="robots" content="index, follow"><meta name="GOOGLEBOT" content="index, follow" /><meta property="og:description" content="Explore beloved films with exclusive content from Netflix&#039;s awards contenders for your consideration, including featurettes, scripts &amp; Q&amp;As."/><meta property="og:site_name" content="Netflix FYC | Films"/><meta property="og:title" content="Netflix FYC | Films"/><meta property="og:type" content="website"/><meta property="og:url" content="https://film.netflixawards.com/"/><meta property="og:image" name="thumb" id="fb-image" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/seo/nfxFYC_shareImg.jpg"/><meta name="format-detection" content="telephone=no"/><meta name="google" value="notranslate"/><meta name="twitter:creator" content="@netflix"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:site" content="/"/><meta name="twitter:title" content="Netflix FYC | Films"/><meta name="twitter:description" content="Explore beloved films with exclusive content from Netflix&#039;s awards contenders for your consideration, including featurettes, scripts &amp; Q&amp;As."/><meta name="twitter:image:src" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/seo/nfxFYC_shareImg.jpg"/><link rel="stylesheet" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/css/scrollbar.min.css"/><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Oswald:wght@100;300;500;700&family=Material+Icons&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/css/main.css"/><script>
+    function loadScript(src, extra = '', callback = null, async = false) {
+        var script = document.createElement('script');
+        script.src = src + extra;
+        script.onload = callback;
+        if (async) {
+            script.async = true;
+        }
+        document.head.appendChild(script);
+    }
+
+    function loadInlineScript(contents) {
+        if(contents) {
+            var script = document.createElement('script');
+            script.innerHTML = contents;
+            document.head.appendChild(script);
+        }
+    }
+
+    function loadInlineNoScript(contents) {
+        if(contents) {
+            var noscript = document.createElement('noscript');
+
+            var image = document.createElement('img');
+            image.src = contents;
+            image.height = 1;
+            image.width = 1;
+            image.style.display = "none"
+
+            noscript.appendChild(image);
+            document.head.appendChild(noscript);
+        }
+    }
+
+    function globalAnalytics() {
+        console.log('global', globalCookiesDisabledOptOut)
+        console.log('performance', performanceCookiesDisabledOptOut)
+        console.log('advertising', advertCookiesDisabledOptOut)
+        if (!globalCookiesDisabledOptOut) {
+
+            if(!performanceCookiesDisabledOptOut) {
+                                loadScript('https://www.googletagmanager.com/gtag/js', '?id=G-GNFPJ2K8HH');
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = function () {
+                    dataLayer.push(arguments);
+                };
+                gtag('js', new Date());
+                gtag('config', 'G-GNFPJ2K8HH');
+            }
+
+                            if(!advertCookiesDisabledOptOut) {
+                    // Meta Pixel Code
+
+                    if (!window.fbq) {
+                        window.fbq = function () {
+                            if (fbq.callMethod) {
+                                fbq.callMethod.apply(fbq, arguments);
+                            } else {
+                                fbq.queue.push(arguments);
+                            }
+                        };
+                        if (!window._fbq) window._fbq = fbq;
+                        fbq.push = fbq;
+                        fbq.loaded = true;
+                        fbq.version = '2.0';
+                        fbq.queue = [];
+                        var script = document.createElement('script');
+                        script.async = true;
+                        script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+                        var firstScript = document.getElementsByTagName('script')[0];
+                        firstScript.parentNode.insertBefore(script, firstScript);
+                    }
+                    fbq('init', '1523135262190207');
+                    fbq('track', 'PageView');
+
+                    // Reddit Pixel Code
+
+                    if (!window.rdt) {
+                        window.rdt = function () {
+                            if (window.rdt.sendEvent) {
+                                window.rdt.sendEvent.apply(window.rdt, arguments);
+                            } else {
+                                window.rdt.callQueue.push(arguments);
+                            }
+                        };
+                        window.rdt.callQueue = [];
+
+                        loadScript("https://www.redditstatic.com/ads/pixel.js", '', function () {
+                            rdt('init', 't2_3cpw5xub');
+                            rdt('track', 'PageVisit');
+                        });
+                    }
+
+                    // Google pixel code
+                    loadScript('https://www.googletagmanager.com/gtag/js', '?id=AW-11293575227');
+                    window.dataLayer = window.dataLayer || [];
+                    function awgtag(){ dataLayer.push(arguments); }
+                    awgtag('js', new Date());
+
+                    awgtag('config', 'AW-11293575227');
+
+                    // Tiktok Pixel Code
+
+                    (function (w, d, t) {
+                        w.TiktokAnalyticsObject = t;
+                        var ttq = w[t] = w[t] || [];
+                        ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie"];
+                        ttq.setAndDefer = function (t, e) {
+                            t[e] = function () {
+                                t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                            }
+                        };
+                        for (var i = 0; i < ttq.methods.length; i++) {
+                            ttq.setAndDefer(ttq, ttq.methods[i]);
+                        }
+                        ttq.instance = function (t) {
+                            for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) {
+                                ttq.setAndDefer(e, ttq.methods[n]);
+                            }
+                            return e;
+                        };
+                        ttq.load = function (e, n) {
+                            var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+                            ttq._i = ttq._i || {};
+                            ttq._i[e] = [];
+                            ttq._i[e]._u = i;
+                            ttq._t = ttq._t || {};
+                            ttq._t[e] = +new Date;
+                            ttq._o = ttq._o || {};
+                            ttq._o[e] = n || {};
+                            var o = document.createElement("script");
+                            o.type = "text/javascript";
+                            o.async = true;
+                            o.src = i + "?sdkid=" + e + "&lib=" + t;
+                            var a = document.getElementsByTagName("script")[0];
+                            a.parentNode.insertBefore(o, a);
+                        };
+
+                        ttq.load('CQOFVN3C77U11VCBB9AG');
+                        ttq.page();
+                        //ttq.track('ViewContent')
+                    })(window, document, 'ttq');
+
+                }
+            
+                            if(!performanceCookiesDisabledOptOut) {
+                    loadScript('https://www.googletagmanager.com/gtag/js', '?id=DC-4968236');
+                    window.dataLayer = window.dataLayer || [];
+                    window.gtag = function () {
+                        dataLayer.push(arguments);
+                    };
+                    gtag('js', new Date());
+                    gtag('config', 'DC-4968236');
+                                    }
+                    }
+    } // globalAnalytics
+</script><script>
+    var globalCookiesDisabledOptOut = false;
+    var performanceCookiesDisabledOptOut = false;
+    var advertCookiesDisabledOptOut = false;
+    var youTubeIsReady = false;
+</script><script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="01936cf3-c999-723a-bb4c-30eacd0288a1" ></script><script type="text/javascript">
+        function OptanonWrapper() { }
+    </script><script>
+    var youTubeIsReady = false;
+    function unescapeUnicode(val) {
+        return val.replace(/\\u([\dA-Fa-f]{4})/g, function(match, capture) {
+            return String.fromCharCode(parseInt(capture, 16));
+        });
+    }
+    function checkForCookies() {
+                    if (typeof OnetrustActiveGroups !== 'undefined') {
+                                    console.log('OnetrustActiveGroups', OnetrustActiveGroups)
+                    if (OnetrustActiveGroups && !OnetrustActiveGroups.includes('C0007')) {
+                        performanceCookiesDisabledOptOut = true;
+                    }
+                    if(OnetrustActiveGroups && !OnetrustActiveGroups.includes('C0004')) {
+                        advertCookiesDisabledOptOut = true;
+                    }
+                                // analytics time
+                globalAnalytics()
+            }
+                clearInterval(cookieInterval)
+        if (typeof cookieKillerInit !== 'undefined') {
+            cookieKillerInit();
+        }
+    }
+    var cookieInterval;
+    document.addEventListener('DOMContentLoaded', function() {
+        cookieInterval = setTimeout(checkForCookies, 500);
+    });
+</script><script>
+        var site_baseUrl = "https://film.netflixawards.com";
+        var site_currentUrl = "https://film.netflixawards.com/";
+        var site_path = "/";
+        var site_segment1 = "";
+        var site_segment2 = "";
+        var site_segment3 = "";
+        var seg1 = "";
+        var seg2 = "";
+        var seg3 = "";
+    </script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/splide.min.js"></script><link rel="stylesheet" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/splide.min.css"/><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/swiper.min.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/screenings.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/gsap/gsap.min.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/gsap/ScrollTrigger.min.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/gsap/ScrollToPlugin.min.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/gsap/Flip.min.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/detect.js"></script><script src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/js/modal.js"></script><link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-57x57.png" /><link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-114x114.png" /><link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-72x72.png" /><link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-144x144.png" /><link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-60x60.png" /><link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-120x120.png" /><link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-76x76.png" /><link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/apple-touch-icon-152x152.png" /><link rel="icon" type="image/png" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/favicon-196x196.png" sizes="196x196" /><link rel="icon" type="image/png" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/favicon-96x96.png" sizes="96x96" /><link rel="icon" type="image/png" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/favicon-32x32.png" sizes="32x32" /><link rel="icon" type="image/png" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/favicon-16x16.png" sizes="16x16" /><link rel="icon" type="image/png" href="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/favicon-128.png" sizes="128x128" /><meta name="msapplication-TileColor" content="#FFFFFF" /><meta name="msapplication-TileImage" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/mstile-144x144.png" /><meta name="msapplication-square70x70logo" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/mstile-70x70.png" /><meta name="msapplication-square150x150logo" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/mstile-150x150.png" /><meta name="msapplication-wide310x150logo" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/mstile-310x150.png" /><meta name="msapplication-square310x310logo" content="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/favicons/mstile-310x310.png" /></head><body class="home page-home env-guilds  "><header data-search="closed" class="fixed top-0 z-50 w-full pb-[40px] header group/hdr "><div class="flex justify-between items-center w-full mx-auto relative z-30 px-[20px] sm:px-[28px] h-[64px] min-[900px]:h-[87px]"><a href="/" class = "flex flex-col justify-center min-w-[26px] max-w-[26px] shrink-0 py-[8px] min-[900px]:py-[20px] items-center z-40 header-logo" id = "logo-holder"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/logo.svg" class="cursor-pointer w-full" alt=""></a><div id="mobile-filter-container" class="flex-1 min-w-0 flex justify-center items-center px-2 min-[900px]:hidden z-30 opacity-0 pointer-events-none group-data-[search=open]/hdr:opacity-0 group-data-[search=open]/hdr:pointer-events-none transition-opacity duration-200"><div class="mobile-filter after:bg-[url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iOSIgdmlld0JveD0iMCAwIDE1IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjAwMDIzIDAuOTk5OTk5TDcuMzIwNzEgNy4wNTY4M0wxMy42NDUgMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiLz4KPC9zdmc+Cg==)] bg-black max-w-[280px] w-full text-center"><select id="categoryfilter__select" class="text-center bg-transparent"><option value="">All Films</option><option value="Narrative">Narrative</option><option value="Documentary">Documentary</option><option value="Animated">Animation</option><option value="International">International</option><option value="Short">Shorts</option></select></div></div><div class="min-w-[26px] max-w-[26px] shrink-0 pointer-events-none invisible min-[900px]:hidden header-logo-spacer" aria-hidden="true"></div><div class="flex-1 text-right pt-[32px] pr-[32px] absolute top-0 right-0"><div class=""><a href="https://fyseefilm.netflixawards.com"><button class="hidden relative after:bg-gradient-to-r from-[#D22F2700] via-[#D22F27] to-[#D22F2700] after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[1px]"><span class="text-[12px] leading-3 uppercase tracking-[.1rem] font-normal ml-[.5rem] text-white">FYSEE
+                            FILM</span><span class="text-[12px] leading-3 uppercase tracking-[.1rem] font-normal ml-[.5rem] text-white">FYSEE</span></button></a><script>
+                                                                        async function fetchData() {
+                                try {
+                                                                              const screeningsData = await checkForScreenings();
+                                     
+                                } catch (error) {
+                                     console.error('error', error)
+                                 }
+                             }
+
+                             fetchData();
+                                                               </script></div></div></div><div id="search-overlay" aria-hidden="true" class="absolute inset-0 z-20 bg-black/30 opacity-0 pointer-events-none transition-opacity duration-300 ease-out group-data-[search=open]/hdr:opacity-100 group-data-[search=open]/hdr:pointer-events-auto"></div><div id="search_holder" class="flex items-center justify-end absolute top-0 right-0 z-40 h-[64px] min-[900px]:h-[87px] pr-[20px] sm:pr-[28px]"><input data-version="desktop" id="search" tabindex="-1" aria-hidden="true" type="text" value="" placeholder="Search by Title, Cast, or Keyword..." class="absolute right-[64px] top-1/2 -translate-y-1/2 w-0 opacity-0 pointer-events-none overflow-hidden whitespace-nowrap bg-transparent text-white placeholder-white/70 text-[11px] focus:outline-none border-b border-white/50 pb-[4px] transition-[width,opacity] duration-300 ease-out group-data-[search=open]/hdr:w-[280px] group-data-[search=open]/hdr:opacity-100 group-data-[search=open]/hdr:pointer-events-auto"><button type="button" id="search-modal-trigger" tabindex="0" aria-label="Open search" aria-expanded="false" aria-controls="search" class="shrink-0 flex items-center justify-center w-[28px] h-[28px] cursor-pointer bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-white [-webkit-tap-highlight-color:transparent]"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/search.svg" alt="" class="w-[28px] h-[28px] block"></button></div><div class = "header-text overflow-hidden px-[2rem] md:px-[6rem]"><div class="text-[18px] opacity-50 text-center font-[100] uppercase font-netflix-ucd block text-white tracking-[4.9px] -mr-[4.9px] mb-[20px] leading-full">Film</div><div class="text-[11px] font-netflix font-[500] text-center uppercase text-white tracking-[5.1px] -mr-[5.1px] leading-full">For Your Awards Consideration</div></div><div id="filter" class = "opacity-0 fixed top-0 left-1/2 -translate-x-1/2 w-full z-10 mt-[105px] pb-[20px] pointer-events-none hidden min-[900px]:block"><div class = "bg-black bottom-0 left-0 w-full h-screen absolute z-0 pointer-events-none"></div><div class="relative z-10 justify-center flex-wrap gap-[20px] hidden w-full pt-[8px] min-[900px]:flex px-[15px]"><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer active" data-category = ""><div class="pointer-events-none">
+                All Films</div></div><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer" data-category="Narrative"><div class="pointer-events-none">Narrative</div></div><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer" data-category="Documentary"><div class="pointer-events-none">Documentary</div></div><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer" data-category="Animated"><div class="pointer-events-none">Animation</div></div><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer" data-category="International"><div class="pointer-events-none">International</div></div><div class="film-option relative text-[11px] font-medium text-center text-[#D22F27] uppercase cursor-pointer" data-category="Short"><div class="pointer-events-none">Shorts</div></div></div></div></header><div class = "min-h-[100svh] top-0 flex flex-col justify-between relative"><div id = "top" class = "absolute top-[1px] h-[1px]"></div><div class = "fixed top-0 left-0 pointer-events-none z-0 w-screen h-screen bg-black"></div><main id="content" class="site-content flex-1 flex flex-col"><div id = "gradient-bg" style="background-image: url(https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/gradient.png)" class="bg-no-repeat fixed left-0 w-full h-screen bg-top bg-cover z-0 mt-[64px] min-[900px]:mt-[160px] opacity-0 pointer-events-none"></div><div id="mainContainer" class = "flex-1 flex flex-col opacity-0"><!-- Slider --><section class="mx-auto absolute z-0 w-full overflow-hidden slider-wrapper pt-[250px] opacity-0" id = "slider"><!-- TOP VIDEO SLIDER --><div class = "absolute top-0 left-0 w-full h-full pointer-events-none opacity-12"><div class="top-slider absolute top-0 left-0 h-full w-full"><li class="m-0 text-center bg-[#000] bg-slide absolute top-0 left-0 w-full h-full"><video class="w-full h-full absolute top-0 left-0 object-cover" preload="auto" paused muted autoplay playsinline loop id="heroVideo"><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_LaBolaNegra_16x9_3Kkbps.mp4" type="video/mp4"></video></li><li class="m-0 text-center bg-[#000] bg-slide absolute top-0 left-0 w-full h-full"><video class="w-full h-full absolute top-0 left-0 object-cover" preload="auto" paused muted autoplay playsinline loop id="heroVideo"><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_PossibleLove_16x9_3Kkbps.mp4" type="video/mp4"></video></li><li class="m-0 text-center bg-[#000] bg-slide absolute top-0 left-0 w-full h-full"><video class="w-full h-full absolute top-0 left-0 object-cover" preload="auto" paused muted autoplay playsinline loop id="heroVideo"><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_ink_16x9_3Kkbps.mp4" type="video/mp4"></video></li><li class="m-0 text-center bg-[#000] bg-slide absolute top-0 left-0 w-full h-full"><video class="w-full h-full absolute top-0 left-0 object-cover" preload="auto" paused muted autoplay playsinline loop id="heroVideo"><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_GentleMonster_16x9_3Kkbps.mp4" type="video/mp4"></video></li></div></div><!-- BOTTOM SLIDER --><div class="bottom-slider w-full"><div class = "slider pb-[2px] overflow-hidden relative"><ul class="slider_track relative flex justify-left gap-[22px]"><li class="slide relative min-[1100px]:aspect-poster"><a href="la-bola-negra"><div class = "slide-inner flex flex-col h-full"><div class="poster absolute w-full h-full z-10 pointer-events-none"><div class="relative h-full"><img class = "w-full h-full object-cover" src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/LaBolaNegra_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=o0DpRInqRw7T1A6HANImxsYXB0JBTut8fnxWCr1aQUY" aria-hidden="true" alt = ""></div></div><div class="w-full h-full flex flex-1 flex-col min-[1100px]:flex-row items-stretch pointer-events-none video min-[1100px]:pb-[2px]"><div class="min-[1100px]:flex-1 min-[1100px]:min-w-[66%] min-[1100px]:max-w-[66%] w-full relative video-header"><video class="h-full aspect-video object-cover" preload="auto" paused muted autoplay playsinline loop><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_LaBolaNegra_16x9_3Kkbps.mp4" type="video/mp4"></video><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/LaBolaNegra_TT_pink-brush-horizontal.png?fit=scale-down&amp;width=800&amp;s=62eQj6r0gQcEAvVWGnpplNKdcSC7ZrlbPbkCY_5lfio" alt="" class="max-h-[30px] min-[1100px]:max-h-[64px] w-auto white-image block absolute bottom-[20px] left-1/2 -translate-x-1/2"></div><div class = "bar w-full h-[2px] bg-[#D22F27] min-[1100px]:absolute min-[1100px]:bottom-0 min-[1100px]:left-0"><div class = "bar-inner bg-white h-full w-0 left-0 top-0"></div></div><div class="min-[1100px]:min-h-full bottom p-[25px] bg-black flex flex-col flex-1 justify-between 2xl:px-[1.5vw] 2xl:py-[1vw]"><div class = "content flex-1 flex flex-col pb-[12px] 2xl:pb-[1vw] gap-[12px] 2xl:gap-[1vw]"><div class = "quote-container flex-1"><p class="quote-text font-netflix min-[1100px]:absolute text-transparent text-left font-[500] text-[12px] xs:text-[15px] sm:text-[22px] min-[2500px]:text-[50px] leading-[120%] bg-clip-text bg-cover bg-center bg-no-repeat -indent-[.4125em] max-w-[calc(100% - .4125em)] pl-[.4125em] -ml-[.4125em]" style="background-image: url('https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/slider-text-gradient.png');">
+                                                            &ldquo;The best film of the year. Transcendently monumental.&rdquo;
+                                                        </p></div><div class="text-[13px] min-[2500px]:text-[22px] uppercase font-[500] opacity-50 text-white text-left mb-[12px]">AwardsWatch</div></div><div class="learn-more relative font-[500] text-[11px] min-[2500px]:text-[18px] uppercase text-[#D22F27] hover:text-white transition-colors tracking-[5.1px]">
+                                                    Learn More
+                                                </div></div></div></div></a></li><li class="slide relative min-[1100px]:aspect-poster"><a href="possible-love"><div class = "slide-inner flex flex-col h-full"><div class="poster absolute w-full h-full z-10 pointer-events-none"><div class="relative h-full"><img class = "w-full h-full object-cover" src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/PossibleLove_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=Y2IGTYdDObttedGuJlG71uiJ6ohx5XG4jjMl8MsbviA" aria-hidden="true" alt = ""></div></div><div class="w-full h-full flex flex-1 flex-col min-[1100px]:flex-row items-stretch pointer-events-none video min-[1100px]:pb-[2px]"><div class="min-[1100px]:flex-1 min-[1100px]:min-w-[66%] min-[1100px]:max-w-[66%] w-full relative video-header"><video class="h-full aspect-video object-cover" preload="auto" paused muted autoplay playsinline loop><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_PossibleLove_16x9_3Kkbps.mp4" type="video/mp4"></video><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/PossibleLove_TT_horizontal-white.png?fit=scale-down&amp;width=800&amp;s=YcD8wtEkIx4rF8BII262pu-F99WkrAwyabXDvW0bnxg" alt="" class="max-h-[30px] min-[1100px]:max-h-[64px] w-auto white-image block absolute bottom-[20px] left-1/2 -translate-x-1/2"></div><div class = "bar w-full h-[2px] bg-[#D22F27] min-[1100px]:absolute min-[1100px]:bottom-0 min-[1100px]:left-0"><div class = "bar-inner bg-white h-full w-0 left-0 top-0"></div></div><div class="min-[1100px]:min-h-full bottom p-[25px] bg-black flex flex-col flex-1 justify-between 2xl:px-[1.5vw] 2xl:py-[1vw]"><div class = "content flex-1 flex flex-col pb-[12px] 2xl:pb-[1vw] gap-[12px] 2xl:gap-[1vw]"><div class = "quote-container flex-1"><p class="quote-text font-netflix min-[1100px]:absolute text-transparent text-left font-[500] text-[12px] xs:text-[15px] sm:text-[22px] min-[2500px]:text-[50px] leading-[120%] bg-clip-text bg-cover bg-center bg-no-repeat -indent-[.4125em] max-w-[calc(100% - .4125em)] pl-[.4125em] -ml-[.4125em]" style="background-image: url('https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/slider-text-gradient.png');">
+                                                            &ldquo;One for the ages.&rdquo;
+                                                        </p></div><div class="text-[13px] min-[2500px]:text-[22px] uppercase font-[500] opacity-50 text-white text-left mb-[12px]">New York Magazine</div></div><div class="learn-more relative font-[500] text-[11px] min-[2500px]:text-[18px] uppercase text-[#D22F27] hover:text-white transition-colors tracking-[5.1px]">
+                                                    Learn More
+                                                </div></div></div></div></a></li><li class="slide relative min-[1100px]:aspect-poster"><a href="ink"><div class = "slide-inner flex flex-col h-full"><div class="poster absolute w-full h-full z-10 pointer-events-none"><div class="relative h-full"><img class = "w-full h-full object-cover" src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Ink_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=UajNiupeVlKJwe4yY_qe_KlGG2uDRxxRzzdq5MBNbqQ" aria-hidden="true" alt = ""></div></div><div class="w-full h-full flex flex-1 flex-col min-[1100px]:flex-row items-stretch pointer-events-none video min-[1100px]:pb-[2px]"><div class="min-[1100px]:flex-1 min-[1100px]:min-w-[66%] min-[1100px]:max-w-[66%] w-full relative video-header"><video class="h-full aspect-video object-cover" preload="auto" paused muted autoplay playsinline loop><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_ink_16x9_3Kkbps.mp4" type="video/mp4"></video><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Ink_TT_white.png?fit=scale-down&amp;width=800&amp;s=o22hHpXBdAy7NVveu-NYLBBl2ZlN5K2lg6Al-KKwcSI" alt="" class="max-h-[30px] min-[1100px]:max-h-[64px] w-auto white-image block absolute bottom-[20px] left-1/2 -translate-x-1/2"></div><div class = "bar w-full h-[2px] bg-[#D22F27] min-[1100px]:absolute min-[1100px]:bottom-0 min-[1100px]:left-0"><div class = "bar-inner bg-white h-full w-0 left-0 top-0"></div></div><div class="min-[1100px]:min-h-full bottom p-[25px] bg-black flex flex-col flex-1 justify-between 2xl:px-[1.5vw] 2xl:py-[1vw]"><div class = "content flex-1 flex flex-col pb-[12px] 2xl:pb-[1vw] gap-[12px] 2xl:gap-[1vw]"><div class = "quote-container flex-1"><p class="quote-text font-netflix min-[1100px]:absolute text-transparent text-left font-[500] text-[12px] xs:text-[15px] sm:text-[22px] min-[2500px]:text-[50px] leading-[120%] bg-clip-text bg-cover bg-center bg-no-repeat -indent-[.4125em] max-w-[calc(100% - .4125em)] pl-[.4125em] -ml-[.4125em]" style="background-image: url('https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/slider-text-gradient.png');">
+                                                            &ldquo;A masterpiece. Danny Boyle’s best film in decades.&rdquo;
+                                                        </p></div><div class="text-[13px] min-[2500px]:text-[22px] uppercase font-[500] opacity-50 text-white text-left mb-[12px]">New York Magazine</div></div><div class="learn-more relative font-[500] text-[11px] min-[2500px]:text-[18px] uppercase text-[#D22F27] hover:text-white transition-colors tracking-[5.1px]">
+                                                    Learn More
+                                                </div></div></div></div></a></li><li class="slide relative min-[1100px]:aspect-poster"><a href="gentle-monster"><div class = "slide-inner flex flex-col h-full"><div class="poster absolute w-full h-full z-10 pointer-events-none"><div class="relative h-full"><img class = "w-full h-full object-cover" src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/GentleMonster_KA_v2.jpg?fit=scale-down&amp;width=400&amp;s=ro2pmhNIzuP7xzlgNsvliRBlV7iCYlJyB6BZpIX9FCs" aria-hidden="true" alt = ""></div></div><div class="w-full h-full flex flex-1 flex-col min-[1100px]:flex-row items-stretch pointer-events-none video min-[1100px]:pb-[2px]"><div class="min-[1100px]:flex-1 min-[1100px]:min-w-[66%] min-[1100px]:max-w-[66%] w-full relative video-header"><video class="h-full aspect-video object-cover" preload="auto" paused muted autoplay playsinline loop><source src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/nxFYC_GentleMonster_16x9_3Kkbps.mp4" type="video/mp4"></video><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/GentleMonster_TT_horizontal.png?fit=scale-down&amp;width=800&amp;s=UaU99VhzaiMEwMLVHdW7mhQc-wHs_dy_NOr_G3bjh3w" alt="" class="max-h-[30px] min-[1100px]:max-h-[64px] w-auto white-image block absolute bottom-[20px] left-1/2 -translate-x-1/2"></div><div class = "bar w-full h-[2px] bg-[#D22F27] min-[1100px]:absolute min-[1100px]:bottom-0 min-[1100px]:left-0"><div class = "bar-inner bg-white h-full w-0 left-0 top-0"></div></div><div class="min-[1100px]:min-h-full bottom p-[25px] bg-black flex flex-col flex-1 justify-between 2xl:px-[1.5vw] 2xl:py-[1vw]"><div class = "content flex-1 flex flex-col pb-[12px] 2xl:pb-[1vw] gap-[12px] 2xl:gap-[1vw]"><div class = "quote-container flex-1"><p class="quote-text font-netflix min-[1100px]:absolute text-transparent text-left font-[500] text-[12px] xs:text-[15px] sm:text-[22px] min-[2500px]:text-[50px] leading-[120%] bg-clip-text bg-cover bg-center bg-no-repeat -indent-[.4125em] max-w-[calc(100% - .4125em)] pl-[.4125em] -ml-[.4125em]" style="background-image: url('https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/slider-text-gradient.png');">
+                                                            &ldquo;An implosive performance from Léa Seydoux.&rdquo;
+                                                        </p></div><div class="text-[13px] min-[2500px]:text-[22px] uppercase font-[500] opacity-50 text-white text-left mb-[12px]">IndieWire</div></div><div class="learn-more relative font-[500] text-[11px] min-[2500px]:text-[18px] uppercase text-[#D22F27] hover:text-white transition-colors tracking-[5.1px]">
+                                                    Learn More
+                                                </div></div></div></div></a></li></ul></div><div class = "slider_arrows mt-[18px] mb-[87px] flex justify-center items-center z-10 relative"><div class = "w-[110px] min-[1100px]:w-[78px] min-[2500px]:w-[150px] h-[37px] min-[2500px]:h-[71px] flex justify-between items-center"><button class = "slider_arrow slider_arrow--prev h-full w-[50px] min-[1100px]:w-[35px] min-[2500px]:w-[70px] !left-0 relative hover-red"><img src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/left-arrow.svg" alt = "Left arrow for the homepage slider" class = "h-full w-auto min-[1100px]:w-full min-[1100px]:h-auto pointer-events-none white" /><img src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/left-arrow.svg" alt = "Left arrow for the homepage slider" class = "h-full w-auto min-[1100px]:w-full min-[1100px]:h-auto absolute top-0 left-0 opacity-0 red pointer-events-none" /></button><div class = "font-netflix-ucd text-[12px] min-[2500px]:text-[20px] text-white opacity-50 tracking-[2.4px] min-[1100px]:absolute min-[1100px]:top-[100%] min-[1100px]:left-1/2 min-[1100px]:-translate-x-1/2 hidden"><span id = "current-slide"></span>/<span id = "total-slides"></span></div><button class = "slider_arrow slider_arrow--next h-full w-[50px] min-[1100px]:w-[35px] min-[2500px]:w-[70px] !right-0 relative hover-red"><img src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/right-arrow.svg" alt = "Right arrow for the homepage slider" class = "h-full w-auto min-[1100px]:w-full min-[1100px]:h-auto pointer-events-none white" /><img src = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/right-arrow.svg" alt = "Right arrow for the homepage slider" class = "h-full w-auto min-[1100px]:w-full min-[1100px]:h-auto absolute top-0 left-0 opacity-0 red pointer-events-none" /></button></div></div></div></section><script>
+    let videosReady = 0;
+    let sliderReady = true;
+    const slider = document.getElementById('slider');
+    const topSlider = slider.querySelector('.top-slider');
+    const bottomSlider = slider.querySelector('.bottom-slider');
+    const bottomTrack = bottomSlider.querySelector('.slider_track');
+    const bottomSlides = bottomSlider.querySelectorAll('.slide');
+    const slidesLength = bottomSlides.length;
+    const firstSlide = bottomSlides[0];
+
+    const currentSlideCounter = slider.querySelector('#current-slide');
+    const totalSlidesCounter = slider.querySelector('#total-slides');
+
+    let pos = 1;
+    let currentTranslation = 0;
+    let currentSlide = null;
+    let sliding = false;
+    let pendingScroll = false;
+    let sliderHeight = 0;
+
+    let currentSlideAutoTween = null;
+
+    let lastWindowWidth = 0;
+
+    // Only the active (.current) slide should be reachable by keyboard tab.
+    function updateSlideTabbing() {
+        bottomTrack.querySelectorAll('.slide').forEach(function(s) {
+            var link = s.querySelector('a');
+            if (!link) return;
+            if (s.classList.contains('current')) { link.removeAttribute('tabindex'); }
+            else { link.setAttribute('tabindex', '-1'); }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() { 
+
+        // set up init sizing
+        document.getElementById('body').style.paddingTop = slider.offsetHeight;
+        document.getElementById('bottom-bg').style.paddingTop = slider.offsetHeight;
+        document.getElementById('gradient-bg').style.top = slider.offsetHeight / 2;
+
+    });
+
+    window.addEventListener('load', function() {
+
+        let activeSlideWidth = document.documentElement.clientWidth * .55;
+        let inactiveSlideWidth = document.documentElement.clientWidth * .15;
+
+        // ios fix
+        /*document.body.addEventListener('click', function() {
+            playVideosIfNotPlaying();
+        }, { once: true });*/
+
+        slider.querySelectorAll('video').forEach(video => {
+            video.addEventListener('loadeddata', () => {
+                readyToShowSlider();
+            }, { once: true });
+        });
+
+        slider.querySelectorAll('.bg-slide').forEach((bg, i) => {
+            if(i > 0) {
+                gsap.set(bg, { opacity: 0 });
+            }
+        });
+
+        let prependSlides = [...bottomSlides];
+        let appendSlides = [...bottomSlides];
+
+        appendSlides.forEach(slide => {
+            cloneAndAppendSlide(slide, bottomTrack);
+        });
+        
+        prependSlides.reverse().forEach(slide => {
+            cloneAndAppendSlide(slide, bottomTrack, true);
+        });
+
+        gsap.set(firstSlide, { minWidth: getCurrentWidth(), maxWidth: getCurrentWidth(), aspectRatio: 'auto' });
+        gsap.set(firstSlide.querySelector('.poster'), { opacity: 0 });
+        gsap.set(firstSlide.querySelector('.video'), { pointerEvents: 'all', display: 'flex' }, 0);
+        firstSlide.setAttribute('data-index', 1);
+        
+        currentSlide = firstSlide;
+
+        setupAutoSlide();
+
+        bottomTrack.querySelectorAll('.slide').forEach(slide => {
+            if(slide !== currentSlide) {
+                if(slide.querySelector('.learn-more')) {
+                    gsap.set(slide.querySelector('.learn-more'), { pointerEvents: 'none', display: 'none' }, 0);
+                }
+                gsap.set(slide.querySelector('.video'), { pointerEvents: 'none', display: 'none' }, 0);
+            }
+            slide.addEventListener('click', function() {
+                rotateSlider(null, slide);
+            });
+        });
+        
+        currentSlide.classList.add('current');
+        updateSlideTabbing();
+
+        currentTranslation = initializeTranslation();
+        
+        gsap.set(bottomTrack, { x: currentTranslation });
+
+        // slide counter
+
+        currentSlideCounter.innerHTML = pos;
+        totalSlidesCounter.innerHTML = slidesLength;
+
+        // controls
+
+        // Bring the slider fully into view (scroll to top) before changing slides on user interaction.
+        function scrollSliderIntoViewThen(cb) {
+            if(sliding || pendingScroll) return;
+            if(window.pageYOffset > 1) {
+                pendingScroll = true;
+                gsap.to(window, {
+                    scrollTo: { y: 0, autoKill: false },
+                    duration: 0.6,
+                    ease: 'power2.inOut',
+                    onComplete: function() { pendingScroll = false; cb(); }
+                });
+            } else {
+                cb();
+            }
+        }
+
+        slider.querySelector('.slider_arrow--next').addEventListener('click', () =>  {
+            scrollSliderIntoViewThen(() => rotateSlider(true));
+        });
+
+        slider.querySelector('.slider_arrow--prev').addEventListener('click', () =>  {
+            scrollSliderIntoViewThen(() => rotateSlider(false));
+        });
+
+        // resize
+
+        // Debounce the handleWindowResize function with a 200ms delay
+        const debouncedResizeHandler = debounce(handleWindowResize, 200);
+
+        // Attach the debounced handler to the window's resize event
+        window.addEventListener('resize', debouncedResizeHandler);
+
+        gsap.set('#slider', { opacity: 0 });
+
+        setTimeout(() => {
+            handleWindowResize();
+        }, 10)
+    });
+
+    function getAllSiblingsWithIndex(element) {
+        let parent = element.parentNode;
+        if (!parent) return []; // No parent, no siblings
+
+        let siblings = Array.from(parent.children); // Convert HTMLCollection to Array
+        let result = [];
+
+        siblings.forEach((sibling, index) => {
+            if (sibling !== element) { // Exclude the original element
+                let direction = '';
+                let distance = 0;
+
+                // Determine direction and distance
+                let currentIndex = siblings.indexOf(element);
+                if (index < currentIndex) {
+                    direction = 'previous';
+                    distance = currentIndex - index;
+                } else {
+                    direction = 'next';
+                    distance = index - currentIndex;
+                }
+
+                result.push({
+                    element: sibling,
+                    direction: direction,
+                    distance: distance
+                });
+            }
+        });
+        return result;
+    }
+
+    function readyToShowSlider() {
+        videosReady++;
+
+        if((videosReady >= slidesLength * 2) && sliderReady) {
+            slider.querySelectorAll('video').forEach(video => {
+                video.pause();
+            });
+            slider.classList.remove('opacity-0');
+            initHomeAnimation();
+        }
+    }
+
+    function cloneAndAppendSlide(slide, track, prepend = false) {
+        let clone = slide.cloneNode(true);
+        clone.classList.remove('active');
+        if(prepend) {
+            track.prepend(clone);
+        } else {
+            track.appendChild(clone);
+        }
+    }
+
+    function setupAutoSlide() {
+        if(currentSlideAutoTween) {
+            currentSlideAutoTween.kill();
+            currentSlideAutoTween = null;
+        }
+
+        currentSlideAutoTween = gsap.fromTo(currentSlide.querySelector('.bar-inner'), { width: '0%' }, { width: '100%', delay: 0.2, duration: 10, ease: 'none', onComplete: () => { rotateSlider(true); } })
+    }
+
+    function rotateSlider(right = true, goToSlide = null) {
+        sliding = true;
+        let newSlide;
+        let currentBGSlide = slider.querySelector(`.bg-slide:nth-child(${pos})`);
+        
+        if(goToSlide) {
+            newSlide = goToSlide;
+
+            if(newSlide == currentSlide) {
+                return;
+            }
+
+            let siblings = getAllSiblingsWithIndex(currentSlide);
+
+            for(sib of siblings) {
+                if(sib.element == newSlide) {
+                    if(sib.direction == 'next') {
+                        right = true;
+                        if(pos+sib.distance > slidesLength) {
+                            pos = (pos+sib.distance) - slidesLength;
+                        } else {
+                            pos += sib.distance;
+                        }
+                        currentTranslation -= (getOffWidth() + 22) * sib.distance;
+                    } else {
+                        right = false;
+                        if(pos-sib.distance <= 0) {
+                            pos = slidesLength - (sib.distance - pos);
+                        } else {
+                            pos -= sib.distance;
+                        }
+                        currentTranslation += (getOffWidth() + 22) * sib.distance;
+                    }
+                }
+            }
+        } else {
+            if(right) {
+                newSlide = currentSlide.nextElementSibling;
+                if(pos+1 > slidesLength) {
+                    pos = 1;
+                } else {
+                    pos++;
+                }
+                currentTranslation -= (getOffWidth() + 22);
+            } else {
+                newSlide = currentSlide.previousElementSibling;
+                if(pos-1 <= 0) {
+                    pos = slidesLength;
+                } else {
+                    pos--;
+                }
+                currentTranslation += (getOffWidth() + 22);
+            }
+        }
+
+        let newBGSlide = slider.querySelector(`.bg-slide:nth-child(${pos})`);
+        newSlide.setAttribute('data-index', pos);
+
+        let rotateTL = gsap.timeline();
+
+        currentSlide.classList.remove('current');
+        newSlide.classList.add('current');
+        updateSlideTabbing();
+
+        // reset slider height
+        rotateTL.set(slider, { height: slider.offsetHeight }, 0)
+
+        rotateTL.set(bottomTrack, { height: bottomTrack.offsetHeight }, 0)
+        rotateTL.to(newSlide, { minWidth: getCurrentWidth(), maxWidth: getCurrentWidth(), ease: 'power2.inOut', duration: 0.8, }, 0);
+
+                    rotateTL.set(newSlide, { height: getHeight() }, 0)
+            rotateTL.set(newSlide.querySelector('.poster'), { height: getHeight() }, 0)
+            // this controls the new mobile display and offset
+            rotateTL.to(newSlide, { height: () => window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight, ease: 'power2.inOut', duration: 0.3 }, 0.8);
+            rotateTL.to(bottomTrack, { height: () => window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight, ease: 'power2.inOut', duration: 0.3 }, 0.8);
+            rotateTL.to(slider, { height: () => (250 + 37 + 18 + 87) + (window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight), ease: 'power2.inOut', duration: 0.3 }, 0.8);
+
+            rotateTL.to(document.getElementById('body'), { paddingTop: () => (250 + 37 + 18 + 87) + (window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight), ease: 'power2.inOut',duration: 0.3 }, 0.9);
+            rotateTL.to(document.getElementById('bottom-bg'), { paddingTop: () => (250 + 37 + 18 + 87) + (window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight), ease: 'power2.inOut', duration: 0.3 }, 0.9);
+            rotateTL.to(document.getElementById('gradient-bg'), { top: () => ((250 + 37 + 18 + 87) + (window.innerWidth >= 1100 ? getHeight() : getHeight() + newSlide.querySelector('.bottom').offsetHeight)) / 2, ease: 'power2.inOut',duration: 0.3 }, 0.9);
+        
+        rotateTL.set(currentSlide.querySelector('.poster'), { height: '' }, 0);
+        rotateTL.to(newSlide.querySelector('.poster'), { opacity: 0, ease: 'power2.inOut', duration: 0.8, }, 0);
+        rotateTL.set(newSlide.querySelector('.video'), { pointerEvents: 'all', display: 'flex' }, 0);
+
+        if(newSlide.querySelector('.learn-more')) {
+            rotateTL.set(newSlide.querySelector('.learn-more'), { pointerEvents: 'all', display: 'flex' }, 0);
+        }
+        rotateTL.to(currentSlide, { minWidth: getOffWidth(), maxWidth: getOffWidth(), aspectRatio: '2 / 3', ease: 'power2.inOut', duration: 0.8, }, 0);
+        rotateTL.to(currentSlide.querySelector('.poster'), { opacity: 1, ease: 'power2.inOut', duration: 0.8, }, 0);
+        rotateTL.set(currentSlide.querySelector('.video'), { pointerEvents: 'none' }, 0);
+
+        if(currentSlide.querySelector('.learn-more')) {
+            rotateTL.set(currentSlide.querySelector('.learn-more'), { pointerEvents: 'none' }, 0);
+            rotateTL.set(currentSlide.querySelector('.learn-more'), { display: 'none' }, 0.4);
+        }
+        rotateTL.to(bottomTrack, { x: currentTranslation, ease: 'power2.inOut', duration: 0.8 }, 0);
+        rotateTL.to(currentBGSlide, { opacity: 0, ease: 'power2.inOut', duration: 0.8 }, 0);
+        rotateTL.to(newBGSlide, { opacity: 1, ease: 'power2.inOut', duration: 0.8, onStart: () => {
+            gsap.set(newBGSlide.querySelector('video'), { display: 'block', onComplete: () => {
+                newBGSlide.querySelector('video').currentTime = 0;
+                newBGSlide.querySelector('video').play();
+            } });
+            gsap.set(newSlide.querySelector('video'), { display: 'block', onComplete: () => {
+                newSlide.querySelector('video').currentTime = 0;
+                newSlide.querySelector('video').play();
+            } });
+        },
+        onComplete: () => {
+            gsap.set(currentBGSlide.querySelector('video'), { display: 'none' });
+            gsap.set(currentSlide.querySelector('video'), { display: 'none' });
+            currentBGSlide.querySelector('video').pause();
+            currentSlide.querySelector('video').pause();
+            currentSlide.querySelector('.bar-inner').style.width = 0;
+            currentSlideCounter.innerHTML = pos;
+            currentSlide = newSlide;
+            // set the index on the slide
+            setupAutoSlide();
+        } }, 0);
+
+        if(document.documentElement.clientWidth < 1100) {
+            rotateTL.to(currentSlide, { height: getHeight() }, 0);
+            rotateTL.set(bottomTrack.querySelectorAll('.video-header'), { minHeight: `${getHeight()}px`, maxHeight: `${getHeight()}px` }, 0);
+        } else {
+            gsap.set(bottomTrack.querySelectorAll('.slide'), { height: 'auto' }, 0);
+            gsap.set(bottomTrack.querySelectorAll('.video-header'), { minHeight: '0', maxHeight: 'none' }, 0);
+        }
+
+        rotateTL.add(() => {
+            if(right) {
+                bottomTrack.appendChild(bottomTrack.querySelector('.slide:first-child'));
+                currentTranslation += (getOffWidth() + 22);
+            } else {
+                bottomTrack.prepend(bottomTrack.querySelector('.slide:last-child'));
+                currentTranslation -= (getOffWidth() + 22);
+            }
+            gsap.set(bottomTrack, { x: currentTranslation });
+            gsap.set(bottomTrack.querySelectorAll('.slide:not(.current)'), { minWidth: getOffWidth(), maxWidth: getOffWidth(), aspectRatio: '2 / 3' });
+            sliding = false;
+        });
+    }
+
+    function handleWindowResize() {
+        
+        if(window.innerWidth == lastWindowWidth) {
+            return;
+        }
+
+        lastWindowWidth = window.innerWidth;
+
+        let maxHeight = document.documentElement.clientWidth * .19;
+        
+        gsap.set(currentSlide, { minWidth: getCurrentWidth(), maxWidth: getCurrentWidth(), aspectRatio: 'auto' });
+        gsap.set(bottomTrack.querySelectorAll('.slide:not(.current)'), { minWidth: getOffWidth(), maxWidth: getOffWidth(), aspectRatio: '2 / 3' });
+
+        gsap.set(slider, { height: 'auto' })
+        if(document.documentElement.clientWidth < 1100) {
+            gsap.set(bottomTrack.querySelectorAll('.video-header'), { minHeight: `${getHeight()}px`, maxHeight: `${getHeight()}px` });
+        } else {
+            gsap.set(bottomTrack.querySelectorAll('.video-header'), { minHeight: '0', maxHeight: 'none' });
+        }
+
+        if(document.documentElement.clientWidth < 1100) {
+            gsap.set(bottomTrack, { height: 'auto' });
+        } else {
+            gsap.set(bottomTrack, { height: Math.round(document.documentElement.clientWidth * .19) });
+        }
+
+                    const checkContainer = bottomTrack.querySelector('.slide.current').querySelector('.quote-container');
+            let minFontSize;
+
+            let fontSizes = [];
+
+            bottomTrack.querySelectorAll('.slide').forEach(slide => {
+
+                slide.querySelector('.quote-text').style.fontSize = '';
+                slide.querySelector('.quote-text').style.width = '';
+                slide.querySelector('.quote-text').style.height = '';
+
+                gsap.set(slide.querySelector('.quote-text'), { width: 'auto', minHeight: 0 });
+
+                if(!slide.classList.contains('current')) {
+                    gsap.set(slide.querySelector('.video'), { display: '' }, 0);
+                    slide.style.minWidth = getCurrentWidth() + 'px';
+                    slide.style.maxWidth = getCurrentWidth() + 'px';
+                }
+
+                gsap.set(slide.querySelector('.quote-text'), { width: checkContainer.offsetWidth, minHeight: checkContainer.offsetHeight });
+
+                let fontSize = resizeTextToFit(slide.querySelector('.quote-text'), checkContainer);
+                
+                if(fontSize) {
+                    fontSizes.push(fontSize);
+                }
+
+                if(!slide.classList.contains('current')) {
+                    gsap.set(slide.querySelector('.video'), { display: 'none' }, 0);
+                }
+                
+            });
+
+            minFontSize = Math.min(...fontSizes);
+        
+        gsap.set(currentSlide, { height: 'auto' });
+        gsap.set(bottomTrack.querySelectorAll('.slide:not(.current)'), { height: getHeight() });
+
+        gsap.set(bottomTrack.querySelectorAll('.slide:not(.current)'), { minWidth: getOffWidth(), maxWidth: getOffWidth(), aspectRatio: '2 / 3' });
+
+        currentTranslation = initializeTranslation();
+        gsap.set(bottomTrack, { x: currentTranslation });
+
+
+        
+            bottomTrack.querySelectorAll('.slide').forEach(slide => {
+                // resize quote text
+                if(document.documentElement.clientWidth >= 1100) {
+                    slide.querySelector('.quote-text').style.fontSize = minFontSize + 'px';
+                    bottomSlider.querySelector('.slider').style.height = '';
+                } else {
+                    slide.querySelector('.quote-text').style.fontSize = '';
+                    slide.querySelector('.quote-text').style.width = '';
+                    slide.querySelector('.quote-text').style.minHeight = '';
+                }
+            });
+
+        
+        gsap.set(document.getElementById('body'), { paddingTop: () => slider.offsetHeight }, 0);
+        gsap.set(document.getElementById('bottom-bg'), { paddingTop: () => slider.offsetHeight }, 0);
+        gsap.set(document.getElementById('gradient-bg'), { top: () => slider.offsetHeight / 2 }, 0);
+    }
+
+    function debounce(func, delay) {
+        let timeoutId;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+            func.apply(context, args);
+            }, delay);
+        };
+    }
+
+    const getCurrentWidth = () => {
+        if(document.documentElement.clientWidth >= 1100) {
+                            return Math.round(getHeight() * (1.7778 / (2/3)));
+                    } else {
+            return Math.round(getHeight() * (1.7778));
+        }
+    }
+
+    const getOffWidth = () => {
+        return Math.round(getHeight() * .66666666667);
+    }
+
+    const getHeight = () => {
+        if(document.documentElement.clientWidth >= 600) {
+            return Math.round(document.documentElement.clientWidth * .19);
+        } else {
+            return Math.round(document.documentElement.clientWidth * .45);
+        }
+    }
+
+    const initializeTranslation = () => {
+        return Math.round((document.documentElement.clientWidth / 2) - ((getOffWidth() + 22) * slidesLength) - ((getCurrentWidth() / 2)));
+    }
+
+    function resetText(textElement) {
+        let fontSize = 13; // Initial font size
+        textElement.style.fontSize = `${fontSize}px`; 
+    }
+
+    function resizeTextToFit(textElement, checkContainer) {
+        if(textElement.textContent == '' || textElement.textContent == null) {
+            return false;
+        }
+
+        let fontSize = 1; // Initial font size
+        const maxFontSize = 128; // Maximum allowed font size
+
+        // Reset font size to ensure accurate measurement
+        textElement.style.fontSize = `${fontSize}px`; 
+
+        while (fontSize < maxFontSize) {
+            textElement.style.fontSize = `${fontSize}px`;
+
+            console.log('quote', textElement.innerHTML);
+            console.log('height', textElement.scrollHeight);
+            console.log('width', textElement.scrollWidth);
+
+            // Check for overflow (adjust based on desired direction of fit)
+            if (textElement.scrollHeight > checkContainer.clientHeight || textElement.scrollWidth > checkContainer.clientWidth) {
+                fontSize--;
+                break;
+            }
+            fontSize++;
+        }
+
+        textElement.style.fontSize = '';
+
+        return fontSize;
+    }
+</script><div class="relative flex flex-1 top-0 pointer-events-none" id = "body"><div class="max-w-[1200px] px-[2rem] md:px-[3rem] lg:px-[6rem] mx-auto w-full"><div class="pt-[60px] pb-[133px] relative " id = "genre__grid"><div class="grid pointer-events-auto items-start w-full gap-x-[95px] gap-y-[49px] grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-content-start origin-top scale-[0.7]"><a href="14th" id="14th" data-title="14th" data-keywords="" data-category=", Documentary" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="14th"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/14th_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=kONXFFyZ22XKROi3vw5eCso_02eO_emXjtuxRlTfg3A" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary">Documentary</span></div></a><a href="a-child-of-my-own" id="a-child-of-my-own" data-title="A Child of My Own" data-keywords="" data-category=", Documentary" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="A Child of My Own"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/AChildofMyOwn_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=KtEKgjUkx_OqGRWlGj69I3Re61htGTMvgqcV9XnpLr4" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary">Documentary</span></div></a><a href="an-open-field" id="an-open-field" data-title="An Open Field" data-keywords="" data-category=", Documentary, Short" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="An Open Field"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/AnOpenField_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=l7Ve7g-RDK2rBjXVUckfjGZiVaAt4_gasYUprxxIbUk" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary, Short">Documentary, Short</span></div></a><div role="button" tabindex="0" aria-label="Avedon - Coming soon" id="avedon" data-title="Avedon" data-keywords="" data-category=", Documentary" data-credits="" target="_self" class="film group transition-all is-preview cursor-pointer select-none flex flex-col justify-start h-full" title="Avedon"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Avedon_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=1DiYsxeObsx8k1XiZVes9mToiEtyfW5CJWndkADoXAc" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"><div class="preview-overlay absolute inset-0 bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"><span class="text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase text-[16px]">Coming soon</span></div></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px]  font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary">Documentary</span></div></div><a href="the-baddest-speechwriter-of-all" id="the-baddest-speechwriter-of-all" data-title="The Baddest Speechwriter of All" data-keywords="" data-category=", Documentary, Short" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="The Baddest Speechwriter of All"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/TBSOA_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=2RGTlCeOohcK3g4xZp-iFI0YIyCmkwjTp49neztCgEY" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary, Short">Documentary, Short</span></div></a><div role="button" tabindex="0" aria-label="The Disciple - Coming soon" id="the-disciple" data-title="The Disciple" data-keywords="" data-category=", Documentary" data-credits="" target="_self" class="film group transition-all is-preview cursor-pointer select-none flex flex-col justify-start h-full" title="The Disciple"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/TheDisciple_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=200VL7J3W-Sez5ELDvHB1Zh3Q6t51UODry_63zUpLUA" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"><div class="preview-overlay absolute inset-0 bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"><span class="text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase text-[16px]">Coming soon</span></div></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px]  font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary">Documentary</span></div></div><div role="button" tabindex="0" aria-label="The Further Mis-Adventures of Cliff Booth - Coming soon" id="the-further-mis-adventures-of-cliff-booth" data-title="The Further Mis-Adventures of Cliff Booth" data-keywords="" data-category=", Narrative" data-credits="" target="_self" class="film group transition-all is-preview cursor-pointer select-none flex flex-col justify-start h-full" title="The Further Mis-Adventures of Cliff Booth"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/TFMOCliffBooth_KA_V0.jpg?fit=scale-down&amp;width=400&amp;s=8w4xpjp-BQJAUoAE5Kr6QkQasnAalTGXL9HC8P2zssg" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"><div class="preview-overlay absolute inset-0 bg-black/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"><span class="text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase text-[16px]">Coming soon</span></div></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px]  font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative">Narrative</span></div></div><a href="gentle-monster" id="gentle-monster" data-title="Gentle Monster" data-keywords="" data-category=", Narrative" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Gentle Monster"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/GentleMonster_KA_v2.jpg?fit=scale-down&amp;width=400&amp;s=ro2pmhNIzuP7xzlgNsvliRBlV7iCYlJyB6BZpIX9FCs" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative">Narrative</span></div></a><a href="i-am-frankelda" id="i-am-frankelda" data-title="I Am Frankelda" data-keywords="" data-category=", Animated" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="I Am Frankelda"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/IAmFrankelda_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=LiO9z52fj8SI_g_2Rem9-jaM7KFFuwscjPJ5L65aMdg" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Animated">Animation</span></div></a><a href="in-waves" id="in-waves" data-title="In Waves" data-keywords="" data-category=", Animated" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="In Waves"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/InWaves_KA_v1.jpg?fit=scale-down&amp;width=400&amp;s=eGr62i-5oZHS5egEqDChUKGZK2r8quI4CpkiaBrWybM" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Animated">Animation</span></div></a><a href="ink" id="ink" data-title="Ink" data-keywords="" data-category=", Narrative" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Ink"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Ink_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=UajNiupeVlKJwe4yY_qe_KlGG2uDRxxRzzdq5MBNbqQ" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative">Narrative</span></div></a><a href="jean-michel-basquiat" id="jean-michel-basquiat" data-title="Jean-Michel Basquiat" data-keywords="" data-category=", Documentary" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Jean-Michel Basquiat"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/JMB_KA_v1.jpg?fit=scale-down&amp;width=400&amp;s=T7yfU0HqF5AJ10bcRHUvYYc2BBLTq7vHf036nKfYO68" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary">Documentary</span></div></a><a href="la-bola-negra" id="la-bola-negra" data-title="La Bola Negra" data-keywords="" data-category=", Narrative, International" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="La Bola Negra"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/LaBolaNegra_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=o0DpRInqRw7T1A6HANImxsYXB0JBTut8fnxWCr1aQUY" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative, International">Narrative, International</span></div></a><a href="mosquito-bowl" id="the-mosquito-bowl" data-title="The Mosquito Bowl" data-keywords="" data-category=", Narrative" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="The Mosquito Bowl"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/TheMosquitoBowl_KA_v1.jpg?fit=scale-down&amp;width=400&amp;s=ur4ztuH9lBJ3jjXyWWGPoqDov65Uh182BF6gTXbVoh8" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative">Narrative</span></div></a><a href="on-behalf-of-my-son" id="on-behalf-of-my-son" data-title="On Behalf of My Son" data-keywords="" data-category=", Narrative" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="On Behalf of My Son"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/OnBehalfofMySon_KA_v1.jpg?fit=scale-down&amp;width=400&amp;s=i19gEPZ--qZCQdD09ah8kHsgwmEtLFwb1AmB23uJDRY" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative">Narrative</span></div></a><a href="one-last-order" id="one-last-order" data-title="One Last Order" data-keywords="" data-category=", Documentary, Short" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="One Last Order"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/OneLastOrder_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=cfm1brzH-e6y_-AkPAYnLput6ltaBCfvqXBBtWeB2Bc" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Documentary, Short">Documentary, Short</span></div></a><a href="possible-love" id="possible-love" data-title="Possible Love" data-keywords="" data-category=", Narrative, International" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Possible Love"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/PossibleLove_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=Y2IGTYdDObttedGuJlG71uiJ6ohx5XG4jjMl8MsbviA" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Narrative, International">Narrative, International</span></div></a><a href="ray-gunn" id="ray-gunn" data-title="Ray Gunn" data-keywords="" data-category=", Animated" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Ray Gunn"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/RayGunn_KA_V2.jpg?fit=scale-down&amp;width=400&amp;s=Y34zBo-H4V74KLfs6XKkqe4jbd3XEXVOxiQ3-NjZmL8" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Animated">Animation</span></div></a><a href="steps" id="steps" data-title="Steps" data-keywords="" data-category=", Animated" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Steps"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Steps_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=B0oG9P-cUHqa0qnUKCY0u-oNGvbF9noFOdiotf1XOAQ" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Animated">Animation</span></div></a><a href="swapped" id="swapped" data-title="Swapped" data-keywords="" data-category=", Animated" data-credits="" target="_self" class="film group transition-all hover:scale-[110%] duration-500 flex flex-col justify-start h-full" title="Swapped"><div class="relative overflow-hidden"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/assets/Swapped_KA_V1.jpg?fit=scale-down&amp;width=400&amp;s=YeT-VxNxgrb01bzKPaNtRu-FQgkYWqha2Z3oocMrSlw" aria-hidden="true" alt = "" class="w-full transition-transform duration-300 group-hover:scale-[1.03]"></div><div class="mt-[14px]"><span class="block text-[#f9f9f9] text-center text-[12px] group-hover:text-[#D22F27] font-netflix-ucd tracking-[2.2px] uppercase transition-all duration-500" data-category=", Animated">Animation</span></div></a></div></div></div><div id = "bottom-bg" class="absolute bottom-bg top-0 left-0 w-full h-full z-[-1] bg-[#D9D9D9] opacity-8 pointer-events-none"></div></div><script>
+                // Get references to the select element, film elements, and film option elements
+                const categorySelect = document.querySelector("#categoryfilter__select");
+                const filmElements = document.querySelectorAll(".film");
+                const filmOptionElements = document.querySelectorAll("#filter .film-option");
+                let searchInputs = document.querySelectorAll("#search, #search-modal-input");
+
+                // Keep search/filter-hidden films out of the tab order and AT immediately
+                // (inert alone isn't reliable across browsers/timing; tabindex="-1" always is).
+                function hnHide(el){ el.inert = true; el.setAttribute('tabindex','-1'); el.setAttribute('aria-hidden','true'); }
+                function hnShow(el){ el.inert = false; if(el.classList.contains('is-preview')){ el.setAttribute('tabindex','0'); } else { el.removeAttribute('tabindex'); } el.removeAttribute('aria-hidden'); }
+
+                // Preview / Coming Soon mobile tap interaction (mirrors desktop hover)
+                const previewFilmElements = document.querySelectorAll(".film.is-preview");
+                previewFilmElements.forEach((previewFilm) => {
+                    previewFilm.addEventListener("click", function(event) {
+                        event.stopPropagation();
+                        const wasActive = previewFilm.classList.contains("is-active");
+                        previewFilmElements.forEach(f => f.classList.remove("is-active"));
+                        if (!wasActive) {
+                            previewFilm.classList.add("is-active");
+                        }
+                    });
+                    previewFilm.addEventListener("keydown", function(event) {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            previewFilm.click();
+                        }
+                    });
+                });
+
+                document.addEventListener("click", function(event) {
+                    if (!event.target.closest(".film.is-preview")) {
+                        previewFilmElements.forEach(f => f.classList.remove("is-active"));
+                    }
+                });
+
+                let typingTimer;
+
+                // Add event listeners to the select element and film option elements
+                categorySelect.addEventListener("change", filterFilmsBySelect);
+
+                // Keep the mobile filter label readable: the pill is a fixed width, so step the
+                // type size / tracking down until the selected category fits between the padding
+                // (which reserves room for the chevron) instead of running under it and clipping.
+                function fitCategoryLabel() {
+                    if (!categorySelect || !categorySelect.clientWidth) return;
+                    const option = categorySelect.options[categorySelect.selectedIndex];
+                    if (!option) return;
+                    const label = option.text.trim().toUpperCase();
+                    const styles = window.getComputedStyle(categorySelect);
+                    const available = categorySelect.clientWidth
+                        - parseFloat(styles.paddingLeft || 0)
+                        - parseFloat(styles.paddingRight || 0);
+                    if (!available || available <= 0) return;
+
+                    const steps = [[11, 5.1], [11, 3.5], [10, 2.5], [10, 1.5], [9, 1], [8, 0.6]];
+                    const canvas = fitCategoryLabel._canvas || (fitCategoryLabel._canvas = document.createElement("canvas"));
+                    const ctx = canvas.getContext("2d");
+
+                    for (let i = 0; i < steps.length; i++) {
+                        const size = steps[i][0], tracking = steps[i][1];
+                        ctx.font = styles.fontWeight + " " + size + "px " + styles.fontFamily;
+                        // browsers add the tracking after the last character too
+                        const width = ctx.measureText(label).width + tracking * label.length;
+                        if (width <= available || i === steps.length - 1) {
+                            categorySelect.style.fontSize = size + "px";
+                            categorySelect.style.letterSpacing = tracking + "px";
+                            break;
+                        }
+                    }
+                }
+
+                categorySelect.addEventListener("change", fitCategoryLabel);
+                window.addEventListener("resize", fitCategoryLabel);
+                window.addEventListener("orientationchange", fitCategoryLabel);
+                if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fitCategoryLabel); }
+                fitCategoryLabel();
+                filmOptionElements.forEach((option) => {
+                    option.addEventListener("click", filterFilmsByTab);
+                });
+
+                var handleEnterKey = function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                    }
+                };
+
+                function setSearchPlaceholder() {
+                    searchInputs.forEach(input => {
+                        if(input.getAttribute('data-version') == 'desktop' && window.innerWidth < 768) {
+                            input.setAttribute('data-version', 'mobile');
+                            input.setAttribute('placeholder', 'Search...');
+                        } else if(input.getAttribute('data-version') == 'mobile' && window.innerWidth >= 768) {
+                            input.setAttribute('data-version', 'desktop');
+                            input.setAttribute('placeholder', 'Search by Title, Cast, or Keyword...');
+                        }
+                    });
+                }
+
+                setSearchPlaceholder();
+                window.addEventListener('resize', setSearchPlaceholder);
+
+                function initSearchInputs() {
+                    searchInputs = document.querySelectorAll("#search, #search-modal-input");
+                    searchInputs.forEach(input => {
+                        // Avoid double listeners if script runs twice
+                        input.removeEventListener('keydown', handleEnterKey);
+                        input.addEventListener('keydown', handleEnterKey);
+                        
+                        input.removeEventListener('input', handleSearchInput);
+                        input.addEventListener("input", handleSearchInput);
+                    });
+                    setSearchPlaceholder();
+                }
+
+                function handleSearchInput(e) {
+                    clearTimeout(typingTimer);
+                    searchInputs.forEach(otherInput => {
+                        if (otherInput !== e.target) {
+                            otherInput.value = e.target.value;
+                        }
+                    });
+                    
+                    if (e.target.id !== 'search-modal-input') {
+                        typingTimer = setTimeout(() => searchFilms(e.target.value), 500);
+                    }
+                }
+
+                document.addEventListener("DOMContentLoaded", initSearchInputs);
+                window.addEventListener('load', initSearchInputs);
+
+                function resetHeaderTL() {
+                    
+                    const endPosition = headerTL.scrollTrigger.end; // Get the calculated end position
+
+                    gsap.to(window, {
+                        scrollTo: {
+                            y: endPosition, // Scroll to the exact end pixel value
+                            autoKill: false // Prevents the tween from stopping if the user scrolls manually
+                        },
+                        duration: 1 // Adjust the scroll animation duration as needed
+                    });
+
+                    setTimeout(() => {
+                        headerTL.scrollTrigger.refresh();
+                    }, 500);
+                }
+
+                function addRemoveSearchParam(inputValue = '') {
+                    // update the URL with ?s=query (without reloading page)
+                    const params = new URLSearchParams(window.location.search);
+                    if (inputValue) {
+                        params.set("s", inputValue);
+                    } else {
+                        params.delete("s");
+                    }
+                    const newUrl = `${window.location.pathname}?${params.toString()}`;
+                    window.history.replaceState({}, "", newUrl);
+                }
+
+                window.searchFilms = function(providedValue) {
+                    clearTimeout(typingTimer);
+                    let inputValue = "";
+                    if (typeof providedValue === 'string') {
+                        inputValue = providedValue.toLowerCase();
+                    } else if (searchInputs.length > 0) {
+                        inputValue = searchInputs[0].value.toLowerCase();
+                    }
+
+                    addRemoveSearchParam(inputValue);
+                    previewFilmElements.forEach(f => f.classList.remove("is-active"));
+
+                    filmElements.forEach(function (film) {
+                        const title = film.getAttribute("data-title") || "";
+                        const keywords = film.getAttribute("data-keywords") || "";
+                        const credits = film.getAttribute("data-credits") || "";
+
+                        if (
+                            title.toLowerCase().includes(inputValue) ||
+                            credits.toLowerCase().includes(inputValue) ||
+                            keywords.toLowerCase().includes(inputValue)
+                        ) {
+                            hnShow(film);
+                            setTimeout(() => {
+                                film.style.display = "block";
+                                setTimeout(() => {
+                                    film.classList.remove("!opacity-0");
+                                    film.classList.add("!opacity-100");
+                                }, 100);
+                            }, 500);
+                        } else {
+                            hnHide(film);
+                            film.classList.add("!opacity-0");
+                            film.classList.remove("!opacity-100");
+                            setTimeout(() => {
+                                film.style.display = "none";
+                            }, 500);
+                        }
+                    });
+
+                    document.querySelector(".film-option.active").classList.remove("active");
+                    document.querySelector(".film-option:first-child").classList.add("active");
+                    categorySelect.value = "";
+                    fitCategoryLabel();
+                    
+                    if(window.closeSearchModal) window.closeSearchModal();
+                    resetHeaderTL();
+                }
+
+                function loadSearchFromParams() {
+                    const params = new URLSearchParams(window.location.search);
+                    const searchTerm = params.get("s");
+                    if (searchTerm) {
+                        searchInputs.forEach(input => { input.value = searchTerm; });
+                        searchFilms(searchTerm);
+                    }
+                }
+
+                // NOTE: loadSearchFromParams() is intentionally NOT called on DOMContentLoaded.
+                // It runs at the end of the header timeline setup (in the window 'load' handler
+                // below) so that headerTL exists when searchFilms() -> resetHeaderTL() fires,
+                // and the search scroll-down animation plays when arriving with ?s=<query>.
+
+                function filterFilmsBySelect() {
+                    // Get the selected option value
+                    const selectedOption = categorySelect.value;
+
+                    const activeTab = document.querySelector(".film-option.active");
+                    if (activeTab) {
+                        activeTab.classList.remove("active");
+                    }
+                    const targetTab = document.querySelector('.film-option[data-category="' + selectedOption + '"]');
+                    if (targetTab) {
+                        targetTab.classList.add("active");
+                    }
+
+                    filterFilms(selectedOption);
+                }
+
+                function filterFilmsByTab(event) {
+                    const tab = (event && event.currentTarget) ? event.currentTarget : (event && event.target ? event.target.closest('.film-option') : null);
+                    if (!tab) return;
+                    const selectedOption = tab.getAttribute("data-category");
+
+                    const activeTab = document.querySelector(".film-option.active");
+                    if (activeTab) {
+                        activeTab.classList.remove("active");
+                    }
+                    categorySelect.value = selectedOption;
+                    fitCategoryLabel();
+
+                    tab.classList.add('active');
+
+                    filterFilms(selectedOption);
+                }
+
+                // Function to filter the film elements based on the selected option or clicked film option
+                function filterFilms(selectedOption) {
+                    previewFilmElements.forEach(f => f.classList.remove("is-active"));
+                    // Iterate over each film element
+                    filmElements.forEach((filmElement) => {
+                        // Get the data-category attribute value
+                        const dataCategory = filmElement.getAttribute("data-category");
+
+                        // Show all films if the selected option is "" or a film option is clicked
+                        if (selectedOption === "") {
+                            hnShow(filmElement);
+                            filmElement.style.display = "block";
+                            setTimeout(() => {
+                                filmElement.classList.remove("!opacity-0");
+                                filmElement.classList.add("!opacity-100");
+                            }, 500);
+                        } else {
+                            // Check if the data-category attribute value matches the selected option
+                            if (dataCategory.includes(selectedOption)) {
+                                hnShow(filmElement);
+                                setTimeout(() => {
+                                    filmElement.style.display = "block";
+                                    setTimeout(() => {
+                                        filmElement.classList.remove("!opacity-0");
+                                        filmElement.classList.add("!opacity-100");
+                                    }, 100);
+                                }, 500);
+                            } else {
+                                hnHide(filmElement);
+                                filmElement.classList.add("!opacity-0");
+                                filmElement.classList.remove("!opacity-100");
+                                setTimeout(() => {
+                                    filmElement.style.display = "none";
+                                }, 500);
+                            }
+                        }
+                    });
+
+                    searchInputs.forEach(input => { 
+                        input.value = ''; 
+                        input.dispatchEvent(new Event('input'));
+                    });
+                    addRemoveSearchParam();
+                    
+                    resetHeaderTL();
+                }
+                
+                window.addEventListener('load', function() {
+
+                    setTimeout(() => {
+                        gsap.to('#mainContainer', { opacity: 1, duration: 0.3 });
+
+                                                    document.getElementById('body').style.paddingTop = document.getElementById('slider').offsetHeight + 'px';
+                        
+                        window.scrollTo(0,0);
+
+                        gsap.registerPlugin(ScrollTrigger);
+
+                        headerTL = gsap.timeline({ 
+                            scrollTrigger: {
+                                trigger: "#mainContainer",
+                                start: "top top",
+                                end: window.innerWidth >= 900 ? "+=1000" : "+=500",
+                                pin: true,
+                                pinSpacing: true,
+                                invalidateOnRefresh: true,
+                                scrub: 1,
+                            },
+                            onUpdate: () => {
+                                const filter = document.getElementById('filter');
+                                if (filter) {
+                                    const opacity = parseFloat(gsap.getProperty(filter, 'opacity')) || 0;
+                                    filter.style.pointerEvents = opacity > 0.05 ? 'all' : 'none';
+                                }
+                                const mobileFilter = document.getElementById('mobile-filter-container');
+                                if (mobileFilter) {
+                                    const mOpacity = parseFloat(gsap.getProperty(mobileFilter, 'opacity')) || 0;
+                                    mobileFilter.style.pointerEvents = mOpacity > 0.05 ? 'all' : 'none';
+                                }
+                            }
+                        });
+
+                        const slider = document.getElementById('slider');
+                        let currentVideo, currentBGVideo;
+
+                        headerTL.addLabel('start');
+                        headerTL.to('.header', { backgroundColor: '#000000', height: () => headerHeight(), paddingBottom: 0, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                        if (window.innerWidth >= 900) {
+                            headerTL.to('.header-logo, .header-logo-spacer', { maxWidth: 35, minWidth: 35, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                        }
+                        headerTL.to('.header-text', { height: 0, opacity: 0, y: -20, overflow: 'hidden', pointerEvents: 'none', duration: 0.2, ease: 'power2.inOut' }, 0.001);
+                        headerTL.fromTo('#gradient-bg', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+
+                        const mobileFilterContainer = document.getElementById('mobile-filter-container');
+                        if (mobileFilterContainer) {
+                            headerTL.fromTo('#mobile-filter-container', { opacity: 0, pointerEvents: 'none' }, { opacity: 1, pointerEvents: 'all', duration: 0.2, ease: 'power2.inOut' }, 0.1);
+                        }
+                        
+                                                    headerTL.fromTo('#filter', { opacity: 0, pointerEvents: 'none' }, { opacity: 1, pointerEvents: 'all', duration: () => window.innerWidth >= 900 ? 0.5 : 0.25, ease: 'power2.inOut' }, 0.001);
+                            headerTL.set(document.getElementById('filter'), { top: () => halfOffset() }, 0);
+                            headerTL.set('#filter', { pointerEvents: 'all' }, 0.001);
+                            headerTL.fromTo('#slider', { opacity: 1 }, { opacity: 0, duration: () => window.innerWidth >= 900 ? 0.25 : 0.1, ease: 'power2.inOut' }, 'start+=0.1');
+                            headerTL.fromTo('#slider', { y: 0 }, { y: -100, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                            headerTL.fromTo('#filter', { y: 0 }, { y: () => -halfOffset(), duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                            headerTL.fromTo('#gradient-bg', { y: 0 }, { y: () => window.innerWidth >= 900 ? -halfOffset() : -halfOffset() - 50, duration: () => window.innerWidth >= 900 ? 0.5 : 0.25, ease: 'power2.inOut' }, 0.001);
+                            headerTL.fromTo('#bottom-bg', { opacity: '8%' }, { opacity: '0%', duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                            headerTL.fromTo('#genre__grid', { marginTop: () => -gridOffset(), top: () => gridOffset() - 75 }, { top: 33, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                            headerTL.fromTo('#genre__grid .grid', { scale: 0.7 }, { scale: 1, duration: 0.5, ease: 'power2.inOut' }, 0.001);
+                                                headerTL.addLabel('end');
+                                                    headerTL.add(() => {
+                                if(headerTL.scrollTrigger.direction == -1) {
+                                    console.log('play')
+                                    currentVideo.style.display = "block";
+                                    currentVideo.currentTime = 0;
+                                    currentVideo.play();
+                                    currentBGVideo.style.display = "block";
+                                    currentBGVideo.currentTime = 0;
+                                    currentBGVideo.play();
+                                    gsap.to([currentVideo, currentBGVideo], { opacity: 1 });
+                                }
+                            }, 'start+=0.1')
+                            headerTL.add(() => {
+                                console.log('pause')
+                                if(headerTL.scrollTrigger.direction == 1) {
+                                    currentVideo = slider.querySelector('.current').querySelector('video');
+                                    currentBGVideo = slider.querySelector(`.bg-slide:nth-child(${slider.querySelector('.current').getAttribute('data-index')})`).querySelector('video');
+                                    for(const video of document.getElementById('slider').querySelectorAll('video')) {
+                                        gsap.to([currentVideo, currentBGVideo], { opacity: 0, onComplete: () => {
+                                            currentVideo.style.display = "none";
+                                            currentVideo.pause();
+                                            currentBGVideo.style.display = "none";
+                                            currentBGVideo.pause();
+                                        } });
+                                    }
+                                }
+                            }, 'end-=0.1')
+                        
+                        // Header timeline is now built. Let ScrollTrigger settle, then apply
+                        // ?s=<query> so searchFilms() -> resetHeaderTL() scrolls to the timeline
+                        // end and plays the same scroll-down animation as an on-page search.
+                        ScrollTrigger.refresh();
+                        gsap.delayedCall(0.25, loadSearchFromParams);
+
+                    }, 10);
+
+                });
+
+                const gridOffset = () => {
+                    return (document.getElementById('slider').offsetHeight - headerHeight());
+                }
+
+                const halfOffset = () => {
+                    return (document.getElementById('slider').offsetHeight / 2);
+                }
+
+                const headerHeight = () => {
+                    if (window.innerWidth < 900) {
+                        return 64;
+                    }
+                    // 90 is the end logo height
+                    // filter has variable height if it wraps
+                    const filterEl = document.getElementById('filter');
+                    return 90 + (filterEl ? filterEl.offsetHeight : 0);
+                }
+
+                // Force a page refresh when resizing between mobile and desktop breakpoints (900px)
+                // so GSAP animation, pinned spacing, and header heights re-initialize cleanly
+                let isDesktopBreakpoint = window.innerWidth >= 900;
+                let resizeReloadTriggered = false;
+                window.addEventListener('resize', () => {
+                    const currentIsDesktop = window.innerWidth >= 900;
+                    if (currentIsDesktop !== isDesktopBreakpoint && !resizeReloadTriggered) {
+                        resizeReloadTriggered = true;
+                        window.location.reload();
+                    }
+                });
+
+            </script></div></main><footer class="relative bg-[#111] pb-[40px]"><div class="w-full h-[1px] gradient"></div><div class="flex justify-center md:justify-between items-center flex-col md:flex-row w-full max-w-[1400px] px-[2rem] md:px-[3rem] lg:px-[6rem] mx-auto  pt-[3rem] mb-12 md:mb-0"><div class="flex items-end justify-start mb-[1.5rem]"><div class="mr-[20px]"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/netflix-logo-ribbon.742f01cd.png" class="w-[20px]" alt="Netflix"></div><div class=""><span class="font-medium block text-[12px] text-[#D22F27] tracking-[.1rem] uppercase mb-[3px] leading-[0]">Film</span><span class="text-[8px] md:text-[12px] text-white leading-[0] uppercase tracking-[.1rem] font-normal">For
+                            Your Awards Consideration</span></div></div></div><div class="w-full max-w-[1400px] px-[2rem] md:px-[3rem] lg:px-[6rem] mx-auto"><div class="flex justify-center items-center gap-[3px] lg:gap-0 flex-col lg:flex-row text-[#f9f9f9] max-md:mb-[3rem]"><a target="_blank" rel="noopener noreferrer" href="/privacy" class="text-[12px] md:text-[14px] text-[#f9f9f9] px-[5px] md:px-[10px] font-medium">
+                        Privacy Statement
+                    </a><span class = "hidden lg:block">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a target="_blank" rel="noopener noreferrer" href="/do-not-sell" class="text-[12px] md:text-[14px] text-[#f9f9f9] px-[5px] md:px-[10px] font-medium">
+                        Do Not Sell or Share My Personal Information
+                    </a><span class = "hidden lg:block">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a target="_blank" rel="noopener noreferrer" href="/sustainability" class="text-[12px] md:text-[14px] text-[#f9f9f9] px-[5px] md:px-[10px] font-medium">
+                        Sustainability
+                    </a><span class = "hidden lg:block">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a target="_blank" rel="noopener noreferrer" href="/faq" class="text-[12px] md:text-[14px] text-[#f9f9f9] px-[5px] md:px-[10px] font-medium">
+                        FAQ
+                    </a><span class = "hidden lg:block">&nbsp;&nbsp;|&nbsp;&nbsp;</span><button id="ot-sdk-btn" style="outline: none;margin-left:5px;color:#fff;border:none;padding:0;transition:none!important;background-color: transparent!important;" class="ot-sdk-show-settings text-[12px] md:text-[14px] text-[#f9f9f9] px-[5px] md:px-[10px] font-medium"></button></div><div class="w-full text-center mt-4 text-[11px] text-[#aaa] uppercase font-bold tracking-[.1em]">
+                    Contact Us: &nbsp; <a href = "/contact/">Email</a><span class="text-[rgb(119, 119, 119)]">&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href = "tel:+12132462099">Phone: (213) 246-2099</a></div><div class="w-full text-center mt-[20px] text-[10px] text-[#f9f9f9]"><p>All uses of the Netflix For Your Consideration Website are subject to the terms of use
+                    associated with your promotional code and the
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" class="text-[#D22F27]">Privacy
+                        Statement</a></p></div></div></footer></div><div id="meta-breakpoint"></div><div id="meta-sitewidth"></div><script>
+    const iconLocationDot = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/icon-location-dot.svg";
+    const iconClock = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/icon-clock.svg";
+    const iconWine = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/icon-wine-glass.svg";
+    const iconComments = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/icon-comments.svg";
+    const iconBadge = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/icon-id-badge.svg";
+    const bgStream = "https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/media/bg-streams4.eaed433d.png";
+</script><script>
+    document.addEventListener('DOMContentLoaded', function() {
+        for (const img of document.querySelectorAll('img')) {
+            img.setAttribute('data-pin-nopin', 'true');
+        }
+    });
+</script><div id="overlay"><div id="overlay-scrim"></div><div id="overlay-inner"><div id="overlay-inner2"><div class="overlay-x noselect"><div class="close-button global-close"></div></div><div class="overlay-section" id="overlay-rsvp"><div class="overlay-rsvp-wrapper"><div id="overlay-rsvp-hook"></div></div></div><div class="overlay-section over-video-grabber" id="overlay-trailer-api"><div class="overlay-video-wrapper"><div id="ytplayer"></div></div></div></div></div></div><div id="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-modal-label" class="fixed inset-0 z-[60] hidden bg-black items-center justify-center transition-opacity duration-300 p-[32px] opacity-0" style="opacity: 0;"><div class = "flex h-full w-full items-center justify-center -mt-[1px]"><button id="search-modal-close" class="absolute top-8 right-8 text-white hover:text-gray-300 text-4xl sm:text-5xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors cursor-pointer z-[70]" aria-label="Close search">
+            &times;
+        </button><div class="relative w-full h-full sm:h-auto flex items-center justify-between sm:max-w-4xl mx-auto"><h2 id="search-modal-label" class="sr-only">Site Search</h2><div class="flex items-center w-full opacity-50 focus-within:opacity-100 transition-opacity duration-300 pb-2 border-b border-white border-solid"><button id="search-modal-submit" class="mr-4 sm:mr-6 shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm" aria-label="Submit search"><img src="https://cdn.craft.cloud/df544f99-61e0-42fe-8101-68aa333f9f77/builds/a2dd4578-6b55-45d4-bce0-9f78668248af/artifacts/assets-site/images/global/search.svg" alt="" class="w-[27px]"></button><input type="text" id="search-modal-input" class="w-full bg-transparent text-white placeholder-white/50 text-base focus:outline-none" placeholder="Search by Title, Cast, or Keyword..."><button id="search-modal-clear" class="ml-4 text-white/50 hover:text-white text-2xl focus:outline-none transition-colors cursor-pointer hidden focus-visible:ring-2 focus-visible:ring-white rounded-sm px-1" aria-label="Clear search">
+                    &times;
+                </button></div></div></div></div></body></html>
