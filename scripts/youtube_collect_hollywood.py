@@ -263,6 +263,7 @@ def search_videos(session, key_pool, query, max_pages=6, results_per_page=50, ta
             "relevanceLanguage": "en",
             "regionCode": "US",
             "order": "relevance",
+            "safeSearch": "none",  # 기본값 moderate는 성인 단어가 든 제목을 걸러냄
         }
         if page_token:
             params["pageToken"] = page_token
