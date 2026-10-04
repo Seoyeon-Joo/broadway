@@ -1,0 +1,74 @@
+{
+ "scriptpdf_com_full_list_.html": {
+  "url": "https://scriptpdf.com/full-list/",
+  "status": 200,
+  "final": "https://scriptpdf.com/full-list/",
+  "len": 112755
+ },
+ "bulletproofscreenwriting_tv_free_screenplays_download_.html": {
+  "url": "https://bulletproofscreenwriting.tv/free-screenplays-download/",
+  "status": 200,
+  "final": "https://bulletproofscreenwriting.tv/free-screenplays-download/",
+  "len": 214830
+ },
+ "indiefilmhustle_com_free_screenplays_download_.html": {
+  "url": "https://indiefilmhustle.com/free-screenplays-download/",
+  "status": 200,
+  "final": "https://indiefilmhustle.com/free-screenplays-download/",
+  "len": 312861
+ },
+ "nofilmschool_com_2023_academy_award_screenplays.html": {
+  "url": "https://nofilmschool.com/2023-academy-award-screenplays",
+  "status": 200,
+  "final": "https://nofilmschool.com/2023-academy-award-screenplays",
+  "len": 216286
+ },
+ "colehaddon_substack_com_p_2024s_award_season_screenplays_to.html": {
+  "url": "https://colehaddon.substack.com/p/2024s-award-season-screenplays-to",
+  "status": 403,
+  "final": "https://colehaddon.substack.com/p/2024s-award-season-screenplays-to",
+  "len": 5719
+ },
+ "screenplayhowto_com_category_movie_scripts_pdf_.html": {
+  "url": "https://screenplayhowto.com/category/movie-scripts-pdf/",
+  "status": 202,
+  "final": "https://screenplayhowto.com/category/movie-scripts-pdf/",
+  "len": 198
+ },
+ "www_writing_ninja_free_screenplay_downloads_pdf_.html": {
+  "url": "https://www.writing.ninja/free-screenplay-downloads-pdf/",
+  "status": 200,
+  "final": "https://www.writing.ninja/free-screenplay-downloads-pdf/",
+  "len": 519097
+ },
+ "8flix_com_post_sitemap_xml.html": {
+  "url": "https://8flix.com/post-sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/post-sitemap.xml",
+  "len": 5093
+ },
+ "www_simplyscripts_com_category_movie_scripts_oscar_contenders_.html": {
+  "url": "https://www.simplyscripts.com/category/movie-scripts/oscar-contenders/",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/category/movie-scripts/oscar-contenders/",
+  "len": 102134
+ },
+ "nofilmschool_com_sitemap_xml.html": {
+  "url": "https://nofilmschool.com/sitemap.xml",
+  "status": 200,
+  "final": "https://nofilmschool.com/sitemap.xml",
+  "len": 20573
+ },
+ "screenplayhowto_com_sitemap_xml.html": {
+  "url": "https://screenplayhowto.com/sitemap.xml",
+  "status": 202,
+  "final": "https://screenplayhowto.com/sitemap.xml",
+  "len": 178
+ },
+ "scriptpdf_com_sitemap_xml.html": {
+  "url": "https://scriptpdf.com/sitemap.xml",
+  "status": 200,
+  "final": "https://scriptpdf.com/sitemap.xml",
+  "len": 482
+ }
+}
