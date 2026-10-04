@@ -1,0 +1,190 @@
+{
+ "ss_movie-screenplays": {
+  "url": "https://www.simplyscripts.com/movie-screenplays.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/movie-screenplays.html",
+  "len": 919239
+ },
+ "ss_movie-scripts": {
+  "url": "https://www.simplyscripts.com/movie-scripts.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/movie-scripts.html",
+  "len": 63551
+ },
+ "ss_oscar_winners": {
+  "url": "https://www.simplyscripts.com/oscar_winners.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar_winners.html",
+  "len": 74838
+ },
+ "sb_tag_p1": {
+  "url": "https://www.studiobinder.com/tag/free-screenplays/",
+  "status": 200,
+  "final": "https://www.studiobinder.com/tag/free-screenplays/",
+  "len": 224915
+ },
+ "sb_thriller": {
+  "url": "https://www.studiobinder.com/blog/thriller-scripts/",
+  "status": 200,
+  "final": "https://www.studiobinder.com/blog/thriller-scripts/",
+  "len": 515901
+ },
+ "sb_best": {
+  "url": "https://www.studiobinder.com/blog/best-free-movie-scripts-online/",
+  "status": 200,
+  "final": "https://www.studiobinder.com/blog/best-free-movie-scripts-online/",
+  "len": 1370767
+ },
+ "sb_goodfellas": {
+  "url": "https://www.studiobinder.com/blog/goodfellas-script-screenplay-pdf-download/",
+  "status": 200,
+  "final": "https://www.studiobinder.com/blog/goodfellas-script-screenplay-pdf-download/",
+  "len": 422122
+ },
+ "ss_oscar_88": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-88.html",
+  "status": 404,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-88.html",
+  "len": 63183
+ },
+ "ss_oscar_89": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-89.html",
+  "status": 404,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-89.html",
+  "len": 63183
+ },
+ "ss_oscar_90": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-90.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-90.html",
+  "len": 57507
+ },
+ "ss_oscar_91": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-91.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-91.html",
+  "len": 63857
+ },
+ "ss_oscar_92": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-92.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-92.html",
+  "len": 61505
+ },
+ "ss_oscar_93": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-93.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-93.html",
+  "len": 65525
+ },
+ "ss_oscar_94": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-94.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-94.html",
+  "len": 67434
+ },
+ "ss_oscar_95": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-95.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-95.html",
+  "len": 67524
+ },
+ "ss_oscar_96": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-96.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-96.html",
+  "len": 73340
+ },
+ "ss_oscar_97": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-97.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-97.html",
+  "len": 62135
+ },
+ "ss_oscar_98": {
+  "url": "https://www.simplyscripts.com/oscar-screenplays-98.html",
+  "status": 200,
+  "final": "https://www.simplyscripts.com/oscar-screenplays-98.html",
+  "len": 49676
+ },
+ "_bitly": [
+  {
+   "bitly": "https://bit.ly/2BuR0ix",
+   "final": "https://www.youtube.com/channel/UCUFoQUaVRt3MVFxqwPUMLCQ?sub_confirmation=1&utm_medium=blog_link&utm_campaign=blog-yt-subscribe-link&utm_source=blog&utm_content=cinematography-techniques&utm_term=cinematography-techniques",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/2BuR0ix"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/3mVHqs2",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/5fce8be550eb2f12c88a57c8/projects/5fbbc24766461211963c3b52/document/5fbbc257231435110248f01f/?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=1408-full-script-pdf-download",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/3mVHqs2",
+    "https://app.studiobinder.com/shared/5fce8be550eb2f12c88a57c8?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=1408-full-script-pdf-download"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/3mVHqs2",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/5fce8be550eb2f12c88a57c8/projects/5fbbc24766461211963c3b52/document/5fbbc257231435110248f01f/?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=1408-full-script-pdf-download",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/3mVHqs2",
+    "https://app.studiobinder.com/shared/5fce8be550eb2f12c88a57c8?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=1408-full-script-pdf-download"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/2VRxyUI",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/5f034ff4be7c65be93c66218/projects/5f034cbf46f5c562a9b3b3b0/document/5f034cc946f5c562a9b3b423/?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=ad-astra-pdf-download",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/2VRxyUI",
+    "https://app.studiobinder.com/shared/5f034ff4be7c65be93c66218?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=ad-astra-pdf-download"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/2VRxyUI",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/5f034ff4be7c65be93c66218/projects/5f034cbf46f5c562a9b3b3b0/document/5f034cc946f5c562a9b3b423/?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=ad-astra-pdf-download",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/2VRxyUI",
+    "https://app.studiobinder.com/shared/5f034ff4be7c65be93c66218?utm_source=blog&utm_medium=sb-app-link&utm_campaign=script&utm_term=best-free-movie-scripts&utm_content=ad-astra-pdf-download"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/3sDJWcm",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/61ca0a1a377db18de8ace33d/projects/60d0c2dd84d87c66542ca7fc/document/60f13853e24b004c7de38f80/?utm_source=blog&utm_medium=post&utm_campaign=sb-app-link&utm_id=blog&utm_term=best-free-movie-scripts&utm_content=american-psycho",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/3sDJWcm",
+    "https://app.studiobinder.com/shared/61ca0a1a377db18de8ace33d?utm_source=blog&utm_medium=post&utm_campaign=sb-app-link&utm_id=blog&utm_term=best-free-movie-scripts&utm_content=american-psycho"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/2BuR0ix",
+   "final": "https://www.youtube.com/channel/UCUFoQUaVRt3MVFxqwPUMLCQ?sub_confirmation=1&utm_medium=blog_link&utm_campaign=blog-yt-subscribe-link&utm_source=blog&utm_content=cinematography-techniques&utm_term=cinematography-techniques",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/2BuR0ix"
+   ]
+  },
+  {
+   "bitly": "https://bit.ly/3sDJWcm",
+   "final": "https://app.studiobinder.com/company/580e85847e7982164664e844/collab/61ca0a1a377db18de8ace33d/projects/60d0c2dd84d87c66542ca7fc/document/60f13853e24b004c7de38f80/?utm_source=blog&utm_medium=post&utm_campaign=sb-app-link&utm_id=blog&utm_term=best-free-movie-scripts&utm_content=american-psycho",
+   "status": 200,
+   "ctype": "text/html; charset=utf-8",
+   "hist": [
+    "https://bit.ly/3sDJWcm",
+    "https://app.studiobinder.com/shared/61ca0a1a377db18de8ace33d?utm_source=blog&utm_medium=post&utm_campaign=sb-app-link&utm_id=blog&utm_term=best-free-movie-scripts&utm_content=american-psycho"
+   ]
+  }
+ ]
+}
