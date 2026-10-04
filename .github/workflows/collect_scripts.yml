@@ -20,6 +20,9 @@ on:
         description: "매칭 결과만 만들기 (다운로드 안 함)"
         type: boolean
         default: false
+      titles:
+        description: "(선택) 이 제목들만 실행, | 로 구분 — 디버깅용"
+        default: ""
       fuzzy:
         description: "퍼지 매칭 최소 점수 (0-100, 연도 검증된 경우에만 적용)"
         default: "92"
@@ -50,6 +53,7 @@ jobs:
             --txt-dir data/scripts_txt \
             --raw-dir data/scripts_raw \
             --fuzzy "${{ github.event.inputs.fuzzy || '92' }}" \
+            --titles "${{ github.event.inputs.titles }}" \
             ${{ github.event.inputs.match_only == 'true' && '--match-only' || '' }}
 
       - name: Upload results

@@ -233,9 +233,13 @@ def main():
     ap.add_argument("--fuzzy", type=int, default=92)
     ap.add_argument("--max-tries", type=int, default=4, help="candidates tried per movie")
     ap.add_argument("--match-only", action="store_true")
+    ap.add_argument("--titles", default="", help="only these movie titles (separated by |), for debugging")
     a = ap.parse_args()
 
     movies = pd.read_excel(a.input)
+    if a.titles:
+        want = {t.strip() for t in a.titles.split("|") if t.strip()}
+        movies = movies[movies["movie_title"].astype(str).str.strip().isin(want)]
     rel = release_years(a.release_years)
     catalog = load_catalog()
     by_norm: dict[str, list[dict]] = {}
@@ -290,9 +294,12 @@ def main():
     st = res["status"].value_counts().to_dict()
     src = res.loc[res["status"] == "ok", "source"].value_counts().to_dict()
     print(f"::notice::movies={len(res)} | status={st} | ok by source={src}")
-    failed = res.loc[res["status"] == "download_failed", "movie_title"].tolist()
-    if failed:
-        print(f"::notice::download_failed ({len(failed)}): {failed[:60]}")
+    failed = res[res["status"] == "download_failed"]
+    if len(failed):
+        print(f"::notice::download_failed ({len(failed)}): {failed['movie_title'].tolist()[:60]}")
+        lines = [f"{r.movie_title} => {r.tried} :: {r.all_candidates[:160]}" for r in failed.itertuples()]
+        for i in range(0, len(lines), 12):  # annotations are size-limited; chunk them
+            print("::notice::FAILED DETAIL " + " #### ".join(lines[i:i + 12]))
 
 
 if __name__ == "__main__":
