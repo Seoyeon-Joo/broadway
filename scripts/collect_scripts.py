@@ -133,7 +133,13 @@ BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 
 
 def _get_once(url: str):
-    r = session.get(url, timeout=(20, 90), allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+    """Default UA first (some CDNs, e.g. DocumentCloud, 403 a spoofed browser UA);
+    retry with a browser UA only if the default one is refused."""
+    r = session.get(url, timeout=(20, 90), allow_redirects=True)
+    if r.status_code == 403:
+        r2 = session.get(url, timeout=(20, 90), allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+        if r2.ok:
+            return r2
     r.raise_for_status()
     return r
 
@@ -149,7 +155,7 @@ def _archive_get(url: str):
         if wait > 0:
             time.sleep(wait)
         _last_archive[0] = time.time()
-        r = session.get(url, timeout=(20, 90), allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+        r = session.get(url, timeout=(20, 90), allow_redirects=True)
         if r.status_code == 429:
             ARCHIVE_STATS["429"] += 1
             if attempt == 0:
