@@ -258,6 +258,8 @@ def main():
     results.to_excel(args.output, index=False)
     print(f"Saved: {args.output}")
     print(f"Matched: {int(results['matched'].sum())}/{len(results)}")
+    fmts = results.loc[results["matched"], "script_format"].value_counts().to_dict()
+    print(f"::notice::Daily Script catalog={len(catalog)} | matched={int(results['matched'].sum())}/{len(results)} | formats={fmts}")
 
     if args.download != "none":
         download(results, args.download, Path(args.approved), Path(args.download_dir))
