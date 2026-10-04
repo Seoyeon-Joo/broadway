@@ -2,9 +2,21 @@
 Combined screenplay collector — one script per movie, sources in priority order.
 
   1. SimplyScripts award-season pages (studio FYC scripts, 2018-2026)
-  2. SimplyScripts full movie list (links to many hosts)
-  3. IMSDb
-  4. Daily Script
+  2. Script Slug (scriptslug.com, ~2k film scripts incl. 2021-2026)
+  3. SimplyScripts full movie list (links to many hosts)
+  4. Deadline "read the screenplay" articles (2020-09 onward)
+  5. IMSDb
+  6. Daily Script
+
+Movie list handling
+  - Box Office Mojo re-release suffixes ("Alien2020 Re-release", "Coraline15th Anniversary")
+    are stripped before matching; re-releases (suffix, or Box Office Mojo "Weeks" >= 52 at
+    first appearance) accept scripts from any earlier year.
+  - Non-film items (concerts, UFC, opera/stage broadcasts, TV-episode screenings, shorts
+    programmes) are classified (non_film_type) and skipped.
+  - --previous <results.xlsx|csv>: movies already collected there are carried over and skipped.
+  - Any file format is kept: if no text can be extracted, the original PDF/DOC is still saved
+    (status ok_raw_only).
 
 For every movie in data/movie_list.xlsx:
   - candidates = exact (normalized) title matches in every source, plus fuzzy matches
@@ -39,12 +51,21 @@ from rapidfuzz import fuzz, process
 
 import dailyscript_matcher as ds
 import imsdb_matcher as im
+import more_sources as ms
 import simplyscripts_source as ss
+import title_utils as tu
 from imsdb_matcher import norm  # handles "Title, The" -> "the title"
 
 session = ds.session
 MIN_CHARS = 15000  # a feature screenplay is typically 100k+ characters
-SOURCE_RANK = {"simplyscripts_award": 0, "simplyscripts": 1, "imsdb": 2, "dailyscript": 3}
+SOURCE_RANK = {"simplyscripts_award": 0, "scriptslug": 1, "simplyscripts": 2, "deadline": 3,
+               "imsdb": 4, "dailyscript": 5}
+RAW_OK_EXT = {".pdf", ".doc", ".docx", ".rtf"}
+RAW_MIN_BYTES = 30_000
+
+
+def compact(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", norm(s).replace(" and ", " "))
 
 
 # ----------------------------------------------------------------- catalogs
@@ -55,6 +76,11 @@ def load_catalog() -> list[dict]:
         cands.append({"source": "simplyscripts_award" if e["award_year"] else "simplyscripts",
                       "title": e["title"], "url": e["url"], "year": e["script_year"],
                       "award_year": e["award_year"], "info": f"{e['host']} | {e['draft_info']}"})
+    print("Script Slug...")
+    try:
+        cands += ms.scriptslug_catalog(session)
+    except Exception as e:  # noqa: BLE001
+        print(f"::warning::Script Slug catalog failed: {e}")
     print("IMSDb...")
     try:
         for e in im.build_catalog():
@@ -73,24 +99,37 @@ def load_catalog() -> list[dict]:
         print(f"::warning::Daily Script catalog failed: {e}")
     for c in cands:
         c["norm"] = norm(c["title"])
+        c["compact"] = compact(c["title"])
     counts = pd.Series([c["source"] for c in cands]).value_counts().to_dict()
     print(f"Catalog: {len(cands)} entries {counts}")
     return [c for c in cands if c["norm"]]
 
 
-def release_years(path: str) -> dict:
+def release_info(path: str) -> tuple[dict, dict, dict]:
+    """(first box-office year, weeks-in-release at first appearance, distributor) per movie_id."""
     try:
-        h = pd.read_excel(path, usecols=["movie_id", "Year"])
-        return h.groupby("movie_id")["Year"].min().astype(int).to_dict()
+        h = pd.read_excel(path, usecols=["movie_id", "Year", "Weeks", "Distributor", "week_start_date"])
+        h = h.sort_values("week_start_date")
+        first = h.groupby("movie_id").first()
+        years = h.groupby("movie_id")["Year"].min().astype(int).to_dict()
+        weeks = pd.to_numeric(first["Weeks"], errors="coerce").fillna(0).astype(int).to_dict()
+        dist = h.groupby("movie_id")["Distributor"].agg(
+            lambda x: x.dropna().iloc[0] if x.notna().any() else "").to_dict()
+        return years, weeks, dist
     except Exception as e:  # noqa: BLE001
-        print(f"::warning::release years unavailable ({e}); year check disabled")
-        return {}
+        print(f"::warning::release info unavailable ({e}); year check disabled")
+        return {}, {}, {}
 
 
-def year_check(c: dict, rel: int | None) -> str:
+def year_check(c: dict, rel: int | None, rerelease: bool = False) -> str:
     """'ok' | 'fail' | 'unknown'"""
     if not rel:
         return "unknown"
+    if rerelease:  # re-release of an older film: any script from before the re-release year
+        y = c["year"] or (str(int(c["award_year"]) - 1) if c["award_year"] else "")
+        if not y:
+            return "unknown"
+        return "ok" if int(y) <= rel else "fail"
     if c["award_year"]:
         return "ok" if rel - 1 <= int(c["award_year"]) - 1 <= rel + 1 else "fail"
     if c["year"]:
@@ -99,16 +138,26 @@ def year_check(c: dict, rel: int | None) -> str:
     return "unknown"
 
 
-def candidates_for(title: str, rel, by_norm: dict, keys: list, fuzzy: int) -> list[dict]:
+def candidates_for(title: str, rel, by_norm: dict, keys: list, fuzzy: int,
+                   by_compact: dict | None = None, deadline_idx: list | None = None,
+                   rerelease: bool = False) -> list[dict]:
     n = norm(title)
     found = [dict(c, score=100.0) for c in by_norm.get(n, [])]
+    seen = {(c["source"], c["url"]) for c in found}
+    for c in (by_compact or {}).get(compact(title), []):  # punctuation-insensitive (Script Slug slugs)
+        if (c["source"], c["url"]) not in seen:
+            found.append(dict(c, score=100.0))
+            seen.add((c["source"], c["url"]))
+    for c in ms.deadline_candidates(title, deadline_idx or []):
+        c["norm"], c["compact"] = n, compact(title)
+        found.append(dict(c, score=100.0))
     if n:
         for key, score, _ in process.extract(n, keys, scorer=fuzz.ratio, limit=5):
             if key != n and score >= fuzzy:
                 found += [dict(c, score=float(score)) for c in by_norm[key]]
     out = []
     for c in found:
-        c["year_check"] = year_check(c, rel)
+        c["year_check"] = year_check(c, rel, rerelease)
         if c["score"] < 100 and (c["year_check"] != "ok" or not _wordwise_close(n, c["norm"])):
             continue  # fuzzy matches must be year-verified and differ only by typos
         out.append(c)
@@ -314,7 +363,18 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
                     return t2, wb.content, ".pdf", wb.url
         return t, r.content, ".pdf", url
     ctype = r.headers.get("content-type", "").lower()
-    if "text/plain" in ctype or urlparse(url).path.lower().endswith(".txt"):
+    path = urlparse(url).path.lower()
+    if r.content[:2] == b"PK" and ("wordprocessingml" in ctype or path.endswith(".docx")):
+        import zipfile
+        xml = zipfile.ZipFile(io.BytesIO(r.content)).read("word/document.xml").decode("utf-8", "replace")
+        xml = re.sub(r"</w:p>", "\n", xml)
+        return _clean(re.sub(r"<[^>]+>", "", xml)), r.content, ".docx", url
+    if path.endswith((".doc", ".rtf")) or "msword" in ctype or "rtf" in ctype:
+        txt = r.content.decode("latin-1", "replace")
+        if path.endswith(".rtf") or "rtf" in ctype:
+            txt = re.sub(r"\\[a-z]+-?\d* ?|[{}]", "", txt)
+        return _clean(txt) if path.endswith(".rtf") else "", r.content, ".rtf" if "rtf" in path else ".doc", url
+    if "text/plain" in ctype or path.endswith(".txt"):
         r.encoding = r.apparent_encoding or r.encoding
         return _clean(r.text), r.content, ".txt", url
     text = _clean(_html_text(r))
@@ -396,18 +456,37 @@ def main():
     ap.add_argument("--match-only", action="store_true")
     ap.add_argument("--per-try-timeout", type=int, default=480, help="seconds per candidate")
     ap.add_argument("--titles", default="", help="only these movie titles (separated by |), for debugging")
+    ap.add_argument("--previous", default="", help="earlier script_collection.xlsx/.csv: skip movies already ok")
     a = ap.parse_args()
 
     movies = pd.read_excel(a.input)
     if a.titles:
         want = {t.strip() for t in a.titles.split("|") if t.strip()}
         movies = movies[movies["movie_title"].astype(str).str.strip().isin(want)]
-    rel = release_years(a.release_years)
+    rel, first_weeks, dist = release_info(a.release_years)
+
+    prev_ok = pd.DataFrame()
+    if a.previous and Path(a.previous).exists():
+        prev = pd.read_csv(a.previous) if a.previous.endswith(".csv") else pd.read_excel(a.previous)
+        prev_ok = prev[prev["status"].astype(str).str.startswith("ok")].copy()
+        prev_ok["round"] = prev_ok.get("round", pd.Series("previous", index=prev_ok.index)).fillna("previous")
+        print(f"Previous results: {len(prev_ok)} movies already collected -> skipped")
+    done_ids = set(prev_ok["movie_id"]) if len(prev_ok) else set()
+
     catalog = load_catalog()
     by_norm: dict[str, list[dict]] = {}
+    by_compact: dict[str, list[dict]] = {}
     for c in catalog:
         by_norm.setdefault(c["norm"], []).append(c)
+        if c.get("compact"):
+            by_compact.setdefault(c["compact"], []).append(c)
     keys = list(by_norm)
+    print("Deadline...")
+    try:
+        deadline_idx = ms.deadline_index(session)
+    except Exception as e:  # noqa: BLE001
+        print(f"::warning::Deadline index failed: {e}")
+        deadline_idx = []
 
     txt_dir, raw_dir = Path(a.txt_dir), Path(a.raw_dir)
     txt_dir.mkdir(parents=True, exist_ok=True)
@@ -417,18 +496,29 @@ def main():
     partial = Path(a.output).with_suffix(".partial.csv")
     partial.parent.mkdir(parents=True, exist_ok=True)
     partial.unlink(missing_ok=True)
+    round_name = pd.Timestamp.now(tz="Asia/Seoul").strftime("%Y-%m-%d %H:%M")
     for _, mv in movies.iterrows():
         mid, title = mv["movie_id"], str(mv["movie_title"]).strip()
+        if mid in done_ids:
+            continue
         ry = rel.get(mid)
-        cands = candidates_for(title, ry, by_norm, keys, a.fuzzy)
-        row = {"movie_id": mid, "movie_title": title, "release_year": ry,
-               "n_candidates": len(cands), "status": "no_match" if not cands else "matched",
+        search_title, suffix = tu.clean_title(title)
+        rerelease = suffix or first_weeks.get(mid, 0) >= 52
+        nf = tu.non_film_type(title, dist.get(mid, ""))
+        cands = [] if nf else candidates_for(search_title, ry, by_norm, keys, a.fuzzy,
+                                            by_compact, deadline_idx, rerelease)
+        row = {"movie_id": mid, "movie_title": title, "search_title": search_title,
+               "release_year": ry, "rerelease": rerelease, "non_film_type": nf,
+               "distributor": dist.get(mid, ""), "round": round_name,
+               "n_candidates": len(cands),
+               "status": "non_film" if nf else ("no_match" if not cands else "matched"),
                "source": "", "matched_title": "", "match_score": "", "year_check": "",
                "script_url": "", "via": "", "chars": 0, "script_info": "", "tried": "",
                "all_candidates": " || ".join(f"{c['source']}:{c['title']}:{c['url']}" for c in cands)}
         if cands and not a.match_only:
             row["status"] = "download_failed"
             tried = []
+            raw_fallback = None  # first usable original file without extractable text
             for c in cands[: a.max_tries]:
                 try:
                     signal.alarm(a.per_try_timeout)  # hard cap per candidate (hung server / huge OCR)
@@ -438,6 +528,8 @@ def main():
                         signal.alarm(0)
                     ok = len(text) >= MIN_CHARS
                     tried.append(f"{c['source']}:{'ok' if ok else f'short({len(text)})'}")
+                    if not ok and raw_fallback is None and ext in RAW_OK_EXT and len(raw) >= RAW_MIN_BYTES:
+                        raw_fallback = (c, raw, ext, final, len(text))
                     if ok:
                         safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{mid}_{title}").strip(" ._")[:150]
                         (txt_dir / f"{safe}.txt").write_text(text, encoding="utf-8")
@@ -450,6 +542,14 @@ def main():
                 except Exception as e:  # noqa: BLE001
                     tried.append(f"{c['source']}:err({type(e).__name__}: {str(e)[:60]})")
                 time.sleep(1.5)
+            if row["status"] == "download_failed" and raw_fallback is not None:
+                c, raw, ext, final, n = raw_fallback  # keep the original file anyway (any format is fine)
+                safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{mid}_{title}").strip(" ._")[:150]
+                (raw_dir / f"{safe}{ext}").write_bytes(raw)
+                row.update(status="ok_raw_only", source=c["source"], matched_title=c["title"],
+                           match_score=c["score"], year_check=c["year_check"], script_url=final,
+                           chars=n, script_info=c["info"][:300],
+                           via="wayback" if "web.archive.org" in final else "")
             row["tried"] = " ; ".join(tried)
             print(f"  [{row['status']}] {title} ({ry}) <- {row['source'] or '-'} | {row['tried']}", flush=True)
         elif cands:
@@ -461,13 +561,19 @@ def main():
             pd.DataFrame([row]).to_csv(partial, mode="a", header=not partial.exists(),
                                        index=False, encoding="utf-8-sig")
 
-    res = pd.DataFrame(rows)
+    new = pd.DataFrame(rows)
+    res = pd.concat([prev_ok, new], ignore_index=True) if len(prev_ok) else new
+    if "movie_id" in res:
+        order = {m: i for i, m in enumerate(movies["movie_id"])}
+        res = res.sort_values("movie_id", key=lambda s: s.map(order).fillna(1e9))
     Path(a.output).parent.mkdir(parents=True, exist_ok=True)
     res.to_excel(a.output, index=False)
     st = res["status"].value_counts().to_dict()
-    src = res.loc[res["status"] == "ok", "source"].value_counts().to_dict()
+    src = res.loc[res["status"].astype(str).str.startswith("ok"), "source"].value_counts().to_dict()
+    gained = new["status"].astype(str).str.startswith("ok").sum() if len(new) else 0
+    print(f"::notice::this round: +{gained} new scripts | non_film={int((new['status'] == 'non_film').sum())}")
     print(f"::notice::movies={len(res)} | status={st} | ok by source={src} | OCR used={len(OCR_USED)} | wayback={ARCHIVE_STATS}")
-    failed = res[res["status"] == "download_failed"]
+    failed = new[new["status"] == "download_failed"] if len(new) else new
     if len(failed):
         print(f"::notice::download_failed ({len(failed)}): {failed['movie_title'].tolist()[:60]}")
         lines = [f"{r.movie_title} => {r.tried} :: {r.all_candidates[:160]}" for r in failed.itertuples()]

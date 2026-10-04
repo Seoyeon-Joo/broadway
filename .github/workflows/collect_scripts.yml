@@ -1,7 +1,9 @@
 # .github/workflows/collect_scripts.yml
 #
-# 영화 대본 통합 수집: data/movie_list.xlsx 의 영화마다 대본 1개씩 txt로 저장
-#   우선순위: SimplyScripts 수상시즌(스튜디오 공개 대본) > SimplyScripts 전체목록 > IMSDb > Daily Script
+# 영화 대본 통합 수집: data/movie_list.xlsx 의 영화마다 대본 1개씩 저장
+#   우선순위: SimplyScripts 수상시즌 > Script Slug > SimplyScripts 전체목록 > Deadline 기사 > IMSDb > Daily Script
+#   previous_run_id 에 이전 실행 번호를 넣으면 그때 받은 영화는 건너뛰고, 결과 엑셀은 누적으로 만듭니다.
+#   재개봉작(제목의 "2022 Re-release" 등)은 원작 대본으로, 공연·UFC·오페라 등 영화가 아닌 것은 non_film 으로 분류.
 #   앞 순위 링크가 깨져 있으면 다음 후보로 자동으로 넘어갑니다.
 #   개봉연도(data/hollywood.xlsx 의 첫 박스오피스 연도)로 후보 순서를 정하고 year_check 열에 표시합니다.
 #   죽은 링크는 Wayback Machine 보관본으로, 스캔본 PDF는 OCR(tesseract)로 처리합니다 (txt 앞에 [OCR] 표시).
@@ -21,12 +23,19 @@ on:
         description: "매칭 결과만 만들기 (다운로드 안 함)"
         type: boolean
         default: false
+      previous_run_id:
+        description: "(선택) 이전 Collect screenplays 실행 번호 — 이미 받은 영화는 건너뜀"
+        default: ""
       titles:
         description: "(선택) 이 제목들만 실행, | 로 구분 — 디버깅용"
         default: ""
       fuzzy:
         description: "퍼지 매칭 최소 점수 (0-100, 연도 검증된 경우에만 적용)"
         default: "92"
+
+permissions:
+  contents: read
+  actions: read
 
 jobs:
   collect:
@@ -48,8 +57,18 @@ jobs:
           pip install "pandas>=2.2" "openpyxl>=3.1" "requests>=2.32" "beautifulsoup4>=4.12" "rapidfuzz>=3.9" \
                       "pypdf>=4.0" "pymupdf>=1.24" "pytesseract>=0.3.10" "pillow>=10" "gdown>=5.2"
 
+      - name: Download previous results
+        if: ${{ github.event.inputs.previous_run_id != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ github.event.inputs.previous_run_id }}" -R "${{ github.repository }}" -n scripts-results -D prev
+          ls -la prev
+
       - name: Collect screenplays
         run: |
+          PREV=""
+          [ -f prev/script_collection.xlsx ] && PREV="--previous prev/script_collection.xlsx"
           python scripts/collect_scripts.py \
             --input data/movie_list.xlsx \
             --release-years data/hollywood.xlsx \
@@ -57,7 +76,7 @@ jobs:
             --txt-dir data/scripts_txt \
             --raw-dir data/scripts_raw \
             --fuzzy "${{ github.event.inputs.fuzzy || '92' }}" \
-            --titles "${{ github.event.inputs.titles }}" \
+            --titles "${{ github.event.inputs.titles }}" $PREV \
             ${{ github.event.inputs.match_only == 'true' && '--match-only' || '' }}
 
       - name: Upload results
