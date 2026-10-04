@@ -1,0 +1,72 @@
+name: Check Shorts (Hollywood)
+
+# Hollywood YouTube 영상의 실제 Shorts 여부를 /shorts/{video_id} 응답으로 판별.
+# - 10개 shard 병렬, 각 shard 결과를 hollywood-youtube-data Release에 덮어써 저장
+# - 다시 실행하면 Release의 shard 파일을 받아 이어서 진행(체크포인트)
+# - merge 잡이 hollywood_shorts_result.csv(video_id,is_shorts)로 합쳐 업로드
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DATA_TAG: hollywood-youtube-data
+  NUM_SHARDS: 10
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas requests
+
+      - name: 기존 진행 상황 받아오기
+        run: |
+          mkdir -p data/shorts
+          gh release download "$DATA_TAG" --dir data/shorts \
+            --pattern "shorts_shard_${{ matrix.shard }}.csv" --clobber 2>/dev/null || \
+            echo "기존 데이터 없음 (첫 실행)"
+
+      - name: Shorts 판별
+        run: |
+          python scripts/check_shorts_hollywood.py \
+            --out data/shorts/shorts_shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} --num-shards "$NUM_SHARDS"
+
+      - name: Release에 업로드
+        if: always()
+        run: |
+          bash scripts/checkpoint_release.sh "$DATA_TAG" \
+            data/shorts/shorts_shard_${{ matrix.shard }}.csv
+
+  merge:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install pandas
+      - name: shard 합치기
+        run: |
+          mkdir -p data/shorts
+          gh release download "$DATA_TAG" --dir data/shorts --pattern "shorts_shard_*.csv" --clobber
+          python - <<'EOF'
+          import glob, pandas as pd
+          d = pd.concat([pd.read_csv(f) for f in glob.glob("data/shorts/shorts_shard_*.csv")])
+          d = d.drop_duplicates("video_id", keep="last")
+          t = pd.read_csv("data/hollywood_shorts_targets.csv")
+          print(f"판별 완료 {len(d)} / 전체 {t.video_id.nunique()}  shorts={int(d.is_shorts.sum())}")
+          d.to_csv("data/shorts/hollywood_shorts_result.csv", index=False)
+          EOF
+          bash scripts/checkpoint_release.sh "$DATA_TAG" data/shorts/hollywood_shorts_result.csv
