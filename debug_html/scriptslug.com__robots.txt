@@ -1,0 +1,92 @@
+# robots.txt for https://www.scriptslug.com/
+
+Sitemap: https://www.scriptslug.com/sitemap.xml
+Sitemap: https://www.scriptslug.com/sitemap-news.xml
+
+# ==============================================
+# AI/LLM Crawlers - Allow access to all content
+# ==============================================
+
+# OpenAI (ChatGPT, GPT models)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+User-agent: Claude-Web
+Allow: /
+
+# Google AI (Gemini, Bard)
+User-agent: Google-Extended
+User-agent: Gemini-Deep-Research
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (used by many AI companies)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# ==============================================
+# Google Search - Block PDFs from search results
+# ==============================================
+
+User-agent: Googlebot
+Disallow: /*.pdf$
+Allow: /
+
+# ==============================================
+# Yandex - Clean-param for URL parameters that do not change page content
+# https://yandex.ru/support/webmaster/en/robot-workings/clean-param
+# Yandex ignores the "User-agent: *" group once it finds its own group,
+# so the general rules are repeated here. "/*?q=" is intentionally not
+# disallowed for Yandex: Clean-param folds those URLs into the base page
+# instead of dropping them (Yandex's recommended approach).
+# ==============================================
+
+User-agent: Yandex
+Disallow: /craft/
+Disallow: /request/
+Disallow: /cpresources/
+Disallow: /api/
+Allow: /ads.txt
+# Campaign tracking appended to links (newsletters use utm_source/utm_medium/utm_campaign)
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
+# Click IDs appended by ad and social platforms when links are shared
+Clean-param: gclid&fbclid
+# Site search: the search overlay writes ?q= onto whatever page it is opened from,
+# /scripts/series?q= filters the series list, and newsletters link to /contact?q=
+Clean-param: q
+# Listing sort order on the home page and /scripts/* listing pages (?sort=).
+# ?pg= is deliberately NOT listed: it changes which items are on the page.
+Clean-param: sort
+# Contact form state: ?subject= prefills the form, ?s= is the post-submit status
+Clean-param: subject&s /contact
+# PDF viewer deep link (?page=N) on script pages; the HTML page is identical
+Clean-param: page /script/
+# Image cache-buster appended to poster/backdrop/transform URLs
+Clean-param: utime
+
+# ==============================================
+# All Other Crawlers
+# ==============================================
+
+User-agent: *
+Disallow: /craft/
+Disallow: /request/
+Disallow: /cpresources/
+Disallow: /api/
+Disallow: /*?q=
+Allow: /ads.txt
+

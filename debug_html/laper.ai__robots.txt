@@ -1,0 +1,24 @@
+# robots.txt for https://laper.ai
+# Updated: 2026-06-26
+#
+# 策略: 默认放行全站 (含搜索 / AI 检索 / AI 训练), 仅屏蔽登录后私有路由.
+# 不针对单一 AI UA 重复声明 — User-agent: * 已覆盖所有爬虫.
+
+User-agent: *
+Allow: /
+Disallow: /app/
+Disallow: /login$
+Disallow: /onboarding$
+Disallow: /settings$
+# round 61 · 社区分享链接是内部 redirect 路由, 真实 SEO 主页是 /script/:id
+Disallow: /community/file/
+# 预压缩边车文件 (.gz/.br) 已随双压缩插件拆除 (2026-07-05, CF Pages 不识别边车),
+# 不再需要 Disallow 压缩后缀; 关键渲染资源 JS/CSS 保持放行.
+
+Sitemap: https://laper.ai/sitemap.xml
+# 剧本档案馆 (千部级 · 边缘函数按接口实时生成, 不随构建)
+Sitemap: https://laper.ai/sitemap-screenplays.xml
+
+# AI 优化内容索引 (供 LLM 主动发现):
+#   https://laper.ai/llms.txt
+#   https://laper.ai/llms-full.txt

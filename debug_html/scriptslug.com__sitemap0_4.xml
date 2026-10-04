@@ -1,0 +1,23 @@
+
+
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+    <loc>https://www.scriptslug.com/scripts/format/film</loc>
+    <lastmod>2025-05-17T23:39:47-07:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+    <url>
+    <loc>https://www.scriptslug.com/scripts/format/series</loc>
+    <lastmod>2025-05-17T23:39:58-07:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+    <url>
+    <loc>https://www.scriptslug.com/scripts/format/podcast</loc>
+    <lastmod>2025-05-17T23:40:09-07:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  </urlset>

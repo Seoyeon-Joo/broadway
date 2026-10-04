@@ -1,0 +1,1438 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta name="theme-color" content="#84827B"/>
+<meta name="google-site-verification" content="Vwtm3Beq3QD_YfWrA1dirI6k0Z8gPxVvSr37PfU92oE" />
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Scripts.com</title>
+<meta name="description" content="A large collection of movie scripts, screenplays and transcripts - runs by a community of amateur and professional writers.">
+<meta name="keywords" content="scripts, movie scripts, screenplays, screenplay, transcripts, transcript, amateur script writers, submit your script">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<base href="https://www.scripts.com/">
+<script>
+s4Prefix = 'https://static.stands4.com';
+version = '1.3.50';
+common_version = '2.0.30';
+</script>
+
+<link rel="preload" href="https://static.stands4.com/app_common/css/bootstrap-3.4.1.min.css" as="style" />
+<link rel="stylesheet" href="https://static.stands4.com/app_common/css/bootstrap-3.4.1.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preload" href="//fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&family=Oxygen:wght@400;700&family=Droid+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Droid+Sans+Mono&family=Alegreya+Sans:wght@800&family=Original+Surfer&display=swap" as="style" />
+<link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&family=Oxygen:wght@400;700&family=Droid+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Droid+Sans+Mono&family=Alegreya+Sans:wght@800&family=Original+Surfer&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&family=Oxygen:wght@400;700&family=Droid+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Droid+Sans+Mono&family=Alegreya+Sans:wght@800&family=Original+Surfer&display=swap" /></noscript>
+
+<script async src="https://fundingchoicesmessages.google.com/i/pub-6071864913982699?ers=1" nonce="MUq7dglVKQUwDi0qLjs9Og"></script><script nonce="MUq7dglVKQUwDi0qLjs9Og">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<link rel="stylesheet" href="https://static.stands4.com/app_common/css/scr.css?v=1.8.60">
+<link rel="icon" type="image/png" sizes="32x32" href="https://static.stands4.com/app_common/img/favicon_scrp.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.stands4.com/app_common/img/favicon_scrp.ico">
+<link rel="icon" type="image/x-icon" href="https://static.stands4.com/app_common/img/favicon_scrp.ico">
+<link rel="search" type="application/opensearchdescription+xml" title="Scripts.com" href="https://static.stands4.com/app_scripts/open-search.xml">
+
+<style>.cblocks .new-scripts h3 {color: #84827b;border-style: dotted;border-width: 0 1px 0 0;border-color: rgba(113,180,23,0.75)}.cblocks .new-scripts h4 {color: #84827b}.cblocks .new-scripts .more a:hover {color: #84827b}.cblocks .new-scripts dl {list-style-type: none;padding: 5px 0;margin: 0}.cblocks .new-scripts dt {font-size: 14px;line-height: 14px;font-weight: 700;margin: 0 0 2px 0;border-top: 1px dotted #aaa;padding: 10px 5px 0}.cblocks .new-scripts dt:first-child {border-top: none}.cblocks .new-scripts dt a {color: #222}.cblocks .new-scripts dt a:hover {color: #84827b}.cblocks .new-scripts dd {color: #555;font-size: 13px;line-height: 16px;margin: 0 0 10px 0;padding: 0 5px}</style><link rel="stylesheet" href="https://static.stands4.com/app_common/css/alpha-mobile-refresh.css?v=1.8.60">
+<style>
+:root{--s4-refresh-accent:#84827B;--s4-refresh-accent-rgb:132,130,123;--s4-refresh-accent-dark:#403f3b;--s4-refresh-accent-soft:#f5f4f1;--s4-refresh-accent-warm:#c2a768;--s4-refresh-title:#17323b;--s4-refresh-copy:#263940;--s4-refresh-muted:#52666e}
+</style>
+<link rel="stylesheet" href="https://static.stands4.com/app_common/css/network-refresh.css?v=1.0.48">
+<style>
+#content-main .category-header.clearfix:before,
+#content-main .category-header.clearfix:after{content:none!important;display:none!important}
+#content-main .category-header.clearfix>hgroup{min-width:0!important}
+#content-aside .cblocks .cblock > hgroup.clearfix:before,
+#content-aside .cblocks .cblock > hgroup.clearfix:after{content:none!important;display:none!important}
+#content-aside .cblocks .cblock:not(.top-terms):not(.new-terms):not(.quizzes-box):not(.quiz-preview):not(.alpha-mob) > hgroup.clearfix{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row!important;align-items:start!important}
+#content-aside .cblocks .cblock:not(.top-terms):not(.new-terms):not(.quizzes-box):not(.quiz-preview):not(.alpha-mob) > hgroup.clearfix > h3,
+#content-aside .cblocks .cblock:not(.top-terms):not(.new-terms):not(.quizzes-box):not(.quiz-preview):not(.alpha-mob) > hgroup.clearfix > h4{grid-column:1!important;justify-self:stretch!important;width:100%!important;max-width:100%!important;min-width:0!important}
+#content-main #sele-container .sela-list{display:grid!important;grid-template-columns:repeat(4,125px)!important;justify-content:space-between!important;align-items:start!important;gap:26px 24px!important;max-width:none!important;margin:0!important;padding:35px 0 0!important;overflow:visible!important}
+#content-main #sele-container .sela-list>.sela-case{display:flex!important;width:125px!important;height:125px!important;margin:0!important;align-items:center!important;justify-content:center!important}
+#content-main #sele-container .sela-list>.sela-case img{max-width:125px!important;max-height:125px!important}
+@media (min-width:768px) and (max-width:991px){#content-main #sele-container .sela-list{grid-template-columns:repeat(4,110px)!important;gap:22px 16px!important}#content-main #sele-container .sela-list>.sela-case{width:110px!important;height:110px!important}#content-main #sele-container .sela-list>.sela-case img{max-width:110px!important;max-height:110px!important}}
+@media (min-width:768px) and (max-width:1199px){body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box){display:block!important;min-height:0!important;padding:24px 18px 82px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):before{top:18px!important;bottom:auto!important;left:18px!important;width:42px!important;height:4px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):after,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box) .category-header-icon,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box) .sub-category-header-icon{display:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box)>hgroup{display:block!important;width:100%!important;max-width:100%!important;padding:10px 0 0!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box) h1{max-width:100%!important;font-size:32px!important;line-height:34px!important;overflow-wrap:normal!important;word-break:normal!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box) h4{max-width:100%!important;font-size:15px!important;line-height:24px!important}body#s4-page-justadded #content-main .category-header>div[style*="position"],body#s4-page-justadded #content-main .category-header .print-style-icon,body#s4-page-justadded #content-main .category-header>.flr,body#s4-page-justadded #content-main .category-header>.buttons-line,body#s4-page-justadded #content-main .category-header>.recent-header-cta{position:absolute!important;right:18px!important;bottom:18px!important;left:auto!important}}
+@media (max-width:767px){#content-main #sele-container .sela-list{grid-template-columns:repeat(2,125px)!important;justify-content:center!important;gap:18px 16px!important;max-width:300px!important;margin:0 auto!important}#content-main #sele-container .sela-list>.sela-case{width:125px!important;height:125px!important;margin:0!important}}
+@media (max-width:1199px){#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line),#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta){position:relative!important;display:block!important;min-height:0!important;padding:24px 18px 96px!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line):before,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta):before{top:18px!important;bottom:auto!important;left:18px!important;width:42px!important;height:4px!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line):after,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta):after,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line) .category-header-icon,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line) .sub-category-header-icon,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta) .category-header-icon,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta) .sub-category-header-icon{display:none!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line)>hgroup,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta)>hgroup{display:block!important;width:100%!important;max-width:100%!important;padding:10px 0 0!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line) h1,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta) h1{max-width:100%!important;font-size:32px!important;line-height:34px!important;overflow-wrap:normal!important;word-break:normal!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line) h2,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta) h2,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.buttons-line) h4,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box):has(>.recent-header-cta) h4{max-width:100%!important;font-size:15px!important;line-height:24px!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box)>.buttons-line,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box)>.recent-header-cta{position:absolute!important;right:18px!important;bottom:18px!important;left:18px!important;z-index:2!important;display:flex!important;float:none!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;margin:0!important;text-align:right!important}#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box)>.buttons-line>.btn,#content-main .category-header.clearfix:not(.editor-hero):not(.cats-list):not(.ranks-box)>.recent-header-cta>.btn{min-height:40px!important;margin:0!important;line-height:40px!important;white-space:nowrap!important}}
+@media (max-width:1199px){body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a){display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;padding:24px 18px 20px!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a) .category-header-icon,body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a) .sub-category-header-icon{display:none!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a)>hgroup{order:1!important;display:block!important;width:100%!important;max-width:100%!important;padding:10px 0 0!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a)>div[style*="position"]{position:static!important;order:2!important;display:block!important;width:100%!important;margin:18px 0 0!important;text-align:left!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a) .print-style-icon{position:static!important;display:grid!important;grid-template-columns:1fr!important;gap:9px!important;width:100%!important;margin:0!important;padding:0!important;text-align:left!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header:not(.editor-hero):not(.cats-list):not(.ranks-box):has(.print-style-icon>a+a) .print-style-icon>a{width:100%!important;min-height:44px!important;line-height:44px!important;margin:0!important;white-space:nowrap!important}}
+@media (max-width:1199px){body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box){display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;padding:24px 18px 20px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):before{top:18px!important;bottom:auto!important;left:18px!important;width:42px!important;height:4px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):after,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .category-header-icon,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .sub-category-header-icon{display:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box)>hgroup{order:1!important;display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:10px 0 0!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) h1{max-width:100%!important;font-size:32px!important;line-height:34px!important;overflow-wrap:normal!important;word-break:normal!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) h4{max-width:100%!important;font-size:15px!important;line-height:24px!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr{position:static!important;order:2!important;display:block!important;float:none!important;width:100%!important;margin:18px 0 0!important;text-align:left!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr>.btn{display:inline-flex!important;width:100%!important;min-height:44px!important;align-items:center!important;justify-content:center!important;margin:0!important;line-height:44px!important;white-space:nowrap!important}}
+body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box){position:relative!important;display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;column-gap:18px!important;align-items:center!important;min-height:190px!important;margin:0 0 22px!important;padding:28px 30px 96px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.16)!important;border-radius:8px!important;background:linear-gradient(145deg,#fff 0%,#fff 62%,var(--s4-refresh-accent-soft) 100%)!important;box-shadow:0 14px 30px rgba(31,47,53,.08)!important;overflow:hidden!important;text-shadow:none!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):before{content:""!important;position:absolute!important;top:28px!important;bottom:28px!important;left:22px!important;display:block!important;width:4px!important;height:auto!important;border-radius:4px!important;background:var(--s4-refresh-accent)!important}body#s4-page-justadded:not(#s4-page-homepage):not(#s4-page-acronym-quiz) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):after{content:""!important;position:absolute!important;right:24px!important;bottom:18px!important;display:block!important;width:72px!important;height:72px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.1)!important;border-width:1px 0 0 1px!important;transform:rotate(-8deg)!important;opacity:.45!important;pointer-events:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero .sub-category-header-icon{position:relative!important;z-index:1!important;display:flex!important;width:72px!important;height:72px!important;float:none!important;align-items:center!important;justify-content:center!important;margin:0!important;border-radius:8px!important;background:var(--s4-refresh-accent-soft)!important;color:var(--s4-refresh-accent)!important;text-shadow:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero .sub-category-header-icon i{font-size:32px!important;line-height:1!important;color:var(--s4-refresh-accent)!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero>hgroup{position:relative!important;z-index:1!important;grid-column:2!important;margin:0!important;padding:0!important;border:0!important;text-shadow:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero h1{margin:0 0 10px!important;color:var(--s4-refresh-title)!important;font-family:"Alegreya Sans",sans-serif!important;font-size:36px!important;font-weight:800!important;line-height:38px!important;letter-spacing:0!important;text-shadow:none!important;text-wrap:balance!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero h3{margin:0 0 7px!important;color:var(--s4-refresh-muted)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:16px!important;letter-spacing:.07em!important;text-transform:uppercase!important;text-shadow:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero h4{margin:0!important;color:var(--s4-refresh-copy)!important;font-family:"Oxygen",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:25px!important;text-shadow:none!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr{position:absolute!important;right:30px!important;bottom:28px!important;z-index:2!important;display:flex!important;float:none!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;margin:0!important;text-align:right!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr>.btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-height:40px!important;margin:0!important;padding:0 16px!important;border:0!important;border-radius:6px!important;background:var(--s4-refresh-accent)!important;color:#fff!important;box-shadow:0 9px 18px rgba(var(--s4-refresh-accent-rgb),.18)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:800!important;line-height:40px!important;letter-spacing:.04em!important;text-transform:uppercase!important;text-shadow:none!important}
+@media (max-width:1199px){body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box){display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;padding:24px 18px 20px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):before{top:18px!important;bottom:auto!important;left:18px!important;width:42px!important;height:4px!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):after,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .category-header-icon,body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .sub-category-header-icon{display:none!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box)>hgroup{order:1!important;display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:10px 0 0!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) h1{max-width:100%!important;font-size:32px!important;line-height:34px!important;overflow-wrap:normal!important;word-break:normal!important}body#s4-page-justadded:not(#s4-page-homepage) #content-main .category-header.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) h4{max-width:100%!important;font-size:15px!important;line-height:24px!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr{position:static!important;order:2!important;display:block!important;float:none!important;width:100%!important;margin:18px 0 0!important;text-align:left!important}body#s4-page-justadded #content-main .category-header.articles-hero>.flr>.btn{display:inline-flex!important;width:100%!important;min-height:44px!important;align-items:center!important;justify-content:center!important;margin:0!important;line-height:44px!important;white-space:nowrap!important}}
+body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box){position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;margin:0 0 22px!important;padding:24px 18px 20px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.16)!important;border-radius:8px!important;background:linear-gradient(145deg,#fff 0%,#fff 62%,var(--s4-refresh-accent-soft) 100%)!important;box-shadow:0 14px 30px rgba(31,47,53,.08)!important;overflow:hidden!important;text-shadow:none!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):before{content:""!important;position:absolute!important;top:18px!important;bottom:auto!important;left:18px!important;display:block!important;width:42px!important;height:4px!important;border-radius:4px!important;background:var(--s4-refresh-accent)!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box):after,body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .category-header-icon,body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box) .sub-category-header-icon{display:none!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero:not(.editor-hero):not(.cats-list):not(.ranks-box)>hgroup{position:relative!important;z-index:1!important;order:1!important;display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:10px 0 0!important;border:0!important;text-shadow:none!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero h3{margin:0 0 7px!important;color:var(--s4-refresh-muted)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:16px!important;letter-spacing:.07em!important;text-transform:uppercase!important;text-shadow:none!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero h3 a{color:var(--s4-refresh-accent)!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero h1{max-width:100%!important;margin:0 0 10px!important;color:var(--s4-refresh-title)!important;font-family:"Alegreya Sans",sans-serif!important;font-size:32px!important;font-weight:800!important;line-height:34px!important;letter-spacing:0!important;overflow-wrap:normal!important;word-break:normal!important;text-shadow:none!important;text-wrap:balance!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero h4{max-width:100%!important;margin:0!important;color:var(--s4-refresh-copy)!important;font-family:"Oxygen",sans-serif!important;font-size:15px!important;font-weight:400!important;line-height:24px!important;text-shadow:none!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero h4 a{color:var(--s4-refresh-accent)!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero>.flr{position:static!important;z-index:2!important;order:2!important;display:block!important;float:none!important;width:100%!important;margin:18px 0 0!important;text-align:left!important}body:is(#s4-page-justadded,#s4-page-articles) #content-main .category-header.clearfix.articles-hero>.flr>.btn{display:inline-flex!important;width:100%!important;min-height:44px!important;align-items:center!important;justify-content:center!important;gap:7px!important;margin:0!important;padding:0 16px!important;border:0!important;border-radius:6px!important;background:var(--s4-refresh-accent)!important;color:#fff!important;box-shadow:0 9px 18px rgba(var(--s4-refresh-accent-rgb),.18)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:800!important;line-height:44px!important;letter-spacing:.04em!important;text-transform:uppercase!important;text-shadow:none!important;white-space:nowrap!important}
+body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero:not(.editor-hero):not(.cats-list):not(.ranks-box){position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:0!important;margin:0 0 22px!important;padding:24px 18px 20px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.16)!important;border-radius:8px!important;background:linear-gradient(145deg,#fff 0%,#fff 62%,var(--s4-refresh-accent-soft) 100%)!important;box-shadow:0 14px 30px rgba(31,47,53,.08)!important;overflow:hidden!important;text-shadow:none!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero:before{content:""!important;position:absolute!important;top:18px!important;bottom:auto!important;left:18px!important;display:block!important;width:42px!important;height:4px!important;border-radius:4px!important;background:var(--s4-refresh-accent)!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero:after{display:none!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero>hgroup{position:relative!important;z-index:1!important;display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:10px 0 0!important;border:0!important;text-shadow:none!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero h3{margin:0 0 7px!important;color:var(--s4-refresh-muted)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:16px!important;letter-spacing:.07em!important;text-transform:uppercase!important;text-shadow:none!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero h3 a{color:var(--s4-refresh-accent)!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero h1{max-width:100%!important;margin:0 0 10px!important;color:var(--s4-refresh-title)!important;font-family:"Alegreya Sans",sans-serif!important;font-size:32px!important;font-weight:800!important;line-height:34px!important;letter-spacing:0!important;text-shadow:none!important;text-wrap:balance!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero h4{max-width:100%!important;margin:0!important;color:var(--s4-refresh-copy)!important;font-family:"Oxygen",sans-serif!important;font-size:15px!important;font-weight:400!important;line-height:24px!important;text-shadow:none!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero>.flr{position:static!important;z-index:2!important;display:block!important;float:none!important;width:100%!important;margin:18px 0 0!important;text-align:left!important}body#s4-page-advertise #content-main .category-header.clearfix.advertise-hero>.flr>.btn{display:inline-flex!important;width:100%!important;min-height:44px!important;align-items:center!important;justify-content:center!important;gap:7px!important;margin:0!important;padding:0 16px!important;border:0!important;border-radius:6px!important;background:var(--s4-refresh-accent)!important;color:#fff!important;box-shadow:0 9px 18px rgba(var(--s4-refresh-accent-rgb),.18)!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:800!important;line-height:44px!important;letter-spacing:.04em!important;text-transform:uppercase!important;text-shadow:none!important;white-space:nowrap!important}
+body#s4-page-advertise #content-body .advertise-intro,body#s4-page-advertise #content-body .advertise-benefits,body#s4-page-advertise #content-body .advertise-form-intro,body#s4-page-advertise #advertise-frm{margin:0 0 18px!important;padding:22px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.14)!important;border-radius:8px!important;background:#fff!important;box-shadow:0 12px 28px rgba(31,47,53,.06)!important}body#s4-page-advertise #content-body .advertise-intro p,body#s4-page-advertise #content-body .advertise-benefits p,body#s4-page-advertise #content-body .advertise-form-intro p{margin:0 0 10px!important;color:var(--s4-refresh-copy)!important;font-size:16px!important;line-height:26px!important}body#s4-page-advertise #content-body .advertise-intro p:last-child,body#s4-page-advertise #content-body .advertise-form-intro p:last-child{margin-bottom:0!important}body#s4-page-advertise #content-body .advertise-benefits h4,body#s4-page-advertise #content-body .advertise-form-intro h4{margin:0 0 12px!important;color:var(--s4-refresh-title)!important;font-family:"Alegreya Sans",sans-serif!important;font-size:24px!important;font-weight:800!important;line-height:28px!important}body#s4-page-advertise #content-body .s4-adv-ul{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:0!important;padding:0!important;list-style:none!important}body#s4-page-advertise #content-body .s4-adv-ul li{position:relative!important;margin:0!important;padding:11px 12px 11px 34px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.14)!important;border-radius:8px!important;background:var(--s4-refresh-accent-soft)!important;color:var(--s4-refresh-copy)!important;font-size:14px!important;line-height:20px!important;list-style:none!important}body#s4-page-advertise #content-body .s4-adv-ul li:before{content:"✓"!important;position:absolute!important;top:11px!important;left:12px!important;color:var(--s4-refresh-accent)!important;font-family:Arial,sans-serif!important;font-weight:800!important;font-size:13px!important}
+body#s4-page-advertise #advertise-frm{padding:24px!important}body#s4-page-advertise #advertise-frm .advertise-form{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}body#s4-page-advertise #advertise-frm .advertise-form>section{display:block!important;margin:0!important;padding:0!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(n+4){grid-column:1 / -1!important}body#s4-page-advertise #advertise-frm .advertise-form .col-left,body#s4-page-advertise #advertise-frm .advertise-form .col-right{display:block!important;width:auto!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important}body#s4-page-advertise #advertise-frm p{margin:0!important}body#s4-page-advertise #advertise-frm label{display:block!important;margin:0 0 7px!important;color:var(--s4-refresh-title)!important;font-family:"Oxygen",sans-serif!important;font-size:13px!important;font-weight:800!important;line-height:18px!important;text-transform:uppercase!important;letter-spacing:.04em!important}body#s4-page-advertise #advertise-frm input[type="text"],body#s4-page-advertise #advertise-frm select,body#s4-page-advertise #advertise-frm textarea#fld-adesc{display:block!important;width:100%!important;min-height:46px!important;margin:0!important;padding:10px 12px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.24)!important;border-radius:8px!important;background:#fff!important;box-shadow:none!important;color:var(--s4-refresh-copy)!important;font-family:"Oxygen",sans-serif!important;font-size:16px!important;line-height:22px!important;text-shadow:none!important}body#s4-page-advertise #advertise-frm textarea#fld-adesc{min-height:120px!important;resize:vertical!important}body#s4-page-advertise #advertise-frm textarea.g-recaptcha-response{display:none!important;visibility:hidden!important;width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;opacity:0!important}body#s4-page-advertise #advertise-frm input[type="text"]:focus,body#s4-page-advertise #advertise-frm select:focus,body#s4-page-advertise #advertise-frm textarea#fld-adesc:focus{outline:0!important;border-color:var(--s4-refresh-accent)!important;box-shadow:0 0 0 3px rgba(var(--s4-refresh-accent-rgb),.12)!important}
+body#s4-page-advertise #advertise-frm .advertise-services{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;margin:0!important;padding:0!important;list-style:none!important}body#s4-page-advertise #advertise-frm .advertise-services li{margin:0!important;padding:0!important;list-style:none!important}body#s4-page-advertise #advertise-frm .advertise-services input{position:absolute!important;opacity:0!important;pointer-events:none!important}body#s4-page-advertise #advertise-frm .advertise-services label{display:flex!important;min-height:42px!important;align-items:center!important;margin:0!important;padding:10px 12px!important;border:1px solid rgba(var(--s4-refresh-accent-rgb),.22)!important;border-radius:8px!important;background:#fff!important;color:var(--s4-refresh-copy)!important;text-transform:none!important;letter-spacing:0!important;font-size:14px!important;line-height:18px!important;cursor:pointer!important}body#s4-page-advertise #advertise-frm .advertise-services input:checked+label{border-color:var(--s4-refresh-accent)!important;background:var(--s4-refresh-accent-soft)!important;color:var(--s4-refresh-accent-dark)!important;box-shadow:0 0 0 3px rgba(var(--s4-refresh-accent-rgb),.10)!important}body#s4-page-advertise #advertise-frm .col-right h4{margin:0 0 6px!important;color:var(--s4-refresh-accent)!important;font-size:16px!important;font-weight:800!important;line-height:20px!important}body#s4-page-advertise #advertise-frm .col-right p{color:var(--s4-refresh-muted)!important;font-size:13px!important;line-height:20px!important}body#s4-page-advertise #advertise-frm .mandatory{color:var(--s4-refresh-accent)!important}body#s4-page-advertise #advertise-frm .err{margin:8px 0 0!important;color:#b00020!important;font-size:13px!important;line-height:18px!important}body#s4-page-advertise #advertise-frm button.btn{display:inline-flex!important;min-height:44px!important;align-items:center!important;justify-content:center!important;margin:0 8px 0 0!important;padding:0 18px!important;border-radius:6px!important;font-family:"Oxygen",sans-serif!important;font-size:12px!important;font-weight:800!important;line-height:44px!important;letter-spacing:.04em!important;text-transform:uppercase!important;text-shadow:none!important}
+body#s4-page-advertise #advertise-frm .advertise-form:before,body#s4-page-advertise #advertise-frm .advertise-form:after{content:none!important;display:none!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(5) .col-right,body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(6) .col-right{margin-top:8px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(5) .col-right p,body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(6) .col-right p{max-width:100%!important}body#s4-page-advertise #advertise-frm textarea#fld-adesc{height:150px!important;min-height:150px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(7){color:var(--s4-refresh-muted)!important;font-size:14px!important;line-height:22px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(8) p{display:flex!important;gap:10px!important;align-items:center!important}
+body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(6),body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(7),body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(8){max-width:640px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(6) .col-right,body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(7){padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(7) p{margin:4px 0 0!important;color:var(--s4-refresh-muted)!important;font-size:14px!important;line-height:22px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(8){margin-top:2px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(8) .col-left{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+@media (max-width:767px){body#s4-page-advertise #content-body .s4-adv-ul,body#s4-page-advertise #advertise-frm .advertise-form,body#s4-page-advertise #advertise-frm .advertise-services{grid-template-columns:1fr!important}body#s4-page-advertise #content-body .advertise-intro,body#s4-page-advertise #content-body .advertise-benefits,body#s4-page-advertise #content-body .advertise-form-intro,body#s4-page-advertise #advertise-frm{padding:18px!important}body#s4-page-advertise #advertise-frm .advertise-form>section:nth-child(8) p{display:block!important}body#s4-page-advertise #advertise-frm button.btn{width:100%!important;margin:0 0 9px!important}}
+</style>
+<style>
+#content-aside .cblocks .cblock:not(.alpha-mob) h4 {
+	border-left: 0 !important;
+	padding-left: 0 !important;
+}
+</style>
+</head>
+<body id="s4-page-homepage" data-atp="ra-4f75bf3d5305fac2">
+
+<div id="page-container">
+<style>
+:root{--header-msg-count-bg:#84827B}
+#header #user-msg.header-control-icon{width:52px!important}
+#header #user-msg.header-control-icon a{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;width:100%!important;height:100%!important;overflow:visible!important;font-size:0!important;line-height:1!important}
+#header #user-msg.header-control-icon .env-icon{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:0!important;padding:0!important;font-size:15px!important;line-height:1!important;transform:none!important}
+#header #user-msg.header-control-icon .msg-count{position:static!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-width:16px!important;height:16px!important;margin:0!important;padding:0 4px!important;border-radius:999px!important;background:var(--header-msg-count-bg,#3d7889)!important;color:#fff!important;font-family:'Oxygen',sans-serif!important;font-size:10px!important;font-weight:800!important;line-height:16px!important;text-align:center!important;text-shadow:none!important;box-shadow:none!important;z-index:2!important}
+#header #user-msg.header-control-icon .msg-count:empty{display:none!important}
+#header #user-login.header-control,#header #user-ident.header-control{display:inline-flex!important;align-items:center!important;gap:3px!important}
+#header #user-login.header-control a,#header #user-ident.header-control .user-ident-name{margin-right:0!important}
+#header #user-login.header-control i,#header #user-ident.header-control>i{margin-left:0!important}
+</style>
+<header id="header">
+	<div id="header-int" class="clearfix header-controls">
+				    <div id="user-hist" class="header-control header-control-icon"><a href="/search-history" title="Viewing history" aria-label="Viewing history"><i class="fas fa-history" aria-hidden="true"></i></a></div>
+					<div id="user-login" class="header-control">
+				<a href="login.php">Login</a><i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+			</div>
+				<div id="network-header"><span id="network-header-trigger"><span class="hidden-xs">STANDS4&nbsp;</span>Network<span class="arw"><i class="fas fa-chevron-down"></i></span></span>
+    <ul id="network-header-links" class="rc5" style="display:none;">
+        <li class="nw-abbreviations"><span onclick="javascript:location.href='https://www.abbreviations.com/'">Abbreviations.com</span></li>
+        <li class="nw-anagrams"><span onclick="javascript:location.href='https://www.anagrams.net/'">Anagrams.net</span></li>
+        <li class="nw-biographies"><span onclick="javascript:location.href='https://www.biographies.net/'">Biographies.net</span></li>
+        <li class="nw-calculator"><span onclick="javascript:location.href='https://www.calculators.net/'">Calculators.net</span></li>
+        <li class="nw-convert"><span onclick="javascript:location.href='https://www.convert.net/'">Convert.net</span></li>
+        <li class="nw-definitions"><span onclick="javascript:location.href='https://www.definitions.net/'">Definitions.net</span></li>
+        <li class="nw-grammar"><span onclick="javascript:location.href='https://www.grammar.com/'">Grammar.com</span></li>
+        <li class="nw-literature"><span onclick="javascript:location.href='https://www.literature.com/'">Literature.com</span></li>
+        <li class="nw-lyrics"><span onclick="javascript:location.href='https://www.lyrics.com/'">Lyrics.com</span></li>
+        <li class="nw-phrases"><span onclick="javascript:location.href='https://www.phrases.com/'">Phrases.com</span></li>
+        <li class="nw-poetry"><span onclick="javascript:location.href='https://www.poetry.com/'">Poetry.com</span></li>
+        <li class="nw-quotes"><span onclick="javascript:location.href='https://www.quotes.net/'">Quotes.net</span></li>
+        <li class="nw-references"><span onclick="javascript:location.href='https://www.references.net/'">References.net</span></li>
+        <li class="nw-rhymes"><span onclick="javascript:location.href='https://www.rhymes.com/'">Rhymes.com</span></li>
+        <li class="nw-scripts"><span onclick="javascript:location.href='https://www.scripts.com/'">Scripts.com</span></li>
+        <li class="nw-symbols"><span onclick="javascript:location.href='https://www.symbols.com/'">Symbols.com</span></li>
+        <li class="nw-synonyms"><span onclick="javascript:location.href='https://www.synonyms.com/'">Synonyms.com</span></li>
+        <li class="nw-uszip"><span onclick="javascript:location.href='https://www.uszip.com/'">USZip.com</span></li>
+    </ul>
+</div>
+	</div>
+</header>
+<div id="main" role="main" class="container"><div id="content-top" class="content-top">
+	<div class="view-search view-desktop hidden-xs">
+		<form id="search-frm" method="get" action="subserp.php">
+    <div class="page-top-search">
+    	<div class="page-word-search">
+    		<select id="search-options" name="qtype" aria-label="search options"><option value="1" selected>By Title</option><option value="3">In Scripts</option><option value="2">By Writer</option></select>    		<input id="search" type="text" class="page-word-search-query" name="st" value="" placeholder="Search for scripts and screenwriters..." autocomplete="off">
+    		<button type="submit" class="btn btn-3 primary" id="page-word-search-button" aria-label="Search"><i class="fas fa-2x fa-search" aria-hidden="true"></i></button>
+    	</div>
+    </div>
+    <div class="page-letter-search"><a href="/scripts/0">#</a><a href="/scripts/A">A</a><a href="/scripts/B">B</a><a href="/scripts/C">C</a><a href="/scripts/D">D</a><a href="/scripts/E">E</a><a href="/scripts/F">F</a><a href="/scripts/G">G</a><a href="/scripts/H">H</a><a href="/scripts/I">I</a><a href="/scripts/J">J</a><a href="/scripts/K">K</a><a href="/scripts/L">L</a><a href="/scripts/M">M</a><a href="/scripts/N">N</a><a href="/scripts/O">O</a><a href="/scripts/P">P</a><a href="/scripts/Q">Q</a><a href="/scripts/R">R</a><a href="/scripts/S">S</a><a href="/scripts/T">T</a><a href="/scripts/U">U</a><a href="/scripts/V">V</a><a href="/scripts/W">W</a><a href="/scripts/X">X</a><a href="/scripts/Y">Y</a><a href="/scripts/Z">Z</a><span class="vbar">&nbsp;</span><a href="random.php" aria-label="Random Script" class="z flr"><i class="fas fa-random" aria-hidden="true"></i><span class="hidden-xs"> Random</span></a><a href="/justadded" aria-label="New Scripts" class="z flr"><i class="fas fa-list" aria-hidden="true"></i><span class="hidden-xs"> New Scripts</span></a></div>
+</form>		<div class="page-top-logo" onclick="location.href='https://www.scripts.com/';"><img src="https://static.stands4.com/app_common/img/top_logo_scr.png" alt="Scripts.com" title="Scripts.com" width="300" height="300"></div>
+	</div>
+	<div class="view-search view-mobile visible-xs">
+		<form id="search-frm-mob" method="get" action="subserp.php">
+	<div class="page-top-search">
+		<div class="page-word-search" style="width: calc(100% - 110px);">
+			<div class="input-group">
+				<input id="search-mob" type="text" class="page-word-search-query form-control rc5" name="st" value="" placeholder="Search for scripts..." autocomplete="off">
+				<span class="input-group-btn"><button id="page-word-search-button-mob" class="btn primary" type="submit" aria-label="Search for scripts and writers"><i class="fas fa-search" aria-hidden="true"></i></button></span>
+			</div>
+		</div>
+		<div class="page-word-search-ops">
+			<div><input type="radio" class="custom-rb" name="qtype" id="page-word-search-m-op1" value="1" checked="checked"><label for="page-word-search-m-op1"><span>By Title</span></label></div>
+        		<div><input type="radio" class="custom-rb" name="qtype" id="page-word-search-m-op3" value="3"><label for="page-word-search-m-op3"><span>In Scripts</span></label></div>
+        		<div><input type="radio" class="custom-rb" name="qtype" id="page-word-search-m-op2" value="2"><label for="page-word-search-m-op2"><span>By Writer</span></label></div>
+		</div>
+	</div>
+	<div class="page-letter-search rc3"></div>
+</form>		<div class="page-top-logo" onclick="location.href='https://www.scripts.com/';"><img src="https://static.stands4.com/app_common/img/top_logo_sm_scr.png" alt="Scripts.com" title="Scripts.com" width="70" height="70"></div>
+	</div>
+</div>
+<div class="row">
+
+	<div id="content-main" class="col-sm-8 col-sm-push-4">
+
+		<div class="siteprop rc4 clearfix">
+			<hgroup>
+				<h1>Welcome to Scripts<span style="color: #222;">.</span>com!</h1>
+			</hgroup>
+			<div class="siteprop-int clearfix">
+				<div>
+					<p><strong>Scripts.com</strong> is a huge collection of movie scripts, screenplays and transcripts from famous and not-so-famous <strong><a href="writers.php">screen writers</a></strong> from around the world &mdash; collaboratively published by amateur script writers and <strong><a href="/editors">contributing editors</a></strong>.</p>
+				</div>
+				<div class="bottom">
+					<p>Navigate through our scripts database <strong><a href="scripts/B">alphabetically</a></strong> or simply search by <strong><a href="psearch/sweet">keywords</a></strong>. You can <strong><a href="add-script.php">submit a new script</a></strong>, discuss and rate existing scripts, and even translate pieces to many common and not-so-common languages.</p>
+					<span class="flr">
+        				<button type="button" class="btn primary btn-3" onclick="location.href='add-script.php';">ADD A NEW SCRIPT</button>
+        			</span>
+				</div>
+			</div>
+		</div>
+
+		<div id="content-body" class="row">
+
+			<div class="col-xs-12 col-sm-12">
+
+				<div class="clearfix">
+					
+					<div id="disp-quote" class="clearfix rc5">
+						<div id="disp-quote-ext" class="clearfix">
+							<div id="disp-quote-int">
+								<span class="flr">
+									<a href="https://www.amazon.com/gp/search?index=instant-video&keywords=Full+Metal+Jacket&tag=stands4com-20" target="_blank" title="Find Full Metal Jacket on Amazon">
+										<img class="cover-img grayscale" src="https://static.stands4.com/images/script/70_full-metal-jacket.png" alt="" title="Find Full Metal Jacket on Amazon" loading="lazy">
+									</a>
+								</span>
+								<i class="bq-before fa-film fas" aria-hidden="true"></i>
+								<div id="disp-script-title">
+									<a href="/script/full_metal_jacket_70">Full Metal Jacket</a>
+								</div>
+																<div id="disp-script-subtitle">
+    								<strong>Synopsis:</strong> Stanley Kubrick's take on the Vietnam War follows smart-aleck Private Davis (Matthew Modine), quickly christened "Joker" by his foul-mouthed drill sergeant (R. Lee Ermey), and pudgy Private Lawrence (Vincent D'Onofrio), nicknamed "Gomer Pyle," as they endure the rigors of basic training. Though Pyle takes a frightening detour, Joker graduates to the Marine Corps and is sent to Vietnam as a journalist, covering -- and eventually participating in -- the bloody Battle of Hué.    							</div>
+    															    								<div class="awards"><strong>Genre:</strong>&nbsp;<a href="https://www.scripts.com/genre/Action">Action</a>, <a href="https://www.scripts.com/genre/Biography">Biography</a></div>
+    							    							
+    							<div>
+        							<span class="awards"><i class="fas fa-quote-left small" aria-hidden="true"></i>&nbsp;&nbsp;<a href="https://www.quotes.net/movies/full_metal_jacket_" target="_blank">Full Metal Jacket Movie Quotes&nbsp;&raquo;</a></span>
+    							</div>
+    							
+								<div class="links-bar">
+            						<a href="collection.php?add=70&for_sale=0" class="add-to-list s rc3"  title="click to add Full Metal Jacket to your collection"><i class="fas fa-bookmark"></i> Collection</a>&nbsp;&nbsp;
+        							<a href="signup.php" class="add-to-list s rc3"  title="click to edit Full Metal Jacket"><i class="fa-pencil-alt fas" aria-hidden="true"></i> Edit</a>&nbsp;&nbsp;
+        							<a href="https://www.amazon.com/gp/search?index=instant-video&keywords=Full+Metal+Jacket&tag=stands4com-20" class="add-to-list s rc3" target="_blank"><i class="far fa-eye"></i> Watch</a>&nbsp;&nbsp;
+        							<a href="/script-pdf/70" class="add-to-list s rc3" title="click to down the Full Metal Jacket script as PDF"><i class="far fa-file-pdf"></i> PDF</a>&nbsp;
+        							<a href="extsearch.php?src=amazon&s=Full+Metal+Jacket&dep=MoviesAndTV&bn=4499" target="_blank" class="add-to-list s rc3" title="click to buy the Full Metal Jacket screenplay in Amazon"><i class="fas fa-shopping-cart"></i> Buy</a>&nbsp;
+        							<span class="add-to-list rc3 s fsize" title="Change text size"><i class="fas fa-text-size"></i></span>&nbsp;
+            					</div>
+            					<div class="script-details">
+            						<dl>
+            							        								<dt>Year:</dt>
+    									<dd class="dd-margin"><a href="/year/2022" title="See all scripts from this year">2022</a></dd>
+            							            							<dt><i class="far fa-eye" aria-hidden="true"></i></dt>
+            							<dd>883,821&nbsp;Views</dd>
+            						</dl>
+        						</div>
+        						
+								<hr>
+            					<div class="row">
+            						<div class="adunit-middle adunit-middle-2col clearfix">
+            							<div class="col-xs-12 col-sm-12"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6071864913982699"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-6071864913982699"
+     data-ad-slot="2643431785"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+            						</div>
+            					</div>
+        						<hr>
+        						
+								<div style="float:right;font-size:13px;font-weight:bold;">
+																																	<a href="/script/full_metal_jacket_70/2">Next&nbsp;&raquo;</a>
+																</div>
+								<blockquote>
+									<div id="disp-quote-body"><p><strong>FADE IN:</strong><br></p><p>WARNER BROS. LOGO:</p><p>WARNER BROS. PICTURES</p><p><strong>WB:</strong></p><p>A <a style="color:#222; "href="https://www.definitions.net/definition/WARNERMEDIA">WARNERMEDIA</a> COMPANY</p><p><strong>LOGO <a style="color:#222; "href="https://www.abbreviations.com/FLYS">FLYS</a> DOWN:</strong><br></p><p><strong>Music:</strong><br></p><p>&quot;Chug jug with you&quot;</p><p><strong>TITLE:</strong><br> A <a style="color:#222; "href="https://www.definitions.net/definition/STANLEY">STANLEY</a> GOODMAN FILM</p><p><strong>CUT:</strong></p><p><strong>TO:</strong><br></p><p><strong>TITLE:</strong><br> <a style="color:#222; "href="https://www.abbreviations.com/FULL">FULL</a> <a style="color:#222; "href="https://www.definitions.net/definition/METAL">METAL</a> JACKET 2</p><p><strong>CUT TO:</strong><br></p><p>1 INT. BARBERSHOP--PARRIS <a style="color:#222; "href="https://www.definitions.net/definition/ISLAND">ISLAND</a> MARINE BASE-DAY</p><p>Marine <a style="color:#222; "href="https://www.definitions.net/definition/recruits">recruits</a> are <a style="color:#222; "href="https://www.definitions.net/definition/having">having</a> their <a style="color:#222; "href="https://www.definitions.net/definition/heads">heads</a> shaved with</p><p>electric clippers. The hair <a style="color:#222; "href="https://www.definitions.net/definition/piles">piles</a> up on the floor.</p><p>And <a style="color:#222; "href="https://www.definitions.net/definition/somebody">somebody</a> sits in a wood house.</p><p>2 INT. BARRACKS--DAY</p><p>Marine <a style="color:#222; "href="https://www.definitions.net/definition/recruits">recruits</a> stand at <a style="color:#222; "href="https://www.definitions.net/definition/attention">attention</a> in <a style="color:#222; "href="https://www.definitions.net/definition/front">front</a> of <a style="color:#222; "href="https://www.definitions.net/definition/their">their</a> bunks.</p><p>Master <a style="color:#222; "href="https://www.definitions.net/definition/Gunnery">Gunnery</a> Sergeant <a style="color:#222; "href="https://www.definitions.net/definition/HARTMAN">HARTMAN</a> walks <a style="color:#222; "href="https://www.definitions.net/definition/along">along</a> the line of blank-faced recruits.</p><p><strong>HARTMAN:</strong></p><p>I am <a style="color:#222; "href="https://www.definitions.net/definition/Gunnery">Gunnery</a> Sergeant Hartman, your <a style="color:#222; "href="https://www.definitions.net/definition/Senior">Senior</a> Drill Instructor. From now on, you will <a style="color:#222; "href="https://www.definitions.net/definition/speak">speak</a> only when <a style="color:#222; "href="https://www.definitions.net/definition/spoken">spoken</a> to, and the <a style="color:#222; "href="https://www.definitions.net/definition/first">first</a> and last <a style="color:#222; "href="https://www.definitions.net/definition/words">words</a> out of your filthy</p><p>sewers will be &quot;Sir!&quot; Do you <a style="color:#222; "href="https://www.definitions.net/definition/maggots">maggots</a> understand that? And the last time you did <a style="color:#222; "href="https://www.definitions.net/definition/something">something</a> last year!?</p><p></p></div>
+									<div class="rank-bar"><span class="rank-label">Rate this script:</span><span class="rank-icon rate-stars" title="rate it" data-sid="70" data-name="Full Metal Jacket" data-nv="13" data-score="2.85"><span class="sf"></span><span class="sf"></span><span class="sf"></span><span class="se"></span><span class="se"></span></span><a href="/script-voters/70" class="rank-score"><b>2.9</b> / 13 votes</a><span class="audio tts-icon" data-lang="Alex" data-code="en-US" data-quoteid="70" title="Say it"><i class="fas fa-volume-up" aria-hidden="true"></i></span></div>								</blockquote>
+								<div style="float:right;font-size:13px;font-weight:bold;margin-top:30px;">
+																																	<a href="/script/full_metal_jacket_70/2">Next&nbsp;&raquo;</a>
+																</div>
+							</div>
+						</div>
+						
+        					<div id="disp-quote-author-meta">
+        						<div id="disp-quote-author" class="author-thumb-ext" data-author="Stanley Kubrick" data-img="1">
+        							<img src="https://static.stands4.com/images/writer/65_stanley-kubrick.png" class="author-thumb grayscale" alt="" title="Stanley Kubrick" loading="lazy">
+        						</div>
+        						<p class="author"><a href="/writer/stanley_kubrick/65">Stanley Kubrick</a></p>
+        						<p class="author-bio">
+        							        							Stanley Kubrick was born in Manhattan, New York City, to Sadie Gertrude (Perveler) and Jacob Leonard Kubrick, a physician. His family were Jewish immigrants (from Austria, Romania, and Russia). Stanley was considered intelligent, despite poor grades at school. Hoping that a change of scenery would produce better academic performance, Kubrick's father sent him in 1940 to Pasadena, California, to stay with his uncle, Martin Perveler. Returning to the Bronx in 1941 for his last year of grammar school, there seemed to be little change in his attitude or his results. Hoping to find something to interest his son, Jack introduced Stanley to chess, with the desired result. Kubrick took to the game passionately, and quickly became a skilled player. Chess would become an important device for Kubrick in later years, often as a tool for dealing with recalcitrant actors, but also as an artistic motif in his films.&nbsp;<a href="https://www.biographies.net/search/Stanley%20Kubrick">more&hellip;</a>
+        							    							</p>
+        						<p class="author-bio"><a href="/writer/stanley_kubrick/65">All Stanley Kubrick scripts</a> | <a href="https://www.amazon.com/gp/search?index=instant-video&keywords=Full+Metal+Jacket&tag=stands4com-20" target="_blank">Stanley Kubrick Books</a></p>
+        						<div>
+        							<p class="fans-cnt" data-term="Full Metal Jacket" data-key="65" data-page="homepage">
+                						<button class="btn btn-counter s " data-votes="4" data-wid="65" data-uid="" data-target="#login-modal" title="click to add your vote"><i class="fas fa-star" aria-hidden="true"></i> <span>Follow</span></button>
+                						<span class="fans rc3" onclick="location.href='https://www.scripts.com/writer-fans/65';">4 fans</span>
+                					</p>
+        						</div>
+        						<div class="script-credits text-right">
+        						        						<p>Submitted by <a href="/user/2" title="acronimous"><b>acronimous</b></a></p>
+        						        						</div>
+        					</div>
+						
+					</div>
+					
+					<div class="callout comments-area">
+                			<div id="s4-comments">
+    
+    		<h4>Discuss everything about <a href="https://www.scripts.com/">Scripts.com</a> with the community:</h4>
+        <div class="comment-form-container">
+        
+        <form id="frm-comment">
+            
+            <input type="hidden" name="comment_id" id="commentId" />
+            <input type="hidden" name="cmt_part" id="cmtPart" value="1" />
+            <input type="hidden" name="cmt_reward" id="comments-reward" value="0" />
+            <input type="hidden" id="current-website" value="14" />
+            <input type="hidden" id="current-entity" value="" />
+            <input type="hidden" id="current-entityid" value="" />
+            <input type="hidden" id="comments-limit" value="10" />
+            <div id="objid" class="hidden">https://www.scripts.com</div>
+            
+            <div class="form-group">
+            		
+    		                    <div class="comments-sort filter-users flr">
+            		<div class="btn-group" role="group">
+                    	<button class="btn btn-default filter xxsml primary" data-sort="newest" type="button">Newest</button>
+                    	<button class="btn btn-default filter xxsml" data-sort="oldest" type="button">Oldest</button>
+                    	<button class="btn btn-default filter xxsml" data-sort="popular" type="button">Popular</button>
+                    </div>
+                </div>
+                        		<h5 id="frm-comment-count">60 Comments</h5>
+                <div class="form-control" id="comment" contenteditable="true" data-placeholder="Add a comment..."></div>
+                <div class="cmt-options">
+            		<div class="cmt-tools">
+            			                    	<span id="pic-toggle" class="cmt-tool rc5" data-action="picture" title="Upload an image"><i class="fa-image far" aria-hidden="true"></i></span>
+                    	<div id="picture-btns" class="hidden">
+    						<input type="file" accept="image/*" class="pic-upload hidden">
+    						<input id="pic-stream" type="hidden" name="picture">
+    						<input id="pic-type" type="hidden" name="picture_type">
+    						<img id="pic-preview" width="14" height="14" src="" alt="" title="Preview">
+    						<span class="pic-name hidden-xs" style="display:none;"></span>
+    						<button id="pic-clear" type="button" class="btn secondary xxsml pic-clear" style="display:none;"><i class="fas fa-trash-alt"></i></button>
+    					</div>
+                    	<span id="start" class="cmt-tool record-tool rc5 text-center" data-action="sound" title="Record a sound">
+						<span class="ready"><i class="fas fa-microphone"></i></span>
+                			<span class="recording equalizer hidden"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></span>
+                		</span>
+                    	<div id="record-btns" class="record-tool hidden">
+                    		<button id="stop" type="button" class="btn tertiary xxsml hidden" title="Stop Recording"><i class="fas fa-stop"></i></button>
+                    		<button id="play" type="button" class="btn tertiary xxsml hidden" title="Play"><i class="fas fa-play"></i></button>
+                    		<audio id="recorder" muted hidden></audio>
+                    		<audio id="player" hidden></audio>
+                    		<small id="play-time" hidden>0:00</small>
+                    		<small id="rec-time" hidden>0:00</small>
+                    		<small>&nbsp;<button id="clear-audio" class="btn xxsml" type="button" hidden>clear</button></small>
+                    		<input id="rec-stream" type="hidden" name="sound">
+                    	</div>
+                    </div>
+            		<div class="cmt-publish clearfix">
+            			<div class="col-xs-10 no-padding">
+                			                            <div id="notify-box" class="checkbox">
+<label class="small fw-lighter""><input type="checkbox" id="notify" checked> <span class="notify-full">Email me new comments.</span><span class="notify-short">Email updates</span></label>
+                          	</div>
+                      	            			</div>
+            			<div class="col-xs-2 no-padding text-right">
+            				<button type="button" id="submitButton" class="btn btn-submit primary btn-3" data-uid="" data-target="#login-modal" data-reward="0" aria-label="Publish">
+<span class="hidden-xs">Publish</span><span class="visible-xs"><i class="fas fa-paper-plane" aria-hidden="true"></i></span>
+        					</button>
+            			</div>
+            		</div>
+                </div>
+            </div>
+            
+            <div id="comment-message"></div>
+            
+        </form>
+        
+    </div>
+
+    <ul id='comments-list' class='clearfix'><li><div id="comment-218793" class="comment clearfix" data-id="218793" data-ts="1769439124"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/452094/Didi1969" target="_blank" title="Didi1969"><img src="https://static.stands4.com/images/user/452094/0" title="Didi1969" alt="Didi1969" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/452094/Didi1969" target="_blank" title="Didi1969">Didi1969</a></div><div class="cmt-comment"><div class="cmt-message">Hello, I am a new member on Scripts; and I really enjoy being on here to read certain movie scripts.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="30" title="Didi1969"><i class="fas fa-thumbs-up"></i> 30</span><span class="cmt-added">8 months ago</span></div></div></div></li><li><div id="comment-216928" class="comment clearfix" data-id="216928" data-ts="1767279221"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/449169/Voide" target="_blank" title="Voide"><img src="https://static.stands4.com/images/user/449169/0" title="Voide" alt="Voide" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/449169/Voide" target="_blank" title="Voide">Voide</a></div><div class="cmt-comment"><div class="cmt-message">Hello, I&#039;m a beginner story writer. I love writing stories, but I find it difficult to write scripts for my story, which is a beautiful cartoon film. Can you help me?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="0" title=""></span><span class="cmt-added">9 months ago</span></div></div></div></li><li><div id="comment-149941" class="comment clearfix" data-id="149941" data-ts="1719401702"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/283640/courtneye" target="_blank" title="courtneye"><img src="https://static.stands4.com/images/user/283640/0" title="courtneye" alt="courtneye" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/283640/courtneye" target="_blank" title="courtneye">courtneye</a></div><div class="cmt-comment"><div class="cmt-message">Scripts.com has been an invaluable resource for my writing projects. The extensive library of screenplays and scripts offers endless inspiration, and the user-friendly interface makes it easy to find exactly <span id="cmt-more-149941" class="collapse cmt-collapse">what I&#039;m looking for. Whether you&#039;re a seasoned screenwriter or just starting out, Scripts.com is a must-have tool in your creative arsenal. Highly recommended!</span>&nbsp;<a class="cmt-more-link" data-toggle="collapse" href="#cmt-more-149941" role="button" aria-expanded="false" aria-controls="cmt-more-149941">more &raquo;</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="3" title="acronimous"><i class="fas fa-thumbs-up"></i> 3</span><span class="cmt-added">2 years ago</span></div></div></div></li><li><div id="comment-129128" class="comment clearfix" data-id="129128" data-ts="1694730581"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/295653/family_p" target="_blank" title="family_p"><img src="https://static.stands4.com/images/user/295653/0" title="family_p" alt="family_p" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/295653/family_p" target="_blank" title="family_p">family_p</a></div><div class="cmt-comment"><div class="cmt-message">Hi I&#039;m interested trying to list one of my scripts for sale and my payment isn&#039;t working to list my script.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="0" title=""></span><span class="cmt-added">3 years ago</span></div></div></div><ul class="cmt-replies" data-src="129128"><li><div id="comment-149940" class="comment clearfix" data-id="149940" data-ts="1719401654" data-parent="129128"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/2/acronimous" target="_blank" title="acronimous"><img src="https://static.stands4.com/images/user/2/13" title="acronimous" alt="acronimous" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/2/acronimous" target="_blank" title="acronimous">acronimous</a></div><div class="cmt-comment"><div class="cmt-message">Please reach out to me directly and I&#039;ll try to help you with it...</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="3" title=""><i class="fas fa-thumbs-up"></i> 3</span><span class="cmt-added">2 years ago</span></div></div></div></li></ul></li><li><div id="comment-129092" class="comment clearfix" data-id="129092" data-ts="1694690745"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/340404/jacobe.90590" target="_blank" title="jacobe.90590"><img src="https://static.stands4.com/images/user/340404/0" title="jacobe.90590" alt="jacobe.90590" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/340404/jacobe.90590" target="_blank" title="jacobe.90590">jacobe.90590</a></div><div class="cmt-comment"><div class="cmt-message">Scripts are a great way of writing dissertation with professional writers&#039; help. That is why we should use them.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title="acronimous"><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">3 years ago</span></div></div></div></li><li><div id="comment-104579" class="comment clearfix" data-id="104579" data-ts="1665418494"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/263407/nikki_a" target="_blank" title="nikki_a"><img src="https://static.stands4.com/images/user/263407/0" title="nikki_a" alt="nikki_a" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/263407/nikki_a" target="_blank" title="nikki_a">nikki_a</a></div><div class="cmt-comment"><div class="cmt-message">Do you have musical scripts?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">3 years ago</span></div></div></div><ul class="cmt-replies" data-src="104579"><li><div id="comment-149939" class="comment clearfix" data-id="149939" data-ts="1719401614" data-parent="104579"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/2/acronimous" target="_blank" title="acronimous"><img src="https://static.stands4.com/images/user/2/13" title="acronimous" alt="acronimous" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/2/acronimous" target="_blank" title="acronimous">acronimous</a></div><div class="cmt-comment"><div class="cmt-message">Plenty! Check them out here: <a href="https://www.scripts.com/genre/Musical" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/genre/Musical</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">2 years ago</span></div></div></div></li></ul></li><li><div id="comment-102214" class="comment clearfix" data-id="102214" data-ts="1662717906"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/226447/Asliddin" target="_blank" title="Asliddin"><img src="https://static.stands4.com/images/user/226447/0" title="Asliddin" alt="Asliddin" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/226447/Asliddin" target="_blank" title="Asliddin">Asliddin</a></div><div class="cmt-comment"><div class="cmt-message">how can i sell my script on your site?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title="rinat"><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">4 years ago</span></div></div></div><ul class="cmt-replies" data-src="102214"><li><div id="comment-102646" class="comment clearfix" data-id="102646" data-ts="1662918348" data-parent="102214"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/1/rinat" target="_blank" title="rinat"><img src="https://static.stands4.com/images/user/1/0" title="rinat" alt="rinat" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/1/rinat" target="_blank" title="rinat">rinat</a></div><div class="cmt-comment"><div class="cmt-message">Please check out our marketplace<br><br><a href="https://www.scripts.com/marketplace" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/marketplace</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title="acronimous"><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">4 years ago</span></div></div></div></li></ul></li><li><div id="comment-100466" class="comment clearfix" data-id="100466" data-ts="1659585134"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/247566/benjamindiana" target="_blank" title="benjamindiana"><img src="https://static.stands4.com/images/user/247566/0" title="benjamindiana" alt="benjamindiana" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/247566/benjamindiana" target="_blank" title="benjamindiana">benjamindiana</a></div><div class="cmt-comment"><div class="cmt-message">How do I get my script to appear on my biography page?<br>The thing said something about a citation, but I cannot figure out how to enter it.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="0" title=""></span><span class="cmt-added">4 years ago</span></div></div></div><ul class="cmt-replies" data-src="100466"><li><div id="comment-101102" class="comment clearfix" data-id="101102" data-ts="1660744153" data-parent="100466"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/2/acronimous" target="_blank" title="acronimous"><img src="https://static.stands4.com/images/user/2/13" title="acronimous" alt="acronimous" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/2/acronimous" target="_blank" title="acronimous">acronimous</a></div><div class="cmt-comment"><div class="cmt-message">Hi Benjamin, your script is listed on the marketplace -- and can be found here: <a href="https://www.scripts.com/script-for-sale/vase_el_rey_257" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/script-for-sale/vase_el_rey_257</a><br><span id="cmt-more-101102" class="collapse cmt-collapse"><br>We currently don't display scripts listed for sale on the profile page.</span>&nbsp;<a class="cmt-more-link" data-toggle="collapse" href="#cmt-more-101102" role="button" aria-expanded="false" aria-controls="cmt-more-101102">more &raquo;</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">4 years ago</span></div></div></div></li><li><div id="comment-101107" class="comment clearfix" data-id="101107" data-ts="1660752069" data-parent="101102"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/247566/benjamindiana" target="_blank" title="benjamindiana"><img src="https://static.stands4.com/images/user/247566/0" title="benjamindiana" alt="benjamindiana" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/247566/benjamindiana" target="_blank" title="benjamindiana">benjamindiana</a></div><div class="cmt-comment"><div class="cmt-message">How would someone searching for a script find one? Is there a seperate site for buying them?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title=""><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">4 years ago</span></div></div></div></li><li><div id="comment-101250" class="comment clearfix" data-id="101250" data-ts="1661078763" data-parent="101107"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/2/acronimous" target="_blank" title="acronimous"><img src="https://static.stands4.com/images/user/2/13" title="acronimous" alt="acronimous" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/2/acronimous" target="_blank" title="acronimous">acronimous</a></div><div class="cmt-comment"><div class="cmt-message">All the scripts listed for sale can be found on our marketplace here: <a href="https://www.scripts.com/marketplace" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/marketplace</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">4 years ago</span></div></div></div></li></ul></li><li><div id="comment-89743" class="comment clearfix" data-id="89743" data-ts="1646699818"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/217737/pamelar.99775" target="_blank" title="pamelar.99775"><img src="https://static.stands4.com/images/user/217737/0" title="pamelar.99775" alt="pamelar.99775" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/217737/pamelar.99775" target="_blank" title="pamelar.99775">pamelar.99775</a></div><div class="cmt-comment"><div class="cmt-message">I am looking for Ghosthouse's scripts...Thanks...It's a horror film from 1987...</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="6" title=""><i class="fas fa-thumbs-up"></i> 6</span><span class="cmt-added">4 years ago</span></div></div></div></li><li><div id="comment-75857" class="comment clearfix" data-id="75857" data-ts="1633509174"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/184318/stella.09173" target="_blank" title="stella.09173"><img src="https://static.stands4.com/images/user/184318/0" title="stella.09173" alt="stella.09173" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/184318/stella.09173" target="_blank" title="stella.09173">stella.09173</a></div><div class="cmt-comment"><div class="cmt-message">Good day to everyone! How can I buy specific screenplays? I see only a part of them and when I chose it (click ... as a PDF) it leads me to AMAZON. But I find nothing but blue rays... Can someone held <span id="cmt-more-75857" class="collapse cmt-collapse">me?</span>&nbsp;<a class="cmt-more-link" data-toggle="collapse" href="#cmt-more-75857" role="button" aria-expanded="false" aria-controls="cmt-more-75857">more &raquo;</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">4 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-67813" class="comment clearfix" data-id="67813" data-ts="1624385998"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/162214/alih.85841" target="_blank" title="alih.85841"><img src="https://static.stands4.com/images/user/162214/0" title="alih.85841" alt="alih.85841" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/162214/alih.85841" target="_blank" title="alih.85841">alih.85841</a></div><div class="cmt-comment"><div class="cmt-message">I have a question I am new here and kind of 13 years old but I don't know where to start writing my script.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title="loula_f"><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">5 years ago</span></div></div></div><ul class="cmt-replies" data-src="67813"><li><div id="comment-71338" class="comment clearfix" data-id="71338" data-ts="1630930729" data-parent="67813"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/177344/EmilyADinwiddie" target="_blank" title="EmilyADinwiddie"><img src="https://static.stands4.com/images/user/177344/0" title="EmilyADinwiddie" alt="EmilyADinwiddie" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/177344/EmilyADinwiddie" target="_blank" title="EmilyADinwiddie">EmilyADinwiddie</a></div><div class="cmt-comment"><div class="cmt-message">Best thing to do is to write it as a story, then read the Scriptwriter's bible to learn how to format it. That's what I did, and it's not failed me yet! Good luck. xx</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="7" title="acronimous"><i class="fas fa-thumbs-up"></i> 7</span><span class="cmt-added">5 years ago</span></div></div></div></li><li><div id="comment-151025" class="comment clearfix" data-id="151025" data-ts="1720044325" data-parent="67813"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/381048/ano_n" target="_blank" title="ano_n"><img src="https://static.stands4.com/images/user/381048/0" title="ano_n" alt="ano_n" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/381048/ano_n" target="_blank" title="ano_n">ano_n</a></div><div class="cmt-comment"><div class="cmt-message">yes</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="0" title=""></span><span class="cmt-added">2 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-66592" class="comment clearfix" data-id="66592" data-ts="1621830022"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/155267/stela_a" target="_blank" title="stela_a"><img src="https://static.stands4.com/images/user/155267/0" title="stela_a" alt="stela_a" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/155267/stela_a" target="_blank" title="stela_a">stela_a</a></div><div class="cmt-comment"><div class="cmt-message">Hello, I just found the site and I’m amazed. I love cinema and I started looking for scripts and found this site. Thank you so much for creating this, you are amazing.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="9" title="rinat"><i class="fas fa-thumbs-up"></i> 9</span><span class="cmt-added">5 years ago</span></div></div></div><ul class="cmt-replies" data-src="66592"><li><div id="comment-66597" class="comment clearfix" data-id="66597" data-ts="1621847566" data-parent="66592"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/1/rinat" target="_blank" title="rinat"><img src="https://static.stands4.com/images/user/1/0" title="rinat" alt="rinat" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/1/rinat" target="_blank" title="rinat">rinat</a></div><div class="cmt-comment"><div class="cmt-message">Thanks Stela! Truly appreciate your positive feedback.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title="stela_a"><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">5 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-66537" class="comment clearfix" data-id="66537" data-ts="1621687745"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/154929/brianshaun" target="_blank" title="brianshaun"><img src="https://static.stands4.com/images/user/154929/0" title="brianshaun" alt="brianshaun" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/154929/brianshaun" target="_blank" title="brianshaun">brianshaun</a></div><div class="cmt-comment"><div class="cmt-message">how can I sell my sript</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="7" title=""><i class="fas fa-thumbs-up"></i> 7</span><span class="cmt-added">5 years ago</span></div></div></div><ul class="cmt-replies" data-src="66537"><li><div id="comment-66577" class="comment clearfix" data-id="66577" data-ts="1621783460" data-parent="66537"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/1/rinat" target="_blank" title="rinat"><img src="https://static.stands4.com/images/user/1/0" title="rinat" alt="rinat" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/1/rinat" target="_blank" title="rinat">rinat</a></div><div class="cmt-comment"><div class="cmt-message">Please see at:<br> <a href="https://www.scripts.com/sell-your-script" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/sell-your-script</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="7" title="acronimous"><i class="fas fa-thumbs-up"></i> 7</span><span class="cmt-added">5 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-58575" class="comment clearfix" data-id="58575" data-ts="1606410453"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/110699/chak_c" target="_blank" title="chak_c"><img src="https://static.stands4.com/images/user/110699/0" title="chak_c" alt="chak_c" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/110699/chak_c" target="_blank" title="chak_c">chak_c</a></div><div class="cmt-comment"><div class="cmt-message">nice, there are scripts from george carlin</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title="rinat"><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">5 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-55082" class="comment clearfix" data-id="55082" data-ts="1601215119"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/55082" title="HACKED BY MRCYABER" alt="HACKED BY MRCYABER" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">HACKED BY MRCYABER</div><div class="cmt-comment"><div class="cmt-message">Jgan Hack</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">6 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53863" class="comment clearfix" data-id="53863" data-ts="1597457442"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53863" title="Michael Brooks" alt="Michael Brooks" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Michael Brooks</div><div class="cmt-comment"><div class="cmt-message">Give me NBC on DISH, or I quit</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="10" title=""><i class="fas fa-thumbs-up"></i> 10</span><span class="cmt-added">6 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53864" class="comment clearfix" data-id="53864" data-ts="1594836506"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53864" title="Charles Albert Quist" alt="Charles Albert Quist" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Charles Albert Quist</div><div class="cmt-comment"><div class="cmt-message">I want to write a  movie but I don't have much script</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title=""><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">6 years ago</span></div></div></div><ul class="cmt-replies" data-src="53864"><li><div id="comment-71339" class="comment clearfix" data-id="71339" data-ts="1630930867" data-parent="53864"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><a href="/user/177344/EmilyADinwiddie" target="_blank" title="EmilyADinwiddie"><img src="https://static.stands4.com/images/user/177344/0" title="EmilyADinwiddie" alt="EmilyADinwiddie" loading="lazy" /></a></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user"><a href="/user/177344/EmilyADinwiddie" target="_blank" title="EmilyADinwiddie">EmilyADinwiddie</a></div><div class="cmt-comment"><div class="cmt-message">you could always make it a short film, under 30 min.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">5 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53861" class="comment clearfix" data-id="53861" data-ts="1571850970"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53861" title="Saagar Prasain" alt="Saagar Prasain" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Saagar Prasain</div><div class="cmt-comment"><div class="cmt-message">Hlw Sir,<br>I wants to upload or sell my script <br>Is this is a good websites for this kinda work<br>waiting for your response.<br>Thank you</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title=""><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">6 years ago</span></div></div></div><ul class="cmt-replies" data-src="53861"><li><div id="comment-53862" class="comment clearfix" data-id="53862" data-ts="1572341427" data-parent="53861"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53862" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Hi Saagar, you are more than welcome to list your scripts on our marketplace here: <a href="https://www.scripts.com/marketplace" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/marketplace</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="7" title=""><i class="fas fa-thumbs-up"></i> 7</span><span class="cmt-added">6 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53865" class="comment clearfix" data-id="53865" data-ts="1570631854"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53865" title="Himanshu Mahendru" alt="Himanshu Mahendru" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Himanshu Mahendru</div><div class="cmt-comment"><div class="cmt-message">very nice\</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title=""><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">6 years ago</span></div></div></div><ul class="cmt-replies" data-src="53865"><li><div id="comment-53866" class="comment clearfix" data-id="53866" data-ts="1570698657" data-parent="53865"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53866" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Thanks Himanshu!</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title=""><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">6 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53891" class="comment clearfix" data-id="53891" data-ts="1567041173"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53891" title="Srinanda H R" alt="Srinanda H R" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Srinanda H R</div><div class="cmt-comment"><div class="cmt-message">Hey I want to add a script for K.G.F: Chapter 1 (2018) but it is not accepting it in Kannada language. Please help.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="8" title=""><i class="fas fa-thumbs-up"></i> 8</span><span class="cmt-added">7 years ago</span></div></div></div><ul class="cmt-replies" data-src="53891"><li><div id="comment-53892" class="comment clearfix" data-id="53892" data-ts="1567499323" data-parent="53891"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53892" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Hi Peter, please contact us through here and we'll try to help:<br><a href="https://www.scripts.com/contact.php" target="_blank" rel="nofollow noopener noreferrer">https://www.scripts.com/contact.php</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="8" title=""><i class="fas fa-thumbs-up"></i> 8</span><span class="cmt-added">7 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53870" class="comment clearfix" data-id="53870" data-ts="1558349386"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53870" title="Nelco Lamech Seth" alt="Nelco Lamech Seth" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Nelco Lamech Seth</div><div class="cmt-comment"><div class="cmt-message">hey.....if i were to rate i would give this site 100%.....i was almost giving up on my scripting talent till i met this lovely site.PLEASE SIGN ME</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="5" title=""><i class="fas fa-thumbs-up"></i> 5</span><span class="cmt-added">7 years ago</span></div></div></div><ul class="cmt-replies" data-src="53870"><li><div id="comment-53871" class="comment clearfix" data-id="53871" data-ts="1558358117" data-parent="53870"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53871" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Thanks Nelco! Truly appreciate your positive feedback...</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title=""><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">7 years ago</span></div></div></div></li><li><div id="comment-53872" class="comment clearfix" data-id="53872" data-ts="1563169820" data-parent="53870"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53872" title="Edna Joyce Reginald" alt="Edna Joyce Reginald" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Edna Joyce Reginald</div><div class="cmt-comment"><div class="cmt-message">A rate is out of 10 not a %.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title=""><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">7 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53868" class="comment clearfix" data-id="53868" data-ts="1556895780"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53868" title="Md. Tanvir Alam" alt="Md. Tanvir Alam" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Md. Tanvir Alam</div><div class="cmt-comment"><div class="cmt-message">All of your scripts are awesome, top of the line, but one thing makes all of them COMPLETELY worthless, and that is, none of the dialouges have speaker's name.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="6" title=""><i class="fas fa-thumbs-up"></i> 6</span><span class="cmt-added">7 years ago</span></div></div></div><ul class="cmt-replies" data-src="53868"><li><div id="comment-53869" class="comment clearfix" data-id="53869" data-ts="1557046004" data-parent="53868"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53869" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Hi Muhammad, thanks for your feedback! Some of the scripts on Scripts.com indeed only contain the transcript, without the speaker's name. <br><br>Having said that, lots of other do include the entire script, which includes the speaker's name.<br><span id="cmt-more-53869" class="collapse cmt-collapse"><br>We'll continue adding more full scripts going forward.</span>&nbsp;<a class="cmt-more-link" data-toggle="collapse" href="#cmt-more-53869" role="button" aria-expanded="false" aria-controls="cmt-more-53869">more &raquo;</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="4" title=""><i class="fas fa-thumbs-up"></i> 4</span><span class="cmt-added">7 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53893" class="comment clearfix" data-id="53893" data-ts="1556263804"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53893" title="Kirk Travis Millara" alt="Kirk Travis Millara" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Kirk Travis Millara</div><div class="cmt-comment"><div class="cmt-message">?????/?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="6" title=""><i class="fas fa-thumbs-up"></i> 6</span><span class="cmt-added">7 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53873" class="comment clearfix" data-id="53873" data-ts="1548097392"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53873" title="Dimpi Gupta" alt="Dimpi Gupta" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Dimpi Gupta</div><div class="cmt-comment"><div class="cmt-message">Mcent browser ka trick</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="7" title=""><i class="fas fa-thumbs-up"></i> 7</span><span class="cmt-added">7 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53894" class="comment clearfix" data-id="53894" data-ts="1544261487"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53894" title="Christie Patie Patie" alt="Christie Patie Patie" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Christie Patie Patie</div><div class="cmt-comment"><div class="cmt-message">?????????????</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="3" title=""><i class="fas fa-thumbs-up"></i> 3</span><span class="cmt-added">7 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53883" class="comment clearfix" data-id="53883" data-ts="1535629183"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53883" title="Ruby Ibra" alt="Ruby Ibra" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Ruby Ibra</div><div class="cmt-comment"><div class="cmt-message">:T</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">8 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53876" class="comment clearfix" data-id="53876" data-ts="1534257141"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53876" title="Kathy Delgado" alt="Kathy Delgado" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Kathy Delgado</div><div class="cmt-comment"><div class="cmt-message">T-T</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">8 years ago</span></div></div></div><ul class="cmt-replies" data-src="53876"><li><div id="comment-53877" class="comment clearfix" data-id="53877" data-ts="1544638243" data-parent="53876"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53877" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Anything we can do to help?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">7 years ago</span></div></div></div></li><li><div id="comment-53878" class="comment clearfix" data-id="53878" data-ts="1551412696" data-parent="53877"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53878" title="Maureen Friend" alt="Maureen Friend" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Maureen Friend</div><div class="cmt-comment"><div class="cmt-message">STANDS4 can you please help me regarding an inquiry I have?  I need to get permission or pay to use “The Emperor’s New Groove” transcript  in a HS Speech Tournament.</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">7 years ago</span></div></div></div></li><li><div id="comment-53879" class="comment clearfix" data-id="53879" data-ts="1562069445" data-parent="53876"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53879" title="Binibining Kye" alt="Binibining Kye" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Binibining Kye</div><div class="cmt-comment"><div class="cmt-message">??????????????????????</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">7 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53885" class="comment clearfix" data-id="53885" data-ts="1528726551"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53885" title="Lorraine Bryant" alt="Lorraine Bryant" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Lorraine Bryant</div><div class="cmt-comment"><div class="cmt-message">A tinausez</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">8 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53880" class="comment clearfix" data-id="53880" data-ts="1523175081"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53880" title="م. رعد احمد زايد" alt="م. رعد احمد زايد" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">م. رعد احمد زايد</div><div class="cmt-comment"><div class="cmt-message">CREATE</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">8 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53860" class="comment clearfix" data-id="53860" data-ts="1515858204"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53860" title="Marion Towers" alt="Marion Towers" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Marion Towers</div><div class="cmt-comment"><div class="cmt-message">Sicilian Sisters: Women in La Famiglia, fast paced saga covers generations of Sicilians that emigated to NY. To survive thre streets, they swore loyalty to each other and continued their Mafia ways and <span id="cmt-more-53860" class="collapse cmt-collapse">put Family before anything else to survive. The Sicilian women stayed quiet in the background but planned control of all aspects. It was an inheritance they pledged to their Spanish pirate ancestors (secrecy) and connections.</span>&nbsp;<a class="cmt-more-link" data-toggle="collapse" href="#cmt-more-53860" role="button" aria-expanded="false" aria-controls="cmt-more-53860">more &raquo;</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">8 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53886" class="comment clearfix" data-id="53886" data-ts="1511115149"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53886" title="Harendra Dhakre" alt="Harendra Dhakre" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Harendra Dhakre</div><div class="cmt-comment"><div class="cmt-message">YAS I AM JOIN</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">8 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53889" class="comment clearfix" data-id="53889" data-ts="1505241506"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53889" title="Itsuki Chan" alt="Itsuki Chan" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Itsuki Chan</div><div class="cmt-comment"><div class="cmt-message">how join?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">9 years ago</span></div></div></div><ul class="cmt-replies" data-src="53889"><li><div id="comment-53890" class="comment clearfix" data-id="53890" data-ts="1505641862" data-parent="53889"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53890" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">Here: <a href="http://www.scripts.com/signup.php" target="_blank" rel="nofollow noopener noreferrer">http://www.scripts.com/signup.php</a></div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="2" title=""><i class="fas fa-thumbs-up"></i> 2</span><span class="cmt-added">9 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53881" class="comment clearfix" data-id="53881" data-ts="1503651029"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53881" title="Tapelo Joe" alt="Tapelo Joe" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Tapelo Joe</div><div class="cmt-comment"><div class="cmt-message">Great movie</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">9 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53884" class="comment clearfix" data-id="53884" data-ts="1499088119"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53884" title="Aman Kumar" alt="Aman Kumar" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Aman Kumar</div><div class="cmt-comment"><div class="cmt-message">Rambrit is going to patna</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">9 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53882" class="comment clearfix" data-id="53882" data-ts="1493515589"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53882" title="Migdalia Torres" alt="Migdalia Torres" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Migdalia Torres</div><div class="cmt-comment"><div class="cmt-message">Awesome Movie!</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">9 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53887" class="comment clearfix" data-id="53887" data-ts="1488582307"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53887" title="Sristi Sharma" alt="Sristi Sharma" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Sristi Sharma</div><div class="cmt-comment"><div class="cmt-message">Dffd and mom have to school</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">9 years ago</span></div></div></div></li><li class="cmt-hidden"><div id="comment-53874" class="comment clearfix" data-id="53874" data-ts="1469935312"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53874" title="Marilda Harbin" alt="Marilda Harbin" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Marilda Harbin</div><div class="cmt-comment"><div class="cmt-message">FALSE</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">10 years ago</span></div></div></div><ul class="cmt-replies" data-src="53874"><li><div id="comment-53875" class="comment clearfix" data-id="53875" data-ts="1469963811" data-parent="53874"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53875" title="STANDS4" alt="STANDS4" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">STANDS4</div><div class="cmt-comment"><div class="cmt-message">?</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">10 years ago</span></div></div></div></li></ul></li><li class="cmt-hidden"><div id="comment-53867" class="comment clearfix" data-id="53867" data-ts="1458338786"><div class="col-xs-2 col-sm-1 no-padding"><div class="cmt-avatar"><img src="https://static.stands4.com/images/sender/53867" title="Francis Faber" alt="Francis Faber" loading="lazy" /></div></div><div class="col-xs-10 col-sm-11"><div class="cmt-user">Francis Faber</div><div class="cmt-comment"><div class="cmt-message">Really admire 'Sly'. Reallyliked his movie relative to mountaineering!</div></div><div class="cmt-actions"><span><span class="cmt-like">Like</span></span><span><span class="cmt-reply" title="Reply">Reply</span></span><span><span title="Report as spam" data-target="#login-modal" data-action="report-comment" data-uid="" class="cmt-report small" role="button"><i class="fa-flag fas"></i></span></span><span class="cmt-likes" data-count="1" title=""><i class="fas fa-thumbs-up"></i> 1</span><span class="cmt-added">10 years ago</span></div></div></div></li></ul><div class="text-center cmt-btn-load"><button type="button" class="btn btn-2 cmt-more">Load 18 more comments</button></div>    
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="cmt-report-modal" tabindex="-1" role="dialog" aria-labelledby="cmt-report-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="cmt-report-label">Report Comment</h4>
+			</div>
+			<div class="modal-body">
+    			<p>We're doing our best to make sure our content is useful, accurate and safe.<br>If by any chance you spot an inappropriate comment while navigating through our website please use this form to let us know, and we'll take care of it shortly.</p>
+        		<div class="form-group">
+    				<textarea id="cmt-report-reason" class="form-control" rows="3" placeholder="You may specify the reason for the report here..."></textarea>
+    			</div>
+    			<input type="hidden" id="cmt-reported">
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-3 secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-3 tertiary report-comment">Report</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="cmt-attachment-modal" tabindex="-1" role="dialog" aria-labelledby="cmt-attachment-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="cmt-attachment-label">Attachment</h4>
+			</div>
+			<div class="modal-body flex-align-center justify-center">
+    			<img id="cmt-image" class="thumbnail" alt="">
+    			<audio id="cmt-player" controls></audio>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-3 tertiary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<style>
+#login-modal{--login-accent:#66645f;--login-accent-rgb:102, 100, 95}
+#login-modal.modal .modal-dialog{max-width:880px;width:92%;margin:38px auto}
+#login-modal.modal .modal-content{overflow:hidden;border:0;border-radius:8px;box-shadow:0 24px 70px rgba(26,20,31,.28)}
+#login-modal.modal .modal-header{position:relative;padding:26px 30px 22px;border:0;background:linear-gradient(135deg,var(--login-accent) 0%,rgba(var(--login-accent-rgb),.78) 100%);color:#fff}
+#login-modal.modal .modal-header:after{position:absolute;right:-70px;bottom:-86px;width:210px;height:210px;border:34px solid rgba(255,255,255,.13);border-radius:50%;content:""}
+#login-modal.modal .modal-title{position:relative;max-width:660px;margin:0;color:#fff;font-size:28px;line-height:34px;font-weight:800;letter-spacing:0}
+#login-modal.modal .modal-title .modal-type{color:#fff}
+#login-modal.modal .close{position:relative;z-index:2;margin-top:0;color:#fff;text-shadow:none;opacity:.72;font-size:30px}
+#login-modal.modal .close:hover{opacity:1}
+#login-modal.modal .modal-body{padding:28px 30px 32px;background:linear-gradient(180deg,#fff 0%,rgba(var(--login-accent-rgb),.035) 100%)}
+#login-modal.modal .social-signin{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 22px}
+#login-modal.modal .social-signin>[class*="col-"]{float:none;width:auto;padding:0}
+#login-modal.modal .social-signin .g_id_signin{min-width:240px}
+#login-modal.modal .sn-message{list-style:none;font-size:13px;text-align:center;padding:0;margin:6px 0 14px}
+#login-modal.modal #or{display:inline-block;padding:0 18px;background:#fff;color:#766a80;font-size:12px;font-weight:800;line-height:18px;text-transform:uppercase;letter-spacing:.08em}
+#login-modal.modal .or-container{position:relative;margin:8px 0 24px;text-align:center}
+#login-modal.modal .or-hr{position:absolute;top:50%;left:0;width:100%;margin:0;border:0;border-top:1px solid rgba(var(--login-accent-rgb),.14)}
+#login-modal.modal .login-modal-panels{display:flex;gap:22px}
+#login-modal.modal .login-modal-panel{flex:1;min-width:0;padding:22px;border:1px solid rgba(var(--login-accent-rgb),.16);border-radius:8px;background:#fff;box-shadow:0 10px 28px rgba(51,40,61,.07)}
+#login-modal.modal .login-modal-panel h4{margin:0 0 18px;color:var(--login-accent);font-size:22px;line-height:27px;font-weight:800;letter-spacing:0}
+#login-modal.modal .login-modal-panel section{margin:0}
+#login-modal.modal .login-modal-panel p{margin:0 0 16px}
+#login-modal.modal .login-modal-panel label{display:block;margin:0 0 7px;color:#201927;font-size:14px;line-height:18px;font-weight:800}
+#login-modal.modal .mandatory{margin-left:6px;color:var(--login-accent);font-size:15px}
+#login-modal.modal .mandatory span{margin-left:4px;color:var(--login-accent);font-size:11px;font-style:italic;font-weight:600}
+#login-modal.modal input.fw{height:42px;padding:8px 11px;border:1px solid rgba(var(--login-accent-rgb),.24);border-radius:4px;background:#fff;color:#201927;font-size:16px;line-height:22px;box-shadow:inset 0 1px 1px rgba(0,0,0,.02);transition:border-color .18s ease,box-shadow .18s ease}
+#login-modal.modal input.fw:focus{border-color:var(--login-accent);box-shadow:0 0 0 3px rgba(var(--login-accent-rgb),.13);outline:0}
+#login-modal.modal .btn.primary{min-width:96px;border:0;border-radius:4px;background:var(--login-accent);color:#fff;box-shadow:0 5px 12px rgba(var(--login-accent-rgb),.22);font-weight:800}
+#login-modal.modal .btn.primary:hover{background:var(--login-accent);filter:brightness(.88)}
+#login-modal.modal .ptext{margin-top:18px;color:#4b4350;font-size:13px;text-align:right}
+#login-modal.modal .ptext .btn{margin-left:8px}
+#login-modal.modal .waiting{opacity:0;font-size:5px;height:15px;color:var(--login-accent)}
+#login-modal.modal ul.errors-list{margin:0 0 10px;padding:0;list-style:none;line-height:15px;font-size:12px}
+#login-modal.modal p.err{margin:6px 0 0;color:#b94343;font-size:12px;line-height:15px}
+@media (max-width:767px){
+	#login-modal.modal .modal-dialog{width:94%;margin:18px auto}
+	#login-modal.modal .modal-header{padding:22px 22px 18px}
+	#login-modal.modal .modal-title{font-size:23px;line-height:29px}
+	#login-modal.modal .modal-body{padding:22px 18px 24px}
+	#login-modal.modal .social-signin{display:block}
+	#login-modal.modal .social-signin>[class*="col-"]{width:100%;margin-bottom:12px}
+	#login-modal.modal .social-signin .g_id_signin{width:100%;min-width:0}
+	#login-modal.modal .login-modal-panels{display:block}
+	#login-modal.modal .login-modal-panel{padding:18px;margin-bottom:16px}
+}
+</style>
+<div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="loginModal">You need to be logged in to <span class="modal-type">favorite</span>.</h4>
+            </div>
+            <div class="modal-body edit-content">
+				<div class="row social-signin">
+					<div class="col-xs-12">
+						<div id="g_id_onload" data-client_id="567628204450-61pi322eegdisntjp0c3356aoa0rmoof.apps.googleusercontent.com" data-callback="onSuccess"></div><div class='g_id_signin' data-theme='filled_blue' data-type='standard' data-shape='rectangular' data-width='240' data-text='continue_with'></div>					</div>
+				</div>
+        			
+        			<ul class="sn-message"></ul>
+        			
+    				<div class="or-container">
+                    <hr class="or-hr">
+                    <div id="or">or fill the form below</div>
+                </div>
+                
+                <div class="login-modal-panels">
+                    <div class="login-modal-panel short_signin">
+                			<h4>Create a new account</h4>
+                			<div class="text-center waiting"><i class="fas fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                			<form id="modal-signup-frm" method="post">
+                				<ul class="errors-list"></ul>	
+                				<input type="hidden" name="action" id="frm-action" value="short_signin">
+                				<input type="hidden" name="source" id="frm-source" value="0">
+                				<input type="hidden" name="website" id="website" value="14">
+                				<input type="hidden" name="sra" id="fld-sra" value="188.241.67.81">
+                				
+                				<div class="bcols clearfix row">
+                					
+                					<section class="col-xs-12">
+                						<div class="col-left">
+                							<p>
+                								<label for="fld-rname">Your name:<span class="mandatory">*<span>Required</span></span></label>
+                								<input type="text" name="rname" id="fld-rname" value="" maxlength="100" class="fw">
+                							</p>
+                						</div>
+                					</section>
+                					
+                					<section class="col-xs-12">
+                						<div class="col-left">
+                							<p>
+                								<label for="fld-uemail">Your email address:<span class="mandatory">*<span>Required</span></span></label>
+                								<input type="text" name="uemail" id="fld-uemail" value="" maxlength="100" class="fw">
+                							</p>
+                						</div>
+                					</section>
+                					
+                					<section class="col-xs-12">
+                						<div class="col-left">
+                							<p>
+                								<label for="fld-uname">Pick a user name:<span class="mandatory">*<span>Required</span></span></label>
+                								<input type="text" name="uname" id="fld-uname" value="" maxlength="50" class="fw">
+                							</p>
+                						</div>
+                					</section>
+                					
+                					<section class="col-xs-12">
+                						<div class="col-left text-right">
+                							<p><button type="submit" class="btn btn-3 primary">Join</button></p>
+                						</div>
+                					</section>
+                					
+                				</div>
+                			
+                			</form>
+                		</div>
+                    <div class="login-modal-panel short_login">
+                			<h4>Log In</h4>
+                			<div class="text-center waiting"><i class="fas fa-spinner fa-spin fa-3x fa-fw"></i></div>
+                			<form id="modal-login-frm" method="post">
+                				<ul class="errors-list"></ul>
+                				<input type="hidden" name="action" id="frm-action-2" value="short_login">
+                				<div class="clearfix">
+                					<section>
+            							<p>
+            								<label for="fld-uname-2">Username:<span class="mandatory">*<span>Required</span></span></label>
+            								<input type="text" name="uname" id="fld-uname-2" value="" maxlength="50" class="fw">
+            							</p>
+                					</section>
+                					
+                					<section>
+            							<p>
+            								<label for="fld-upass">Password:<span class="mandatory">*<span>Required</span></span></label>
+            								<input type="password" name="upass" id="fld-upass" value="" maxlength="30" class="fw" autocomplete="off">
+            							</p>
+                					</section>
+                					
+                					<section>
+            							<div class="inner-section text-right">
+            								<p><button type="submit" class="btn btn-3 primary">Log In</button></p>
+            								<br>
+            								<p class="ptext">Forgot your password?&nbsp;&nbsp;&nbsp;<button type="button" class="btn secondary xxsml" onclick="location.href='https://www.scripts.com/forgotpass.php';">Retrieve it</button></p>
+            							</div>
+                					</section>
+                					
+                				</div>
+                			</form>
+                		</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+            		    </div>
+					
+										
+					<section class="translate">
+						<hgroup>
+							<h3>Translation</h3>
+							<h4>Translate and read this script in other languages:</h4>
+						</hgroup>
+						<div class="well rc5">
+        						<div class="translate-line row">
+        							<div class="col-sm-4"><p class="translate-select">Select another language:</p></div>
+        							<div class="col-sm-6">
+        								<div class="languagepicker-content closed"><ul class="languagepicker roundborders large" data-source="en" data-id="70" data-page="1" id="languages"><li data-value="">- Select -</li><li data-value="zh-CN"><span class="flag flag-zh"></span> 简体中文 (Chinese - Simplified)</li><li data-value="zh-TW"><span class="flag flag-zh"></span> 繁體中文 (Chinese - Traditional)</li><li data-value="es"><span class="flag flag-es"></span> Español (Spanish)</li><li data-value="eo"><span class="flag flag-eo"></span> Esperanto (Esperanto)</li><li data-value="ja"><span class="flag flag-ja"></span> 日本語 (Japanese)</li><li data-value="pt"><span class="flag flag-pt"></span> Português (Portuguese)</li><li data-value="de"><span class="flag flag-de"></span> Deutsch (German)</li><li data-value="ar"><span class="flag flag-ar"></span> العربية (Arabic)</li><li data-value="fr"><span class="flag flag-fr"></span> Français (French)</li><li data-value="ru"><span class="flag flag-ru"></span> Русский (Russian)</li><li data-value="kn"><span class="flag flag-kn"></span> ಕನ್ನಡ (Kannada)</li><li data-value="ko"><span class="flag flag-ko"></span> 한국어 (Korean)</li><li data-value="iw"><span class="flag flag-iw"></span> עברית (Hebrew)</li><li data-value="ga"><span class="flag flag-ga"></span> Gaeilge (Irish)</li><li data-value="uk"><span class="flag flag-uk"></span> Українська (Ukrainian)</li><li data-value="ur"><span class="flag flag-ur"></span> اردو (Urdu)</li><li data-value="hu"><span class="flag flag-hu"></span> Magyar (Hungarian)</li><li data-value="hi"><span class="flag flag-hi"></span> मानक हिन्दी (Hindi)</li><li data-value="id"><span class="flag flag-id"></span> Indonesia (Indonesian)</li><li data-value="it"><span class="flag flag-it"></span> Italiano (Italian)</li><li data-value="ta"><span class="flag flag-ta"></span> தமிழ் (Tamil)</li><li data-value="tr"><span class="flag flag-tr"></span> Türkçe (Turkish)</li><li data-value="te"><span class="flag flag-te"></span> తెలుగు (Telugu)</li><li data-value="th"><span class="flag flag-th"></span> ภาษาไทย (Thai)</li><li data-value="vi"><span class="flag flag-vi"></span> Tiếng Việt (Vietnamese)</li><li data-value="cs"><span class="flag flag-cs"></span> Čeština (Czech)</li><li data-value="pl"><span class="flag flag-pl"></span> Polski (Polish)</li><li data-value="ro"><span class="flag flag-ro"></span> Românește (Romanian)</li><li data-value="nl"><span class="flag flag-nl"></span> Nederlands (Dutch)</li><li data-value="el"><span class="flag flag-el"></span> Ελληνικά (Greek)</li><li data-value="la"><span class="flag flag-la"></span> Latinum (Latin)</li><li data-value="sv"><span class="flag flag-sv"></span> Svenska (Swedish)</li><li data-value="da"><span class="flag flag-da"></span> Dansk (Danish)</li><li data-value="fi"><span class="flag flag-fi"></span> Suomi (Finnish)</li><li data-value="fa"><span class="flag flag-fa"></span> فارسی (Persian)</li><li data-value="yi"><span class="flag flag-yi"></span> ייִדיש (Yiddish)</li><li data-value="hy"><span class="flag flag-hy"></span> հայերեն (Armenian)</li><li data-value="no"><span class="flag flag-no"></span> Norsk (Norwegian)</li><li data-value="en" class="used"><span class="flag flag-en"></span> English (English)</li></ul></div>
+        							</div>
+        						</div>
+        					</div>
+					</section>
+
+					<section class="biblio">
+						<hgroup>
+							<h3>Citation</h3>
+							<h4>Use the citation below to add this script to your bibliography:</h4>
+						</hgroup>
+						<div class="well rc5">
+							<span class="cit-copy-frame"><span class="cit-copy" title="Copy to clipboard"><i class="fas fa-clipboard" aria-hidden="true"></i></span></span>
+							<p id="cite-style-select" data-term="Scripts.com" data-key="70" data-page="homepage"><strong>Style:</strong><span class="rc3 s" id="cite-style-select-MLA" data-type="MLA">MLA</span><span class="rc3" id="cite-style-select-Chicago" data-type="Chicago">Chicago</span><span class="rc3" id="cite-style-select-APA" data-type="APA">APA</span></p>
+							<p id="cite-content"><cite>"Scripts.com"</cite> <em>Scripts.com.</em> STANDS4 LTD, 2026. Web. 4 Oct. 2026. &lt;<a href="https://www.scripts.com/" class="force-wrap">https://www.scripts.com/</a>&gt;.</p>
+						</div>
+						<div class="citation-footer">
+	<span>Powered by <a href="https://www.cite.me" target="_blank" title="Cite.Me" rel="noopener noreferrer nofollow">CITE.ME</a></span>
+  	<a href="https://www.cite.me" target="_blank" title="Cite.Me" rel="noopener noreferrer nofollow" aria-label="Cite.Me"><img loading="lazy" alt="Cite.Me" style="filter: grayscale(100%);" width="18" height="18" src="https://static.stands4.com/app_common/img/cite-me-gray.png" title="Cite.Me"></a>
+</div>					</section>
+
+					<div class="callout clearfix row">
+						<div>
+							<div class="callout-int col-xs-12 col-sm-12">
+								<div class="row">
+									<div class="col-xs-12 col-sm-8">
+										<hgroup>
+											<h2>We need you!</h2>
+											<h3>Help us build the largest writers community and scripts collection on the web!</h3>
+										</hgroup>
+									</div>
+									<div class="col-xs-12 col-sm-4">
+										<div class="actions"><button type="button" class="btn btn-2 primary lrg" onclick="location.href='https://www.scripts.com/signup.php';">Signup</button></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div id="blocked-vote" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-body text-center"></div>
+          	<div class="modal-footer">
+        		<button type="button" class="btn btn-3 primary" data-dismiss="modal">Close</button>
+          	</div>
+		</div>
+  	</div>
+</div>		</div>
+	</div>
+	
+	<div id="content-aside" class="col-sm-4 col-sm-pull-8">
+				
+		<div class="hidden-xs">
+    <div class="sep-area"><hr class="sep"></div>
+<div class="tagline">
+	<h3>The Web's Largest Resource for</h3>
+	<h2>Movie <span>&amp;</span> Play Scripts</h2>
+</div>    <div class="nsep"><hr><h3>A Member Of The <span>STANDS4 Network</span></h3></div>
+</div>
+		
+		<style>.youtube-content {padding: 1px;background: white;width: fit-content;margin: 20px auto;}.youtube-player {position: relative;padding-bottom: 56.23%;height: 200px;overflow: hidden;width: 250px;background: #000;margin: 5px;}.youtube-player iframe {position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;background: transparent;}.youtube-player img {bottom: 0;display: block;left: 0;margin: auto;max-width: 100%;width: 100%;position: absolute;right: 0;top: 0;border: none;height: auto;cursor: pointer;-webkit-transition: .4s all;-moz-transition: .4s all;transition: .4s all;}.youtube-player img:hover {-webkit-filter: brightness(75%);}.youtube-player .play {height: 72px;width: 72px;left: 50%;top: 50%;margin-left: -36px;margin-top: -36px;position: absolute;}.cblocks .cblock.trailer h3 {color: #84827b;margin: 0 30px 0 0;font-size: 34px;line-height: 34px}.cblocks .cblock.trailer h4 {font-family: 'Alegreya Sans',sans-serif;font-weight: 800;font-size: 20px;line-height: 22px;color: #333;margin: 4px 30px 4px 0}</style>
+<div class="cblocks">
+	<div class="cblock trailer">
+		<hgroup class="clearfix">
+			<h4>Watch the movie trailer</h4>
+			<h3>Full Metal Jacket</h3>
+		</hgroup>
+		<div class="youtube-content">
+			<div class="youtube-player" data-id="x9f6JaaX7Wg"></div>
+		</div>
+	</div>
+</div>
+    		
+		<div class="cblocks">
+			<div class="cblock fauthors">
+				<hgroup class="clearfix">
+					<h4>Our favorite collection of</h4>
+					<h3>Movie Scripts</h3>
+				</hgroup>
+				<span class="more"><a href="top100.php">&raquo;</a></span>
+				<div class="cblock-int">
+					<ul><li><a href="/script/spirited_away_17770">Spirited Away</a></li><li><a href="/script/puss_in_boots:_the_three_diablos_16402">Puss in Boots: The Three Diablos</a></li><li><a href="/script/crimson_peak_6064">Crimson Peak</a></li><li><a href="/script/the_ultimate_gift_22464">The Ultimate Gift</a></li><li><a href="/script/prisoners_1343">Prisoners</a></li><li><a href="/script/puss_in_boots_16401">Puss in Boots</a></li><li><a href="/script/blackadder's_christmas_carol_4216">Blackadder's Christmas Carol</a></li><li><a href="/script/shrek_2_18070">Shrek 2</a></li><li><a href="/script/spider-man_2_18656">Spider-Man 2</a></li><li><a href="/script/brave_4612">Brave</a></li></ul>
+				</div>
+			</div>
+			
+			<div class="cblock new-scripts">
+				<hgroup class="clearfix">
+					<h3>Fresh</h3>
+					<h4>Our latest scripts</h4>
+				</hgroup>
+				<span class="more"><a href="/justadded">&raquo;</a></span>
+				<div class="cblock-int">
+					<dl>
+											<dt><a href="/script/the_golden_palace_-_runaways_28402">The Golden Palace - Runaways&nbsp;Season #1&nbsp;Episode #14</a></dt>
+						<dd>by Mitchell Hurwitz</dd>
+											<dt><a href="/script/the_golden_palace_-_rose_and_fern_28401">The Golden Palace - Rose and Fern&nbsp;Season #1&nbsp;Episode #13</a></dt>
+						<dd>by Marc Sotkin</dd>
+											<dt><a href="/script/the_golden_palace_-_it's_beginning_to_look_a_lot_(less)_like_christmas_28400">The Golden Palace - It's Beginning to Look a Lot (Less) Like Christmas&nbsp;Season #1&nbsp;Episode #12</a></dt>
+						<dd>by Jonathan Schmock</dd>
+											<dt><a href="/script/the_golden_palace_-_camp_town_races_aren't_nearly_as_much_fun_as_they_used_to_be_28399">The Golden Palace - Camp Town Races Aren't Nearly as Much Fun as They Used to Be&nbsp;Season #1&nbsp;Episode #11</a></dt>
+						<dd>by Marc Sotkin</dd>
+											<dt><a href="/script/the_golden_palace_-_marriage_on_the_rocks_with_a_twist_28398">The Golden Palace - Marriage on the Rocks With A Twist&nbsp;Season #1&nbsp;Episode #10</a></dt>
+						<dd>by Jamie Wooten</dd>
+											<dt><a href="/script/the_golden_palace_-_just_a_gigolo_28397">The Golden Palace - Just a Gigolo&nbsp;Season #1&nbsp;Episode #9</a></dt>
+						<dd>by Tony DeLia</dd>
+											<dt><a href="/script/the_golden_palace_-_seems_like_old_times_part_2_28396">The Golden Palace - Seems Like Old Times Part 2&nbsp;Season #1&nbsp;Episode #8</a></dt>
+						<dd>by Jim Vallely</dd>
+										</dl>
+					
+					<div class="sb-add-btn">
+						<button type="button" class="btn btn-2 primary" onclick="location.href='add-script.php';">Submit a new Script</button>
+					</div>
+				</div>
+			</div>
+		</div>
+					
+		
+<div class="cblocks"><div class="cblock marketplace">
+	<div class="sidebar-marketplace-thumb flr"><i class="far fa-money-bill-alt fa-3x"></i></div>
+	<hgroup class="clearfix">
+		<h4><a href="/marketplace">The Marketplace</a>:</h4>
+		<h3><a href="/sell-your-script">Sell your Script !</a></h3>
+	</hgroup>
+	<div class="cblock-int clearfix">
+		<p>
+			Get listed in the most prominent screenplays collection on the web!
+		</p>
+		<p><button type="button" class="btn btn-2 primary" onclick="location.href='/sell-your-script'">Sell your Screenplay &raquo;</button></p>
+		<br>
+	</div>
+</div></div>
+<section class="ad-slot"><ins class="adsbygoogle" style='display:block' data-ad-client='ca-pub-6071864913982699' data-ad-slot='1724806943' data-ad-format='auto' data-full-width-responsive='true'></ins>
+<div class="fallback-content"><a href="https://www.grammar.com/grammar-check"><img src="https://static.stands4.com/app_common/img/grammar-check-ad.png" width="300" height="250" loading="lazy"></a></div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+<div class="visible-xs cblocks">
+    <div class="alpha-mob cblock">
+    	<hgroup class="clearfix">
+		<h3>Browse by letter</h3>
+    	</hgroup>
+    	<div class="cblock-int">
+    		<div class="alpha-mob-list">
+    			<a href="/scripts/0">#</a><a href="/scripts/A">A</a><a href="/scripts/B">B</a><a href="/scripts/C">C</a><a href="/scripts/D">D</a><a href="/scripts/E">E</a><a href="/scripts/F">F</a><a href="/scripts/G">G</a><a href="/scripts/H">H</a><a href="/scripts/I">I</a><a href="/scripts/J">J</a><a href="/scripts/K">K</a><a href="/scripts/L">L</a><a href="/scripts/M">M</a><a href="/scripts/N">N</a><a href="/scripts/O">O</a><a href="/scripts/P">P</a><a href="/scripts/Q">Q</a><a href="/scripts/R">R</a><a href="/scripts/S">S</a><a href="/scripts/T">T</a><a href="/scripts/U">U</a><a href="/scripts/V">V</a><a href="/scripts/W">W</a><a href="/scripts/X">X</a><a href="/scripts/Y">Y</a><a href="/scripts/Z">Z</a><span class="vbar">&nbsp;</span><a href="random.php" aria-label="Random Script" class="z flr"><i class="fas fa-random" aria-hidden="true"></i><span class="hidden-xs"> Random</span></a><a href="/justadded" aria-label="New Scripts" class="z flr"><i class="fas fa-list" aria-hidden="true"></i><span class="hidden-xs"> New Scripts</span></a>    		</div>
+    	</div>
+    </div>
+</div><div class="cblocks"><style>
+#content-aside .script-studio-card {
+	position: relative;
+	padding: 30px !important;
+}
+
+#content-aside .script-studio-card .studio-card-head {
+	display: block;
+	margin: 0 0 24px;
+	padding: 0 84px 24px 0;
+	border-bottom: 1px solid rgba(132, 130, 123, .22);
+}
+
+#content-aside .cblocks .script-studio-card .sidebar-marketplace-thumb {
+	display: flex;
+	float: none !important;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 64px;
+	height: 64px;
+	align-items: center;
+	justify-content: center;
+	margin: 0 !important;
+	border-radius: 8px;
+	background: rgba(132, 130, 123, .1);
+	color: #333;
+	text-align: center;
+}
+
+#content-aside .cblocks .script-studio-card .sidebar-marketplace-thumb i {
+	font-size: 40px !important;
+	line-height: 40px;
+}
+
+#content-aside .cblocks .script-studio-card .studio-card-titlebox {
+	min-width: 0;
+	padding-right: 0 !important;
+}
+
+#content-aside .cblocks .script-studio-card .studio-card-eyebrow {
+	margin: 0 0 6px !important;
+	color: #84827b;
+	font-family: "Oxygen", sans-serif;
+	font-size: 15px !important;
+	font-weight: 700;
+	line-height: 19px !important;
+}
+
+#content-aside .cblocks .script-studio-card .studio-card-title {
+	display: block;
+	max-width: none;
+	margin: 0 !important;
+	color: #84827b;
+	font-family: "Alegreya Sans", sans-serif;
+	font-size: 30px !important;
+	font-weight: 800;
+	line-height: 32px !important;
+	letter-spacing: 0 !important;
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+#content-aside .script-studio-card .studio-card-title a,
+#content-aside .script-studio-card .studio-card-eyebrow a {
+	color: inherit;
+}
+
+#content-aside .script-studio-card .cblock-int {
+	clear: both;
+	padding: 0;
+}
+
+#content-aside .script-studio-card .cblock-int p {
+	margin: 0 0 18px;
+}
+
+#content-aside .script-studio-card .cblock-int p:last-child {
+	margin-bottom: 0;
+}
+
+#content-aside .script-studio-card .btn {
+	width: 100%;
+	white-space: normal;
+}
+</style>
+<div class="cblock script-studio-card">
+	<div class="studio-card-head">
+		<div class="sidebar-marketplace-thumb"><i class="far fa-pen-square fa-3x"></i></div>
+		<div class="studio-card-titlebox">
+			<p class="studio-card-eyebrow"><a href="script-editor">The Studio</a>:</p>
+			<a class="studio-card-title" href="script-editor">Screenwriting Tool</a>
+		</div>
+	</div>
+	<div class="cblock-int clearfix">
+		<p>Write your screenplay and focus on the story with many helpful features.</p>
+		<p><button type="button" class="btn btn-2 primary" onclick="location.href='script-editor';">Start writing now &raquo;</button></p>
+	</div>
+</div>
+</div>
+<div class="cblocks">
+	<div class="cblock quiz-preview">
+		<hgroup class="clearfix">
+			<h3>Quiz</h3>
+			<h4>Are you a screenwriting master?</h4>
+		</hgroup>
+		 <span class="more"><a href="https://www.scripts.com/scripts-quiz">&raquo;</a></span>
+		<div id="game" class="cblock-int">
+			<h5>Who wrote the screenplay for "Pulp Fiction"?</h5>
+			<div class="answers">
+								<div class="answer qz-option" data-correct="0">
+					<strong>A</strong>
+					<span class="word">Aaron Sorkin</span>
+				</div>
+								<div class="answer qz-option" data-correct="0">
+					<strong>B</strong>
+					<span class="word">Joel Coen</span>
+				</div>
+								<div class="answer qz-option" data-correct="1">
+					<strong>C</strong>
+					<span class="word">Quentin Tarantino</span>
+				</div>
+								<div class="answer qz-option" data-correct="0">
+					<strong>D</strong>
+					<span class="word">David Mamet</span>
+				</div>
+				        	</div>
+        	<input type="hidden" id="game-answer" value="Quentin Tarantino">
+        	<input type="hidden" id="game-question" value="Who wrote the screenplay for &quot;Pulp Fiction&quot;?">
+        	<input type="hidden" id="game-question-id" value="X9J8K4B2L1">
+		</div>
+	</div>
+</div>
+<form id="quiz-preview-form" action="https://www.scripts.com/scripts-quiz" method="post">
+	<input type="hidden" id="game-step" name="step" value="2">
+	<input type="hidden" id="game-score" name="score" value="">
+	<input type="hidden" id="game-total" name="total" value="1">
+</form><section class="ad-slot"><ins class="adsbygoogle" style='display:block' data-ad-client='ca-pub-6071864913982699' data-ad-slot='1724806943' data-ad-format='auto' data-full-width-responsive='true'></ins>
+<div class="fallback-content"><a href="https://www.literature.com"><img src="https://static.stands4.com/app_common/img/literature-contest-ad.png" width="300" height="250" loading="lazy"></a></div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+<section class="ad-slot"><ins class="adsbygoogle" style='display:block' data-ad-client='ca-pub-6071864913982699' data-ad-slot='1724806943' data-ad-format='auto' data-full-width-responsive='true'></ins>
+<div class="fallback-content"><a href="https://www.symbols.com/flags-quiz"><img src="https://static.stands4.com/app_common/img/symbols-quiz-ad.png" width="300" height="250" loading="lazy"></a></div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script></section>
+
+ 		<style>
+	#sele-container { position: relative;width: 100%;background: transparent;margin-top: 25px; }
+	#sele-container a { text-decoration: none; }
+	#sele-container .sela-case-inner > a { display: inline-block; }
+    #sele-container .sec { position: relative;top: -25px; }
+    #sele-container .sec:before { content: "Advertisements";position: absolute;top: 2px;left: 10px;font-size: 11px;font-weight: 100;font-family: 'Oxygen', sans-serif;color: #444;text-shadow: 0 1px 0 #fff; }
+    #sele-container .sec:after { content: '';position: absolute;left: 95px;top: 9px;height: 2px;background: #ccc;width: calc(100% - 162px); }
+    #sele-container .sela-list { padding-top: 35px;overflow: hidden;display: flex;justify-content: space-between;flex-wrap: wrap; }
+    #sele-container .sela-list > .sela-case { width: 125px;height: 125px;margin: 10px 10px;display: flex;align-items: center; }
+    #sele-container .sela-list > .sela-case:not(.sela-new) { box-shadow: 0 0 0 1px #ddd; }
+    #sele-container .sela-advertise { display: flex;flex-direction: column;align-items: center;justify-content: center;width: 125px;height: 125px;background: #ededed;border: 3px dotted #110106;padding: 5px;color: #7b7b7b;font-family: Helvetica;font-weight: 100;box-sizing: border-box; }
+    #sele-container .sela-advertise > .sela-adv-title { display: inline-block;font-size: 18px;color: #110006;letter-spacing: .1px; }
+    #sele-container .sela-advertise > .sela-adv-sub { display: inline-block;color: #110006;font-size: 27px;line-height: 24px;letter-spacing: 1px; }
+    #sele-container .sela-case.sela-new.sup-2 .sela-advertise { background: rgba(51, 51, 51, 0.56); }
+    #sele-container .sela-case.sela-new.sup-2 .sela-advertise > span { color: #fff; }
+    #sele-container > .sec > .sela-link { position: absolute;top: 0;right: 10px;z-index: 10;line-height: 16px; }
+    #sele-container > .sec > .sela-link > .widget-logo { width: 50px;height: 16.5px;display: inline-block;background: url(https://static.stands4.com/app_common/img/selectad-secondary-120x40.png);background-size: contain; }
+    #sele-container > .sec > .sela-link > .widget-logo:hover { background: url(https://static.stands4.com/app_common/img/selectad-primary-120x40.png);background-size: contain; }
+    #sele-container .sela-case img { box-sizing: border-box;padding: 5px; object-fit: contain;}
+	@media screen and (max-width: 767px) {
+	   #sele-container .sec:before { left: 15px; }
+	   #sele-container > .sec > .sela-link { right: 15px; }
+	   #sele-container .sela-list { max-width: 300px;margin: 0 auto; }
+       #sele-container .sela-list > .sela-case { margin: 10px 1px; }
+    }
+</style>
+<div id="sele-container" data-wid="22">
+	<div class="sec">
+		<a class="sela-link" href="https://www.selectad.com" target="_blank" aria-label="Go to SelectAd.com"><span class="widget-logo"></span></a>
+	</div>
+	<div class="sela-list">
+			<div class="sela-case" data-pid="1551"><a href="https://www.socialwick.com/instagram/likes" onclick="sela_nclick(this);" target="_blank" title="SocialWick - Buy Real Instagram Likes" rel="dofollow"><img loading="lazy" src="https://static.stands4.com/placement-image/socialwick-com_1551.png" width="125" height="125" alt="SocialWick - Buy Real Instagram Likes" title="SocialWick - Buy Real Instagram Likes" /></a></div>
+			<div class="sela-case" data-pid="1569"><a href="https://socialboom.io/" onclick="sela_nclick(this);" target="_blank" title="Buy YouTube Views, Subscribers, Likes, Comments &#38; more at Socialboom, the #1 YouTube growth platform" rel="dofollow"><img loading="lazy" src="https://static.stands4.com/placement-image/socialboom-io_1569.png" width="125" height="125" alt="Buy YouTube Views, Subscribers, Likes, Comments &#38; more at Socialboom, the #1 YouTube growth platform" title="Buy YouTube Views, Subscribers, Likes, Comments &#38; more at Socialboom, the #1 YouTube growth platform" /></a></div>
+		    <div class="sela-case sela-new sup-1">
+			<a href="https://www.selectad.com/new-placement/22/token/CE9sF0Mpvi" target="_blank" rel="nofollow">		
+				<span class="sela-advertise"><span class="sela-adv-title">YOUR AD</span><span class="sela-adv-sub">HERE!</span></span>
+	 		</a>
+		</div>
+			    <div class="sela-case sela-new sup-2">
+			<a href="https://www.selectad.com/new-placement/22/token/CE9sF0Mpvi" target="_blank" rel="nofollow">		
+				<span class="sela-advertise"><span class="sela-adv-title">YOUR AD</span><span class="sela-adv-sub">HERE!</span></span>
+	 		</a>
+		</div>
+			</div>
+</div>
+<script>function sela_nclick(e){var t=e.parentNode.dataset.pid,a=new XMLHttpRequest;formData=new FormData,void 0!==t&&0!=t.length&&(formData.append("action","add_click"),formData.append("pid",t),a.open("POST","https://www.selectad.com/gw.php",!0),a.send(formData))};</script>
+		 			 	
+	</div>
+	
+</div>
+
+<br>
+</div>
+<style>
+#footer {
+	margin-top: 36px;
+	padding: 26px 0;
+	min-height: 0;
+	background: radial-gradient(circle at 100% 0, rgba(132, 130, 123, .05) 0, rgba(132, 130, 123, 0) 260px), linear-gradient(180deg, #fff 0%, rgba(132, 130, 123, .03) 100%);
+	border-top: 1px solid rgba(132, 130, 123, .18);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .86);
+	color: #52666e;
+	font-size: 12px;
+	text-shadow: none;
+	--footer-accent: #84827B;
+	--footer-accent-soft: color-mix(in srgb, var(--footer-accent) 13%, white);
+	--footer-accent-hover: color-mix(in srgb, var(--footer-accent) 86%, #111);
+}
+
+#footer-int {
+	max-width: 985px;
+	padding: 0 14px;
+	text-shadow: none;
+}
+
+#footer-int > .clearfix {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	margin: 0 -14px;
+}
+
+#footer-int > .clearfix > [class*="col-"] {
+	padding-right: 18px;
+	padding-left: 18px;
+}
+
+#footer-int .row {
+	margin-right: -10px;
+	margin-left: -10px;
+}
+
+#footer-int .row > [class*="col-"] {
+	padding-right: 14px;
+	padding-left: 14px;
+}
+
+#footer-int > .clearfix > .col-xs-12 > .row > [class*="col-"] {
+	position: relative;
+}
+
+#footer-int > .clearfix > .col-xs-12 > .row > [class*="col-"]:not(:first-child):before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 1px;
+	background: rgba(41, 60, 67, .12);
+}
+
+#footer-int .h5,
+#s4-network .h5 {
+	margin: 0 0 14px;
+	color: #17323b;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 800;
+	letter-spacing: 0;
+	line-height: 20px;
+}
+
+#footer-int ul {
+	float: none;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style: none;
+}
+
+#footer-int li {
+	margin: 0 0 5px;
+	color: #17323b;
+	font-size: 13px;
+	line-height: 17px;
+	white-space: normal;
+}
+
+#footer-int a,
+#footer-int span.light {
+	color: #17323b;
+	text-decoration: none;
+}
+
+#footer-int li.ex a,
+#footer-int a:hover,
+#footer-int li.ex a:hover {
+	color: var(--footer-accent);
+}
+
+#footer-int li.ex a {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	white-space: nowrap;
+}
+
+#footer-int li.ex span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 19px;
+	height: 19px;
+	margin-left: 0;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: #eef6f7;
+	background: var(--footer-accent-soft);
+	color: var(--footer-accent);
+	font-size: 11px;
+	font-weight: 800;
+	line-height: 19px;
+}
+
+#footer-int .fab {
+	color: var(--footer-accent);
+}
+
+#footer-int > .clearfix > .col-xs-12,
+#s4-network {
+	min-height: 0;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	border-left: 0;
+	position: relative;
+}
+
+#footer-int > .clearfix > .col-xs-12:not(:first-child):before,
+#s4-network:before {
+	content: "";
+	position: absolute;
+	top: 14px;
+	bottom: 14px;
+	left: 0;
+	width: 1px;
+	background: rgba(41, 60, 67, .12);
+}
+
+#s4-network {
+	height: auto;
+	padding-left: 34px;
+}
+
+#s4-network .row {
+	margin: 0;
+}
+
+#s4-network .h5,
+#s4-network ul,
+#s4-network > .clearfix {
+	margin-left: 24px;
+}
+
+#s4-network .h5 {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+#s4-network ul {
+	display: grid !important;
+	grid-template-columns: repeat(3, max-content);
+	gap: 3px 18px;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#s4-network ul.row:before,
+#s4-network ul.row:after {
+	content: none;
+	display: none;
+}
+
+#s4-network li {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	width: auto !important;
+	flex: none !important;
+	margin: 0;
+	color: #17323b;
+	font-size: 13px;
+	line-height: 17px;
+}
+
+#s4-network li > .xs-logo {
+	flex: 0 0 20px;
+	margin-right: 6px;
+	opacity: .72;
+	filter: saturate(.65);
+}
+
+#s4-network li:hover > .xs-logo {
+	opacity: 1;
+	filter: saturate(1);
+}
+
+#s4-network .copyright {
+	float: left;
+	margin: 18px 0 0;
+	color: #17323b;
+	font-size: 12px;
+	line-height: 17px;
+}
+
+#s4-network > .clearfix {
+	margin-left: 0;
+}
+
+#footer-int .copyright strong {
+	color: #314047;
+	font-weight: 800;
+}
+
+#social-icons {
+	display: flex;
+	float: left;
+	gap: 8px;
+	margin: 18px 0 0 34px;
+}
+
+#social-icons .social {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	float: none;
+	width: 28px;
+	height: 28px;
+	margin: 0;
+	border: 1px solid #cbdde2;
+	border-radius: 50%;
+	background: #fff;
+	color: var(--footer-accent);
+	font-size: 13px;
+	box-shadow: 0 4px 10px rgba(31, 47, 53, .05);
+}
+
+#social-icons .social svg {
+	display: block;
+	width: 15px;
+	height: 15px;
+	fill: currentColor;
+}
+
+#social-icons .social:hover {
+	border-color: color-mix(in srgb, var(--footer-accent) 36%, #cbdde2);
+	background: #f6fbfc;
+	color: var(--footer-accent-hover);
+}
+
+#footer-int ul.last li:empty,
+#footer-int ul.last li:has(> span.light) {
+	margin-top: 17px;
+}
+
+#footer-int ul.last li:has(> a[title="iTunes"]) {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 6px;
+	font-size: 0;
+}
+
+#footer-int ul.last li:has(> a[title="iTunes"]) a {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: 1px solid #cbdde2;
+	border-radius: 50%;
+	background: #fff;
+	font-size: 15px !important;
+	box-shadow: 0 4px 10px rgba(31, 47, 53, .05);
+}
+
+#footer-int ul.last li:has(> a[title="iTunes"]) a:hover {
+	border-color: color-mix(in srgb, var(--footer-accent) 36%, #cbdde2);
+	background: #f6fbfc;
+}
+
+@media (max-width: 767px) {
+	#footer {
+		margin-top: 28px;
+		padding: 24px 0 26px;
+		min-height: 0;
+	}
+
+	#footer-int {
+		padding: 0 18px;
+	}
+
+	#footer-int > .clearfix {
+		display: block;
+		margin: 0;
+	}
+
+	#footer-int > .clearfix > [class*="col-"] {
+		padding-right: 0;
+		padding-left: 0;
+	}
+
+	#footer-int > .clearfix > .col-xs-12,
+	#s4-network {
+		padding: 18px 0;
+		border-left: 0 !important;
+		border-top: 1px solid rgba(41, 60, 67, .12);
+	}
+
+	#footer-int ul,
+	#footer-int .row > [class*="col-"],
+	#footer-int > .clearfix > .col-xs-12,
+	#s4-network {
+		border-left: 0 !important;
+		border-right: 0 !important;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:before,
+	#s4-network:before,
+	#footer-int > .clearfix > .col-xs-12 > .row > [class*="col-"]:before {
+		content: none !important;
+		display: none !important;
+		background: none !important;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:first-child {
+		border-top: 0;
+	}
+
+	#footer-int .row,
+	#s4-network .row {
+		margin-bottom: 0;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 270px));
+		justify-content: center;
+		gap: 18px 32px;
+		margin-right: 0;
+		margin-left: 20px;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row:before,
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row:after {
+		content: none;
+		display: none;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row > [class*="col-"] {
+		float: none;
+		width: auto;
+		max-width: 100%;
+		margin: 0;
+		padding-right: 0;
+		padding-left: 0;
+		text-align: left;
+	}
+
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row > [class*="col-"]:first-child,
+	#footer-int > .clearfix > .col-xs-12:not(#s4-network) > .row > [class*="col-"]:last-child {
+		justify-self: stretch;
+	}
+
+	#footer-int li > a {
+		display: inline-block;
+		padding: 2px 0;
+		font-size: 14px;
+	}
+
+	#footer-int li.ex a {
+		display: inline-flex;
+	}
+
+	#s4-network ul {
+		grid-template-columns: repeat(2, max-content);
+		justify-content: center;
+		gap: 7px 26px;
+		margin-left: 0;
+	}
+
+	#s4-network ul > li {
+		flex: none;
+	}
+
+	#s4-network .h5,
+	#s4-network > .clearfix {
+		margin-left: 0;
+		text-align: center;
+	}
+
+	#s4-network .copyright {
+		float: none;
+		margin-top: 18px;
+	}
+
+	#social-icons {
+		justify-content: center;
+		float: none;
+		margin: 14px 0 0;
+	}
+}
+</style>
+<footer id="footer">
+	<div id="footer-int" class="clearfix container-fluid">
+
+		<div class="clearfix">
+			<div class="col-xs-12 col-sm-3">
+				<div class="row">
+					<div class="col-xs-6 col-sm-5">
+						<div class="h5">Company</div>
+						<ul>
+							<li><a href="https://www.scripts.com/">Home</a></li>
+							<li><a href="about.php">About</a></li>
+							<li><a href="news.php">News</a></li>
+							<li class="ex"><a href="press.php">Press</a></li>
+							<li><a href="awards.php">Awards</a></li>
+							<li><a href="testimonials.php">Testimonials</a></li>
+						</ul>
+					</div>
+
+					<div class="col-xs-6 col-sm-7">
+						<div class="h5">Editorial</div>
+						<ul>
+							<li><a href="login.php">Login</a></li>
+							<li><a href="add-script.php">Add a New Script</a></li>
+							<li class="ex"><a href="signup.php">Become a Member</a></li>
+							<li><a href="/editors">Meet the Members</a></li>
+							<li><a href="how-to-write-a-script.php">How to write a script?</a></li>
+							<li><a href="/justadded">Recently Added</a></li>
+							<li class="ex"><a href="activity.php">Activity Log</a></li>
+							<li><a href="top100.php">Most Popular</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-4">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6">
+						<div class="h5">Services</div>
+						<ul>
+							<li><a href="https://www.abbreviations.com/tools.php">Tools</a></li>
+							<li class="ex"><a href="/collection">Your Collection</a></li>
+							<li><a href="invite.php">Tell a Friend</a></li>
+							<li><a id="page-bookmark" href="#">Bookmark Us</a></li>
+							<li class="ex"><a href="/help-me-out.php">Help me Out!</a></li>
+							<li><a href="scripts_api.php">Scripts API</a></li>
+							<li class="ex"><a href="/sell-your-script">Sell Your Script</a></li>
+							<li><a href="/marketplace">Marketplace&nbsp;<i class="fas fa-shopping-bag fa-1x"></i></a></li>
+							<li><a href="script-editor">Screenwriting Tool</a></li>
+						</ul>
+					</div>
+
+					<div class="col-xs-6 col-sm-6">
+						<div class="h5">Legal &amp; Contact</div>
+						<ul class="last">
+							<li><a href="terms.php">Terms of Use</a></li>
+							<li><a href="privacy.php">Privacy Policy</a></li>
+							<li><a href="contact.php">Contact Us</a></li>
+							<li class="ex"><a href="advertise.php">Advertise</a></li>
+							<li><a href="affiliate-program.php">Affiliate Program	</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			
+<div id="s4-network" class="col-sm-5 col-xs-12">
+	
+	<div class="row"><div class="container-fluid h5">The STANDS4 Network</div></div>
+  	
+  	<ul class="row">
+        <li class="nw-abbreviations"><span class="xs-logo"></span><a  href="https://www.abbreviations.com/">Abbreviations</a></li>
+		<li class="nw-anagrams"><span class="xs-logo"></span><a  href="https://www.anagrams.net/">Anagrams</a></li>
+		<li class="nw-biographies"><span class="xs-logo"></span><a  href="https://www.biographies.net/">Biographies</a></li>
+		<li class="nw-calculator"><span class="xs-logo"></span><a  href="https://www.calculators.net/">Calculators</a></li>
+		<li class="nw-convert"><span class="xs-logo"></span><a  href="https://www.convert.net/">Conversions</a></li>
+		<li class="nw-definitions"><span class="xs-logo"></span><a  href="https://www.definitions.net/">Definitions</a></li>
+		<li class="nw-grammar"><span class="xs-logo"></span><a  href="https://www.grammar.com/">Grammar</a></li>
+		<li class="nw-ua"><span class="xs-logo"></span><a  href="https://www.literature.com/">Literature</a></li>
+		<li class="nw-lyrics"><span class="xs-logo"></span><a  href="https://www.lyrics.com/">Lyrics</a></li>
+		<li class="nw-phrases"><span class="xs-logo"></span><a  href="https://www.phrases.com/">Phrases</a></li>
+		<li class="nw-poetry"><span class="xs-logo"></span><a  href="https://www.poetry.com/">Poetry</a></li>
+		<li class="nw-quotes"><span class="xs-logo"></span><a  href="https://www.quotes.net/">Quotes</a></li>
+		<li class="nw-references"><span class="xs-logo"></span><a  href="https://www.references.net/">References</a></li>
+		<li class="nw-rhymes"><span class="xs-logo"></span><a  href="https://www.rhymes.com/">Rhymes</a></li>
+		<li class="nw-scripts"><span class="xs-logo"></span><a  href="https://www.scripts.com/">Scripts</a></li>
+		<li class="nw-symbols"><span class="xs-logo"></span><a  href="https://www.symbols.com/">Symbols</a></li>
+		<li class="nw-synonyms"><span class="xs-logo"></span><a  href="https://www.synonyms.com/">Synonyms</a></li>
+		<li class="nw-uszip"><span class="xs-logo"></span><a  href="https://www.uszip.com/">Zip Codes</a></li>
+  	</ul>
+  	
+  	<div class="clearfix">
+		<div class="copyright"><strong>&copy; 2001-2026 STANDS4 LTD.</strong><br>All rights reserved.</div>
+		<div id="social-icons" class="flr">
+			<a rel="nofollow noopener noreferrer" href="https://www.facebook.com/STANDS4" target="_blank" title="Facebook"><span class="social fb"><i class="fab fa-facebook-f" aria-hidden="true"></i></span></a>
+			<a rel="nofollow noopener noreferrer" href="https://x.com/justadded" target="_blank" title="Twitter"><span class="social tw"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true" focusable="false"><path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z"/></svg></span></a>
+			<a rel="nofollow noopener noreferrer" href="https://www.linkedin.com/company/stands4/" target="_blank" title="LinkedIn"><span class="social lkd"><i class="fab fa-linkedin-in" aria-hidden="true"></i></span></a>
+		</div>
+	</div>
+	
+</div>
+
+		</div>
+
+	</div>
+</footer>
+</div>
+<link rel="stylesheet" href="https://static.stands4.com/app_common/css/font-awesome-5.0.min.css">
+<link rel="stylesheet" href="https://static.stands4.com/app_common/css/smoothness/jquery-ui-1.13.2.custom.min.css?v=1.0.1">
+
+<script src="//code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer></script>
+<script src="https://static.stands4.com/app_common/js/libs/jquery-ui-1.13.2.custom.min.js?v=1.0.1" defer></script>
+
+
+
+<script src="https://static.stands4.com/app_common/js/libs/bootstrap-3.4.1.min.js" defer></script>
+
+<script defer src="https://static.stands4.com/app_common/js/page.analytics.min.js?v=1.3.50" id="s4-analytics" data-id="UA-172613-25"></script>
+<script defer src="https://www.googletagmanager.com/gtag/js?id=UA-172613-25"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6071864913982699" crossorigin="anonymous"></script>
+
+<script src="https://static.stands4.com/app_common/js/libs/wselect.min.js" defer></script>
+<script src="https://static.stands4.com/app_scripts/js/scr.min.js?v=1.3.50" defer></script>
+</body>
+</html>
+<!-- Timer: 0.0729 secs | Server: ip-172-30-1-220.ec2.internal -->

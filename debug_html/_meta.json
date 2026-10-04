@@ -1,0 +1,515 @@
+{
+ "scriptslug.com__robots.txt": {
+  "url": "https://www.scriptslug.com/robots.txt",
+  "status": 200,
+  "final": "https://www.scriptslug.com/robots.txt",
+  "len": 2745,
+  "ctype": "text/plain; charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0.xml": {
+  "url": "https://www.scriptslug.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap.xml",
+  "len": 1201,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_0.xml": {
+  "url": "https://www.scriptslug.com/sitemap-scripts.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-scripts.xml",
+  "len": 470116,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_1.xml": {
+  "url": "https://www.scriptslug.com/sitemap-series.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-series.xml",
+  "len": 58223,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_2.xml": {
+  "url": "https://www.scriptslug.com/sitemap-articles.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-articles.xml",
+  "len": 8217,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_3.xml": {
+  "url": "https://www.scriptslug.com/sitemap-genres.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-genres.xml",
+  "len": 4858,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_4.xml": {
+  "url": "https://www.scriptslug.com/sitemap-formats.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-formats.xml",
+  "len": 719,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_5.xml": {
+  "url": "https://www.scriptslug.com/sitemap-pages.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-pages.xml",
+  "len": 2174,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_6.xml": {
+  "url": "https://www.scriptslug.com/sitemap-studios.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-studios.xml",
+  "len": 88872,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap0_7.xml": {
+  "url": "https://www.scriptslug.com/sitemap-writers.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-writers.xml",
+  "len": 522787,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__sitemap1.xml": {
+  "url": "https://www.scriptslug.com/sitemap-news.xml",
+  "status": 200,
+  "final": "https://www.scriptslug.com/sitemap-news.xml",
+  "len": 194,
+  "ctype": "text/xml;charset=UTF-8"
+ },
+ "scriptslug.com__home.html": {
+  "url": "https://www.scriptslug.com/",
+  "status": 200,
+  "final": "https://www.scriptslug.com/",
+  "len": 136350,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "laper.ai__robots.txt": {
+  "url": "https://laper.ai/robots.txt",
+  "status": 200,
+  "final": "https://laper.ai/robots.txt",
+  "len": 919,
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "laper.ai__sitemap0.xml": {
+  "url": "https://laper.ai/sitemap.xml",
+  "status": 200,
+  "final": "https://laper.ai/sitemap.xml",
+  "len": 19423,
+  "ctype": "application/xml"
+ },
+ "laper.ai__sitemap1.xml": {
+  "url": "https://laper.ai/sitemap-screenplays.xml",
+  "status": 200,
+  "final": "https://laper.ai/sitemap-screenplays.xml",
+  "len": 419439,
+  "ctype": "application/xml; charset=utf-8"
+ },
+ "laper.ai__home.html": {
+  "url": "https://laper.ai/",
+  "status": 200,
+  "final": "https://laper.ai/",
+  "len": 962239,
+  "ctype": "text/html; charset=utf-8"
+ },
+ "8flix.com__robots.txt": {
+  "url": "https://8flix.com/robots.txt",
+  "status": 200,
+  "final": "https://8flix.com/robots.txt",
+  "len": 106,
+  "ctype": "text/plain; charset=UTF-8"
+ },
+ "8flix.com__sitemap0.xml": {
+  "url": "https://8flix.com/sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/sitemap.xml",
+  "len": 10908,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_0.xml": {
+  "url": "https://8flix.com/post-sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/post-sitemap.xml",
+  "len": 5093,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_1.xml": {
+  "url": "https://8flix.com/post_tag-sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap.xml",
+  "len": 11239,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_2.xml": {
+  "url": "https://8flix.com/post_tag-sitemap2.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap2.xml",
+  "len": 10960,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_3.xml": {
+  "url": "https://8flix.com/post_tag-sitemap3.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap3.xml",
+  "len": 9772,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_4.xml": {
+  "url": "https://8flix.com/post_tag-sitemap4.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap4.xml",
+  "len": 9514,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_5.xml": {
+  "url": "https://8flix.com/post_tag-sitemap5.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap5.xml",
+  "len": 9486,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_6.xml": {
+  "url": "https://8flix.com/post_tag-sitemap6.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap6.xml",
+  "len": 11204,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_7.xml": {
+  "url": "https://8flix.com/post_tag-sitemap7.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap7.xml",
+  "len": 9791,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_8.xml": {
+  "url": "https://8flix.com/post_tag-sitemap8.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap8.xml",
+  "len": 9926,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_9.xml": {
+  "url": "https://8flix.com/post_tag-sitemap9.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap9.xml",
+  "len": 9571,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_10.xml": {
+  "url": "https://8flix.com/post_tag-sitemap10.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap10.xml",
+  "len": 10158,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap0_11.xml": {
+  "url": "https://8flix.com/post_tag-sitemap11.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap11.xml",
+  "len": 9310,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1.xml": {
+  "url": "https://8flix.com/sitemap_index.xml",
+  "status": 200,
+  "final": "https://8flix.com/sitemap_index.xml",
+  "len": 10908,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_0.xml": {
+  "url": "https://8flix.com/post-sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/post-sitemap.xml",
+  "len": 5093,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_1.xml": {
+  "url": "https://8flix.com/post_tag-sitemap.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap.xml",
+  "len": 11239,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_2.xml": {
+  "url": "https://8flix.com/post_tag-sitemap2.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap2.xml",
+  "len": 10960,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_3.xml": {
+  "url": "https://8flix.com/post_tag-sitemap3.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap3.xml",
+  "len": 9772,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_4.xml": {
+  "url": "https://8flix.com/post_tag-sitemap4.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap4.xml",
+  "len": 9514,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_5.xml": {
+  "url": "https://8flix.com/post_tag-sitemap5.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap5.xml",
+  "len": 9486,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_6.xml": {
+  "url": "https://8flix.com/post_tag-sitemap6.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap6.xml",
+  "len": 11204,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_7.xml": {
+  "url": "https://8flix.com/post_tag-sitemap7.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap7.xml",
+  "len": 9791,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_8.xml": {
+  "url": "https://8flix.com/post_tag-sitemap8.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap8.xml",
+  "len": 9926,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_9.xml": {
+  "url": "https://8flix.com/post_tag-sitemap9.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap9.xml",
+  "len": 9571,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_10.xml": {
+  "url": "https://8flix.com/post_tag-sitemap10.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap10.xml",
+  "len": 10158,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__sitemap1_11.xml": {
+  "url": "https://8flix.com/post_tag-sitemap11.xml",
+  "status": 200,
+  "final": "https://8flix.com/post_tag-sitemap11.xml",
+  "len": 9310,
+  "ctype": "text/xml; charset=UTF-8"
+ },
+ "8flix.com__home.html": {
+  "url": "https://8flix.com/",
+  "status": 200,
+  "final": "https://8flix.com/",
+  "len": 579151,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "screenplaydb.com__robots.txt": {
+  "url": "https://www.screenplaydb.com/robots.txt",
+  "error": "HTTPSConnectionPool(host='www.screenplaydb.com', port=443): Max retries exceeded with url: /robots.txt (Caused by NameResolutionError(\"HTTPSConnection(host='www.screenplaydb.com', port=443): Failed to resolve 'www.screenplaydb.com' ([Errno -3] Temporary failure in name resolution)\"))"
+ },
+ "screenplaydb.com__sitemap0.xml": {
+  "url": "https://www.screenplaydb.com/sitemap.xml",
+  "error": "HTTPSConnectionPool(host='www.screenplaydb.com', port=443): Max retries exceeded with url: /sitemap.xml (Caused by NameResolutionError(\"HTTPSConnection(host='www.screenplaydb.com', port=443): Failed to resolve 'www.screenplaydb.com' ([Errno -3] Temporary failure in name resolution)\"))"
+ },
+ "screenplaydb.com__sitemap1.xml": {
+  "url": "https://www.screenplaydb.com/sitemap_index.xml",
+  "error": "HTTPSConnectionPool(host='www.screenplaydb.com', port=443): Max retries exceeded with url: /sitemap_index.xml (Caused by NameResolutionError(\"HTTPSConnection(host='www.screenplaydb.com', port=443): Failed to resolve 'www.screenplaydb.com' ([Errno -3] Temporary failure in name resolution)\"))"
+ },
+ "screenplaydb.com__home.html": {
+  "url": "https://www.screenplaydb.com/",
+  "error": "HTTPSConnectionPool(host='www.screenplaydb.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.screenplaydb.com', port=443): Failed to resolve 'www.screenplaydb.com' ([Errno -3] Temporary failure in name resolution)\"))"
+ },
+ "thescriptsavant.com__robots.txt": {
+  "url": "https://thescriptsavant.com/robots.txt",
+  "status": 503,
+  "final": "https://thescriptsavant.com/robots.txt",
+  "len": 326,
+  "ctype": "text/html; charset=us-ascii"
+ },
+ "thescriptsavant.com__sitemap0.xml": {
+  "url": "https://thescriptsavant.com/sitemap.xml",
+  "status": 503,
+  "final": "https://thescriptsavant.com/sitemap.xml",
+  "len": 326,
+  "ctype": "text/html; charset=us-ascii"
+ },
+ "thescriptsavant.com__sitemap1.xml": {
+  "url": "https://thescriptsavant.com/sitemap_index.xml",
+  "status": 503,
+  "final": "https://thescriptsavant.com/sitemap_index.xml",
+  "len": 326,
+  "ctype": "text/html; charset=us-ascii"
+ },
+ "thescriptsavant.com__home.html": {
+  "url": "https://thescriptsavant.com/",
+  "status": 503,
+  "final": "https://thescriptsavant.com/",
+  "len": 326,
+  "ctype": "text/html; charset=us-ascii"
+ },
+ "moviescriptsandscreenplays.com__robots.txt": {
+  "url": "https://moviescriptsandscreenplays.com/robots.txt",
+  "status": 200,
+  "final": "https://moviescriptsandscreenplays.com/robots.txt",
+  "len": 816,
+  "ctype": "text/plain; charset=UTF-8"
+ },
+ "moviescriptsandscreenplays.com__sitemap0.xml": {
+  "url": "https://moviescriptsandscreenplays.com/sitemap.xml",
+  "status": 404,
+  "final": "https://moviescriptsandscreenplays.com/sitemap.xml",
+  "len": 236,
+  "ctype": "text/html; charset=iso-8859-1"
+ },
+ "moviescriptsandscreenplays.com__sitemap1.xml": {
+  "url": "https://moviescriptsandscreenplays.com/sitemap_index.xml",
+  "status": 404,
+  "final": "https://moviescriptsandscreenplays.com/sitemap_index.xml",
+  "len": 236,
+  "ctype": "text/html; charset=iso-8859-1"
+ },
+ "moviescriptsandscreenplays.com__home.html": {
+  "url": "https://moviescriptsandscreenplays.com/",
+  "status": 200,
+  "final": "https://moviescriptsandscreenplays.com/",
+  "len": 220300,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scripts.com__robots.txt": {
+  "url": "https://www.scripts.com/robots.txt",
+  "status": 200,
+  "final": "https://www.scripts.com/robots.txt",
+  "len": 469,
+  "ctype": "text/plain; charset=UTF-8"
+ },
+ "scripts.com__sitemap0.xml": {
+  "url": "https://www.scripts.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.scripts.com",
+  "len": 181438,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scripts.com__sitemap1.xml": {
+  "url": "https://www.scripts.com/sitemap_index.xml",
+  "status": 200,
+  "final": "https://www.scripts.com",
+  "len": 182503,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scripts.com__home.html": {
+  "url": "https://www.scripts.com/",
+  "status": 200,
+  "final": "https://www.scripts.com/",
+  "len": 181504,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "deadline.com__robots.txt": {
+  "url": "https://deadline.com/robots.txt",
+  "status": 200,
+  "final": "https://deadline.com/robots.txt",
+  "len": 1285,
+  "ctype": "text/plain; charset=utf-8"
+ },
+ "deadline.com__sitemap0.xml": {
+  "url": "https://deadline.com/sitemap_index.xml",
+  "status": 200,
+  "final": "https://deadline.com/sitemap_index.xml",
+  "len": 72903,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_0.xml": {
+  "url": "https://deadline.com/post-sitemap200608.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200608.xml",
+  "len": 10736,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_1.xml": {
+  "url": "https://deadline.com/post-sitemap200607.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200607.xml",
+  "len": 20168,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_2.xml": {
+  "url": "https://deadline.com/post-sitemap200606.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200606.xml",
+  "len": 22190,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_3.xml": {
+  "url": "https://deadline.com/post-sitemap200605.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200605.xml",
+  "len": 29928,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_4.xml": {
+  "url": "https://deadline.com/post-sitemap200604.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200604.xml",
+  "len": 25921,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap0_5.xml": {
+  "url": "https://deadline.com/post-sitemap200603.xml",
+  "status": 200,
+  "final": "https://deadline.com/post-sitemap200603.xml",
+  "len": 16860,
+  "ctype": "text/xml;charset=utf-8"
+ },
+ "deadline.com__sitemap1.xml": {
+  "url": "https://deadline.com/news-sitemap.xml",
+  "status": 200,
+  "final": "https://deadline.com/news-sitemap.xml",
+  "len": 25710,
+  "ctype": "application/xml"
+ },
+ "deadline.com__home.html": {
+  "url": "https://deadline.com/",
+  "status": 200,
+  "final": "https://deadline.com/",
+  "len": 821321,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scriptslug__oppenheimer.html": {
+  "url": "https://www.scriptslug.com/script/oppenheimer-2023",
+  "status": 200,
+  "final": "https://www.scriptslug.com/script/oppenheimer-2023",
+  "len": 125069,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scriptslug__scripts.html": {
+  "url": "https://www.scriptslug.com/scripts",
+  "status": 404,
+  "final": "https://www.scriptslug.com/scripts",
+  "len": 126781,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "scriptslug__film2024.html": {
+  "url": "https://www.scriptslug.com/scripts/medium/film?year=2024",
+  "status": 200,
+  "final": "https://www.scriptslug.com/scripts/format/film?year=2024",
+  "len": 118528,
+  "ctype": "text/html; charset=UTF-8"
+ },
+ "laper__oppenheimer.html": {
+  "url": "https://laper.ai/screenplays/oppenheimer/",
+  "status": 404,
+  "final": "https://laper.ai/screenplays/oppenheimer/",
+  "len": 488020,
+  "ctype": "text/html; charset=utf-8"
+ },
+ "8flix__home2.html": {
+  "url": "https://8flix.com/screenplays/",
+  "status": 404,
+  "final": "https://8flix.com/screenplays/",
+  "len": 354325,
+  "ctype": "text/html; charset=UTF-8"
+ }
+}
