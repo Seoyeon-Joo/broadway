@@ -67,6 +67,7 @@ def fetch_index(page: str) -> tuple[str, str]:
         except Exception as e:  # noqa: BLE001
             last = e
             print(f"  fetch failed {url}: {e}")
+            print(f"::warning::fetch failed {url}: {type(e).__name__}: {str(e)[:300]}")
     raise RuntimeError(f"Could not fetch {page}: {last}")
 
 
@@ -257,4 +258,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:  # surface the cause as a GitHub Actions annotation
+        print(f"::error::{type(e).__name__}: {str(e)[:500]}")
+        raise
