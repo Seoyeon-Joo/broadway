@@ -1,0 +1,74 @@
+# .github/workflows/imsdb.yml
+#
+# data/movie_list.xlsx 의 영화 제목을 IMSDb(imsdb.com) 대본 목록과 매칭하고,
+# 선택하면 대본을 .txt로 저장합니다.
+#
+# 실행: Actions > IMSDb matcher > Run workflow
+#   download = none    : 매칭 결과(IMSDb_results.xlsx)만 생성
+#   download = matched : 매칭된 영화 대본을 txt(imsdb-txt) + 원본 페이지(imsdb-original)로 저장
+# 결과물은 실행 페이지 하단 Artifacts 에서 다운로드합니다.
+
+name: IMSDb matcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      download:
+        description: "대본 txt 저장 (none / matched)"
+        type: choice
+        options: [none, matched]
+        default: matched
+      threshold:
+        description: "퍼지 매칭 최소 점수 (0-100)"
+        default: "88"
+
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install "pandas>=2.2" "openpyxl>=3.1" "requests>=2.32" "beautifulsoup4>=4.12" "rapidfuzz>=3.9" "pypdf>=4.0"
+
+      - name: Match movie list against IMSDb
+        run: |
+          python scripts/imsdb_matcher.py \
+            --input data/movie_list.xlsx \
+            --output data/IMSDb_results.xlsx \
+            --threshold "${{ github.event.inputs.threshold || '88' }}" \
+            --download "${{ github.event.inputs.download || 'matched' }}" \
+            --download-dir data/imsdb_txt \
+            --raw-dir data/imsdb_raw
+
+      - name: Upload matching results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: imsdb-results
+          path: data/IMSDb_results.xlsx
+          if-no-files-found: warn
+
+      - name: Upload screenplay txt files
+        if: ${{ github.event.inputs.download == 'matched' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: imsdb-txt
+          path: data/imsdb_txt/
+          if-no-files-found: warn
+
+      - name: Upload original pages
+        if: ${{ github.event.inputs.download == 'matched' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: imsdb-original
+          path: data/imsdb_raw/
+          if-no-files-found: warn
