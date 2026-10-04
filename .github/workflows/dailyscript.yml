@@ -7,6 +7,8 @@
 #   download = none     : 매칭 결과(DailyScript_results.xlsx)만 생성
 #   download = approved : data/approved_urls.txt 에 적은 URL만 txt로 저장
 #   download = matched  : 매칭된 모든 영화의 대본을 txt로 저장 (PDF도 텍스트 추출)
+#   all_versions        : 체크하면 같은 영화의 모든 버전(초고·촬영본 등)을 다 받음
+#   txt는 dailyscript-txt, 원본 pdf/html/txt는 dailyscript-original 아티팩트로 업로드
 # 결과물은 실행 페이지 하단 Artifacts 에서 다운로드합니다.
 
 name: Daily Script matcher
@@ -22,6 +24,10 @@ on:
       threshold:
         description: "퍼지 매칭 최소 점수 (0-100)"
         default: "88"
+      all_versions:
+        description: "같은 영화의 모든 버전(초고/촬영본, pdf/html/txt) 받기"
+        type: boolean
+        default: false
   push:
     paths:
       - "data/movie_list.xlsx"
@@ -54,7 +60,9 @@ jobs:
             --threshold "${{ github.event.inputs.threshold || '88' }}" \
             --download "${{ github.event.inputs.download || 'none' }}" \
             --approved data/approved_urls.txt \
-            --download-dir data/dailyscript_txt
+            --download-dir data/dailyscript_txt \
+            --raw-dir data/dailyscript_raw \
+            ${{ github.event.inputs.all_versions == 'true' && '--all-versions' || '' }}
 
       - name: Upload matching results
         uses: actions/upload-artifact@v4
@@ -68,4 +76,12 @@ jobs:
         with:
           name: dailyscript-txt
           path: data/dailyscript_txt/
+          if-no-files-found: warn
+
+      - name: Upload original pdf/html/txt files
+        if: ${{ github.event.inputs.download == 'approved' || github.event.inputs.download == 'matched' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dailyscript-original
+          path: data/dailyscript_raw/
           if-no-files-found: warn

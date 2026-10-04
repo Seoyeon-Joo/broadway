@@ -196,7 +196,8 @@ def to_text(resp: requests.Response, fmt: str) -> str | None:
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 
-def download(results: pd.DataFrame, mode: str, approved_file: Path, out_dir: Path):
+def download(results: pd.DataFrame, mode: str, approved_file: Path, out_dir: Path,
+             raw_dir: Path | None = None, all_versions: bool = False):
     matched = results[results["matched"]]
     if mode == "approved":
         if not approved_file.exists():
@@ -211,15 +212,31 @@ def download(results: pd.DataFrame, mode: str, approved_file: Path, out_dir: Pat
     else:
         selected = matched
         print(f"Downloading all matched scripts: {len(selected)}")
+    if all_versions:  # one row per available version (txt/html/pdf drafts)
+        rows = []
+        for _, r in selected.iterrows():
+            urls = [u.strip() for u in str(r["all_urls"]).split("|") if u.strip()] or [r["script_url"]]
+            for i, u in enumerate(urls):
+                rr = r.copy(); rr["script_url"] = u; rr["_v"] = i
+                rr["script_format"] = Path(u.split("?")[0]).suffix.lower().lstrip(".")
+                rows.append(rr)
+        selected = pd.DataFrame(rows)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     log = []
     for _, row in selected.iterrows():
         url, title = row["script_url"], str(row["movie_title"])
         safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{row['movie_id']}_{title}").strip(" ._") or "script"
+        if all_versions and row.get("_v", 0):
+            safe += f"_v{int(row['_v']) + 1}"
         status = ""
         try:
-            text = to_text(get(url, timeout=60), row["script_format"])
+            resp = get(url, timeout=60)
+            if raw_dir is not None:
+                raw_dir.mkdir(parents=True, exist_ok=True)
+                ext = Path(url.split("?")[0]).suffix or ".bin"
+                (raw_dir / f"{safe}{ext}").write_bytes(resp.content)
+            text = to_text(resp, row["script_format"])
             if text and len(text) > 500:
                 (out_dir / f"{safe}.txt").write_text(text, encoding="utf-8")
                 status = f"ok ({len(text):,} chars)"
@@ -231,6 +248,9 @@ def download(results: pd.DataFrame, mode: str, approved_file: Path, out_dir: Pat
         log.append({"movie_id": row["movie_id"], "movie_title": title, "url": url, "status": status})
         time.sleep(1.5)
     pd.DataFrame(log).to_csv(out_dir / "_download_log.csv", index=False, encoding="utf-8-sig")
+    ok = sum(1 for l in log if l["status"].startswith("ok"))
+    bad = [f"{l['movie_title']}({l['status'][:40]})" for l in log if not l["status"].startswith("ok")]
+    print(f"::notice::download: txt ok={ok}/{len(log)} | not ok={bad}")
 
 
 def main():
@@ -241,6 +261,8 @@ def main():
     ap.add_argument("--download", choices=["none", "approved", "matched"], default="none")
     ap.add_argument("--approved", default="data/approved_urls.txt")
     ap.add_argument("--download-dir", default="data/dailyscript_txt")
+    ap.add_argument("--raw-dir", default="", help="also save original pdf/html/txt files here")
+    ap.add_argument("--all-versions", action="store_true", help="download every draft/version, not just the best one")
     args = ap.parse_args()
 
     df = pd.read_excel(args.input)
@@ -262,7 +284,8 @@ def main():
     print(f"::notice::Daily Script catalog={len(catalog)} | matched={int(results['matched'].sum())}/{len(results)} | formats={fmts}")
 
     if args.download != "none":
-        download(results, args.download, Path(args.approved), Path(args.download_dir))
+        download(results, args.download, Path(args.approved), Path(args.download_dir),
+                 Path(args.raw_dir) if args.raw_dir else None, args.all_versions)
 
 
 if __name__ == "__main__":
