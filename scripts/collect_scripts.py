@@ -127,15 +127,87 @@ def _wordwise_close(a: str, b: str) -> bool:
 LANDING_HINT = re.compile(r"documentcloud\.org/documents/\d+|\.pdf(\?|$|#)", re.I)
 
 
-def _get(url: str):
-    r = session.get(url, timeout=90, allow_redirects=True)
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+
+
+def _get_once(url: str):
+    r = session.get(url, timeout=90, allow_redirects=True, headers={"User-Agent": BROWSER_UA})
     r.raise_for_status()
     return r
 
 
+def wayback_url(url: str) -> str:
+    """Closest archived snapshot as raw content (id_), or ''."""
+    if "web.archive.org" in url:
+        return ""
+    try:
+        j = session.get("https://archive.org/wayback/available", params={"url": url}, timeout=40).json()
+        snap = (j.get("archived_snapshots") or {}).get("closest") or {}
+        if snap.get("available") and snap.get("url"):
+            return re.sub(r"(/web/\d+)/", r"\1id_/", snap["url"].replace("http://", "https://", 1), count=1)
+    except Exception:  # noqa: BLE001
+        pass
+    return ""
+
+
+def _get(url: str):
+    """GET with Wayback Machine fallback for dead links (404/403/410/5xx/connection errors)."""
+    try:
+        return _get_once(url)
+    except Exception as e:  # noqa: BLE001
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        if code is not None and code not in (403, 404, 410) and code < 500:
+            raise
+        wb = wayback_url(url)
+        if not wb:
+            raise
+        print(f"    wayback: {url} -> {wb}")
+        r = _get_once(wb)
+        r.wayback = True
+        return r
+
+
+OCR_MAX_PAGES = 250
+OCR_USED: list[str] = []
+
+
 def _pdf_text(content: bytes) -> str:
-    from pypdf import PdfReader
-    return "\n".join((p.extract_text() or "") for p in PdfReader(io.BytesIO(content)).pages)
+    """pypdf -> PyMuPDF -> Tesseract OCR (for scanned / image-only PDFs)."""
+    text = ""
+    try:
+        from pypdf import PdfReader
+        text = "\n".join((p.extract_text() or "") for p in PdfReader(io.BytesIO(content)).pages)
+    except Exception:  # noqa: BLE001
+        pass
+    if len(text.strip()) >= MIN_CHARS:
+        return text
+    try:
+        import pymupdf as fitz
+        doc = fitz.open(stream=content, filetype="pdf")
+        t2 = "\n".join(page.get_text() for page in doc)
+        if len(t2.strip()) >= MIN_CHARS:
+            return t2
+        import os
+        from concurrent.futures import ThreadPoolExecutor
+        import pytesseract
+        from PIL import Image
+        os.environ.setdefault("OMP_THREAD_LIMIT", "1")  # one core per tesseract, pages in parallel
+        imgs = []
+        for i, page in enumerate(doc):
+            if i >= OCR_MAX_PAGES:
+                break
+            pix = page.get_pixmap(dpi=150, colorspace=fitz.csGRAY)
+            imgs.append(Image.frombytes("L", (pix.width, pix.height), pix.samples))
+        with ThreadPoolExecutor(max_workers=os.cpu_count() or 2) as ex:
+            parts = list(ex.map(lambda im: pytesseract.image_to_string(im, config="--psm 6"), imgs))
+        t3 = "\n".join(parts)
+        if len(t3.strip()) > len(text.strip()):
+            OCR_USED.append(f"{len(doc)}p")
+            return "[OCR]\n" + t3
+    except Exception as e:  # noqa: BLE001
+        print(f"    pdf fallback failed: {type(e).__name__}: {str(e)[:120]}")
+    return text
 
 
 def _is_pdf(r) -> bool:
@@ -194,11 +266,13 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
         return _clean(im.page_to_text(r)), r.content, ".pdf" if _is_pdf(r) else ".html", url
 
     url = ss.resolve_download_url(url)
+    if "drive.google.com" in url:
+        return _fetch_drive(url)
+    if ".box.com/s/" in url:
+        return _fetch_box(url)
     r = _get(url)
-    if "drive.google.com" in url and not _is_pdf(r):  # large-file confirm page
-        fid = re.search(r"id=([\w-]+)", url).group(1)
-        url = f"https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t"
-        r = _get(url)
+    if getattr(r, "wayback", False):
+        url = r.url
     if _is_pdf(r):
         return _clean(_pdf_text(r.content)), r.content, ".pdf", url
     ctype = r.headers.get("content-type", "").lower()
@@ -220,6 +294,43 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
             continue
         time.sleep(1)
     return text, r.content, ".html", url
+
+
+def _fetch_drive(url: str):
+    fid = re.search(r"id=([\w-]+)", url).group(1)
+    import tempfile
+    import gdown
+    with tempfile.TemporaryDirectory() as td:
+        out = gdown.download(id=fid, output=f"{td}/f", quiet=True, fuzzy=True)
+        if not out:
+            raise ValueError("Google Drive download refused (not public?)")
+        raw = Path(out).read_bytes()
+    if raw[:5] != b"%PDF-":
+        raise ValueError(f"Google Drive returned non-PDF ({raw[:60]!r})")
+    return _clean(_pdf_text(raw)), raw, ".pdf", f"https://drive.google.com/uc?id={fid}"
+
+
+def _fetch_box(url: str):
+    """Box shared link: try shared/static, else parse file id from the page."""
+    m = re.match(r"(https://[\w.-]*box\.com)/s/(\w+)", url)
+    root, shared = m.group(1), m.group(2)
+    tries = [f"{root}/shared/static/{shared}.pdf"]
+    try:
+        page = _get_once(url).text
+        fm = re.search(r'"typedID"\s*:\s*"f_(\d+)"', page) or re.search(r'"itemID"\s*:\s*(\d+)', page) \
+            or re.search(r"/file/(\d+)", page)
+        if fm:
+            tries.append(f"{root}/index.php?rm=box_download_shared_file&shared_name={shared}&file_id=f_{fm.group(1)}")
+    except Exception:  # noqa: BLE001
+        pass
+    for t in tries:
+        try:
+            r = _get_once(t)
+            if _is_pdf(r):
+                return _clean(_pdf_text(r.content)), r.content, ".pdf", t
+        except Exception:  # noqa: BLE001
+            continue
+    raise ValueError("Box shared link: no direct PDF download")
 
 
 # ----------------------------------------------------------------- main
@@ -259,7 +370,7 @@ def main():
         row = {"movie_id": mid, "movie_title": title, "release_year": ry,
                "n_candidates": len(cands), "status": "no_match" if not cands else "matched",
                "source": "", "matched_title": "", "match_score": "", "year_check": "",
-               "script_url": "", "chars": 0, "script_info": "", "tried": "",
+               "script_url": "", "via": "", "chars": 0, "script_info": "", "tried": "",
                "all_candidates": " || ".join(f"{c['source']}:{c['title']}:{c['url']}" for c in cands)}
         if cands and not a.match_only:
             row["status"] = "download_failed"
@@ -273,6 +384,7 @@ def main():
                         safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{mid}_{title}").strip(" ._")[:150]
                         (txt_dir / f"{safe}.txt").write_text(text, encoding="utf-8")
                         (raw_dir / f"{safe}{ext}").write_bytes(raw)
+                        row["via"] = ("ocr " if text.startswith("[OCR]") else "") + ("wayback" if "web.archive.org" in final else "")
                         row.update(status="ok", source=c["source"], matched_title=c["title"],
                                    match_score=c["score"], year_check=c["year_check"],
                                    script_url=final, chars=len(text), script_info=c["info"][:300])
@@ -293,7 +405,7 @@ def main():
     res.to_excel(a.output, index=False)
     st = res["status"].value_counts().to_dict()
     src = res.loc[res["status"] == "ok", "source"].value_counts().to_dict()
-    print(f"::notice::movies={len(res)} | status={st} | ok by source={src}")
+    print(f"::notice::movies={len(res)} | status={st} | ok by source={src} | OCR used={len(OCR_USED)}")
     failed = res[res["status"] == "download_failed"]
     if len(failed):
         print(f"::notice::download_failed ({len(failed)}): {failed['movie_title'].tolist()[:60]}")
