@@ -5,8 +5,10 @@ Combined screenplay collector — one script per movie, sources in priority orde
   2. Script Slug (scriptslug.com, ~2k film scripts incl. 2021-2026)
   3. SimplyScripts full movie list (links to many hosts)
   4. Deadline "read the screenplay" articles (2020-09 onward)
-  5. IMSDb
-  6. Daily Script
+  5. Pages listing screenplay PDF links (ScriptPDF, Bulletproof Screenwriting, Indie Film Hustle,
+     No Film School, writing.ninja, SimplyScripts Oscar-contenders category)
+  6. IMSDb
+  7. Daily Script
 
 Movie list handling
   - Box Office Mojo re-release suffixes ("Alien2020 Re-release", "Coraline15th Anniversary")
@@ -59,7 +61,7 @@ from imsdb_matcher import norm  # handles "Title, The" -> "the title"
 session = ds.session
 MIN_CHARS = 15000  # a feature screenplay is typically 100k+ characters
 SOURCE_RANK = {"simplyscripts_award": 0, "scriptslug": 1, "simplyscripts": 2, "deadline": 3,
-               "imsdb": 4, "dailyscript": 5}
+               "linkpages": 4, "imsdb": 5, "dailyscript": 6}
 RAW_OK_EXT = {".pdf", ".doc", ".docx", ".rtf"}
 RAW_MIN_BYTES = 30_000
 
@@ -81,6 +83,11 @@ def load_catalog() -> list[dict]:
         cands += ms.scriptslug_catalog(session)
     except Exception as e:  # noqa: BLE001
         print(f"::warning::Script Slug catalog failed: {e}")
+    print("PDF link pages...")
+    try:
+        cands += ms.linkpages_catalog(session)
+    except Exception as e:  # noqa: BLE001
+        print(f"::warning::link pages failed: {e}")
     print("IMSDb...")
     try:
         for e in im.build_catalog():

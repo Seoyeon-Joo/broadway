@@ -97,3 +97,48 @@ def deadline_candidates(title: str, index: list[dict]) -> list[dict]:
             out.append({"source": "deadline", "title": title, "url": a["url"], "year": a["year"],
                         "award_year": "", "info": f"deadline {a['slug'][:120]}"})
     return out
+
+
+# ---------------------------------------------------------------- round 3: pages that list PDF links
+LINK_PAGES = [
+    "https://scriptpdf.com/full-list/",
+    "https://bulletproofscreenwriting.tv/free-screenplays-download/",
+    "https://indiefilmhustle.com/free-screenplays-download/",
+    "https://nofilmschool.com/2023-academy-award-screenplays",
+    "https://www.writing.ninja/free-screenplay-downloads-pdf/",
+] + ["https://www.simplyscripts.com/category/movie-scripts/oscar-contenders/"] + [
+    f"https://www.simplyscripts.com/category/movie-scripts/oscar-contenders/page/{i}/" for i in range(2, 12)]
+_GENERIC = re.compile(r"^(download|pdf|here|read|script|screenplay|link|click here|read (it|the script) here)\W*$", re.I)
+
+
+def linkpages_catalog(session, pages: list[str] = LINK_PAGES, sleep: float = 1.0) -> list[dict]:
+    from bs4 import BeautifulSoup
+    from urllib.parse import urljoin
+    out, seen = [], set()
+    for page in pages:
+        try:
+            r = session.get(page, timeout=60)
+            if r.status_code == 404:
+                continue
+            r.raise_for_status()
+        except Exception as e:  # noqa: BLE001
+            print(f"  link page failed {page}: {type(e).__name__}")
+            continue
+        soup = BeautifulSoup(r.content, "html.parser")
+        n = 0
+        for a in soup.find_all("a", href=True):
+            href = a["href"].strip()
+            if not re.search(r"\.pdf(\?|#|$)|documentcloud\.org/documents/", href, re.I):
+                continue
+            href = re.sub(r"^https?://", lambda x: x.group(0).lower(), urljoin(page, href), flags=re.I)
+            title = " ".join(a.get_text(" ", strip=True).split())
+            title = re.sub(r"\s*[\(\[]?(pdf|screenplay|script|download)[\)\]]?\s*$", "", title, flags=re.I).strip()
+            if not title or _GENERIC.match(title) or len(title) > 80 or href in seen:
+                continue
+            seen.add(href)
+            n += 1
+            out.append({"source": "linkpages", "title": title, "url": href, "year": "", "award_year": "",
+                        "info": f"listed on {page}"})
+        print(f"  link page {page}: {n} pdf links")
+        time.sleep(sleep)
+    return out
