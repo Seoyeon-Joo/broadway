@@ -91,9 +91,13 @@ def deadline_candidates(title: str, index: list[dict]) -> list[dict]:
     if len(s) < 3:
         return []
     out = []
+    heads = {s, s.replace("-and-", "-")}
     for a in index:
-        if a["slug"].startswith(s + "-") or a["slug"].startswith("read-" + s + "-") or \
-                a["slug"].startswith(s.replace("-and-", "-") + "-"):
+        slug = a["slug"]
+        if any(slug.startswith(f"{h}-{w}") for h in heads
+               for w in ("screenplay", "script-read", "script-screenplay", "read-the-screenplay",
+                         "read-the-script", "script-")) or \
+                any(slug.startswith(f"read-{h}-") or slug.startswith(f"{h}-movie-screenplay") for h in heads):
             out.append({"source": "deadline", "title": title, "url": a["url"], "year": a["year"],
                         "award_year": "", "info": f"deadline {a['slug'][:120]}"})
     return out

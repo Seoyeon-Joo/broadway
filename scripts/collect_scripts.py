@@ -352,6 +352,8 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
         r = im.get(url)
         return _clean(im.page_to_text(r)), r.content, ".pdf" if _is_pdf(r) else ".html", url
 
+    if c["source"] == "scriptslug":
+        return _fetch_scriptslug(c)
     url = ss.resolve_download_url(url)
     if "drive.google.com" in url:
         return _fetch_drive(url)
@@ -406,6 +408,42 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
             if len(t3) >= MIN_CHARS:
                 return t3, wb.content, ".pdf", wb.url
     return text, r.content, ".html", url
+
+
+_last_slug = [0.0]
+
+
+def _fetch_scriptslug(c: dict):
+    """Script Slug PDFs sit behind a CDN that 403s rapid / referer-less requests: pace + retry."""
+    hdrs = {"Referer": c.get("page") or "https://www.scriptslug.com/", "User-Agent": BROWSER_UA,
+            "Accept": "application/pdf,*/*"}
+    last = None
+    for attempt in range(3):
+        wait = 3 - (time.time() - _last_slug[0])
+        if wait > 0:
+            time.sleep(wait)
+        _last_slug[0] = time.time()
+        r = session.get(c["url"], timeout=(20, 90), headers=hdrs if attempt else {"Referer": hdrs["Referer"]})
+        if r.ok and _is_pdf(r):
+            return _clean(_pdf_text(r.content)), r.content, ".pdf", c["url"]
+        last = r
+        if r.status_code in (403, 429):
+            time.sleep(15 * (attempt + 1))
+            continue
+        break
+    if c.get("page"):  # PDF link with cache-busting ?v= taken from the script page
+        try:
+            pg = session.get(c["page"], timeout=(20, 60), headers={"User-Agent": BROWSER_UA})
+            m = re.search(r'data-pdf-url="([^"]+)"', pg.text) or re.search(r'href="([^"]+\.pdf[^"]*)"', pg.text)
+            if m:
+                r = session.get(m.group(1).replace("&amp;", "&"), timeout=(20, 90), headers=hdrs)
+                if r.ok and _is_pdf(r):
+                    return _clean(_pdf_text(r.content)), r.content, ".pdf", m.group(1)
+                last = r
+        except Exception:  # noqa: BLE001
+            pass
+    last.raise_for_status()
+    raise ValueError(f"Script Slug: no PDF (status {last.status_code})")
 
 
 def _fetch_drive(url: str):
