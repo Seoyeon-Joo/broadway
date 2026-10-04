@@ -16,8 +16,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout --orphan debug/script-sources3
+          git checkout --orphan debug/script-sources4
           git rm -rq --cached .
           git add debug_html
           git commit -qm "debug snapshot"
-          git push -f origin debug/script-sources3
+          git push -f origin debug/script-sources4
