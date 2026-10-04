@@ -71,8 +71,9 @@ def fetch_index(page: str) -> tuple[str, str]:
     raise RuntimeError(f"Could not fetch {page}: {last}")
 
 
-def is_script_link(a: Tag) -> bool:
-    return "/scripts/" in a.get("href", "").lower()
+def is_script_link(a: Tag, base: str = "https://www.dailyscript.com/") -> bool:
+    href = urljoin(base, a.get("href", "").strip()).lower()
+    return "dailyscript.com/scripts/" in href
 
 
 def text_after(a: Tag, limit: int = 400) -> str:
@@ -124,6 +125,11 @@ def build_catalog() -> list[dict]:
         html, url = fetch_index(page)
         recs = parse_index(html, url)
         print(f"  {page}: {len(recs)} script links")
+        if not recs:
+            soup = BeautifulSoup(html, "html.parser")
+            hrefs = [a.get("href", "") for a in soup.find_all("a", href=True)][:15]
+            title = soup.title.get_text(strip=True) if soup.title else ""
+            print(f"::warning::{page}: 0 script links | len={len(html)} title={title!r} sample_hrefs={hrefs}")
         for r in recs:
             key = r["url"].split("://", 1)[-1]
             if key not in seen:
