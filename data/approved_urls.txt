@@ -1,0 +1,4 @@
+# Put ONLY URLs you have confirmed you are permitted to save here.
+# One URL per line.
+# Example:
+# https://www.dailyscript.com/scripts/example.html

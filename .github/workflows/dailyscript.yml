@@ -1,0 +1,71 @@
+# .github/workflows/dailyscript.yml
+#
+# data/movie_list.xlsx 의 영화 제목을 Daily Script(dailyscript.com) 대본 목록과 매칭하고,
+# 선택하면 대본을 .txt로 저장합니다.
+#
+# 실행: Actions > Daily Script matcher > Run workflow
+#   download = none     : 매칭 결과(DailyScript_results.xlsx)만 생성
+#   download = approved : data/approved_urls.txt 에 적은 URL만 txt로 저장
+#   download = matched  : 매칭된 모든 영화의 대본을 txt로 저장 (PDF도 텍스트 추출)
+# 결과물은 실행 페이지 하단 Artifacts 에서 다운로드합니다.
+
+name: Daily Script matcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      download:
+        description: "대본 txt 저장 방식 (none / approved / matched)"
+        type: choice
+        options: [none, approved, matched]
+        default: none
+      threshold:
+        description: "퍼지 매칭 최소 점수 (0-100)"
+        default: "88"
+  push:
+    paths:
+      - "data/movie_list.xlsx"
+      - "data/approved_urls.txt"
+      - "scripts/dailyscript_matcher.py"
+      - ".github/workflows/dailyscript.yml"
+
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install "pandas>=2.2" "openpyxl>=3.1" "requests>=2.32" "beautifulsoup4>=4.12" "rapidfuzz>=3.9" "pypdf>=4.0"
+
+      - name: Match movie list against Daily Script
+        run: |
+          python scripts/dailyscript_matcher.py \
+            --input data/movie_list.xlsx \
+            --output data/DailyScript_results.xlsx \
+            --threshold "${{ github.event.inputs.threshold || '88' }}" \
+            --download "${{ github.event.inputs.download || 'none' }}" \
+            --approved data/approved_urls.txt \
+            --download-dir data/dailyscript_txt
+
+      - name: Upload matching results
+        uses: actions/upload-artifact@v4
+        with:
+          name: dailyscript-results
+          path: data/DailyScript_results.xlsx
+
+      - name: Upload screenplay txt files
+        if: ${{ github.event.inputs.download == 'approved' || github.event.inputs.download == 'matched' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dailyscript-txt
+          path: data/dailyscript_txt/
+          if-no-files-found: warn
