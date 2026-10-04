@@ -1,0 +1,15 @@
+﻿movie_id,movie_title,search_title,is_rerelease,distributor,first_chart_week,release_date,release_year,last_week_date,n_chart_weeks,total_gross,title_ambiguous,original_search_title,fix_reason
+381,Bad Luck Banging or Loony Porn,Bad Luck Banging or Loony Porn,False,Magnolia Pictures,2021-11-19,2021-11-19,2021,2022-02-17,13,72342.0,False,Bad Luck Banging or Loony Porn,safeSearch 필터 의심
+673,Bloom Up: A Swinger Couple Story,Bloom Up: A Swinger Couple Story,False,Kino Lorber,2022-08-12,2022-08-12,2022,2022-09-22,3,3107.0,False,Bloom Up: A Swinger Couple Story,safeSearch 필터 의심
+776,Brainwashed: Sex-Camera-Power,Brainwashed: Sex-Camera-Power,False,Kino Lorber,2022-10-21,2022-10-21,2022,2023-03-09,12,28826.0,True,Brainwashed: Sex-Camera-Power,safeSearch 필터 의심
+835,"Kevin Puts: The Hours, Libretto by Greg Pierce",The Hours opera,False,Fathom Events,2022-12-09,2022-12-09,2022,2022-12-15,1,791374.0,False,"Kevin Puts: The Hours, Libretto by Greg Pierce",Met Opera — 2002년 영화와 구분
+1300,The Abyss4K - Special Edition,The Abyss,True,20th Century Studios,2023-12-01,2023-12-01,2023,2023-12-07,1,520104.0,False,The Abyss4K - Special Edition,제목 미정리(4K - Special Edition) — 재개봉 처리
+1384,DuneIMAX,Dune,True,IMAX,2024-02-09,2024-02-09,2024,2024-02-15,1,570000.0,True,DuneIMAX,제목 미정리(DuneIMAX) — 재개봉 처리
+2141,UFC 316: Dvalishvili vs. O'Malley 2 in COSM Shared Reality,UFC 316,False,Iconic Events Releasing,2025-06-06,2025-06-06,2025,2025-06-12,1,265986.0,False,UFC 316: Dvalishvili vs. O'Malley 2 in COSM Shared Reality,상영용 긴 제목 → 대회명으로
+2226,Hema Hema: Sing Me a Song While I Wait,Hema Hema,True,Dekanalog,2025-08-08,2025-08-08,2025,2025-09-04,3,7490.0,False,Hema Hema: Sing Me a Song While I Wait,2016년 작품 → 개봉일-365일 필터에 걸림
+2231,UFC 319: du Plessis vs. Chimaev in COSM Shared Reality,UFC 319,False,Iconic Events Releasing,2025-08-15,2025-08-15,2025,2025-08-21,1,478675.0,False,UFC 319: du Plessis vs. Chimaev in COSM Shared Reality,상영용 긴 제목 → 대회명으로
+2313,Spider-Man/Spider-Man 2/Spider-Man 3Fathom 2025,Spider-Man Trilogy,True,,2025-09-26,2025-09-26,2025,2025-10-02,1,2250977.0,False,Spider-Man/Spider-Man 2/Spider-Man 3Fathom 2025,제목 미정리(3Fathom 2025) — 재개봉 처리
+2333,Orwell: 2+2=5,Orwell 2+2=5,False,Neon,2025-10-03,2025-10-03,2025,2025-11-06,5,355288.0,True,Orwell: 2+2=5,콜론/기호 정리
+2370,Libera nos: Il trionfo sul male,Libera Nos,True,-,2025-10-24,2025-10-24,2025,2025-10-30,1,227674.0,False,Libera nos: Il trionfo sul male,미국 개봉 전 이탈리아 영상이 필터에 걸림
+2550,Hypnosismic -Division Rap Battle- Interactive Movie,Hypnosismic Interactive Movie,False,GKIDS,2026-02-27,2026-02-27,2026,2026-03-19,3,114569.0,False,Hypnosismic -Division Rap Battle- Interactive Movie,긴 제목 정리
+2551,Hypnosismic -Division Rap Battle- Rule the Stage -Battle of Pride 2023,Battle of Pride 2023,True,GKIDS,2026-02-27,2026-02-27,2026,2026-03-05,1,58276.0,False,Hypnosismic -Division Rap Battle- Rule the Stage -Battle of Pride 2023,"긴 제목 → 공연명으로, 원 공연(2023) 영상 포함"
