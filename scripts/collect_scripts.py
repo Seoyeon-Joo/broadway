@@ -137,34 +137,53 @@ def _get_once(url: str):
     return r
 
 
-def wayback_url(url: str) -> str:
-    """Closest archived snapshot as raw content (id_), or ''."""
+_last_archive = [0.0]
+
+
+def _archive_get(url: str):
+    """GET from web.archive.org with pacing and 429 back-off."""
+    for attempt in range(4):
+        wait = 6 - (time.time() - _last_archive[0])
+        if wait > 0:
+            time.sleep(wait)
+        _last_archive[0] = time.time()
+        r = session.get(url, timeout=120, allow_redirects=True, headers={"User-Agent": BROWSER_UA})
+        if r.status_code == 429:
+            time.sleep(int(r.headers.get("Retry-After", 0) or 0) or 30 * (attempt + 1))
+            continue
+        r.raise_for_status()
+        return r
+    r.raise_for_status()
+    return r
+
+
+def wayback_get(url: str):
+    """Closest archived capture of url as raw content (id_ mode), or None."""
     if "web.archive.org" in url:
-        return ""
+        return None
     try:
-        j = session.get("https://archive.org/wayback/available", params={"url": url}, timeout=40).json()
-        snap = (j.get("archived_snapshots") or {}).get("closest") or {}
-        if snap.get("available") and snap.get("url"):
-            return re.sub(r"(/web/\d+)/", r"\1id_/", snap["url"].replace("http://", "https://", 1), count=1)
-    except Exception:  # noqa: BLE001
-        pass
-    return ""
+        r = _archive_get(f"https://web.archive.org/web/2026id_/{url}")
+        r.wayback = True
+        print(f"    wayback ok: {url}")
+        return r
+    except Exception as e:  # noqa: BLE001
+        print(f"    wayback miss: {url} ({type(e).__name__})")
+        return None
 
 
 def _get(url: str):
-    """GET with Wayback Machine fallback for dead links (404/403/410/5xx/connection errors)."""
+    """GET with Wayback Machine fallback for dead links (403/404/410/429/5xx/connection errors)."""
     try:
+        if "web.archive.org" in url:
+            return _archive_get(url)
         return _get_once(url)
     except Exception as e:  # noqa: BLE001
         code = getattr(getattr(e, "response", None), "status_code", None)
-        if code is not None and code not in (403, 404, 410) and code < 500:
+        if code is not None and code not in (403, 404, 410, 429) and code < 500:
             raise
-        wb = wayback_url(url)
-        if not wb:
+        r = wayback_get(url)
+        if r is None:
             raise
-        print(f"    wayback: {url} -> {wb}")
-        r = _get_once(wb)
-        r.wayback = True
         return r
 
 
@@ -274,7 +293,14 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
     if getattr(r, "wayback", False):
         url = r.url
     if _is_pdf(r):
-        return _clean(_pdf_text(r.content)), r.content, ".pdf", url
+        t = _clean(_pdf_text(r.content))
+        if len(t) < MIN_CHARS and not getattr(r, "wayback", False):
+            wb = wayback_get(url)  # e.g. protected/broken PDF -> archived copy
+            if wb is not None and _is_pdf(wb):
+                t2 = _clean(_pdf_text(wb.content))
+                if len(t2) > len(t):
+                    return t2, wb.content, ".pdf", wb.url
+        return t, r.content, ".pdf", url
     ctype = r.headers.get("content-type", "").lower()
     if "text/plain" in ctype or urlparse(url).path.lower().endswith(".txt"):
         r.encoding = r.apparent_encoding or r.encoding
@@ -293,6 +319,13 @@ def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
         except Exception:  # noqa: BLE001
             continue
         time.sleep(1)
+    # page served something other than the script (redirect to a home page, viewer shell...)
+    if not getattr(r, "wayback", False):
+        wb = wayback_get(url)
+        if wb is not None and _is_pdf(wb):
+            t3 = _clean(_pdf_text(wb.content))
+            if len(t3) >= MIN_CHARS:
+                return t3, wb.content, ".pdf", wb.url
     return text, r.content, ".html", url
 
 
@@ -301,7 +334,7 @@ def _fetch_drive(url: str):
     import tempfile
     import gdown
     with tempfile.TemporaryDirectory() as td:
-        out = gdown.download(id=fid, output=f"{td}/f", quiet=True, fuzzy=True)
+        out = gdown.download(id=fid, output=f"{td}/f", quiet=True)
         if not out:
             raise ValueError("Google Drive download refused (not public?)")
         raw = Path(out).read_bytes()
@@ -330,7 +363,7 @@ def _fetch_box(url: str):
                 return _clean(_pdf_text(r.content)), r.content, ".pdf", t
         except Exception:  # noqa: BLE001
             continue
-    raise ValueError("Box shared link: no direct PDF download")
+    raise ValueError("Box shared link: no direct PDF download - open in a browser and download manually")
 
 
 # ----------------------------------------------------------------- main
