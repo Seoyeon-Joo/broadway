@@ -1,0 +1,110 @@
+{
+ "scripts_onscreen_com_robots_txt.html": {
+  "url": "https://scripts-onscreen.com/robots.txt",
+  "status": 200,
+  "final": "https://scripts-onscreen.com/robots.txt",
+  "len": 108
+ },
+ "scripts_onscreen_com_sitemap_xml.html": {
+  "url": "https://scripts-onscreen.com/sitemap.xml",
+  "status": 200,
+  "final": "https://scripts-onscreen.com/wp-sitemap.xml",
+  "len": 2518
+ },
+ "scripts_onscreen_com_sitemap_index_xml.html": {
+  "url": "https://scripts-onscreen.com/sitemap_index.xml",
+  "status": 404,
+  "final": "https://scripts-onscreen.com/sitemap_index.xml",
+  "len": 9579
+ },
+ "scripts_onscreen_com_movie_sitemap_xml.html": {
+  "url": "https://scripts-onscreen.com/movie-sitemap.xml",
+  "status": 404,
+  "final": "https://scripts-onscreen.com/movie-sitemap.xml",
+  "len": 9579
+ },
+ "scripts_onscreen_com_movie_dune_part_two_script_links_.html": {
+  "url": "https://scripts-onscreen.com/movie/dune-part-two-script-links/",
+  "status": 200,
+  "final": "https://scripts-onscreen.com/movie/dune-part-two-script-links/",
+  "len": 14193
+ },
+ "scripts_onscreen_com_movie_oppenheimer_script_links_.html": {
+  "url": "https://scripts-onscreen.com/movie/oppenheimer-script-links/",
+  "status": 200,
+  "final": "https://scripts-onscreen.com/movie/oppenheimer-script-links/",
+  "len": 14574
+ },
+ "scrapsfromtheloft_com_robots_txt.html": {
+  "url": "https://scrapsfromtheloft.com/robots.txt",
+  "status": 200,
+  "final": "https://scrapsfromtheloft.com/robots.txt",
+  "len": 1322
+ },
+ "scrapsfromtheloft_com_sitemap_index_xml.html": {
+  "url": "https://scrapsfromtheloft.com/sitemap_index.xml",
+  "status": 403,
+  "final": "https://scrapsfromtheloft.com/sitemap_index.xml",
+  "len": 5527
+ },
+ "scrapsfromtheloft_com_movies_godzilla_minus_one_transcript_.html": {
+  "url": "https://scrapsfromtheloft.com/movies/godzilla-minus-one-transcript/",
+  "status": 403,
+  "final": "https://scrapsfromtheloft.com/movies/godzilla-minus-one-transcript/",
+  "len": 5608
+ },
+ "subslikescript_com_robots_txt.html": {
+  "url": "https://subslikescript.com/robots.txt",
+  "status": 200,
+  "final": "https://subslikescript.com/robots.txt",
+  "len": 80
+ },
+ "subslikescript_com_sitemap_xml.html": {
+  "url": "https://subslikescript.com/sitemap.xml",
+  "status": 404,
+  "final": "https://subslikescript.com/sitemap.xml",
+  "len": 2319
+ },
+ "subslikescript_com_movies.html": {
+  "url": "https://subslikescript.com/movies",
+  "status": 200,
+  "final": "https://subslikescript.com/challenge?destination=%2Fmovies",
+  "len": 2228
+ },
+ "subslikescript_com_movies_letter_d.html": {
+  "url": "https://subslikescript.com/movies_letter-D",
+  "status": 200,
+  "final": "https://subslikescript.com/challenge?destination=%2Fmovies_letter-D",
+  "len": 2237
+ },
+ "www_springfieldspringfield_co_uk_robots_txt.html": {
+  "url": "https://www.springfieldspringfield.co.uk/robots.txt",
+  "status": 200,
+  "final": "https://www.springfieldspringfield.co.uk/robots.txt",
+  "len": 170
+ },
+ "www_springfieldspringfield_co_uk_movie_scripts_php_order_d.html": {
+  "url": "https://www.springfieldspringfield.co.uk/movie_scripts.php?order=D",
+  "status": 200,
+  "final": "https://www.springfieldspringfield.co.uk/movie_scripts.php?order=D",
+  "len": 34148
+ },
+ "www_springfieldspringfield_co_uk_movie_script_php_movie_dune_part_two.html": {
+  "url": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=dune-part-two",
+  "status": 404,
+  "final": "https://www.springfieldspringfield.co.uk/movie_script.php?movie=dune-part-two",
+  "len": 33733
+ },
+ "archive_org_advancedsearch_php_q_title_3a_28_22bullet_train_22_29_and_28screenplay_or_scri.html": {
+  "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22bullet+train%22%29+AND+%28screenplay+OR+script%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=mediatype&rows=20&output=json",
+  "status": 200,
+  "final": "https://archive.org/advancedsearch.php?q=title%3A%28%22bullet+train%22%29+AND+%28screenplay+OR+script%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=mediatype&rows=20&output=json",
+  "len": 2835
+ },
+ "archive_org_advancedsearch_php_q_28screenplay_29_and_mediatype_3atexts_and_year_3a_5b2020_.html": {
+  "url": "https://archive.org/advancedsearch.php?q=%28screenplay%29+AND+mediatype%3Atexts+AND+year%3A%5B2020+TO+2026%5D&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=50&output=json",
+  "status": 200,
+  "final": "https://archive.org/advancedsearch.php?q=%28screenplay%29+AND+mediatype%3Atexts+AND+year%3A%5B2020+TO+2026%5D&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=50&output=json",
+  "len": 5648
+ }
+}
