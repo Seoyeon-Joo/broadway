@@ -1,0 +1,166 @@
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+# This file will be ignored unless it is at the root of your host:
+# Used:    http://example.com/robots.txt
+# Ignored: http://example.com/site/robots.txt
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+# CSS, JS, Images
+Allow: /core/*.css$
+Allow: /core/*.css?
+Allow: /core/*.js$
+Allow: /core/*.js?
+Allow: /core/*.gif
+Allow: /core/*.jpg
+Allow: /core/*.jpeg
+Allow: /core/*.png
+Allow: /core/*.svg
+Allow: /profiles/*.css$
+Allow: /profiles/*.css?
+Allow: /profiles/*.js$
+Allow: /profiles/*.js?
+Allow: /profiles/*.gif
+Allow: /profiles/*.jpg
+Allow: /profiles/*.jpeg
+Allow: /profiles/*.png
+Allow: /profiles/*.svg
+# Directories
+Disallow: /core/
+Disallow: /profiles/
+# Files
+Disallow: /README.md
+Disallow: /composer/Metapackage/README.txt
+Disallow: /composer/Plugin/ProjectMessage/README.md
+Disallow: /composer/Plugin/Scaffold/README.md
+Disallow: /composer/Plugin/VendorHardening/README.txt
+Disallow: /composer/Template/README.txt
+Disallow: /modules/README.txt
+Disallow: /sites/README.txt
+Disallow: /themes/README.txt
+# Paths (clean URLs)
+Disallow: /admin/
+Disallow: /comment/reply/
+Disallow: /filter/tips
+Disallow: /node/add/
+Disallow: /search/
+Disallow: /user/register
+Disallow: /user/password
+Disallow: /user/login
+Disallow: /user/logout
+Disallow: /media/oembed
+Disallow: /*/media/oembed
+# MTI: endpoints that are not content and must never be crawled (DIG-004397).
+#
+# Measured on live from 16.7h of nginx access log (2026-08-12): these five
+# families were 44,857 requests and 22,049 seconds of origin time — 32.2% of ALL
+# origin time on the site — and essentially none of it was a search engine
+# indexing content. /search-content-full alone was 15,109 requests and 20.6% of
+# origin time, of which 13,007 were meta-externalagent and exactly 2 were
+# Googlebot. It is also the one page still refused by the dynamic page cache, so
+# every hit is a full render.
+#
+# Site-search result pages should never be indexed anyway — Google's own
+# guidance is to keep crawlers out of them.
+Disallow: /search-content-full
+Disallow: /search-content
+Disallow: /views
+Disallow: /mti-localize-data
+Disallow: /show-upcoming
+# The `production` content type was retired from the sitemap in DIG-004445; its
+# ~49.7k nodes are kept only as an archive and should not be crawled.
+Disallow: /production/
+# Paths (no clean URLs)
+Disallow: /index.php/admin/
+Disallow: /index.php/comment/reply/
+Disallow: /index.php/filter/tips
+Disallow: /index.php/node/add/
+Disallow: /index.php/search/
+Disallow: /index.php/user/password
+Disallow: /index.php/user/register
+Disallow: /index.php/user/login
+Disallow: /index.php/user/logout
+Disallow: /index.php/media/oembed
+Disallow: /index.php/*/media/oembed
+
+#
+# MTI: AI training crawlers (DIG-004397)
+#
+# These fetch pages to build training corpora. They send no referral traffic and
+# do not affect search ranking, so the origin time they consume buys nothing.
+# Measured on live over 16.7h on 2026-08-12, meta-externalagent alone was 23,686
+# requests and 17,169 seconds of origin time — 20.6% of all requests and 25.1%
+# of all origin time, against Googlebot's 913 seconds. 55% of what it asked for
+# was /search-content-full.
+#
+# Deliberately NOT listed, because they earn their keep:
+#   Googlebot, bingbot, Applebot, DuckDuckBot, YandexBot  - search indexing
+#   facebookexternalhit, Twitterbot, LinkedInBot, Slackbot - link previews
+#     (breaking these was DIG-003697; note facebookexternalhit is a DIFFERENT
+#      agent from meta-externalagent, which is why only the latter is below)
+#   OAI-SearchBot - drives ChatGPT search citations, i.e. referral traffic,
+#     unlike GPTBot which is training-only
+#
+# A robots.txt group match is exclusive: an agent named here obeys only its own
+# group and ignores "User-agent: *", so each needs its own Disallow: /.
+#
+# Bytespider/TikTokSpider ignore robots.txt entirely and are already rejected at
+# the PHP layer in settings.php (DIG-004268); they are listed here for
+# completeness. If any agent below keeps crawling after this lands, that same
+# settings.php block is the escalation.
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: TikTokSpider
+Disallow: /

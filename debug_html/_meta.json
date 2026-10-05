@@ -1,0 +1,110 @@
+{
+ "www_concordtheatricals_com_robots_txt.html": {
+  "url": "https://www.concordtheatricals.com/robots.txt",
+  "status": 404,
+  "final": "https://www.concordtheatricals.com/robots.txt",
+  "len": 73509
+ },
+ "www_concordtheatricals_com_sitemap_xml.html": {
+  "url": "https://www.concordtheatricals.com/sitemap.xml",
+  "status": 404,
+  "final": "https://www.concordtheatricals.com/sitemap.xml",
+  "len": 73512
+ },
+ "www_mtishows_com_robots_txt.html": {
+  "url": "https://www.mtishows.com/robots.txt",
+  "status": 200,
+  "final": "https://www.mtishows.com/robots.txt",
+  "len": 4980
+ },
+ "www_mtishows_com_sitemap_xml.html": {
+  "url": "https://www.mtishows.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.mtishows.com/sitemap.xml",
+  "len": 604
+ },
+ "www_broadwaylicensing_com_robots_txt.html": {
+  "url": "https://www.broadwaylicensing.com/robots.txt",
+  "status": 200,
+  "final": "https://www.concordtheatricals.com/",
+  "len": 93668
+ },
+ "www_broadwaylicensing_com_sitemap_xml.html": {
+  "url": "https://www.broadwaylicensing.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.concordtheatricals.com/",
+  "len": 93668
+ },
+ "www_dramatists_com_robots_txt.html": {
+  "url": "https://www.dramatists.com/robots.txt",
+  "status": 200,
+  "final": "https://www.concordtheatricals.com/",
+  "len": 93668
+ },
+ "www_dramatists_com_sitemap_xml.html": {
+  "url": "https://www.dramatists.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.concordtheatricals.com/",
+  "len": 93668
+ },
+ "www_theatricalrights_com_robots_txt.html": {
+  "url": "https://www.theatricalrights.com/robots.txt",
+  "status": 200,
+  "final": "https://www.theatricalrights.com/robots.txt",
+  "len": 467
+ },
+ "www_theatricalrights_com_sitemap_xml.html": {
+  "url": "https://www.theatricalrights.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.theatricalrights.com/sitemap_index.xml",
+  "len": 1984
+ },
+ "www_halleonard_com_robots_txt.html": {
+  "url": "https://www.halleonard.com/robots.txt",
+  "status": 200,
+  "final": "https://www.halleonard.com/robots.txt",
+  "len": 477
+ },
+ "www_halleonard_com_sitemap_xml.html": {
+  "url": "https://www.halleonard.com/sitemap.xml",
+  "status": 200,
+  "final": "https://www.halleonard.com/sitemap.xml",
+  "len": 3613
+ },
+ "www_tcg_org_robots_txt.html": {
+  "url": "https://www.tcg.org/robots.txt",
+  "status": 200,
+  "final": "https://www.tcg.org/robots.txt",
+  "len": 775
+ },
+ "www_tcg_org_sitemap_xml.html": {
+  "url": "https://www.tcg.org/sitemap.xml",
+  "status": 404,
+  "final": "https://www.tcg.org/sitemap.xml",
+  "len": 59173
+ },
+ "www_musicnotes_com_robots_txt.html": {
+  "url": "https://www.musicnotes.com/robots.txt",
+  "status": 200,
+  "final": "https://www.musicnotes.com/robots.txt",
+  "len": 1131
+ },
+ "archive_org_advancedsearch_php_q_title_3a_28_22kimberly_akimbo_22_29_fl_5b_5d_identifier_f.html": {
+  "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22kimberly+akimbo%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+  "status": 200,
+  "final": "https://archive.org/advancedsearch.php?q=title%3A%28%22kimberly+akimbo%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+  "len": 1134
+ },
+ "archive_org_advancedsearch_php_q_title_3a_28_22a_strange_loop_22_29_fl_5b_5d_identifier_fl.html": {
+  "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22a+strange+loop%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+  "status": 200,
+  "final": "https://archive.org/advancedsearch.php?q=title%3A%28%22a+strange+loop%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+  "len": 1349
+ },
+ "archive_org_advancedsearch_php_q_title_3a_28_22vocal_selections_22_29_and_mediatype_3atext.html": {
+  "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22vocal+selections%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=100&sort%5B%5D=year+desc&output=json",
+  "status": 200,
+  "final": "https://archive.org/advancedsearch.php?q=title%3A%28%22vocal+selections%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=100&sort%5B%5D=year+desc&output=json",
+  "len": 8635
+ }
+}
