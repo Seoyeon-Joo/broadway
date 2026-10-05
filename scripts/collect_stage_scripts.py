@@ -27,6 +27,8 @@ from __future__ import annotations
 
 import argparse
 import re
+import signal
+import sys
 import time
 import unicodedata
 from pathlib import Path
@@ -85,14 +87,23 @@ def title_match(title: str, show: str) -> bool:
 def get(url, **kw):
     for attempt in range(3):
         try:
-            r = S.get(url, timeout=60, **kw)
+            r = S.get(url, timeout=25, **kw)
             if r.status_code == 429:
-                time.sleep(20 * (attempt + 1))
+                time.sleep(8 * (attempt + 1))
                 continue
             return r
         except Exception:  # noqa: BLE001
-            time.sleep(5)
+            time.sleep(3)
     return None
+
+
+def get_once(url, **kw):
+    """Single-attempt, no-retry fetch for noisy/rate-limited endpoints (e.g. Google
+    Books without an API key) - a slow/failing call here must not stall the whole run."""
+    try:
+        return S.get(url, timeout=15, **kw)
+    except Exception:  # noqa: BLE001
+        return None
 
 
 # ------------------------------------------------------------------ archive.org
@@ -185,8 +196,8 @@ def openlibrary(show: str, creators: list[str]) -> list[dict]:
 # ------------------------------------------------------------------ Google Books (public-domain full view only)
 def google_books(show: str, creators: list[str]) -> list[dict]:
     ct = core_title(show)
-    r = get("https://www.googleapis.com/books/v1/volumes",
-            params={"q": f'intitle:"{ct}"', "maxResults": 20})
+    r = get_once("https://www.googleapis.com/books/v1/volumes",
+                 params={"q": f'intitle:"{ct}"', "maxResults": 20})
     if r is None or not r.ok:
         return []
     out = []
@@ -255,6 +266,9 @@ def main():
     ap.add_argument("--creators", default="data/shows_creators.csv")
     ap.add_argument("--output", default="data/stage_scripts.xlsx")
     ap.add_argument("--files", default="data/stage_files")
+    ap.add_argument("--previous", default="", help="xlsx/csv of a prior run's results; shows already"
+                     " resolved there (anything but 'not found') are skipped and carried over as-is")
+    ap.add_argument("--titles", default="", help="debug: comma-separated show names to run, ignoring the rest")
     a = ap.parse_args()
 
     shows = pd.read_csv(a.shows)
@@ -262,13 +276,41 @@ def main():
                 for r in pd.read_csv(a.creators).itertuples()}
     fdir = Path(a.files)
     fdir.mkdir(parents=True, exist_ok=True)
+
+    prev_rows: dict[str, dict] = {}
+    if a.previous and Path(a.previous).exists():
+        pdf_ = pd.read_excel(a.previous) if a.previous.endswith(".xlsx") else pd.read_csv(a.previous)
+        for r in pdf_.to_dict("records"):
+            if str(r.get("status", "")) != "not found":
+                prev_rows[str(r["show"])] = {k: v for k, v in r.items() if pd.notna(v)}
+        print(f"Previous results loaded: {len(prev_rows)} shows already resolved, will be carried over")
+
+    titles_filter = {t.strip() for t in a.titles.split(",") if t.strip()} if a.titles else None
+
     print("Licensing catalogs...")
     lic = licensing_index()
 
+    out_path = Path(a.output)
     rows = []
+
+    def flush():
+        pd.DataFrame(rows).to_excel(out_path, index=False)
+
+    def _on_term(signum, frame):  # GitHub Actions cancel -> SIGTERM with a short grace period
+        print(f"::warning::received signal {signum}, flushing {len(rows)} rows before exit")
+        flush()
+        sys.exit(1)
+
+    signal.signal(signal.SIGTERM, _on_term)
+
     for s in shows.itertuples():
         show, genre, found = str(s.show), str(s.genre), str(getattr(s, "find", "") or "")
         row = {"show_id": s.show_id, "show": show, "genre": genre, "your_find": found if found != "nan" else ""}
+        if titles_filter is not None and show not in titles_filter:
+            continue
+        if show in prev_rows:
+            rows.append(prev_rows[show])
+            continue
         if row["your_find"] in ("O", "S"):
             rows.append({**row, "status": "already found (skipped)"})
             continue
@@ -341,10 +383,12 @@ def main():
                      "licensing": " | ".join(lic_hits),
                      "creators_used": "; ".join(cr)})
         print(f"  [{status}] {show}", flush=True)
+        if len(rows) % 5 == 0:
+            flush()  # incremental save so a timeout/cancel doesn't lose earlier progress
         time.sleep(1)
 
+    flush()
     res = pd.DataFrame(rows)
-    res.to_excel(a.output, index=False)
     print(f"::notice::shows={len(res)} | status={res['status'].value_counts().to_dict()}")
 
 
