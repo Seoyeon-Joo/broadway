@@ -21,6 +21,16 @@ jobs:
           python-version: "3.11"
       - run: pip install "pandas>=2.2" "openpyxl>=3.1" "requests>=2.32"
       - run: python scripts/collect_stage_scripts.py
+      - name: Commit results xlsx to repo
+        if: always()
+        run: |
+          if [ -f data/stage_scripts.xlsx ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/stage_scripts.xlsx
+            git diff --staged --quiet || git commit -m "Update stage_scripts.xlsx [skip ci]"
+            git push || echo "push failed (non-fatal)"
+          fi
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
