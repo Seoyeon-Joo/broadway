@@ -3,19 +3,17 @@ import json, pathlib, re, time, requests
 H = {"User-Agent": "Mozilla/5.0 (compatible; ScriptSourceProbe/1.0; academic research)"}
 out = pathlib.Path("debug_html"); out.mkdir(exist_ok=True)
 PAGES = [
-    "https://scripts-onscreen.com/robots.txt", "https://scripts-onscreen.com/sitemap.xml",
-    "https://scripts-onscreen.com/sitemap_index.xml", "https://scripts-onscreen.com/movie-sitemap.xml",
-    "https://scripts-onscreen.com/movie/dune-part-two-script-links/",
-    "https://scripts-onscreen.com/movie/oppenheimer-script-links/",
-    "https://scrapsfromtheloft.com/robots.txt", "https://scrapsfromtheloft.com/sitemap_index.xml",
-    "https://scrapsfromtheloft.com/movies/godzilla-minus-one-transcript/",
-    "https://subslikescript.com/robots.txt", "https://subslikescript.com/sitemap.xml",
-    "https://subslikescript.com/movies", "https://subslikescript.com/movies_letter-D",
-    "https://www.springfieldspringfield.co.uk/robots.txt",
-    "https://www.springfieldspringfield.co.uk/movie_scripts.php?order=D",
-    "https://www.springfieldspringfield.co.uk/movie_script.php?movie=dune-part-two",
-    "https://archive.org/advancedsearch.php?q=title%3A%28%22bullet+train%22%29+AND+%28screenplay+OR+script%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=mediatype&rows=20&output=json",
-    "https://archive.org/advancedsearch.php?q=%28screenplay%29+AND+mediatype%3Atexts+AND+year%3A%5B2020+TO+2026%5D&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=50&output=json",
+    "https://www.concordtheatricals.com/robots.txt", "https://www.concordtheatricals.com/sitemap.xml",
+    "https://www.mtishows.com/robots.txt", "https://www.mtishows.com/sitemap.xml",
+    "https://www.broadwaylicensing.com/robots.txt", "https://www.broadwaylicensing.com/sitemap.xml",
+    "https://www.dramatists.com/robots.txt", "https://www.dramatists.com/sitemap.xml",
+    "https://www.theatricalrights.com/robots.txt", "https://www.theatricalrights.com/sitemap.xml",
+    "https://www.halleonard.com/robots.txt", "https://www.halleonard.com/sitemap.xml",
+    "https://www.tcg.org/robots.txt", "https://www.tcg.org/sitemap.xml",
+    "https://www.musicnotes.com/robots.txt",
+    "https://archive.org/advancedsearch.php?q=title%3A%28%22kimberly+akimbo%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+    "https://archive.org/advancedsearch.php?q=title%3A%28%22a+strange+loop%22%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=mediatype&rows=30&output=json",
+    "https://archive.org/advancedsearch.php?q=title%3A%28%22vocal+selections%22%29+AND+mediatype%3Atexts&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=100&sort%5B%5D=year+desc&output=json",
 ]
 meta = {}
 for u in PAGES:
