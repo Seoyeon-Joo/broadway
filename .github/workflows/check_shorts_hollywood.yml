@@ -1,7 +1,7 @@
 name: Check Shorts (Hollywood)
 
 # Hollywood YouTube 영상의 실제 Shorts 여부를 /shorts/{video_id} 응답으로 판별.
-# - 10개 shard 병렬, 각 shard 결과를 hollywood-youtube-data Release에 덮어써 저장
+# - 20개 shard 병렬, 각 shard 결과를 hollywood-youtube-data Release에 덮어써 저장
 # - 다시 실행하면 Release의 shard 파일을 받아 이어서 진행(체크포인트)
 # - merge 잡이 hollywood_shorts_result.csv(video_id,is_shorts)로 합쳐 업로드
 
@@ -14,7 +14,7 @@ permissions:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DATA_TAG: hollywood-youtube-data
-  NUM_SHARDS: 10
+  NUM_SHARDS: 20
 
 jobs:
   check:
@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0,1,2,3,4,5,6,7,8,9]
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p data/shorts
           gh release download "$DATA_TAG" --dir data/shorts \
-            --pattern "shorts_shard_${{ matrix.shard }}.csv" --clobber 2>/dev/null || \
+            --pattern "shorts_shard_*.csv" --clobber 2>/dev/null || \
             echo "기존 데이터 없음 (첫 실행)"
 
       - name: Shorts 판별

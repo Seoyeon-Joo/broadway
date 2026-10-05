@@ -66,9 +66,15 @@ def main():
     df = pd.read_csv(a.in_path).drop_duplicates("video_id")
     df = df[df.video_id.apply(lambda v: zlib.crc32(str(v).encode()) % a.num_shards == a.shard_index)]
 
+    # 이 shard 파일 + 같은 폴더의 다른 shard 결과까지 모두 완료로 간주
+    # (shard 수를 바꿔도 이미 판별한 영상은 다시 요청하지 않도록)
+    import glob
     done = set()
-    if os.path.isfile(a.out):
-        done = set(pd.read_csv(a.out).video_id.astype(str))
+    for fp in glob.glob(os.path.join(os.path.dirname(a.out) or ".", "shorts_shard_*.csv")):
+        try:
+            done |= set(pd.read_csv(fp).video_id.astype(str))
+        except Exception:
+            pass
     new = not os.path.isfile(a.out)
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     f = open(a.out, "a", newline="", encoding="utf-8")
