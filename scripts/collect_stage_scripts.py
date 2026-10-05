@@ -96,20 +96,32 @@ def get(url, **kw):
 
 
 # ------------------------------------------------------------------ archive.org
-def archive_items(show: str, creators: list[str]) -> list[dict]:
-    q = f'title:("{core_title(show)}") AND mediatype:texts'
+def _archive_search(q: str) -> list[dict]:
     r = get("https://archive.org/advancedsearch.php",
             params={"q": q, "fl[]": ["identifier", "title", "creator", "year", "subject"], "rows": 50, "output": "json"})
     if r is None or not r.ok:
         return []
-    out = []
-    for d in r.json().get("response", {}).get("docs", []):
+    return r.json().get("response", {}).get("docs", [])
+
+
+def archive_items(show: str, creators: list[str]) -> list[dict]:
+    ct = core_title(show)
+    docs = _archive_search(f'title:("{ct}") AND mediatype:texts')
+    if not docs:
+        # fallback: drop the exact title-field restriction (catches items filed with
+        # looser/garbled metadata) -- still gated by title_match()+creator_match() below
+        docs = _archive_search(f'"{ct}" AND mediatype:texts')
+    seen, out = set(), []
+    for d in docs:
+        if d.get("identifier") in seen:
+            continue
         t = str(d.get("title", ""))
         if not title_match(t, show):
             continue
         cr = d.get("creator", [])
         if not creator_match(cr if isinstance(cr, list) else [cr], creators):
             continue
+        seen.add(d["identifier"])
         out.append({"id": d["identifier"], "title": t, "year": d.get("year", ""),
                     "kind": "score" if SCORE_RX.search(t) else "script"})
     return out
@@ -158,11 +170,43 @@ def openlibrary(show: str, creators: list[str]) -> list[dict]:
     for d in r.json().get("docs", []):
         if not title_match(d.get("title", ""), show) or not creator_match(d.get("author_name", []), creators):
             continue
+        ia_list = d.get("ia") or []
+        if isinstance(ia_list, str):
+            ia_list = [ia_list]
         out.append({"title": d.get("title"), "year": d.get("first_publish_year", ""),
                     "publishers": "; ".join((d.get("publisher") or [])[:4]),
                     "isbn": (d.get("isbn") or [""])[0], "ebook_access": d.get("ebook_access", ""),
-                    "ia": (d.get("ia") or [""])[0], "url": f"https://openlibrary.org{d['key']}",
+                    "ia": ia_list[0] if ia_list else "", "ia_all": ia_list,
+                    "url": f"https://openlibrary.org{d['key']}",
                     "kind": "score" if SCORE_RX.search(d.get("title", "")) else "script"})
+    return out
+
+
+# ------------------------------------------------------------------ Google Books (public-domain full view only)
+def google_books(show: str, creators: list[str]) -> list[dict]:
+    ct = core_title(show)
+    r = get("https://www.googleapis.com/books/v1/volumes",
+            params={"q": f'intitle:"{ct}"', "maxResults": 20})
+    if r is None or not r.ok:
+        return []
+    out = []
+    for item in r.json().get("items", []) or []:
+        vi = item.get("volumeInfo", {})
+        ai = item.get("accessInfo", {})
+        title = vi.get("title", "")
+        if not title_match(title, show):
+            continue
+        if not creator_match(vi.get("authors", []), creators):
+            continue
+        if vi.get("viewability") != "ALL_PAGES" or not ai.get("publicDomain"):
+            continue  # only fully free, public-domain copies - never a paid/preview one
+        pdf = ai.get("pdf", {}) or {}
+        epub = ai.get("epub", {}) or {}
+        url = pdf.get("downloadLink") or epub.get("downloadLink") or ""
+        if not url:
+            continue
+        out.append({"title": title, "year": (vi.get("publishedDate", "") or "")[:4], "url": url,
+                    "kind": "score" if SCORE_RX.search(title) else "script"})
     return out
 
 
@@ -255,14 +299,24 @@ def main():
 
         eds = openlibrary(show, cr)
         for e in eds:
-            if e["ebook_access"] == "public" and e["ia"]:
-                restricted, files = archive_files(e["ia"])
-                if not restricted and files:
-                    dest = fdir / f"{safe}_{e['kind']}_ol{Path(files[0]).suffix}"
-                    if save(f"https://archive.org/download/{e['ia']}/{quote(files[0])}", dest):
-                        got[e["kind"]].append(f"{dest.name} <- {e['url']}")
-            elif e["ebook_access"] == "borrowable" and e["ia"]:
+            ia_candidates = e.get("ia_all") or ([e["ia"]] if e["ia"] else [])
+            downloaded = False
+            if e["ebook_access"] == "public":
+                for ia in ia_candidates:
+                    restricted, files = archive_files(ia)
+                    if not restricted and files:
+                        dest = fdir / f"{safe}_{e['kind']}_ol{Path(files[0]).suffix}"
+                        if save(f"https://archive.org/download/{ia}/{quote(files[0])}", dest):
+                            got[e["kind"]].append(f"{dest.name} <- {e['url']}")
+                            downloaded = True
+                            break
+            if not downloaded and e["ebook_access"] == "borrowable" and e["ia"]:
                 borrow[e["kind"]].append(f"{e['title']} ({e['year']}) https://archive.org/details/{e['ia']}")
+
+        for g in google_books(show, cr):
+            dest = fdir / f"{safe}_{g['kind']}_googlebooks{Path(g['url'].split('?')[0]).suffix or '.pdf'}"
+            if save(g["url"], dest):
+                got[g["kind"]].append(f"{dest.name} <- Google Books: {g['title']} ({g['year']})")
 
         lic_hits = licensing_hits(show, lic)
         is_musical = genre.lower() == "musical"

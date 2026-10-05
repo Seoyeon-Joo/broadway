@@ -28,8 +28,17 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add data/stage_scripts.xlsx
-            git diff --staged --quiet || git commit -m "Update stage_scripts.xlsx [skip ci]"
-            git push origin HEAD:main || echo "push failed (non-fatal)"
+            git diff --staged --quiet && { echo "no change to commit"; exit 0; }
+            git commit -m "Update stage_scripts.xlsx [skip ci]"
+            for i in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main && git push origin HEAD:main && { echo "pushed ok"; break; }
+              echo "push attempt $i failed, retrying..."
+              git rebase --abort 2>/dev/null || true
+              sleep $((RANDOM % 10 + 3))
+            done
+          else
+            echo "::warning::data/stage_scripts.xlsx not found, nothing to commit"
           fi
       - name: Upload results
         if: always()
