@@ -1,7 +1,9 @@
 # .github/workflows/collect_scripts.yml
 #
 # 영화 대본 통합 수집: data/movie_list.xlsx 의 영화마다 대본 1개씩 저장
-#   우선순위: SimplyScripts 수상시즌 > Script Slug > SimplyScripts 전체목록 > Deadline 기사 > IMSDb > Daily Script
+#   우선순위: SimplyScripts 수상시즌 > Script Slug > SimplyScripts 전체목록 > Deadline 기사 > PDF 링크 모음 페이지
+#            > Scripts On Screen(무료 링크만) > archive.org > IMSDb > Daily Script
+#   대본이 끝내 없으면 대사 전사본(Springfield! Springfield!)을 transcripts-txt 로 따로 저장 (status=transcript_only)
 #   previous_run_id 에 이전 실행 번호를 넣으면 그때 받은 영화는 건너뛰고, 결과 엑셀은 누적으로 만듭니다.
 #   재개봉작(제목의 "2022 Re-release" 등)은 원작 대본으로, 공연·UFC·오페라 등 영화가 아닌 것은 non_film 으로 분류.
 #   앞 순위 링크가 깨져 있으면 다음 후보로 자동으로 넘어갑니다.
@@ -40,7 +42,7 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 360
 
     steps:
       - name: Checkout
@@ -103,4 +105,12 @@ jobs:
         with:
           name: scripts-original
           path: data/scripts_raw/
+          if-no-files-found: warn
+
+      - name: Upload transcripts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transcripts-txt
+          path: data/transcripts_txt/
           if-no-files-found: warn

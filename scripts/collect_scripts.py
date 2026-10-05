@@ -7,8 +7,12 @@ Combined screenplay collector — one script per movie, sources in priority orde
   4. Deadline "read the screenplay" articles (2020-09 onward)
   5. Pages listing screenplay PDF links (ScriptPDF, Bulletproof Screenwriting, Indie Film Hustle,
      No Film School, writing.ninja, SimplyScripts Oscar-contenders category)
-  6. IMSDb
-  7. Daily Script
+  6. Scripts On Screen (free links listed per movie; paid sellers / Scribd / transcripts excluded)
+  7. archive.org (items titled "<movie> ... screenplay/script")
+  8. IMSDb
+  9. Daily Script
+  + Dialogue transcripts (Springfield! Springfield!) for movies still without a screenplay,
+    saved separately (data/transcripts_txt, status transcript_only) - dialogue only, no action lines.
 
 Movie list handling
   - Box Office Mojo re-release suffixes ("Alien2020 Re-release", "Coraline15th Anniversary")
@@ -61,7 +65,7 @@ from imsdb_matcher import norm  # handles "Title, The" -> "the title"
 session = ds.session
 MIN_CHARS = 15000  # a feature screenplay is typically 100k+ characters
 SOURCE_RANK = {"simplyscripts_award": 0, "scriptslug": 1, "simplyscripts": 2, "deadline": 3,
-               "linkpages": 4, "imsdb": 5, "dailyscript": 6}
+               "linkpages": 4, "scriptsonscreen": 5, "archive_org": 6, "imsdb": 7, "dailyscript": 8}
 RAW_OK_EXT = {".pdf", ".doc", ".docx", ".rtf"}
 RAW_MIN_BYTES = 30_000
 
@@ -345,6 +349,9 @@ def _landing_links(r, base: str, title: str) -> list[str]:
 def fetch_script(c: dict, title: str) -> tuple[str, bytes, str, str]:
     """Return (text, raw_bytes, raw_ext, final_url). Raises on failure."""
     url = c["url"]
+    if c["source"] == "archive_org":
+        c = dict(c, url=ms.archive_pdf_url(url, session))
+        url = c["url"]
     if c["source"] == "imsdb":
         url = im.find_script_url(url)
         if not url:
@@ -502,6 +509,9 @@ def main():
     ap.add_argument("--per-try-timeout", type=int, default=480, help="seconds per candidate")
     ap.add_argument("--titles", default="", help="only these movie titles (separated by |), for debugging")
     ap.add_argument("--previous", default="", help="earlier script_collection.xlsx/.csv: skip movies already ok")
+    ap.add_argument("--no-dynamic", action="store_true", help="skip per-movie Scripts On Screen / archive.org lookups")
+    ap.add_argument("--no-transcripts", action="store_true")
+    ap.add_argument("--transcript-dir", default="data/transcripts_txt")
     a = ap.parse_args()
 
     movies = pd.read_excel(a.input)
@@ -533,6 +543,23 @@ def main():
         print(f"::warning::Deadline index failed: {e}")
         deadline_idx = []
 
+    sos_idx, spring_idx = {}, {}
+    if not a.no_dynamic:
+        print("Scripts On Screen index...")
+        try:
+            sos_idx = ms.scriptsonscreen_index(session)
+        except Exception as e:  # noqa: BLE001
+            print(f"::warning::Scripts On Screen index failed: {e}")
+    if not a.no_transcripts:
+        print("Springfield transcript index...")
+        try:
+            spring_idx = ms.springfield_index(session)
+        except Exception as e:  # noqa: BLE001
+            print(f"::warning::Springfield index failed: {e}")
+    tr_dir = Path(a.transcript_dir)
+    tr_dir.mkdir(parents=True, exist_ok=True)
+    TR_STATS = {"ok": 0, "miss": 0}
+
     txt_dir, raw_dir = Path(a.txt_dir), Path(a.raw_dir)
     txt_dir.mkdir(parents=True, exist_ok=True)
     raw_dir.mkdir(parents=True, exist_ok=True)
@@ -552,6 +579,26 @@ def main():
         nf = tu.non_film_type(title, dist.get(mid, ""))
         cands = [] if nf else candidates_for(search_title, ry, by_norm, keys, a.fuzzy,
                                             by_compact, deadline_idx, rerelease)
+        if not nf and not a.no_dynamic:  # per-movie lookups (only movies still missing reach here)
+            extra = []
+            try:
+                extra += ms.scriptsonscreen_candidates(search_title, ry, sos_idx, session)
+            except Exception:  # noqa: BLE001
+                pass
+            try:
+                extra += ms.archive_candidates(search_title, ry, session)
+                time.sleep(0.5)
+            except Exception:  # noqa: BLE001
+                pass
+            known = {c["url"] for c in cands}
+            for c in extra:
+                if c["url"] in known:
+                    continue
+                c.update(norm=norm(search_title), compact=compact(search_title), score=100.0,
+                         year_check=year_check(c, ry, rerelease))
+                cands.append(c)
+            order = {"ok": 0, "unknown": 1, "fail": 2}
+            cands.sort(key=lambda c: (order[c["year_check"]], SOURCE_RANK[c["source"]], -c["score"]))
         row = {"movie_id": mid, "movie_title": title, "search_title": search_title,
                "release_year": ry, "rerelease": rerelease, "non_film_type": nf,
                "distributor": dist.get(mid, ""), "round": round_name,
@@ -596,6 +643,30 @@ def main():
                            chars=n, script_info=c["info"][:300],
                            via="wayback" if "web.archive.org" in final else "")
             row["tried"] = " ; ".join(tried)
+        if not nf and not str(row["status"]).startswith("ok") and spring_idx:
+            # no screenplay -> dialogue transcript, matched on title + release year
+            key = re.sub(r"[^a-z0-9]", "", search_title.lower().replace("&", "and"))
+            hits = spring_idx.get(key, [])
+            def _yr_ok(y):
+                if not (y and ry):
+                    return False
+                return int(y) <= ry if rerelease else ry - 1 <= int(y) <= ry + 1
+            good = [u for y, u in hits if _yr_ok(y)]
+            if good:
+                try:
+                    tr = ms.springfield_transcript(good[0], session)
+                    if len(tr) >= 5000:
+                        safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{mid}_{title}").strip(" ._")[:150]
+                        (tr_dir / f"{safe}.txt").write_text(tr, encoding="utf-8")
+                        row.update(status="transcript_only", transcript_url=good[0], transcript_chars=len(tr))
+                        TR_STATS["ok"] += 1
+                    else:
+                        TR_STATS["miss"] += 1
+                except Exception:  # noqa: BLE001
+                    TR_STATS["miss"] += 1
+                time.sleep(0.7)
+            if row["status"] == "transcript_only" or good:
+                print(f"  [{row['status']}] {title} transcript", flush=True)
             print(f"  [{row['status']}] {title} ({ry}) <- {row['source'] or '-'} | {row['tried']}", flush=True)
         elif cands:
             c = cands[0]
@@ -616,7 +687,9 @@ def main():
     st = res["status"].value_counts().to_dict()
     src = res.loc[res["status"].astype(str).str.startswith("ok"), "source"].value_counts().to_dict()
     gained = new["status"].astype(str).str.startswith("ok").sum() if len(new) else 0
-    print(f"::notice::this round: +{gained} new scripts | non_film={int((new['status'] == 'non_film').sum())}")
+    ntr = int((new["status"] == "transcript_only").sum()) if len(new) else 0
+    print(f"::notice::this round: +{gained} new screenplays | +{ntr} transcripts | "
+          f"non_film={int((new['status'] == 'non_film').sum())}")
     print(f"::notice::movies={len(res)} | status={st} | ok by source={src} | OCR used={len(OCR_USED)} | wayback={ARCHIVE_STATS}")
     failed = new[new["status"] == "download_failed"] if len(new) else new
     if len(failed):
