@@ -36,7 +36,7 @@ on:
         default: "92"
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 jobs:
@@ -80,6 +80,26 @@ jobs:
             --fuzzy "${{ github.event.inputs.fuzzy || '92' }}" \
             --titles "${{ github.event.inputs.titles }}" $PREV \
             ${{ github.event.inputs.match_only == 'true' && '--match-only' || '' }}
+
+      - name: Commit results xlsx to repo
+        if: always()
+        run: |
+          if [ -f data/script_collection.xlsx ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/script_collection.xlsx
+            git diff --staged --quiet && { echo "no change to commit"; exit 0; }
+            git commit -m "Update script_collection.xlsx [skip ci]"
+            for i in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main && git push origin HEAD:main && { echo "pushed ok"; break; }
+              echo "push attempt $i failed, retrying..."
+              git rebase --abort 2>/dev/null || true
+              sleep $((RANDOM % 10 + 3))
+            done
+          else
+            echo "::warning::data/script_collection.xlsx not found, nothing to commit"
+          fi
 
       - name: Upload results
         if: always()

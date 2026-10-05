@@ -200,26 +200,40 @@ _ARCHIVE_BAD = re.compile(r"promo|trailer|cbfc|teaser|song|lyrics|novel|book|rev
                           r"production notes|pages? \d|pgs", re.I)
 
 
-def archive_candidates(title: str, rel, session) -> list[dict]:
-    """archive.org texts whose title is '<movie> ... screenplay/script'."""
-    q = f'title:("{title}") AND (title:screenplay OR title:script OR subject:screenplay) AND mediatype:texts'
+def _archive_search_docs(q: str, session, rows: int = 20) -> list[dict]:
     try:
         r = session.get("https://archive.org/advancedsearch.php",
-                        params={"q": q, "fl[]": ["identifier", "title", "year"], "rows": 10, "output": "json"},
+                        params={"q": q, "fl[]": ["identifier", "title", "year"], "rows": rows, "output": "json"},
                         timeout=60)
-        docs = r.json().get("response", {}).get("docs", [])
+        return r.json().get("response", {}).get("docs", [])
     except Exception:  # noqa: BLE001
         return []
+
+
+def archive_candidates(title: str, rel, session) -> list[dict]:
+    """archive.org texts whose title is '<movie> ... screenplay/script'."""
+    docs = _archive_search_docs(
+        f'title:("{title}") AND (title:screenplay OR title:script OR subject:screenplay) AND mediatype:texts',
+        session, rows=10)
+    if not docs:
+        # fallback: just the title + mediatype:texts, no screenplay/script keyword requirement
+        # (catches items filed under looser metadata, e.g. "<Movie> (shooting draft)");
+        # still gated below by startswith-match + _ARCHIVE_BAD, and by year_check downstream
+        docs = _archive_search_docs(f'title:("{title}") AND mediatype:texts', session, rows=20)
     n = re.sub(r"[^a-z0-9]", "", title.lower())
-    out = []
+    seen, out = set(), []
     for d in docs:
+        ident = d.get("identifier")
+        if ident in seen:
+            continue
         t = str(d.get("title", ""))
         tn = re.sub(r"[^a-z0-9]", "", t.lower())
         if not tn.startswith(n) or _ARCHIVE_BAD.search(t):
             continue
+        seen.add(ident)
         yr = re.search(r"(19|20)\d{2}", t)
         out.append({"source": "archive_org", "title": title,
-                    "url": f"https://archive.org/details/{d['identifier']}",
+                    "url": f"https://archive.org/details/{ident}",
                     "year": yr.group(0) if yr else "", "award_year": "", "info": f"archive.org: {t[:100]}"})
     return out
 
