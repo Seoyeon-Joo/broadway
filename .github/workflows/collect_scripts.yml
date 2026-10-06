@@ -34,6 +34,12 @@ on:
       fuzzy:
         description: "퍼지 매칭 최소 점수 (0-100, 연도 검증된 경우에만 적용)"
         default: "92"
+      shard_count:
+        description: "(선택) 병렬로 몇 개로 나눠 돌릴지 — 예: 3 이면 같은 previous_run_id로 shard_index 0/1/2 를 동시에 Run workflow"
+        default: "1"
+      shard_index:
+        description: "(선택) 이 실행이 처리할 shard 번호 (0부터 shard_count-1 까지)"
+        default: "0"
 
 permissions:
   contents: write
@@ -86,11 +92,16 @@ jobs:
             --raw-dir data/scripts_raw \
             --fuzzy "${{ github.event.inputs.fuzzy || '92' }}" \
             --titles "${{ github.event.inputs.titles }}" $PREV \
+            --shard-count "${{ github.event.inputs.shard_count || '1' }}" \
+            --shard-index "${{ github.event.inputs.shard_index || '0' }}" \
             ${{ github.event.inputs.match_only == 'true' && '--match-only' || '' }}
 
       - name: Commit results xlsx to repo
         if: always()
         run: |
+          # separate branch per shard: concurrent shards force-pushing the same branch
+          # would stomp on each other's results
+          BRANCH="data-results-s${{ github.event.inputs.shard_index || '0' }}"
           if [ -f data/script_collection.xlsx ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -99,10 +110,10 @@ jobs:
             git commit -m "Update script_collection.xlsx [skip ci]"
             # push straight to a dedicated results branch (force) -- avoids racing the
             # concurrent stage-scripts/shorts pipelines that push to main throughout the day
-            if git push --force origin HEAD:data-results; then
-              echo "pushed ok"
+            if git push --force origin "HEAD:$BRANCH"; then
+              echo "pushed ok -> $BRANCH"
             else
-              echo "::error::push to data-results failed"
+              echo "::error::push to $BRANCH failed"
               exit 1
             fi
           else

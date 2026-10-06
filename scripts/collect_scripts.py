@@ -63,7 +63,8 @@ import title_utils as tu
 from imsdb_matcher import norm  # handles "Title, The" -> "the title"
 
 session = ds.session
-MIN_CHARS = 15000  # a feature screenplay is typically 100k+ characters
+MIN_CHARS = 40000  # a feature screenplay is typically 100k+ characters; floor raised so a
+# partial/excerpt page can't pass as a full script (thesis needs the complete text, not a sample)
 SOURCE_RANK = {"simplyscripts_award": 0, "scriptslug": 1, "simplyscripts": 2, "deadline": 3,
                "linkpages": 4, "scriptsonscreen": 5, "archive_org": 6, "imsdb": 7, "dailyscript": 8}
 RAW_OK_EXT = {".pdf", ".doc", ".docx", ".rtf"}
@@ -512,17 +513,26 @@ def main():
     ap.add_argument("--no-dynamic", action="store_true", help="skip per-movie Scripts On Screen / archive.org lookups")
     ap.add_argument("--no-transcripts", action="store_true")
     ap.add_argument("--transcript-dir", default="data/transcripts_txt")
+    ap.add_argument("--shard-count", type=int, default=1, help="split remaining movies into N parallel shards")
+    ap.add_argument("--shard-index", type=int, default=0, help="which shard (0-based) this run processes")
     a = ap.parse_args()
 
     movies = pd.read_excel(a.input)
     if a.titles:
         want = {t.strip() for t in a.titles.split("|") if t.strip()}
         movies = movies[movies["movie_title"].astype(str).str.strip().isin(want)]
+    if a.shard_count > 1:
+        movies = movies[movies["movie_id"].astype(int) % a.shard_count == a.shard_index]
+        print(f"Shard {a.shard_index}/{a.shard_count}: {len(movies)} movies")
     rel, first_weeks, dist = release_info(a.release_years)
 
     prev_ok = pd.DataFrame()
     if a.previous and Path(a.previous).exists():
-        prev = pd.read_csv(a.previous) if a.previous.endswith(".csv") else pd.read_excel(a.previous)
+        # a .partial.csv can have a truncated/corrupt last line if the previous run was
+        # killed mid-write (e.g. hit the 6h GitHub Actions hard timeout) - skip bad lines
+        # instead of failing the whole run over the tail of the file
+        prev = (pd.read_csv(a.previous, on_bad_lines="warn", engine="python")
+                if a.previous.endswith(".csv") else pd.read_excel(a.previous))
         prev_ok = prev[prev["status"].astype(str).str.startswith("ok")].copy()
         prev_ok["round"] = prev_ok.get("round", pd.Series("previous", index=prev_ok.index)).fillna("previous")
         print(f"Previous results: {len(prev_ok)} movies already collected -> skipped")
@@ -655,7 +665,7 @@ def main():
             if good:
                 try:
                     tr = ms.springfield_transcript(good[0], session)
-                    if len(tr) >= 5000:
+                    if len(tr) >= 12000:  # full-movie dialogue only, not a short/partial page
                         safe = re.sub(r'[\\/:*?"<>|]+', "_", f"{mid}_{title}").strip(" ._")[:150]
                         (tr_dir / f"{safe}.txt").write_text(tr, encoding="utf-8")
                         row.update(status="transcript_only", transcript_url=good[0], transcript_chars=len(tr))

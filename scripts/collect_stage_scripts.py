@@ -254,7 +254,7 @@ def licensing_hits(show: str, idx: dict) -> list[str]:
 # ------------------------------------------------------------------ main
 def save(url: str, dest: Path) -> int:
     r = get(url)
-    if r is None or not r.ok or len(r.content) < 5000:
+    if r is None or not r.ok or len(r.content) < 30000:  # reject excerpt/sample pages - need the full script/score
         return 0
     dest.write_bytes(r.content)
     return len(r.content)
