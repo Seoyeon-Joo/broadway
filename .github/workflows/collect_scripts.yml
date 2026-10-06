@@ -70,7 +70,14 @@ jobs:
       - name: Collect screenplays
         run: |
           PREV=""
-          [ -f prev/script_collection.xlsx ] && PREV="--previous prev/script_collection.xlsx"
+          if [ -f prev/script_collection.xlsx ]; then
+            PREV="--previous prev/script_collection.xlsx"
+          elif [ -f prev/script_collection.partial.csv ]; then
+            # final xlsx wasn't written (e.g. previous run was cancelled/timed out) -
+            # fall back to the incremental partial CSV so that progress isn't lost
+            PREV="--previous prev/script_collection.partial.csv"
+          fi
+          echo "Using previous results: ${PREV:-<none>}"
           python scripts/collect_scripts.py \
             --input data/movie_list.xlsx \
             --release-years data/hollywood.xlsx \
@@ -87,18 +94,20 @@ jobs:
           if [ -f data/script_collection.xlsx ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/script_collection.xlsx
-            git diff --staged --quiet && { echo "no change to commit"; exit 0; }
+            git add -f data/script_collection.xlsx
+            [ -f data/script_collection.partial.csv ] && git add -f data/script_collection.partial.csv
             git commit -m "Update script_collection.xlsx [skip ci]"
-            for i in 1 2 3 4 5; do
-              git fetch origin main
-              git rebase origin/main && git push origin HEAD:main && { echo "pushed ok"; break; }
-              echo "push attempt $i failed, retrying..."
-              git rebase --abort 2>/dev/null || true
-              sleep $((RANDOM % 10 + 3))
-            done
+            # push straight to a dedicated results branch (force) -- avoids racing the
+            # concurrent stage-scripts/shorts pipelines that push to main throughout the day
+            if git push --force origin HEAD:data-results; then
+              echo "pushed ok"
+            else
+              echo "::error::push to data-results failed"
+              exit 1
+            fi
           else
             echo "::warning::data/script_collection.xlsx not found, nothing to commit"
+            exit 1
           fi
 
       - name: Upload results

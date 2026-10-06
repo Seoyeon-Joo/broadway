@@ -27,18 +27,19 @@ jobs:
           if [ -f data/stage_scripts.xlsx ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/stage_scripts.xlsx
-            git diff --staged --quiet && { echo "no change to commit"; exit 0; }
+            git add -f data/stage_scripts.xlsx
             git commit -m "Update stage_scripts.xlsx [skip ci]"
-            for i in 1 2 3 4 5; do
-              git fetch origin main
-              git rebase origin/main && git push origin HEAD:main && { echo "pushed ok"; break; }
-              echo "push attempt $i failed, retrying..."
-              git rebase --abort 2>/dev/null || true
-              sleep $((RANDOM % 10 + 3))
-            done
+            # push straight to a dedicated results branch (force) -- avoids racing the
+            # concurrent movie/shorts pipelines that push to main throughout the day
+            if git push --force origin HEAD:data-results; then
+              echo "pushed ok"
+            else
+              echo "::error::push to data-results failed"
+              exit 1
+            fi
           else
             echo "::warning::data/stage_scripts.xlsx not found, nothing to commit"
+            exit 1
           fi
       - name: Upload results
         if: always()
