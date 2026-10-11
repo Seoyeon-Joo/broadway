@@ -25,8 +25,8 @@ API = "https://en.wikipedia.org/w/api.php"
 UA = "broadway-synopsis-collector/1.0 (academic thesis; https://github.com/Seoyeon-Joo/broadway)"
 TARGETS = "data/synopsis_targets.xlsx"
 OUT = "data/synopses.xlsx"
-N_SENTENCES = 4          # 시트에 넣을 문장 수
-MAX_CHARS = 800          # 문장 수와 무관하게 넘지 않을 글자 수
+N_SENTENCES = None       # None = 줄거리 섹션 전체 (문장 수 제한 없음)
+MAX_CHARS = 32000        # 엑셀 셀 한도(32,767자) 안에서 전체를 담음
 PLOT_HEADINGS = ["plot", "synopsis", "plot summary", "premise", "story", "summary", "plot synopsis"]
 SKIP_TITLE = re.compile(r"^(list of|category:|soundtrack|.*\bsoundtrack\b|.*\(album\)|.*\(song\))", re.I)
 
@@ -142,7 +142,7 @@ def first_sentences(text, n=N_SENTENCES, max_chars=MAX_CHARS):
     if buf:
         sents.append(buf)
     out = ""
-    for s in sents[:n]:
+    for s in (sents if n is None else sents[:n]):
         if out and len(out) + 1 + len(s) > max_chars:
             break
         out = f"{out} {s}".strip()
@@ -171,13 +171,13 @@ def process(row):
     plot, head = plot_section(text)
     if plot:
         rec["section_used"] = head
-        rec["synopsis"] = first_sentences(plot)
+        rec["synopsis"] = plot[:MAX_CHARS] if N_SENTENCES is None else first_sentences(plot, N_SENTENCES)
         rec["plot_words"] = len(plot.split())
         rec["full_plot"] = plot[:32000]
     else:
         lead = split_sections(text)[0][2]
         rec["section_used"] = "(no plot section; lead paragraph)"
-        rec["synopsis"] = first_sentences(lead)
+        rec["synopsis"] = first_sentences(lead, 4)
         rec["full_plot"] = ""
         reasons.append("no Plot/Synopsis section - lead used")
     if conf in ("low", "none"):
@@ -195,7 +195,7 @@ def write_xlsx(recs, path):
     wb = Workbook()
     ws = wb.active
     ws.title = "synopses"
-    head = ["work_id", "title", "type", "year", "synopsis (first sentences of plot)", "source (Wikipedia, CC BY-SA 4.0)",
+    head = ["work_id", "title", "type", "year", "synopsis (full plot / synopsis section)", "source (Wikipedia, CC BY-SA 4.0)",
             "section_used", "plot_words (full)", "match_confidence", "needs_review", "review_reason", "wikipedia_title"]
     ws.append(head)
     for r in recs:
