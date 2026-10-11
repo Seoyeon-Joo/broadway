@@ -2,10 +2,14 @@ name: Collect Synopses - All works (Broadway + Hollywood)
 
 # Broadway(data/synopsis_targets_broadway.xlsx), Hollywood(data/synopsis_targets_hollywood.xlsx) 전체 작품의
 # 영어 Wikipedia 줄거리를 모아 data/synopses_broadway.xlsx, data/synopses_hollywood.xlsx 로 저장한다.
-# 수동 실행 전용: Actions 탭 > Collect Synopses - All works > Run workflow
+# 수동 실행: Actions 탭 > Collect Synopses - All works > Run workflow (이 파일을 푸시해도 1회 실행됨)
 
 on:
   workflow_dispatch: {}
+  push:
+    branches: [synopsis-scraper]
+    paths:
+      - .github/workflows/collect_synopses_all.yml
 
 permissions:
   contents: write

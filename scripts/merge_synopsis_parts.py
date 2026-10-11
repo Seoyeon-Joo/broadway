@@ -14,8 +14,8 @@ def merge(name):
     full = full.sort_values("work_id").reset_index(drop=True)
     out = f"data/synopses_{name}.xlsx"
     with pd.ExcelWriter(out, engine="openpyxl") as w:
-        syn.to_excel(w, "synopses", index=False)
-        full.to_excel(w, "full_plot", index=False)
+        syn.to_excel(w, sheet_name="synopses", index=False)
+        full.to_excel(w, sheet_name="full_plot", index=False)
         ws = w.sheets["synopses"]
         for c in ws[1]:
             c.font = Font(bold=True, color="FFFFFF")
