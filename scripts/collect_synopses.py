@@ -11,6 +11,7 @@
 출처는 영화/공연 모두 영어 Wikipedia (MediaWiki API, 공식 API 사용).
 본문은 CC BY-SA 4.0 이므로 사용 시 출처(URL)를 표기해야 한다.
 """
+import argparse
 import re
 import sys
 import time
@@ -65,7 +66,7 @@ def find_page(title, typ, year, override):
     """(page_title, confidence, note)"""
     if isinstance(override, str) and override.strip():
         return override.strip(), "high", "wikipedia_title provided"
-    hint = {"film": "film", "musical": "musical", "play": "play"}.get(str(typ).lower(), "")
+    hint = {"film": "film", "musical": "musical", "play": "play", "broadway": "Broadway"}.get(str(typ).lower(), "")
     q = f"{title} {hint} {int(year) if pd.notna(year) else ''}".strip()
     d = api({"action": "query", "list": "search", "srsearch": q, "srlimit": 8, "srnamespace": 0})
     cands = d.get("query", {}).get("search", [])
@@ -79,9 +80,11 @@ def find_page(title, typ, year, override):
             score += 3
         elif norm(t).startswith(norm(title)):
             score += 2
-        if hint and hint in t.lower():
+        if hint and hint.lower() in t.lower():
             score += 1
-        if hint and hint in re.sub(r"<.*?>", "", c.get("snippet", "")).lower():
+        if pd.notna(year) and str(int(year)) in t:
+            score += 2
+        if hint and hint.lower() in re.sub(r"<.*?>", "", c.get("snippet", "")).lower():
             score += 1
         if score > best_score:
             best, best_score = t, score
@@ -224,7 +227,15 @@ def write_xlsx(recs, path):
 
 
 def main():
-    df = pd.read_excel(TARGETS)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--targets", default=TARGETS)
+    ap.add_argument("--out", default=OUT)
+    ap.add_argument("--shard", default="1/1", help="i/N : 전체 목록을 N등분해 i번째만 처리")
+    args = ap.parse_args()
+    df = pd.read_excel(args.targets)
+    i0, n0 = (int(x) for x in args.shard.split("/"))
+    if n0 > 1:
+        df = df.iloc[(i0 - 1)::n0].reset_index(drop=True)
     recs = []
     for i, row in df.iterrows():
         try:
@@ -236,8 +247,10 @@ def main():
         recs.append(rec)
         print(f"[{i + 1}/{len(df)}] {rec['title']} -> {rec['wikipedia_title']} | {rec['confidence']} | {rec['review_reason']}", flush=True)
         time.sleep(0.4)
-    write_xlsx(recs, OUT)
-    print(f"saved {OUT}: {len(recs)} works, {sum(1 for r in recs if r['needs_review']=='Y')} need review")
+        if (i + 1) % 100 == 0:
+            write_xlsx(recs, args.out)  # 중간 저장
+    write_xlsx(recs, args.out)
+    print(f"saved {args.out}: {len(recs)} works, {sum(1 for r in recs if r['needs_review']=='Y')} need review")
 
 
 if __name__ == "__main__":
