@@ -1,0 +1,44 @@
+name: Collect Synopses (Wikipedia -> Excel)
+
+# data/synopsis_targets.xlsx 의 작품(영화/공연) 목록을 읽어 영어 Wikipedia 줄거리를 모으고
+# data/synopses.xlsx 로 저장한다. (시트: synopses, full_plot)
+# 수동 실행: Actions 탭 > Collect Synopses > Run workflow
+# 입력 파일이나 스크립트를 푸시하면 자동 실행된다.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [synopsis-scraper]
+    paths:
+      - scripts/collect_synopses.py
+      - data/synopsis_targets.xlsx
+      - .github/workflows/collect_synopses.yml
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests pandas openpyxl
+      - name: Run collector
+        run: python scripts/collect_synopses.py
+      - name: Upload result as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: synopses
+          path: data/synopses.xlsx
+      - name: Commit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses.xlsx
+          git diff --staged --quiet || git commit -m "Update synopses.xlsx [automated]"
+          git push
