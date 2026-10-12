@@ -1,0 +1,42 @@
+name: Collect Synopses - Fallback sources (Rotten Tomatoes / AllMusicals)
+
+# Wikipedia에서 줄거리를 못 찾은 작품을 Rotten Tomatoes(영화)와 AllMusicals(뮤지컬)에서 채운다.
+# 결과: data/synopses_fallback_hollywood.xlsx, data/synopses_fallback_broadway.xlsx
+# 이 파일이나 스크립트를 푸시하면 실행된다. HOLLYWOOD_LIMIT 으로 시험 규모를 조절한다(0 = 전부).
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [synopsis-scraper]
+    paths:
+      - scripts/collect_fallback_synopses.py
+      - .github/workflows/collect_synopses_fallback.yml
+
+permissions:
+  contents: write
+
+env:
+  HOLLYWOOD_LIMIT: "60"
+
+jobs:
+  fallback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl
+      - name: Broadway (AllMusicals)
+        run: python scripts/collect_fallback_synopses.py --market broadway --targets data/fallback_targets_broadway.xlsx --out data/synopses_fallback_broadway.xlsx
+      - name: Hollywood (Rotten Tomatoes)
+        run: python scripts/collect_fallback_synopses.py --market hollywood --targets data/fallback_targets_hollywood.xlsx --out data/synopses_fallback_hollywood.xlsx --limit ${{ env.HOLLYWOOD_LIMIT }}
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_fallback_broadway.xlsx data/synopses_fallback_hollywood.xlsx
+          git diff --staged --quiet || git commit -m "Update fallback synopses [automated]"
+          git pull --rebase origin synopsis-scraper
+          git push
