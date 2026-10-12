@@ -1,0 +1,46 @@
+name: Merge synopsis shards from an earlier run
+
+# 이전 실행(Collect Synopses - All works)의 샤드 결과물(artifact)만 다시 내려받아 합친다.
+# 병합 단계의 push 충돌로 실패했을 때 수집을 처음부터 다시 하지 않기 위한 일회성 워크플로.
+# 이 파일을 푸시하면 1회 실행된다. 대상 실행 번호는 아래 RUN_ID.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [synopsis-scraper]
+    paths:
+      - .github/workflows/merge_synopsis_run.yml
+
+permissions:
+  contents: write
+  actions: read
+
+env:
+  RUN_ID: "38242116129"
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas openpyxl
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+          pattern: part_*
+          merge-multiple: true
+          run-id: ${{ env.RUN_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge shards
+        run: python scripts/merge_synopsis_parts.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_broadway_panel.xlsx data/synopses_hollywood.xlsx
+          git diff --staged --quiet || git commit -m "Update panel/hollywood synopses (v2) [automated]"
+          git pull --rebase origin synopsis-scraper
+          git push
