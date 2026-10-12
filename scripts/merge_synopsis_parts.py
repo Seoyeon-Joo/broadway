@@ -30,5 +30,5 @@ def merge(name):
     print(out, len(syn), "works;", int((syn["needs_review"] == "Y").sum()), "need review")
 
 
-for n in ("broadway", "hollywood"):
+for n in ("broadway_panel", "hollywood"):
     merge(n)

@@ -27,7 +27,11 @@ TARGETS = "data/synopsis_targets.xlsx"
 OUT = "data/synopses.xlsx"
 N_SENTENCES = None       # None = 줄거리 섹션 전체 (문장 수 제한 없음)
 MAX_CHARS = 32000        # 엑셀 셀 한도(32,767자) 안에서 전체를 담음
-PLOT_HEADINGS = ["plot", "synopsis", "plot summary", "premise", "story", "summary", "plot synopsis"]
+PLOT_HEADINGS = ["plot", "synopsis", "plot summary", "premise", "story", "summary", "plot synopsis", "plot overview",
+                 "overview", "the story", "storyline", "synopsis of the play", "plot and characters", "plot description",
+                 "story and characters", "summary of the plot", "book", "story summary", "narrative"]
+PLOT_WORDS = re.compile(r"\b(plot|synopsis|summary|story|storyline|premise)\b", re.I)
+NONNARRATIVE = re.compile(r"\b(concert|stand-up|standup|comedian|one-man show|one-woman show|solo show|magic show|magician|residency|tour|live album|variety show)\b", re.I)
 SKIP_TITLE = re.compile(r"^(list of|category:|soundtrack|.*\bsoundtrack\b|.*\(album\)|.*\(song\))", re.I)
 
 session = requests.Session()
@@ -62,10 +66,82 @@ def is_disambiguation(title):
     return bool(pages and "disambiguation" in pages[0].get("pageprops", {}))
 
 
+def title_variants(title):
+    """제목에서 'The Musical' 같은 꼬리표를 떼고 부제를 자른 변형들"""
+    t = str(title).strip()
+    out = [t]
+    t2 = re.sub(r"[:,\u2014\u2013-]?\s*(The|A|An)?\s*(New\s+)?(Neil Diamond |Tina Turner |Louis Armstrong |Penzance )?Musical$", "", t, flags=re.I).strip(" :,-")
+    t3 = re.split(r"[:\u2014\u2013]", t)[0].strip()
+    t4 = re.sub(r"^The\s+", "", t)
+    for v in (t2, t3, t4):
+        if v and v not in out:
+            out.append(v)
+    for v in list(out):  # 전부 대문자인 제목(SIX 등)은 Title Case 변형도 시도
+        if v.isupper() and len(v) > 3 and v.title() not in out:
+            out.append(v.title())
+    return out
+
+
+def candidate_titles(title, typ, year):
+    typ = str(typ).lower()
+    y = int(year) if pd.notna(year) else None
+    out = []
+    for b in title_variants(title):
+        if typ == "film":
+            if y:
+                out += [f"{b} ({y} film)", f"{b} ({y - 1} film)", f"{b} ({y + 1} film)"]
+            out += [f"{b} (film)", b]
+        else:
+            out += [f"{b} (musical)", f"{b} (play)", f"{b} (Broadway musical)", f"{b} (stage musical)", f"{b} (play, {y})" if y else "", b]
+    seen, res = set(), []
+    for c in out:
+        if c and c not in seen:
+            seen.add(c)
+            res.append(c)
+    return res
+
+
+def lead_ok(lead, typ, year):
+    lo = lead.lower()
+    typ = str(typ).lower()
+    if typ == "film":
+        if "film" not in lo:
+            return False
+        if pd.notna(year):
+            y = int(year)
+            return any(str(v) in lead for v in (y - 1, y, y + 1))
+        return True
+    return any(w in lo for w in ("musical", "stage", " play ", "play by", "play written", "revue", "opera"))
+
+
+def find_by_candidates(title, typ, year):
+    cands = candidate_titles(title, typ, year)
+    for i in range(0, len(cands), 12):
+        chunk = cands[i:i + 12]
+        d = api({"action": "query", "titles": "|".join(chunk), "redirects": 1, "prop": "extracts|pageprops",
+                 "exintro": 1, "explaintext": 1, "exlimit": "max", "ppprop": "disambiguation"})
+        q = d.get("query", {})
+        norm_map = {n["from"]: n["to"] for n in q.get("normalized", [])}
+        red_map = {r["from"]: r["to"] for r in q.get("redirects", [])}
+        pages = {p["title"]: p for p in q.get("pages", [])}
+        for c in chunk:
+            t = norm_map.get(c, c)
+            t = red_map.get(t, t)
+            pg = pages.get(t)
+            if not pg or pg.get("missing") or "disambiguation" in pg.get("pageprops", {}):
+                continue
+            if lead_ok(pg.get("extract", ""), typ, year):
+                return pg["title"]
+    return None
+
+
 def find_page(title, typ, year, override):
     """(page_title, confidence, note)"""
     if isinstance(override, str) and override.strip():
         return override.strip(), "high", "wikipedia_title provided"
+    direct = find_by_candidates(title, typ, year)
+    if direct:
+        return direct, "high", "direct title candidate + lead check"
     hint = {"film": "film", "musical": "musical", "play": "play", "broadway": "Broadway"}.get(str(typ).lower(), "")
     q = f"{title} {hint} {int(year) if pd.notna(year) else ''}".strip()
     d = api({"action": "query", "list": "search", "srsearch": q, "srlimit": 8, "srnamespace": 0})
@@ -124,6 +200,16 @@ def plot_section(text):
                     break
                 chunks.append(body2)
             return "\n\n".join(c for c in chunks if c), head
+    for i, (lvl, head, body) in enumerate(secs):
+        if lvl in (2, 3) and head and PLOT_WORDS.search(head) and not re.search(r"critic|reception|adaptation|production|soundtrack", head, re.I):
+            chunks = [body]
+            for lvl2, head2, body2 in secs[i + 1:]:
+                if lvl2 <= lvl:
+                    break
+                chunks.append(body2)
+            txt = "\n\n".join(c for c in chunks if c)
+            if len(txt.split()) >= 60:
+                return txt, head
     return None, None
 
 
@@ -180,6 +266,9 @@ def process(row):
         rec["synopsis"] = first_sentences(lead, 4)
         rec["full_plot"] = ""
         reasons.append("no Plot/Synopsis section - lead used")
+    lead_txt = split_sections(text)[0][2][:1500]
+    if NONNARRATIVE.search(lead_txt) and not plot:
+        reasons.append("possibly non-narrative (concert/stand-up/solo show) - no plot expected")
     if conf in ("low", "none"):
         reasons.append(f"page match uncertain ({note})")
     if not rec["synopsis"]:

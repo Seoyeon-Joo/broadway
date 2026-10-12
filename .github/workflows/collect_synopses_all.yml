@@ -1,7 +1,7 @@
 name: Collect Synopses - All works (Broadway + Hollywood)
 
-# Broadway(data/synopsis_targets_broadway.xlsx), Hollywood(data/synopsis_targets_hollywood.xlsx) 전체 작품의
-# 영어 Wikipedia 줄거리를 모아 data/synopses_broadway.xlsx, data/synopses_hollywood.xlsx 로 저장한다.
+# Broadway 패널 214개 공연(data/synopsis_targets_broadway_panel.xlsx)과 Hollywood 2,854편(data/synopsis_targets_hollywood.xlsx)의
+# 영어 Wikipedia 줄거리를 모아 data/synopses_broadway_panel.xlsx, data/synopses_hollywood.xlsx 로 저장한다.
 # 수동 실행: Actions 탭 > Collect Synopses - All works > Run workflow (이 파일을 푸시해도 1회 실행됨)
 
 on:
@@ -22,8 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {name: broadway,   targets: data/synopsis_targets_broadway.xlsx,   shard: "1/2"}
-          - {name: broadway,   targets: data/synopsis_targets_broadway.xlsx,   shard: "2/2"}
+          - {name: broadway_panel, targets: data/synopsis_targets_broadway_panel.xlsx, shard: "1/1"}
           - {name: hollywood,  targets: data/synopsis_targets_hollywood.xlsx,  shard: "1/4"}
           - {name: hollywood,  targets: data/synopsis_targets_hollywood.xlsx,  shard: "2/4"}
           - {name: hollywood,  targets: data/synopsis_targets_hollywood.xlsx,  shard: "3/4"}
@@ -63,12 +62,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/synopses_broadway.xlsx data/synopses_hollywood.xlsx
+          git add data/synopses_broadway_panel.xlsx data/synopses_hollywood.xlsx
           git diff --staged --quiet || git commit -m "Update all-works synopses [automated]"
           git push
       - uses: actions/upload-artifact@v4
         with:
           name: synopses_all
           path: |
-            data/synopses_broadway.xlsx
+            data/synopses_broadway_panel.xlsx
             data/synopses_hollywood.xlsx
