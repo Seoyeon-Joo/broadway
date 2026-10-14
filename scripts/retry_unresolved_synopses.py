@@ -92,7 +92,8 @@ def plot_from_headings(text):
             chunks.append(body2)
             labels.append(head2)
         txt = "\n\n".join(c for c in chunks if c)
-        if prose_words(txt) >= 120 or words(txt) >= 200:
+        # 곡 목록(짧은 줄의 나열)이 Act 소제목 아래 있는 경우를 걸러내기 위해 줄글 단어 수만 본다
+        if prose_words(txt) >= 120:
             return txt, "heading: " + head + (f" (+{len(labels) - 1} sub)" if len(labels) > 1 else "")
     return None, None
 
@@ -138,7 +139,13 @@ def try_pages(titles, kind, dbg, seen):
         real, text = get_text(t)
         time.sleep(0.4)
         if not text:
-            dbg.append(f"{t}: missing")
+            hits = []
+            try:
+                d = api({"action": "query", "list": "search", "srsearch": t + " play musical", "srlimit": 3, "srnamespace": 0})
+                hits = [h["title"] for h in d.get("query", {}).get("search", [])]
+            except Exception:
+                pass
+            dbg.append(f"{t}: missing (search hits: {hits})")
             continue
         plot, lab = extract(text)
         dbg.append(f"{t}: {'plot via ' + lab if plot else 'no plot'} ({words(text)}w)")
