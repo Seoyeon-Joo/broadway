@@ -1,0 +1,37 @@
+name: Collect Synopses - Retry unresolved Broadway (Wikipedia, wider rules)
+
+# Wikipedia 줄거리를 못 찾은 Broadway 작품 26개를 더 넓은 규칙(Act One/Act Two, 본문 ACT 줄, 원작 페이지)으로 다시 찾는다.
+# 결과: data/synopses_retry_broadway.xlsx  (본 파일 synopses_broadway_panel.xlsx 에는 자동으로 합치지 않는다)
+# 이 스크립트나 워크플로를 푸시하거나 Actions 탭에서 수동 실행하면 돈다.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [synopsis-scraper]
+    paths:
+      - scripts/retry_unresolved_synopses.py
+      - .github/workflows/collect_synopses_retry.yml
+
+permissions:
+  contents: write
+
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl
+      - name: Retry unresolved Broadway works
+        run: python scripts/retry_unresolved_synopses.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_retry_broadway.xlsx
+          git diff --staged --quiet || git commit -m "Update retry synopses [automated]"
+          git pull --rebase origin synopsis-scraper
+          git push
