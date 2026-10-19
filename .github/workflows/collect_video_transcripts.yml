@@ -1,0 +1,54 @@
+name: Collect YouTube transcripts (English)
+
+# 영상 자막(영어) 수집. 샤드별로 병렬 실행하고, 결과 jsonl 은 Artifacts 로 저장한다 (용량이 커서 커밋하지 않음).
+# IP 차단(blocked)이 나오면 그 샤드는 멈춘다 → 나중에 skip_run_id 없이 다시 실행하거나 limit 을 줄여 천천히 돌린다.
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_csv:
+        description: "대상 CSV (video_url 또는 video_id 열)"
+        default: "data/youtube_video_urls.csv"
+      num_shards:
+        description: "샤드 수 (병렬 job 수, 최대 20)"
+        default: "10"
+      limit:
+        description: "샤드당 최대 영상 수 (0=전부, 시험은 20)"
+        default: "20"
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      shards: ${{ steps.m.outputs.shards }}
+    steps:
+      - id: m
+        run: |
+          n=${{ github.event.inputs.num_shards }}
+          echo "shards=$(python3 -c "import json;print(json.dumps(list(range($n))))")" >> $GITHUB_OUTPUT
+
+  transcripts:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJson(needs.plan.outputs.shards) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install youtube-transcript-api pandas
+      - name: Collect
+        run: python scripts/collect_video_transcripts.py --input "${{ github.event.inputs.input_csv }}" --out-dir out --shard ${{ matrix.shard }} --num-shards ${{ github.event.inputs.num_shards }} --limit ${{ github.event.inputs.limit }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: transcripts-shard${{ matrix.shard }}
+          path: out/*.jsonl
+          retention-days: 30
