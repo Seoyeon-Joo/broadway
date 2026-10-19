@@ -1,0 +1,41 @@
+name: Re-match synopses (Wikipedia re-match / RT / Playbill story)
+
+# 잘못 매칭됐거나 도입 문단만 있는 작품의 시놉시스를 다시 수집한다.
+# 결과: data/synopses_rematch_hollywood.xlsx, data/synopses_rematch_broadway.xlsx, data/synopses_playbill_story_broadway.xlsx
+# 수동 실행(workflow_dispatch). HOLLYWOOD_LIMIT=0 이면 635편 전부.
+
+on:
+  workflow_dispatch:
+    inputs:
+      hollywood_limit:
+        description: "Hollywood 처리 편수 (0=전부, 시험은 20)"
+        default: "20"
+
+permissions:
+  contents: write
+
+jobs:
+  rematch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl beautifulsoup4
+      - name: Broadway - Playbill story/synopsis
+        continue-on-error: true
+        run: python scripts/scrape_playbill_story.py --targets data/rematch_targets_broadway.xlsx --shows data/broadway_shows_list.csv --out data/synopses_playbill_story_broadway.xlsx
+      - name: Broadway - Wikipedia re-match / source material
+        run: python scripts/rematch_synopses.py --market broadway --targets data/rematch_targets_broadway.xlsx --out data/synopses_rematch_broadway.xlsx
+      - name: Hollywood - Wikipedia re-match / Rotten Tomatoes
+        run: python scripts/rematch_synopses.py --market hollywood --targets data/rematch_targets_hollywood.xlsx --out data/synopses_rematch_hollywood.xlsx --limit ${{ github.event.inputs.hollywood_limit }}
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_playbill_story_broadway.xlsx data/synopses_rematch_broadway.xlsx data/synopses_rematch_hollywood.xlsx
+          git diff --staged --quiet || git commit -m "Re-matched synopses [automated]"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
