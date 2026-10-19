@@ -1,0 +1,42 @@
+name: Collect TMDB overviews (Hollywood)
+
+# Secret TMDB_API_KEY 필요. 결과: data/synopses_tmdb_hollywood.xlsx
+# This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+on:
+  push:
+    branches: [synopsis-rematch]
+    paths:
+      - scripts/collect_tmdb_overviews.py
+      - .github/workflows/collect_tmdb_overviews.yml
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "처리 편수 (0=전부)"
+        default: "0"
+
+permissions:
+  contents: write
+
+jobs:
+  tmdb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl
+      - name: Collect
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: python scripts/collect_tmdb_overviews.py --targets data/rematch_targets_hollywood.xlsx --out data/synopses_tmdb_hollywood.xlsx --limit ${{ github.event.inputs.limit || '0' }}
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_tmdb_hollywood.xlsx
+          git diff --staged --quiet || git commit -m "TMDB overviews [automated]"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
