@@ -40,7 +40,7 @@ def extract_story(soup):
         m = re.search(r"(?i)\b" + re.escape(lab) + r"\s*:\s*\n*(.*?)(?=\n\s*(?:" + L.STOP_LABELS_PATTERN + r")\s*:|\Z)", full, re.S)
         if m:
             txt = re.sub(r"\n{2,}", "\n\n", m.group(1).strip())
-            if len(txt.split()) >= 5:
+            if len(txt.split()) >= 5 and not re.match(r"(?i)\s*(running time|concept|buy)", txt) and not re.search(r"(?i)buy\s+(group\s+)?tickets", txt):
                 return txt[:6000], lab + " (text)"
     return None, ""
 
