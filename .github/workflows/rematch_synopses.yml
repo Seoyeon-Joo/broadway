@@ -5,6 +5,10 @@ name: Re-match synopses (Wikipedia re-match / RT / Playbill story)
 # 수동 실행(workflow_dispatch). HOLLYWOOD_LIMIT=0 이면 635편 전부.
 
 on:
+  push:
+    branches: [synopsis-rematch]
+    paths:
+      - .github/workflows/rematch_synopses.yml
   workflow_dispatch:
     inputs:
       hollywood_limit:
@@ -30,7 +34,7 @@ jobs:
       - name: Broadway - Wikipedia re-match / source material
         run: python scripts/rematch_synopses.py --market broadway --targets data/rematch_targets_broadway.xlsx --out data/synopses_rematch_broadway.xlsx
       - name: Hollywood - Wikipedia re-match / Rotten Tomatoes
-        run: python scripts/rematch_synopses.py --market hollywood --targets data/rematch_targets_hollywood.xlsx --out data/synopses_rematch_hollywood.xlsx --limit ${{ github.event.inputs.hollywood_limit }}
+        run: python scripts/rematch_synopses.py --market hollywood --targets data/rematch_targets_hollywood.xlsx --out data/synopses_rematch_hollywood.xlsx --limit ${{ github.event.inputs.hollywood_limit || '20' }}
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
