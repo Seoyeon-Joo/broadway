@@ -1,0 +1,33 @@
+name: Playbill story - non-narrative shows (concerts / magic / stand-up)
+
+on:
+  push:
+    branches: [synopsis-rematch]
+    paths:
+      - data/playbill_url_overrides.csv
+      - data/playbill_targets_nonnarrative.xlsx
+      - .github/workflows/playbill_story_nonnarrative.yml
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  story:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl beautifulsoup4
+      - run: python scripts/scrape_playbill_story.py --targets data/playbill_targets_nonnarrative.xlsx --shows data/broadway_shows_list.csv --overrides data/playbill_url_overrides.csv --out data/synopses_playbill_story_nonnarrative.xlsx
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_playbill_story_nonnarrative.xlsx
+          git diff --staged --quiet || git commit -m "Playbill story for non-narrative shows [automated]"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
