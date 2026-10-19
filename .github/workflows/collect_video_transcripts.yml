@@ -12,16 +12,16 @@ on:
     inputs:
       input_csv:
         description: "대상 CSV (video_url 또는 video_id 열)"
-        default: "data/youtube_video_urls.csv"
+        default: "data/transcript_targets_t2.csv"
       num_shards:
         description: "샤드 수 (병렬 job 수, 최대 20)"
-        default: "10"
+        default: "4"
       limit:
         description: "샤드당 최대 영상 수 (0=전부, 시험은 20)"
-        default: "20"
+        default: "0"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   plan:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: m
         run: |
-          n=${{ github.event.inputs.num_shards || '2' }}
+          n=${{ github.event.inputs.num_shards || '4' }}
           echo "shards=$(python3 -c "import json;print(json.dumps(list(range($n))))")" >> $GITHUB_OUTPUT
 
   transcripts:
@@ -49,7 +49,18 @@ jobs:
           python-version: '3.11'
       - run: pip install youtube-transcript-api pandas
       - name: Collect
-        run: python scripts/collect_video_transcripts.py --input "${{ github.event.inputs.input_csv || 'data/youtube_video_urls.csv' }}" --out-dir out --shard ${{ matrix.shard }} --num-shards ${{ github.event.inputs.num_shards || '2' }} --limit ${{ github.event.inputs.limit || '20' }}
+        run: python scripts/collect_video_transcripts.py --input "${{ github.event.inputs.input_csv || 'data/transcript_targets_t2.csv' }}" --out-dir out --shard ${{ matrix.shard }} --num-shards ${{ github.event.inputs.num_shards || '4' }} --limit ${{ github.event.inputs.limit || '0' }}
+      - name: Commit results (gz) to the branch
+        if: always()
+        run: |
+          gzip -k out/transcripts_shard${{ matrix.shard }}.jsonl || true
+          mkdir -p data/transcripts
+          cp out/transcripts_shard${{ matrix.shard }}.jsonl.gz data/transcripts/ || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/transcripts/*.gz || true
+          git diff --staged --quiet || git commit -m "Transcripts shard ${{ matrix.shard }} [automated]"
+          for i in 1 2 3 4 5; do git pull --rebase origin ${{ github.ref_name }} && git push && break || sleep $((RANDOM % 10 + 5)); done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
