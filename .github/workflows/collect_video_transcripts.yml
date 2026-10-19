@@ -1,13 +1,10 @@
+# 주의: GitHub Actions 서버 IP는 YouTube 자막 요청이 차단된다(blocked). 로컬 PC 또는 주거용 프록시에서 scripts/collect_video_transcripts.py 를 직접 실행할 것.
 name: Collect YouTube transcripts (English)
 
 # 영상 자막(영어) 수집. 샤드별로 병렬 실행하고, 결과 jsonl 은 Artifacts 로 저장한다 (용량이 커서 커밋하지 않음).
 # IP 차단(blocked)이 나오면 그 샤드는 멈춘다 → 나중에 skip_run_id 없이 다시 실행하거나 limit 을 줄여 천천히 돌린다.
 
 on:
-  push:
-    branches: [synopsis-rematch]
-    paths:
-      - .github/workflows/collect_video_transcripts.yml
   workflow_dispatch:
     inputs:
       input_csv:
