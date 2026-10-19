@@ -5,7 +5,7 @@ Playbill production 페이지의 SYNOPSIS 또는 STORY 문단을 가져온다 (�
 출력 : --out xlsx  (work_id,title,synopsis,source_url,label_used,plot_words,status,debug)
 lib_playbill 의 URL 후보 생성·제목 검증을 재사용한다. URL 슬러그 예외는 data/playbill_url_overrides.csv(show,theatre,url)로 보정 가능.
 """
-import argparse, os, sys
+import argparse, os, re, sys
 import pandas as pd
 from bs4 import BeautifulSoup
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +34,14 @@ def extract_story(soup):
                 pieces.append(el.get_text(" ", strip=True))
         if pieces:
             return "\n\n".join(pieces).strip(), lab
+    # 대체: 페이지 전체 텍스트에서 "SYNOPSIS:" 같은 라벨 뒤 ~ 다음 라벨 앞까지
+    full = soup.get_text("\n")
+    for lab in LABELS:
+        m = re.search(r"(?i)\b" + re.escape(lab) + r"\s*:\s*\n*(.*?)(?=\n\s*(?:" + L.STOP_LABELS_PATTERN + r")\s*:|\Z)", full, re.S)
+        if m:
+            txt = re.sub(r"\n{2,}", "\n\n", m.group(1).strip())
+            if len(txt.split()) >= 5:
+                return txt[:6000], lab + " (text)"
     return None, ""
 
 
