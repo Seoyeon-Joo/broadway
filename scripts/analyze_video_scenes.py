@@ -33,7 +33,7 @@ def analyze(path, shot_th=27.0, cluster_th=0.35, min_shot_s=0.5):
         cap.release(); return None
     dur = n / fps
     scenes = detect(path, ContentDetector(threshold=shot_th, min_scene_len=max(1, int(min_shot_s * fps))))
-    bounds = [(s.get_frames()[0] if hasattr(s, "get_frames") else s[0].get_frames(), s[1].get_frames()) for s in scenes] if scenes else []
+    bounds = [(a_.frame_num, b_.frame_num) for a_, b_ in scenes] if scenes else []
     if not bounds:
         bounds = [(0, int(n))]
     lens, hs = [], []
@@ -65,6 +65,25 @@ def analyze(path, shot_th=27.0, cluster_th=0.35, min_shot_s=0.5):
                 scene_entropy=round(ent, 4), mean_consec_dist=round(float(np.mean(cons)), 4) if cons else 0.0)
 
 
+def select_ids(ids, skip_done, own_done, shard, num_shards):
+    """ids 중 다른 파일에서 이미 끝난 것(skip_done)을 뺀 고정 목록을 만든 뒤, shard 번째 몫만 고르고 자기 파일에서 끝난 것(own_done)을 뺀다.
+    (여러 창을 동시에 돌려도 서로 겹치지 않고, 이어하기를 해도 몫이 바뀌지 않는다.)"""
+    base = [v for v in ids if v not in skip_done]
+    mine = [v for k, v in enumerate(base) if k % num_shards == shard]
+    return [v for v in mine if v not in own_done]
+
+
+def read_done(path):
+    done = set()
+    if path and os.path.exists(path):
+        for ln in open(path, encoding="utf-8"):
+            try:
+                done.add(json.loads(ln)["video_id"])
+            except Exception:
+                pass
+    return done
+
+
 def download(video_id, tmp, height, max_seconds):
     import yt_dlp
     # 분석에는 소리가 필요 없으므로 '영상만' 스트림(bv*)을 받는다 (합쳐진 파일이 없어도 됨, ffmpeg 불필요)
@@ -87,26 +106,28 @@ def main():
     ap.add_argument("--max-seconds", type=int, default=1800, help="이보다 긴 영상은 too_long 으로 기록하고 건너뜀 (0=제한 없음)")
     ap.add_argument("--min-sleep", type=float, default=1.5); ap.add_argument("--max-sleep", type=float, default=3.5)
     ap.add_argument("--shot-th", type=float, default=27.0); ap.add_argument("--cluster-th", type=float, default=0.35)
+    ap.add_argument("--shard", type=int, default=0, help="나눠서 실행할 때 내 번호 (0부터)")
+    ap.add_argument("--num-shards", type=int, default=1, help="전체를 몇 조각으로 나누는지")
+    ap.add_argument("--skip-jsonl", nargs="*", default=[], help="이미 끝난 결과 파일(들): 여기에 있는 영상은 건너뜀")
     ap.add_argument("--tmp-dir", default=None, help="임시 다운로드 폴더 (기본: 시스템 임시폴더)")
     a = ap.parse_args()
     ids = pd.read_csv(a.input)["video_id"].dropna().astype(str).tolist()
-    done = set()
-    if os.path.exists(a.out):
-        for ln in open(a.out, encoding="utf-8"):
-            try:
-                done.add(json.loads(ln)["video_id"])
-            except Exception:
-                pass
-    todo = [v for v in ids if v not in done]
+    own_done = read_done(a.out)
+    skip_done = set()
+    for f_ in a.skip_jsonl:
+        skip_done |= read_done(f_)
+    todo = select_ids(ids, skip_done, own_done, a.shard, a.num_shards)
+    done = own_done | skip_done
     if a.limit:
         todo = todo[:a.limit]
-    print(f"전체 {len(ids)}, 완료 {len(done)}, 이번 처리 {len(todo)}", flush=True)
+    print(f"전체 {len(ids)}, 완료(다른 파일 포함) {len(done)}, 내 몫 {a.shard + 1}/{a.num_shards}, 이번 처리 {len(todo)}", flush=True)
     fails = 0
     errs = 0
     with open(a.out, "a", encoding="utf-8") as fo:
         for i, v in enumerate(todo, 1):
             tmp = tempfile.mkdtemp(dir=a.tmp_dir)
             rec = {"video_id": v}
+            t0 = time.time()
             try:
                 path, d = download(v, tmp, a.height, a.max_seconds)
                 if path is None and d and a.max_seconds and d > a.max_seconds:
@@ -127,6 +148,7 @@ def main():
                     rec.update(status="error", error=msg[:150])
             finally:
                 shutil.rmtree(tmp, ignore_errors=True)
+            rec["elapsed_s"] = round(time.time() - t0, 1)
             print(f"[{i}/{len(todo)}] {v} {rec['status']} shots={rec.get('n_shots')} uniq={rec.get('n_unique_scenes')}", flush=True)
             if rec["status"] == "error":
                 # 오류는 저장하지 않아서 다음 실행 때 다시 시도됨. 연속 5번이면 중단.
