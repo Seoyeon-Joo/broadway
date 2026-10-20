@@ -37,6 +37,10 @@ def fetch(video_id, tmp, cookies):
         info = y.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=True)
     files = sorted(glob.glob(os.path.join(tmp, video_id + ".*.json3")))
     if not files:
+        # yt-dlp 는 자막 다운로드 오류(429 등)를 출력만 하고 넘어가므로, 영어 자막이 있는데 파일이 없으면 차단으로 취급
+        avail = {**(info.get("automatic_captions") or {}), **(info.get("subtitles") or {})}
+        if any(k.startswith("en") for k in avail):
+            raise RuntimeError("429 subtitle download failed (english captions exist but could not be fetched)")
         return None
     manual = set((info.get("subtitles") or {}).keys())
     # 수동 영어 자막 우선
