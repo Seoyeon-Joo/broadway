@@ -121,8 +121,8 @@ def main():
                 low = msg.lower()
                 if "sign in to confirm" in low or "429" in low or "too many requests" in low or "bot" in low:
                     rec.update(status="blocked", error=msg[:150]); fails += 1
-                elif "private" in low or "unavailable" in low or "removed" in low:
-                    rec.update(status="download_failed", error=msg[:150])
+                elif any(k in low for k in ("not available", "unavailable", "private", "removed", "terminated", "deleted", "no longer available")):
+                    rec.update(status="unavailable", error=msg[:150])   # 삭제/비공개 영상: 분석 대상에서 제외할 목록
                 else:
                     rec.update(status="error", error=msg[:150])
             finally:
