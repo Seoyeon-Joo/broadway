@@ -67,7 +67,8 @@ def analyze(path, shot_th=27.0, cluster_th=0.35, min_shot_s=0.5):
 
 def download(video_id, tmp, height, max_seconds):
     import yt_dlp
-    opts = {"format": f"b[height<={height}][ext=mp4]/b[height<={height}]/worst", "outtmpl": os.path.join(tmp, "%(id)s.%(ext)s"),
+    # 분석에는 소리가 필요 없으므로 '영상만' 스트림(bv*)을 받는다 (합쳐진 파일이 없어도 됨, ffmpeg 불필요)
+    opts = {"format": f"bv*[height<={height}][ext=mp4]/bv*[height<={height}]/bv*[height<=480]/wv*", "outtmpl": os.path.join(tmp, "%(id)s.%(ext)s"),
             "quiet": True, "no_warnings": True, "noprogress": True, "retries": 2, "socket_timeout": 30}
     with yt_dlp.YoutubeDL(opts) as y:
         info = y.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
@@ -101,6 +102,7 @@ def main():
         todo = todo[:a.limit]
     print(f"전체 {len(ids)}, 완료 {len(done)}, 이번 처리 {len(todo)}", flush=True)
     fails = 0
+    errs = 0
     with open(a.out, "a", encoding="utf-8") as fo:
         for i, v in enumerate(todo, 1):
             tmp = tempfile.mkdtemp(dir=a.tmp_dir)
@@ -125,8 +127,16 @@ def main():
                     rec.update(status="error", error=msg[:150])
             finally:
                 shutil.rmtree(tmp, ignore_errors=True)
-            fo.write(json.dumps(rec, ensure_ascii=False) + "\n"); fo.flush()
             print(f"[{i}/{len(todo)}] {v} {rec['status']} shots={rec.get('n_shots')} uniq={rec.get('n_unique_scenes')}", flush=True)
+            if rec["status"] == "error":
+                # 오류는 저장하지 않아서 다음 실행 때 다시 시도됨. 연속 5번이면 중단.
+                errs += 1
+                print("   오류:", rec.get("error"))
+                if errs >= 5:
+                    print("연속 5번 오류로 중단합니다. 위 오류 메시지를 확인하세요."); break
+                continue
+            errs = 0
+            fo.write(json.dumps(rec, ensure_ascii=False) + "\n"); fo.flush()
             if rec["status"] == "blocked":
                 if fails >= 3:
                     print("YouTube 차단 의심: 3회 연속 blocked. 중단합니다. 1~2시간 뒤 같은 명령으로 이어서 실행하세요."); break
