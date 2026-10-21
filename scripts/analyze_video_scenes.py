@@ -74,14 +74,17 @@ def select_ids(ids, skip_done, own_done, shard, num_shards):
     return [v for v in mine if v not in own_done]
 
 
-def read_done(path, retry_blocked=False):
-    """결과 파일에 기록된 video_id 집합. retry_blocked=True 이면 status=blocked 인 줄은 '끝난 것'으로 치지 않는다(다시 시도)."""
+def read_done(path, retry_blocked=False, retry_age=False):
+    """결과 파일에 기록된 video_id 집합. retry_blocked=True 이면 status=blocked 인 줄은 '끝난 것'으로 치지 않는다(다시 시도).
+    retry_age=True 이면 age_restricted(연령 제한) 줄도 다시 시도한다(로그인 쿠키를 쓸 때)."""
     done = set()
     if path and os.path.exists(path):
         for ln in open(path, encoding="utf-8"):
             try:
                 r = json.loads(ln)
                 if retry_blocked and r.get("status") == "blocked":
+                    continue
+                if retry_age and r.get("status") == "age_restricted":
                     continue
                 done.add(r["video_id"])
             except Exception:
@@ -123,7 +126,7 @@ def main():
     ap.add_argument("--cookies-from-browser", default=None, help="예: firefox (로그인한 브라우저의 쿠키 사용; 차단 완화용)")
     a = ap.parse_args()
     ids = pd.read_csv(a.input)["video_id"].dropna().astype(str).tolist()
-    own_done = read_done(a.out, retry_blocked=True)
+    own_done = read_done(a.out, retry_blocked=True, retry_age=bool(a.cookies_from_browser))
     skip_done = set()
     for f_ in a.skip_jsonl:
         skip_done |= read_done(f_)
@@ -156,7 +159,9 @@ def main():
             except Exception as e:
                 msg = str(e)
                 low = msg.lower()
-                if "sign in to confirm" in low or "429" in low or "too many requests" in low or "bot" in low:
+                if "confirm your age" in low or "age-restricted" in low or ("please sign in" in low and "bot" not in low):
+                    rec.update(status="age_restricted", error=msg[:150])   # 연령 제한/로그인 필요 영상: IP 차단이 아님. 기록하고 넘어감
+                elif "sign in to confirm" in low or "429" in low or "too many requests" in low or "bot" in low:
                     rec.update(status="blocked", error=msg[:150])
                 elif any(k in low for k in ("not available", "unavailable", "private", "removed", "terminated", "deleted", "no longer available")):
                     rec.update(status="unavailable", error=msg[:150])   # 삭제/비공개 영상: 분석 대상에서 제외할 목록
