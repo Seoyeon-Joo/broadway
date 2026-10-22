@@ -74,7 +74,7 @@ def select_ids(ids, skip_done, own_done, shard, num_shards):
     return [v for v in mine if v not in own_done]
 
 
-def read_done(path, retry_blocked=False, retry_age=False):
+def read_done(path, retry_blocked=False, retry_age=False, retry_too_long=False):
     """결과 파일에 기록된 video_id 집합. retry_blocked=True 이면 status=blocked 인 줄은 '끝난 것'으로 치지 않는다(다시 시도).
     retry_age=True 이면 age_restricted(연령 제한) 줄도 다시 시도한다(로그인 쿠키를 쓸 때)."""
     done = set()
@@ -85,6 +85,8 @@ def read_done(path, retry_blocked=False, retry_age=False):
                 if retry_blocked and r.get("status") == "blocked":
                     continue
                 if retry_age and r.get("status") == "age_restricted":
+                    continue
+                if retry_too_long and r.get("status") == "too_long":
                     continue
                 done.add(r["video_id"])
             except Exception:
@@ -122,15 +124,31 @@ def main():
     ap.add_argument("--tmp-dir", default=None, help="임시 다운로드 폴더 (기본: 시스템 임시폴더)")
     ap.add_argument("--wait-on-block-min", type=float, default=0,
                     help="3회 연속 차단되면 중단하는 대신 이만큼(분) 쉬었다가 같은 영상부터 자동으로 이어감 (0=중단)")
+    ap.add_argument("--retry-too-long", action="store_true",
+                    help="이전에 too_long 으로 기록된 영상도 다시 처리 (보통 --max-seconds 0 과 함께). 긴 영상은 맨 뒤로 보냄")
     ap.add_argument("--max-waits", type=int, default=12, help="자동 대기를 최대 몇 번까지 할지")
     ap.add_argument("--cookies-from-browser", default=None, help="예: firefox (로그인한 브라우저의 쿠키 사용; 차단 완화용)")
     a = ap.parse_args()
     ids = pd.read_csv(a.input)["video_id"].dropna().astype(str).tolist()
-    own_done = read_done(a.out, retry_blocked=True, retry_age=bool(a.cookies_from_browser))
+    rk = dict(retry_blocked=True, retry_age=bool(a.cookies_from_browser), retry_too_long=a.retry_too_long)
+    own_done = read_done(a.out, **rk)
     skip_done = set()
     for f_ in a.skip_jsonl:
-        skip_done |= read_done(f_)
+        skip_done |= read_done(f_, **rk)
     todo = select_ids(ids, skip_done, own_done, a.shard, a.num_shards)
+    if a.retry_too_long:
+        # 이전에 too_long 이었던 영상은 오래 걸리므로 맨 뒤로 보낸다 (짧은 것부터 끝내기)
+        long_ids = set()
+        for f_ in list(a.skip_jsonl) + [a.out]:
+            if f_ and os.path.exists(f_):
+                for ln in open(f_, encoding="utf-8"):
+                    try:
+                        r_ = json.loads(ln)
+                        if r_.get("status") == "too_long":
+                            long_ids.add(r_["video_id"])
+                    except Exception:
+                        pass
+        todo = [v for v in todo if v not in long_ids] + [v for v in todo if v in long_ids]
     done = own_done | skip_done
     if a.limit:
         todo = todo[:a.limit]
