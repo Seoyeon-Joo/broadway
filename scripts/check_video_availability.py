@@ -20,6 +20,7 @@ def check(vid):
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--input", required=True); ap.add_argument("--out", required=True)
+ap.add_argument("--shard", type=int, default=0); ap.add_argument("--num-shards", type=int, default=1)
 ap.add_argument("--min-sleep", type=float, default=0.3); ap.add_argument("--max-sleep", type=float, default=0.8)
 a = ap.parse_args()
 ids = []
@@ -32,6 +33,7 @@ if os.path.exists(a.out):
     with open(a.out, encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
             if r["status"] != "error": done[r["video_id"]] = r["status"]
+ids = [v for k, v in enumerate(ids) if k % a.num_shards == a.shard]
 todo = [v for v in ids if v not in done]
 print(f"전체 {len(ids)}, 완료 {len(done)}, 이번 처리 {len(todo)}")
 new = not os.path.exists(a.out)
