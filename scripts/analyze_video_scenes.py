@@ -99,7 +99,9 @@ def download(video_id, tmp, height, max_seconds, cookies_browser=None):
     # 분석에는 소리가 필요 없으므로 '영상만' 스트림(bv*)을 받는다 (합쳐진 파일이 없어도 됨, ffmpeg 불필요)
     opts = {"format": f"bv*[height<={height}][ext=mp4]/bv*[height<={height}]/bv*[height<=480]/wv*", "outtmpl": os.path.join(tmp, "%(id)s.%(ext)s"),
             "quiet": True, "no_warnings": True, "noprogress": True, "retries": 2, "socket_timeout": 30}
-    if cookies_browser:
+    if cookies_browser and os.path.isfile(cookies_browser):
+        opts["cookiefile"] = cookies_browser   # cookies.txt 파일 경로
+    elif cookies_browser:
         opts["cookiesfrombrowser"] = (cookies_browser,)
     with yt_dlp.YoutubeDL(opts) as y:
         info = y.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
