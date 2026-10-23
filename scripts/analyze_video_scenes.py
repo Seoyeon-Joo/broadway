@@ -181,6 +181,10 @@ def main():
                     rec.update(status="age_restricted", error=msg[:150])   # 연령 제한/로그인 필요 영상: IP 차단이 아님. 기록하고 넘어감
                 elif "sign in to confirm" in low or "429" in low or "too many requests" in low or "bot" in low:
                     rec.update(status="blocked", error=msg[:150])
+                elif "requested format is not available" in low:
+                    rec.update(status="error", error=msg[:150])   # 삭제가 아니라 포맷 문제: 저장하지 않고 재시도 대상으로 둠
+                elif "your country" in low or "claimed content" in low or "blocked" in low:
+                    rec.update(status="geo_blocked", error=msg[:150])   # 국가/저작권 차단: 삭제 아님(미국에서는 존재할 수 있음)
                 elif any(k in low for k in ("not available", "unavailable", "private", "removed", "terminated", "deleted", "no longer available")):
                     rec.update(status="unavailable", error=msg[:150])   # 삭제/비공개 영상: 분석 대상에서 제외할 목록
                 else:
