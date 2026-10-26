@@ -1,0 +1,82 @@
+name: Compute Synopsis-Transcript Similarity
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "임베딩 모델 (비우면 config_similarity.yml 값)"
+        required: false
+        default: ""
+      limit:
+        description: "디버그용: 계산할 (video, work) 쌍 수 제한 (0 = 전체)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write   # 결과 CSV를 repo에 커밋하기 위해 필요
+
+concurrency:
+  group: compute-similarity
+  cancel-in-progress: true
+
+jobs:
+  similarity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements_similarity.txt
+
+      - name: Install dependencies (CPU torch)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements_similarity.txt
+
+      - name: Cache Hugging Face model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ hashFiles('config_similarity.yml') }}-${{ github.event.inputs.model }}
+
+      - name: Compute similarity
+        env:
+          MODEL: ${{ github.event.inputs.model }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          ARGS="--config config_similarity.yml"
+          if [ -n "$MODEL" ]; then ARGS="$ARGS --model $MODEL"; fi
+          if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then ARGS="$ARGS --limit $LIMIT"; fi
+          python scripts/compute_similarity.py $ARGS
+
+      - name: Job summary
+        if: always()
+        run: |
+          if [ -f data/similarity/results/similarity_summary.json ]; then
+            echo '### Similarity summary' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat data/similarity/results/similarity_summary.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: similarity-results
+          path: data/similarity/results/
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/similarity/results/
+          git diff --cached --quiet || git commit -m "Update similarity results [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push

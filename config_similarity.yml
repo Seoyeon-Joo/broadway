@@ -1,0 +1,39 @@
+# compute_similarity.py 설정 (시놉시스 vs 영상 스크립트 유사도)
+
+# ---- 입력 (repo 기준 상대경로)
+transcripts_xlsx: data/similarity/youtube_transcripts_all.xlsx
+synopses_hollywood_xlsx: data/similarity/synopses_hollywood.xlsx
+synopses_broadway_xlsx: data/similarity/synopses_broadway.xlsx
+# 패널(final_v2)의 t2_video_id가 분석 대상 영상. 패널에 남은 작품·영상만 계산한다.
+panel_hollywood_xlsx: data/similarity/hollywood_final_v2.xlsx    # sheet: weekly_data (movie_id, t2_video_id)
+panel_broadway_xlsx: data/similarity/broadway_final_v2.xlsx      # (show_id, t2_video_id)
+# 패널을 안 쓸 때(위 두 줄을 지우면)만 사용되는 구버전 매핑 (scripts/build_video_work_map.py 로 생성)
+video_work_map_csv: data/video_work_map.csv
+
+# ---- 출력
+out_dir: data/similarity/results
+
+# ---- 언어 필터: 영어 기반 분석 (비영어 영상은 제외)
+# languages: 허용 언어 코드(앞 2글자 기준, en / en-US / en-GB 모두 'en').
+#   비영어를 포함해 로버스트니스를 보고 싶으면 [] 로 두면 필터가 꺼진다 (교차언어 유사도는 척도가 달라 비교 주의).
+languages: [en]
+# 메타데이터가 'en'이어도 실제 텍스트가 다른 언어인 경우를 걸러냄 (ASCII 알파벳 비율 + 영어 불용어 비율)
+detect_language: true
+
+# ---- 품질 필터
+min_transcript_words: 50       # 이보다 짧은 스크립트는 제외
+min_synopsis_words: 30         # 이보다 짧은 시놉시스(리드 문단 등)는 계산 제외 (제외 목록은 skipped_pairs.csv)
+
+# ---- 임베딩
+model: BAAI/bge-m3             # 다국어/영어 모두 가능. 영어 전용으로 바꾸려면 예: BAAI/bge-large-en-v1.5
+device: cpu
+batch_size: 16
+chunk_words: 200               # 스크립트 청크 크기(단어)
+chunk_overlap: 50
+chunk_max_tokens: 512
+doc_max_tokens: 2048           # 시놉시스 전체 임베딩 최대 토큰
+sentence_min_words: 6          # 이보다 짧은 시놉시스 문장은 다음 문장과 합침
+
+# ---- 지표
+end_fraction: 0.2              # 시놉시스 마지막 20% 문장 = 결말부
+coverage_thresholds: [0.6, 0.7]   # cov_ge_<τ>: 모델 분포에 맞춰 sample 보고 조정 필요
