@@ -1,9 +1,10 @@
 {
   "model": "BAAI/bge-m3",
-  "n_pairs": 50,
-  "n_videos": 50,
+  "n_pairs": 1381,
+  "n_videos": 1363,
   "by_medium": {
-    "hollywood": 50
+    "broadway": 85,
+    "hollywood": 1296
   },
   "coverage_by_reason": {
     "hollywood": {
@@ -26,60 +27,61 @@
     "transcripts: 1986 rows -> kept 1487; excluded 499 ({'status_not_ok': 241, 'too_short': 129, 'language_metadata_not_allowed': 127, 'language_text_not_english': 2})",
     "panel t2 pairs: 1959 ({'broadway': 153, 'hollywood': 1806})",
     "pairs after language/transcript filter: 1453; dropped for missing/short synopsis: 72",
-    "pairs to compute: 50 | unique videos: 50 | unique works: 45",
+    "pairs to compute: 1381 | unique videos: 1363 | unique works: 1025",
+    "merged 12 shards -> 1381 pairs",
     "pair coverage by reason:\nmedium                         broadway  hollywood\nreason                                            \nlanguage_metadata_not_allowed         0         64\nlanguage_text_not_english             0          2\nnot_in_transcript_file                0         87\nok                                   85       1296\nstatus_not_ok                        28        199\nsynopsis_missing_or_short            11         61\ntoo_short                            29         97"
   ],
   "describe": {
     "doc_cosine": {
-      "count": 50.0,
-      "mean": 0.6369,
-      "std": 0.1208,
-      "min": 0.3194,
-      "25%": 0.5847,
-      "50%": 0.6552,
-      "75%": 0.7263,
-      "max": 0.8072
+      "count": 1381.0,
+      "mean": 0.6519,
+      "std": 0.1319,
+      "min": 0.2503,
+      "25%": 0.5601,
+      "50%": 0.6524,
+      "75%": 0.7636,
+      "max": 0.9076
     },
     "cov_mean": {
-      "count": 50.0,
-      "mean": 0.5169,
-      "std": 0.0733,
-      "min": 0.3245,
-      "25%": 0.4864,
-      "50%": 0.5235,
-      "75%": 0.5655,
-      "max": 0.6418
+      "count": 1381.0,
+      "mean": 0.522,
+      "std": 0.0871,
+      "min": 0.2689,
+      "25%": 0.4569,
+      "50%": 0.517,
+      "75%": 0.592,
+      "max": 0.7378
     },
     "end_cov_mean": {
-      "count": 50.0,
-      "mean": 0.5099,
-      "std": 0.0776,
-      "min": 0.314,
-      "25%": 0.4655,
-      "50%": 0.5292,
-      "75%": 0.5769,
-      "max": 0.6058
+      "count": 1381.0,
+      "mean": 0.5184,
+      "std": 0.0887,
+      "min": 0.2465,
+      "25%": 0.4509,
+      "50%": 0.513,
+      "75%": 0.5876,
+      "max": 0.7758
     },
     "video_align_mean": {
-      "count": 50.0,
-      "mean": 0.533,
-      "std": 0.0688,
-      "min": 0.3726,
-      "25%": 0.4842,
-      "50%": 0.5426,
-      "75%": 0.5803,
-      "max": 0.665
+      "count": 1381.0,
+      "mean": 0.5717,
+      "std": 0.0885,
+      "min": 0.3155,
+      "25%": 0.5046,
+      "50%": 0.5714,
+      "75%": 0.6405,
+      "max": 0.7923
     },
     "tfidf_cosine": {
-      "count": 50.0,
-      "mean": 0.1948,
-      "std": 0.125,
+      "count": 1381.0,
+      "mean": 0.1944,
+      "std": 0.1591,
       "min": 0.0,
-      "25%": 0.1003,
-      "50%": 0.1972,
-      "75%": 0.277,
-      "max": 0.4661
+      "25%": 0.0626,
+      "50%": 0.1612,
+      "75%": 0.294,
+      "max": 0.9616
     }
   },
-  "corr_embedding_vs_tfidf": 0.8954890308645943
+  "corr_embedding_vs_tfidf": 0.8371223018294371
 }
