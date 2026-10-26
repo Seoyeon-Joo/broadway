@@ -4,7 +4,11 @@
 transcripts_xlsx: data/similarity/youtube_transcripts_all.xlsx
 synopses_hollywood_xlsx: data/similarity/synopses_hollywood.xlsx
 synopses_broadway_xlsx: data/similarity/synopses_broadway.xlsx
-video_work_map_csv: data/video_work_map.csv     # scripts/build_video_work_map.py 로 생성
+# 패널(final_v2)의 t2_video_id가 분석 대상 영상. 패널에 남은 작품·영상만 계산한다.
+panel_hollywood_xlsx: data/similarity/hollywood_final_v2.xlsx    # sheet: weekly_data (movie_id, t2_video_id)
+panel_broadway_xlsx: data/similarity/broadway_final_v2.xlsx      # (show_id, t2_video_id)
+# 패널을 안 쓸 때(위 두 줄을 지우면)만 사용되는 구버전 매핑 (scripts/build_video_work_map.py 로 생성)
+video_work_map_csv: data/video_work_map.csv
 
 # ---- 출력
 out_dir: data/similarity/results

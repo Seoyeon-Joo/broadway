@@ -125,15 +125,40 @@ def l2norm(x):
 
 
 # ----------------------------------------------------------------------------- loading
+def extract_video_id(series):
+    return series.astype(str).str.extract(r"(?:v=|youtu\.be/|shorts/)([\w-]{11})")[0]
+
+
+def load_panel_pairs(cfg):
+    """패널(final_v2)의 t2 처치 영상 -> (작품, 영상) 쌍. 패널에 남아 있는 작품만 분석 대상이 된다."""
+    parts = []
+    if cfg.get("panel_hollywood_xlsx"):
+        h = pd.read_excel(cfg["panel_hollywood_xlsx"], sheet_name=cfg.get("panel_hollywood_sheet", "weekly_data"),
+                          usecols=["movie_id", "Release", "t2_video_id"])
+        h = h.rename(columns={"movie_id": "work_id", "Release": "work_title", "t2_video_id": "video_id"})
+        h["medium"] = "hollywood"
+        parts.append(h)
+    if cfg.get("panel_broadway_xlsx"):
+        b = pd.read_excel(cfg["panel_broadway_xlsx"], usecols=["show_id", "show", "t2_video_id"])
+        b = b.rename(columns={"show_id": "work_id", "show": "work_title", "t2_video_id": "video_id"})
+        b["medium"] = "broadway"
+        parts.append(b)
+    v = pd.concat(parts, ignore_index=True).dropna(subset=["video_id"])
+    v["video_id"] = v["video_id"].astype(str).str.strip()
+    v["work_id"] = v["work_id"].astype(int)
+    return v.drop_duplicates(["medium", "work_id", "video_id"]).reset_index(drop=True)
+
+
 def load_transcripts(path, cfg, log):
     t = pd.read_excel(path)
     n0 = len(t)
     t["video_url"] = t["video_url"].astype(str).str.strip()
+    t["video_id"] = extract_video_id(t["video_url"])
     excl = []
 
     def drop(mask, reason):
         if mask.any():
-            d = t[mask][["video_url", "title", "status", "language"]].copy()
+            d = t[mask][["video_id", "video_url", "title", "status", "language"]].copy()
             d["reason"] = reason
             excl.append(d)
         return t[~mask]
@@ -152,7 +177,7 @@ def load_transcripts(path, cfg, log):
             ok = t["text_clean"].map(looks_english)
             t = drop(~ok, "language_text_not_english")
     excluded = pd.concat(excl, ignore_index=True) if excl else pd.DataFrame(
-        columns=["video_url", "title", "status", "language", "reason"])
+        columns=["video_id", "video_url", "title", "status", "language", "reason"])
     log.append(f"transcripts: {n0} rows -> kept {len(t)}; excluded {len(excluded)} "
                f"({excluded['reason'].value_counts().to_dict()})")
     return t.reset_index(drop=True), excluded
@@ -204,18 +229,32 @@ def main():
 
     trans, excluded = load_transcripts(cfg["transcripts_xlsx"], cfg, log)
     syn = load_synopses(cfg.get("synopses_hollywood_xlsx"), cfg.get("synopses_broadway_xlsx"))
-    vmap = pd.read_csv(cfg["video_work_map_csv"], encoding="utf-8-sig")
-    vmap["work_id"] = vmap["work_id"].astype(int)
+    if cfg.get("panel_hollywood_xlsx") or cfg.get("panel_broadway_xlsx"):
+        vmap = load_panel_pairs(cfg)
+        log.append(f"panel t2 pairs: {len(vmap)} ({vmap.groupby('medium').size().to_dict()})")
+    else:  # 패널 없이 video_work_map.csv로 매핑하는 구버전 모드
+        vmap = pd.read_csv(cfg["video_work_map_csv"], encoding="utf-8-sig")
+        vmap["video_id"] = extract_video_id(vmap["video_url"])
+        vmap["work_id"] = vmap["work_id"].astype(int)
     syn["work_id"] = syn["work_id"].astype(int)
 
-    pairs = vmap.merge(trans[["video_url", "title", "language", "is_auto", "text_clean", "transcript_words"]]
-                       .rename(columns={"title": "video_title"}), on="video_url", how="inner")
+    # 쌍별 계산 가능 여부 (커버리지 리포트)
+    excl_reason = excluded.drop_duplicates("video_id").set_index("video_id")["reason"]
+    pair_cov = vmap.copy()
+    pair_cov["reason"] = np.where(pair_cov["video_id"].isin(trans["video_id"]), "ok",
+                                  pair_cov["video_id"].map(excl_reason).fillna("not_in_transcript_file"))
+    pair_cov = pair_cov.merge(syn[["medium", "work_id", "synopsis_words"]], on=["medium", "work_id"], how="left")
+    bad_syn = (pair_cov["reason"] == "ok") & (pair_cov["synopsis_words"].isna() | (pair_cov["synopsis_words"] < cfg["min_synopsis_words"]))
+    pair_cov.loc[bad_syn, "reason"] = "synopsis_missing_or_short"
+
+    pairs = vmap.merge(trans[["video_id", "video_url", "title", "language", "is_auto", "text_clean", "transcript_words"]]
+                       .rename(columns={"title": "video_title"}), on="video_id", how="inner")
     n_pairs_en = len(pairs)
     pairs = pairs.merge(syn.rename(columns={"title": "work_title_syn"}), on=["medium", "work_id"], how="left")
     no_syn = pairs["synopsis_words"].isna() | (pairs["synopsis_words"] < cfg["min_synopsis_words"])
     log.append(f"pairs after language/transcript filter: {n_pairs_en}; "
                f"dropped for missing/short synopsis: {int(no_syn.sum())}")
-    skipped = pairs[no_syn][["video_url", "medium", "work_id", "work_title", "synopsis_words"]]
+    skipped = pairs[no_syn][["video_id", "medium", "work_id", "work_title", "synopsis_words"]]
     pairs = pairs[~no_syn].reset_index(drop=True)
     if a.limit:
         pairs = pairs.head(a.limit)
@@ -282,7 +321,7 @@ def main():
         cov = sim.max(axis=1)                        # 문장별 최대 코사인
         n_end = max(1, int(np.ceil(len(cov) * cfg["end_fraction"])))
         rec = dict(
-            medium=r.medium, work_id=r.work_id, work_title=r.work_title, video_url=r.video_url,
+            medium=r.medium, work_id=r.work_id, work_title=r.work_title, video_id=r.video_id, video_url=r.video_url,
             video_title=r.video_title, language=r.language, is_auto=r.is_auto,
             transcript_words=r.transcript_words, n_chunks=len(ce),
             synopsis_words=r.synopsis_words, n_sentences=len(cov),
@@ -302,10 +341,16 @@ def main():
     res.to_csv(out_dir / "similarity_results.csv", index=False, encoding="utf-8-sig")
     excluded.to_csv(out_dir / "similarity_excluded_transcripts.csv", index=False, encoding="utf-8-sig")
     skipped.to_csv(out_dir / "similarity_skipped_pairs.csv", index=False, encoding="utf-8-sig")
+    pair_cov["computed"] = pair_cov.set_index(["medium", "work_id", "video_id"]).index.isin(
+        res.set_index(["medium", "work_id", "video_id"]).index) if len(res) else False
+    pair_cov.to_csv(out_dir / "similarity_pair_coverage.csv", index=False, encoding="utf-8-sig")
+    cov_tbl = pair_cov.groupby(["medium", "reason"]).size().unstack(0).fillna(0).astype(int)
+    log.append("pair coverage by reason:\n" + cov_tbl.to_string())
     summary = {
         "model": cfg["model"], "n_pairs": int(len(res)),
         "n_videos": int(res.video_url.nunique()),
         "by_medium": res.groupby("medium").size().to_dict() if len(res) else {},
+        "coverage_by_reason": {m: pair_cov[pair_cov.medium == m]["reason"].value_counts().to_dict() for m in pair_cov.medium.unique()},
         "log": log,
         "describe": res[["doc_cosine", "cov_mean", "end_cov_mean", "video_align_mean", "tfidf_cosine"]]
         .describe().round(4).to_dict() if len(res) else {},
