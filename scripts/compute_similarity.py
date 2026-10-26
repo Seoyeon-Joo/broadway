@@ -218,6 +218,9 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="디버그용: 처리할 (video,work) 쌍 수 제한")
     ap.add_argument("--model", default=None, help="config의 model 덮어쓰기 ('hashing' = 스모크 테스트)")
     ap.add_argument("--out-dir", default=None)
+    ap.add_argument("--shard-count", type=int, default=1, help="영상 단위로 작업을 N개로 나눠 병렬 실행 (GitHub Actions matrix)")
+    ap.add_argument("--shard-index", type=int, default=0)
+    ap.add_argument("--merge-from", default=None, help="shard_*.csv가 있는 폴더: 계산 없이 합쳐서 최종 산출물만 생성")
     a = ap.parse_args()
 
     cfg = yaml.safe_load(open(a.config, encoding="utf-8"))
@@ -261,46 +264,9 @@ def main():
     log.append(f"pairs to compute: {len(pairs)} | unique videos: {pairs.video_url.nunique()} | "
                f"unique works: {pairs[['medium', 'work_id']].drop_duplicates().shape[0]}")
 
-    # ---------------- embeddings
-    if cfg["model"] == "hashing":
-        enc = HashingEncoder()
-    else:
-        enc = STEncoder(cfg["model"], cfg["device"], cfg["batch_size"], cfg["chunk_max_tokens"])
-
-    # 영상별 청크 임베딩
     vid_text = pairs.drop_duplicates("video_url").set_index("video_url")["text_clean"]
-    vid_chunks, all_chunks, owner = {}, [], []
-    for url, txt in vid_text.items():
-        ch = chunk_words(txt, cfg["chunk_words"], cfg["chunk_overlap"])
-        vid_chunks[url] = ch
-        all_chunks.extend(ch)
-        owner.extend([url] * len(ch))
-    print(f"embedding {len(all_chunks)} transcript chunks ...", flush=True)
-    emb = enc.encode(all_chunks) if all_chunks else np.zeros((0, 1))
-    vid_emb, owner = {}, np.array(owner)
-    for url in vid_chunks:
-        vid_emb[url] = l2norm(emb[owner == url])
-
-    # 작품별 문장 + 전체 임베딩
     wk = pairs.drop_duplicates(["medium", "work_id"]).set_index(["medium", "work_id"])
-    work_sents, sent_all, sent_owner, full_texts, full_keys = {}, [], [], [], []
-    for key, row in wk.iterrows():
-        ss = split_sentences(row["synopsis"], cfg["sentence_min_words"])
-        work_sents[key] = ss
-        sent_all.extend(ss)
-        sent_owner.extend([key] * len(ss))
-        full_texts.append(row["synopsis"])
-        full_keys.append(key)
-    print(f"embedding {len(sent_all)} synopsis sentences, {len(full_texts)} full synopses ...", flush=True)
-    s_emb = enc.encode(sent_all)
-    full_emb = l2norm(enc.encode(full_texts, max_seq_length=cfg["doc_max_tokens"]))
-    work_sent_emb = {}
-    for key in work_sents:
-        idx = [i for i, k in enumerate(sent_owner) if k == key]
-        work_sent_emb[key] = s_emb[idx]
-    work_full_emb = dict(zip(full_keys, full_emb))
-
-    # ---------------- TF-IDF
+    # ---------------- TF-IDF (전체 쌍 기준 - 샤드 간 동일해야 함)
     from sklearn.feature_extraction.text import TfidfVectorizer
     corpus_v = vid_text.reset_index()
     corpus = list(corpus_v["text_clean"]) + list(wk["synopsis"])
@@ -310,33 +276,91 @@ def main():
     vid_row = {u: i for i, u in enumerate(corpus_v["video_url"])}
     wk_row = {k: len(corpus_v) + i for i, k in enumerate(wk.index)}
 
-    # ---------------- metrics
-    taus = cfg["coverage_thresholds"]
-    rows = []
-    for r in pairs.itertuples(index=False):
-        key = (r.medium, r.work_id)
-        ce = vid_emb[r.video_url]
-        se = work_sent_emb[key]
-        sim = se @ ce.T                              # (n_sent, n_chunk)
-        cov = sim.max(axis=1)                        # 문장별 최대 코사인
-        n_end = max(1, int(np.ceil(len(cov) * cfg["end_fraction"])))
-        rec = dict(
-            medium=r.medium, work_id=r.work_id, work_title=r.work_title, video_id=r.video_id, video_url=r.video_url,
-            video_title=r.video_title, language=r.language, is_auto=r.is_auto,
-            transcript_words=r.transcript_words, n_chunks=len(ce),
-            synopsis_words=r.synopsis_words, n_sentences=len(cov),
-            synopsis_section=r.section_used, synopsis_is_lead=r.synopsis_is_lead,
-            match_confidence=r.match_confidence, needs_review=r.needs_review,
-            doc_cosine=float(work_full_emb[key] @ l2norm(ce.mean(axis=0))),
-            cov_mean=float(cov.mean()),
-            end_cov_mean=float(cov[-n_end:].mean()),
-            video_align_mean=float(sim.max(axis=0).mean()),
-            tfidf_cosine=float(X[vid_row[r.video_url]].multiply(X[wk_row[key]]).sum()),
-        )
-        for tau in taus:
-            rec[f"cov_ge_{str(tau).replace('.', '')}"] = float((cov >= tau).mean())
-        rows.append(rec)
-    res = pd.DataFrame(rows)
+    # ---------------- 샤드 선택 (영상 단위)
+    if a.shard_count > 1:
+        uv = sorted(pairs["video_url"].unique())
+        mine = set(uv[a.shard_index::a.shard_count])
+        pairs = pairs[pairs["video_url"].isin(mine)].reset_index(drop=True)
+        log.append(f"shard {a.shard_index}/{a.shard_count}: {len(pairs)} pairs, {pairs.video_url.nunique()} videos")
+
+    if a.merge_from:
+        parts = sorted(Path(a.merge_from).glob("shard_*.csv"))
+        res = pd.concat([pd.read_csv(f, encoding="utf-8-sig") for f in parts], ignore_index=True)
+        log.append(f"merged {len(parts)} shards -> {len(res)} pairs")
+        res = res.sort_values(["medium", "work_id", "video_id"]).reset_index(drop=True)
+    else:
+        # ---------------- embeddings
+        if cfg["model"] == "hashing":
+            enc = HashingEncoder()
+        else:
+            enc = STEncoder(cfg["model"], cfg["device"], cfg["batch_size"], cfg["chunk_max_tokens"])
+
+        # 영상별 청크 임베딩
+        vid_text = pairs.drop_duplicates("video_url").set_index("video_url")["text_clean"]
+        vid_chunks, all_chunks, owner = {}, [], []
+        for url, txt in vid_text.items():
+            ch = chunk_words(txt, cfg["chunk_words"], cfg["chunk_overlap"])
+            vid_chunks[url] = ch
+            all_chunks.extend(ch)
+            owner.extend([url] * len(ch))
+        print(f"embedding {len(all_chunks)} transcript chunks ...", flush=True)
+        emb = enc.encode(all_chunks) if all_chunks else np.zeros((0, 1))
+        vid_emb, owner = {}, np.array(owner)
+        for url in vid_chunks:
+            vid_emb[url] = l2norm(emb[owner == url])
+
+        # 작품별 문장 + 전체 임베딩
+        wk = pairs.drop_duplicates(["medium", "work_id"]).set_index(["medium", "work_id"])
+        work_sents, sent_all, sent_owner, full_texts, full_keys = {}, [], [], [], []
+        for key, row in wk.iterrows():
+            ss = split_sentences(row["synopsis"], cfg["sentence_min_words"])
+            work_sents[key] = ss
+            sent_all.extend(ss)
+            sent_owner.extend([key] * len(ss))
+            full_texts.append(row["synopsis"])
+            full_keys.append(key)
+        print(f"embedding {len(sent_all)} synopsis sentences, {len(full_texts)} full synopses ...", flush=True)
+        s_emb = enc.encode(sent_all)
+        full_emb = l2norm(enc.encode(full_texts, max_seq_length=cfg["doc_max_tokens"]))
+        work_sent_emb = {}
+        for key in work_sents:
+            idx = [i for i, k in enumerate(sent_owner) if k == key]
+            work_sent_emb[key] = s_emb[idx]
+        work_full_emb = dict(zip(full_keys, full_emb))
+
+        # ---------------- metrics
+        taus = cfg["coverage_thresholds"]
+        rows = []
+        for r in pairs.itertuples(index=False):
+            key = (r.medium, r.work_id)
+            ce = vid_emb[r.video_url]
+            se = work_sent_emb[key]
+            sim = se @ ce.T                              # (n_sent, n_chunk)
+            cov = sim.max(axis=1)                        # 문장별 최대 코사인
+            n_end = max(1, int(np.ceil(len(cov) * cfg["end_fraction"])))
+            rec = dict(
+                medium=r.medium, work_id=r.work_id, work_title=r.work_title, video_id=r.video_id, video_url=r.video_url,
+                video_title=r.video_title, language=r.language, is_auto=r.is_auto,
+                transcript_words=r.transcript_words, n_chunks=len(ce),
+                synopsis_words=r.synopsis_words, n_sentences=len(cov),
+                synopsis_section=r.section_used, synopsis_is_lead=r.synopsis_is_lead,
+                match_confidence=r.match_confidence, needs_review=r.needs_review,
+                doc_cosine=float(work_full_emb[key] @ l2norm(ce.mean(axis=0))),
+                cov_mean=float(cov.mean()),
+                end_cov_mean=float(cov[-n_end:].mean()),
+                video_align_mean=float(sim.max(axis=0).mean()),
+                tfidf_cosine=float(X[vid_row[r.video_url]].multiply(X[wk_row[key]]).sum()),
+            )
+            for tau in taus:
+                rec[f"cov_ge_{str(tau).replace('.', '')}"] = float((cov >= tau).mean())
+            rows.append(rec)
+        res = pd.DataFrame(rows)
+        if a.shard_count > 1:
+            sd = out_dir / "shards"
+            sd.mkdir(parents=True, exist_ok=True)
+            res.to_csv(sd / f"shard_{a.shard_index}.csv", index=False, encoding="utf-8-sig")
+            print(f"shard {a.shard_index} done: {len(res)} pairs")
+            return
 
     res.to_csv(out_dir / "similarity_results.csv", index=False, encoding="utf-8-sig")
     excluded.to_csv(out_dir / "similarity_excluded_transcripts.csv", index=False, encoding="utf-8-sig")
