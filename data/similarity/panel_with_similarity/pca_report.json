@@ -1,0 +1,94 @@
+[
+  {
+    "group": "hollywood",
+    "n_pairs_used": 1261,
+    "explained_variance_ratio": [
+      0.6238,
+      0.193,
+      0.1832
+    ],
+    "eigenvalues": [
+      1.8728,
+      0.5796,
+      0.5501
+    ],
+    "pc1_loadings": {
+      "log_duration": 0.5811,
+      "log_shots": 0.5801,
+      "similarity": 0.5708
+    },
+    "corr_matrix": {
+      "log_duration": {
+        "log_duration": 1.0,
+        "log_shots": 0.45,
+        "similarity": 0.429
+      },
+      "log_shots": {
+        "log_duration": 0.45,
+        "log_shots": 1.0,
+        "similarity": 0.427
+      },
+      "similarity": {
+        "log_duration": 0.429,
+        "log_shots": 0.427,
+        "similarity": 1.0
+      }
+    },
+    "feature_mean": {
+      "log_duration": 5.9851,
+      "log_shots": 4.1516,
+      "similarity": 0.5266
+    },
+    "feature_std": {
+      "log_duration": 1.2945,
+      "log_shots": 1.8107,
+      "similarity": 0.0868
+    }
+  },
+  {
+    "group": "broadway",
+    "n_pairs_used": 85,
+    "explained_variance_ratio": [
+      0.4969,
+      0.3554,
+      0.1477
+    ],
+    "eigenvalues": [
+      1.5086,
+      1.0788,
+      0.4484
+    ],
+    "pc1_loadings": {
+      "log_duration": 0.6554,
+      "log_shots": -0.2141,
+      "similarity": 0.7243
+    },
+    "corr_matrix": {
+      "log_duration": {
+        "log_duration": 1.0,
+        "log_shots": 0.086,
+        "similarity": 0.47
+      },
+      "log_shots": {
+        "log_duration": 0.086,
+        "log_shots": 1.0,
+        "similarity": -0.223
+      },
+      "similarity": {
+        "log_duration": 0.47,
+        "log_shots": -0.223,
+        "similarity": 1.0
+      }
+    },
+    "feature_mean": {
+      "log_duration": 4.9483,
+      "log_shots": 2.8913,
+      "similarity": 0.4605
+    },
+    "feature_std": {
+      "log_duration": 1.5113,
+      "log_shots": 1.3201,
+      "similarity": 0.0702
+    }
+  }
+]
