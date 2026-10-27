@@ -1,7 +1,8 @@
 """
 add_spoiler_intensity.py
 ------------------------
-패널(final_v3)에 두 열을 추가한다.
+패널(final_v3)의 weekly_data 시트 맨 끝에 열을 이어 붙인다 (새 탭은 만들지 않음).
+  duration_sec, n_shots  t2_duration_sec, t2_n_shots 와 같은 값 (PCA 입력)
   similarity         시놉시스 커버리지(cov_mean) - compute_similarity.py 결과
   spoiler_intensity  (영상 길이, 컷수, 유사도)를 PCA로 합친 1개 점수 (PC1)
 
@@ -75,7 +76,7 @@ def insert_after(df, anchor, cols):
 def process(panel_path, res, medium, id_col, sheet, out_path, metric, pooled_store):
     sheets = pd.read_excel(panel_path, sheet_name=None)
     sheet = sheet or list(sheets)[0]
-    df = sheets[sheet].drop(columns=["similarity", "spoiler_intensity"], errors="ignore")
+    df = sheets[sheet].drop(columns=["similarity", "spoiler_intensity", "duration_sec", "n_shots"], errors="ignore")
     r = res[res["medium"] == medium][["work_id", "video_id", metric]].rename(
         columns={"work_id": id_col, "video_id": "t2_video_id", metric: "similarity"}).drop_duplicates(
         [id_col, "t2_video_id"])
@@ -129,8 +130,13 @@ def main():
         key = pd.MultiIndex.from_frame(df[[id_col, "t2_video_id"]])
         df["spoiler_intensity"] = scores[m].reindex(key).to_numpy()
         df.loc[df["t2_video_id"].isna(), "spoiler_intensity"] = np.nan
-        new = df[["similarity", "spoiler_intensity"]]
-        sheets[sheet] = insert_after(df.drop(columns=["similarity", "spoiler_intensity"]), "t2_shots_status", new)
+        # 시트는 새로 만들지 않고, 기존 시트(weekly_data) 맨 끝에 네 열을 이어 붙인다.
+        # duration_sec / n_shots 는 같은 행의 t2_duration_sec / t2_n_shots 값 (PCA 입력을 한눈에 보려는 용도).
+        base = df.drop(columns=["similarity", "spoiler_intensity", "duration_sec", "n_shots"], errors="ignore")
+        tail = pd.DataFrame({"duration_sec": base["t2_duration_sec"], "n_shots": base["t2_n_shots"],
+                             "similarity": df["similarity"], "spoiler_intensity": df["spoiler_intensity"]},
+                            index=base.index)
+        sheets[sheet] = pd.concat([base, tail], axis=1)
         with pd.ExcelWriter(path, engine="openpyxl") as w:
             for name, d in sheets.items():
                 d.to_excel(w, sheet_name=name, index=False)
