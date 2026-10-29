@@ -27,6 +27,10 @@ def main():
     ap.add_argument("--hollywood", default=HW)
     ap.add_argument("--movies", default="data/hollywood_youtube_targets.csv")
     ap.add_argument("--stats", default="data/youtube_video_stats.csv")
+    ap.add_argument("--combined", default="data/combined_panel.xlsx",
+                    help="combined 패널(t2_video_id/s2_video_id 열). 여기 있는 condensed "
+                         "영상 중 위 목록에 없는 것을 뒤에 추가함(기존 순서 유지 = 이미 "
+                         "수집한 shard 배정이 바뀌지 않음)")
     ap.add_argument("--out", default="data/condensed_comment_targets.csv")
     args = ap.parse_args()
 
@@ -46,6 +50,28 @@ def main():
             "duration_sec", "n_shots", "status"]
     t = pd.concat([b[cols], h[cols]], ignore_index=True)
     t = t.drop_duplicates(subset=["video_id"], keep="first")
+    t["source"] = "t2"
+
+    # combined 패널에 있는 condensed 영상 중 아직 없는 것(주로 Hollywood s2 영상)을 뒤에 추가
+    if args.combined:
+        d = pd.read_excel(args.combined, sheet_name="Sheet1", dtype=str)
+        d["medium"] = d["market"].str.lower()
+        extra = []
+        for col, src in (("t2_video_id", "t2"), ("s2_video_id", "s2")):
+            x = d.dropna(subset=[col])[[col, "medium", "orig_id", "title"]].drop_duplicates(col)
+            x = x.rename(columns={col: "video_id", "orig_id": "work_id", "title": "show"})
+            x["source"] = src
+            extra.append(x)
+        e = pd.concat(extra, ignore_index=True)
+        both = e.groupby("video_id")["source"].agg(lambda v: "both" if len(set(v)) > 1 else v.iloc[0])
+        e = e.drop_duplicates("video_id", keep="first")
+        e["source"] = e["video_id"].map(both)
+        # 기존 목록에 있는 영상은 source만 갱신, 없는 영상은 뒤에 추가
+        t["source"] = t["video_id"].map(both).fillna("t2")
+        new = e[~e["video_id"].isin(t["video_id"])]
+        t = pd.concat([t, new], ignore_index=True)
+        print(f"combined 패널 추가: {len(new)}개 (t2 {int((new.source=='t2').sum())} / "
+              f"s2 {int((new.source=='s2').sum())} / both {int((new.source=='both').sum())})")
 
     # 참고용: 수집 시점 comment_count (있는 영상만). 0이면 API 호출 낭비라 제외.
     s = pd.read_csv(args.stats, dtype=str)[["video_id", "comment_count"]]

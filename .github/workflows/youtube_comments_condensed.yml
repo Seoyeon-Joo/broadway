@@ -1,6 +1,6 @@
 name: Condensed 영상 YouTube 댓글 수집 (병렬)
 
-# condensed content로 지정된 영상(패널의 t2 영상, similarity/컷 수 계산 대상)만 대상으로
+# condensed content로 지정된 영상(combined 패널의 t2_video_id + s2_video_id 전부)만 대상으로
 # 댓글을 수집한다. 대상 목록은 data/condensed_comment_targets.csv(저장소에 커밋됨,
 # scripts/build_condensed_comment_targets.py로 생성)를 그대로 사용하므로 Release에서
 # 목록을 받아올 필요가 없다. 수집 로직은 기존 scripts/fetch_youtube_comments.py 재사용.
@@ -12,7 +12,7 @@ on:
     inputs:
       limit:
         description: "shard당 처리할 최대 영상 개수"
-        default: "300"
+        default: "600"
       max_comments_per_video:
         description: "영상 하나당 최대 수집 댓글 개수(top-level 기준)"
         default: "1000"
@@ -75,7 +75,7 @@ jobs:
             --out data/condensed_comments/shard_${{ matrix.shard }}.csv \
             --shard-index ${{ matrix.shard }} \
             --num-shards "$NUM_SHARDS" \
-            --limit "${{ github.event.inputs.limit || '300' }}" \
+            --limit "${{ github.event.inputs.limit || '600' }}" \
             --max-comments-per-video "${{ github.event.inputs.max_comments_per_video || '1000' }}"
 
       - name: 결과를 Release에 업로드
@@ -116,7 +116,7 @@ jobs:
           import pandas as pd
           c = pd.read_csv("data/condensed_comments_merged.csv", encoding="utf-8-sig", low_memory=False)
           t = pd.read_csv("data/condensed_comment_targets.csv", encoding="utf-8-sig", dtype=str)
-          t = t[["video_id", "medium", "work_id", "weeks_as_t2", "duration_sec", "n_shots"]]
+          t = t[["video_id", "medium", "work_id", "source", "weeks_as_t2", "duration_sec", "n_shots"]]
           c = c.merge(t, on="video_id", how="left")
           c.to_csv("data/condensed_comments_merged.csv", index=False, encoding="utf-8-sig")
           print("최종", len(c), "행, 고유 영상", c["video_id"].nunique())
