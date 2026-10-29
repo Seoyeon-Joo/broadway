@@ -1,0 +1,137 @@
+name: Condensed 영상 YouTube 댓글 수집 (병렬)
+
+# condensed content로 지정된 영상(패널의 t2 영상, similarity/컷 수 계산 대상)만 대상으로
+# 댓글을 수집한다. 대상 목록은 data/condensed_comment_targets.csv(저장소에 커밋됨,
+# scripts/build_condensed_comment_targets.py로 생성)를 그대로 사용하므로 Release에서
+# 목록을 받아올 필요가 없다. 수집 로직은 기존 scripts/fetch_youtube_comments.py 재사용.
+#
+# 결과물(shard별 CSV, 병합본)은 별도 Release "condensed-youtube-comments"에 올림
+# (기존 broadway-youtube-comments와 섞이지 않게 분리).
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "shard당 처리할 최대 영상 개수"
+        default: "300"
+      max_comments_per_video:
+        description: "영상 하나당 최대 수집 댓글 개수(top-level 기준)"
+        default: "1000"
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMMENTS_DATA_TAG: condensed-youtube-comments
+  NUM_SHARDS: 10
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+
+      - name: 이 shard의 기존 진행 상황 받아오기 (이어서 수집)
+        run: |
+          mkdir -p data/condensed_comments
+          # 첫 실행이면 없는 게 정상 - 조용히 넘어감
+          gh release download "$COMMENTS_DATA_TAG" --dir data/condensed_comments \
+            --pattern "shard_${{ matrix.shard }}.*" --clobber 2>/dev/null || \
+            echo "이 shard의 기존 데이터 없음 (첫 실행)"
+
+      - name: 이번 shard가 쓸 API 키 묶음 고르기
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          IFS=',' read -ra KEYS <<< "$YOUTUBE_API_KEYS"
+          TOTAL=${#KEYS[@]}
+          INDEX=${{ matrix.shard }}
+          SELECTED=()
+          for ((i=INDEX; i<TOTAL; i+=NUM_SHARDS)); do
+            SELECTED+=("${KEYS[$i]}")
+          done
+          if [ "${#SELECTED[@]}" -eq 0 ]; then
+            echo "::error::shard $INDEX 에 배정된 키가 없어요 (전체 키 $TOTAL 개)."
+            exit 1
+          fi
+          echo "shard $INDEX: 키 ${#SELECTED[@]}개 배정됨 (전체 $TOTAL 개 중)"
+          SELECTED_STR=$(IFS=','; echo "${SELECTED[*]}")
+          echo "SHARD_YOUTUBE_KEYS=$SELECTED_STR" >> "$GITHUB_ENV"
+
+      - name: 댓글 수집
+        env:
+          YOUTUBE_API_KEYS: ${{ env.SHARD_YOUTUBE_KEYS }}
+        run: |
+          python -u scripts/fetch_youtube_comments.py \
+            --targets data/condensed_comment_targets.csv \
+            --out data/condensed_comments/shard_${{ matrix.shard }}.csv \
+            --shard-index ${{ matrix.shard }} \
+            --num-shards "$NUM_SHARDS" \
+            --limit "${{ github.event.inputs.limit || '300' }}" \
+            --max-comments-per-video "${{ github.event.inputs.max_comments_per_video || '1000' }}"
+
+      - name: 결과를 Release에 업로드
+        if: always()
+        run: |
+          bash scripts/checkpoint_release.sh "$COMMENTS_DATA_TAG" \
+            data/condensed_comments/shard_${{ matrix.shard }}.csv \
+            data/condensed_comments/shard_${{ matrix.shard }}.processed.txt
+
+  merge:
+    needs: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+
+      - name: shard 결과 전부 받아오기
+        run: |
+          mkdir -p data/condensed_comments
+          if ! gh release download "$COMMENTS_DATA_TAG" --dir data/condensed_comments \
+            --pattern "shard_*.csv" --clobber; then
+            echo "::error::'$COMMENTS_DATA_TAG' Release에 shard_*.csv가 없습니다."
+            gh release view "$COMMENTS_DATA_TAG" --json assets \
+              --jq '.assets[].name' || echo "(Release 자체가 없을 수 있음)"
+            exit 1
+          fi
+          ls -la data/condensed_comments/
+
+      - name: shard 병합 + 영상 정보(작품/매체/컷 수 등) 붙이기
+        run: |
+          python scripts/merge_youtube_comment_shards.py \
+            --shard-dir data/condensed_comments \
+            --out data/condensed_comments_merged.csv
+          python - <<'EOF'
+          import pandas as pd
+          c = pd.read_csv("data/condensed_comments_merged.csv", encoding="utf-8-sig", low_memory=False)
+          t = pd.read_csv("data/condensed_comment_targets.csv", encoding="utf-8-sig", dtype=str)
+          t = t[["video_id", "medium", "work_id", "weeks_as_t2", "duration_sec", "n_shots"]]
+          c = c.merge(t, on="video_id", how="left")
+          c.to_csv("data/condensed_comments_merged.csv", index=False, encoding="utf-8-sig")
+          print("최종", len(c), "행, 고유 영상", c["video_id"].nunique())
+          print(c.groupby("medium")["video_id"].nunique())
+          EOF
+
+      - name: 병합 결과를 Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$COMMENTS_DATA_TAG" data/condensed_comments_merged.csv
+
+      - name: 안전망 - Actions 아티팩트로도 보관 (30일)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: condensed-youtube-comments-merged
+          path: data/condensed_comments_merged.csv
+          retention-days: 30
+          if-no-files-found: ignore
