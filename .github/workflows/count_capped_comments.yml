@@ -1,0 +1,40 @@
+name: 상한 걸린 condensed 영상의 실제 댓글 수 조회
+
+# 댓글 본문은 받지 않고, 상한(1,000)에 걸려 일부만 수집된 영상들의 실제 댓글 수만
+# videos.list(statistics)로 조회해서 로그에 요약을 출력하고 아티팩트로 남긴다.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMMENTS_DATA_TAG: condensed-youtube-comments
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - name: 체크포인트 받아오기
+        run: |
+          mkdir -p data/condensed_comments
+          gh release download "$COMMENTS_DATA_TAG" --dir data/condensed_comments \
+            --pattern "shard_*.processed.txt" --clobber
+      - name: 실제 댓글 수 조회
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+        run: |
+          python -u scripts/count_capped_comments.py \
+            --checkpoint-dir data/condensed_comments \
+            --out data/capped_comment_counts.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: capped-comment-counts
+          path: data/capped_comment_counts.csv
+          retention-days: 30
