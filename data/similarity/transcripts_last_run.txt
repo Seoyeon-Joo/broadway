@@ -1,0 +1,12 @@
+shard 0: {'blocked': 2}
+    JGByF6naiss: blocked: RequestBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=JGByF6naiss! This is most likely caused by:  YouTube is blocking reques
+    wPWBKSxp0nQ: blocked: RequestBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=wPWBKSxp0nQ! This is most likely caused by:  YouTube is blocking reques
+shard 1: {'blocked': 2}
+    a8rcVO64Ft4: blocked: IpBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=a8rcVO64Ft4! This is most likely caused by:  YouTube is blocking reques
+    zXpfhf19mug: blocked: IpBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=zXpfhf19mug! This is most likely caused by:  YouTube is blocking reques
+shard 2: {'blocked': 1}
+    clstWlBK-aA: blocked: RequestBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=clstWlBK-aA! This is most likely caused by:  YouTube is blocking reques
+shard 3: {'blocked': 1}
+    oIv21LLPVg4: blocked: RequestBlocked:  Could not retrieve a transcript for the video https://www.youtube.com/watch?v=oIv21LLPVg4! This is most likely caused by:  YouTube is blocking reques
+existing 1986 | new/updated 0 {} | total now 1986
+total by status: {'ok': 1745, 'no_transcript': 214, 'error': 18, 'unavailable': 9}
