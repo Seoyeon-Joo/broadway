@@ -13,10 +13,14 @@ Whisper가 감지한 언어가 영어가 아니면 status='no_transcript'(영어
   옵션: --model small(기본)|base|medium  --device auto|cpu|cuda  --cookies-from-browser chrome
 """
 import argparse
+import shutil
+import subprocess
 import sys
 import tempfile
+import traceback
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 OUT_COLS = ["video_url", "text", "status", "language", "is_auto", "title"]
@@ -32,6 +36,26 @@ def download_audio(vid, tmp, cookies):
         info = y.extract_info(f"https://www.youtube.com/watch?v={vid}", download=True)
     files = [f for f in Path(tmp).glob(f"{vid}.*")]
     return (files[0] if files else None), (info or {}).get("title", "")
+
+
+def ffmpeg_exe():
+    exe = shutil.which("ffmpeg")
+    if exe:
+        return exe
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:  # noqa: BLE001
+        raise RuntimeError("ffmpeg를 찾을 수 없음: py -3.13 -m pip install imageio-ffmpeg 후 다시 실행")
+
+
+def load_audio(path):
+    """PyAV 대신 ffmpeg로 16kHz 모노 float32 배열을 만든다."""
+    r = subprocess.run([ffmpeg_exe(), "-nostdin", "-v", "error", "-i", str(path), "-f", "s16le", "-ac", "1",
+                        "-ar", "16000", "-"], capture_output=True)
+    if r.returncode != 0 or not r.stdout:
+        raise RuntimeError("ffmpeg 변환 실패: " + r.stderr.decode(errors="ignore")[:150])
+    return np.frombuffer(r.stdout, np.int16).astype(np.float32) / 32768.0
 
 
 def main():
@@ -66,7 +90,7 @@ def main():
                 f, title = download_audio(v, tmp, a.cookies_from_browser)
                 if f is None:
                     raise RuntimeError("audio file missing")
-                segs, info = model.transcribe(str(f), vad_filter=True, beam_size=1)
+                segs, info = model.transcribe(load_audio(f), vad_filter=True, beam_size=1)
                 lang = info.language
                 text = " ".join(s.text.strip() for s in segs).strip()
             if lang != "en" or not text:
@@ -74,7 +98,8 @@ def main():
             else:
                 status = "ok"
         except Exception as e:  # noqa: BLE001
-            print(f"  [{i}/{len(todo)}] {v} error: {type(e).__name__}: {str(e)[:120]}")
+            tb = traceback.extract_tb(e.__traceback__)[-1]
+            print(f"  [{i}/{len(todo)}] {v} error: {type(e).__name__}: {str(e)[:120]} (at {Path(tb.filename).name}:{tb.lineno})")
             continue  # 오류는 기록하지 않음 -> 다시 실행하면 재시도
         pd.DataFrame([[f"https://www.youtube.com/watch?v={v}", text, status, lang, "whisper", title]],
                      columns=OUT_COLS).to_csv(out, mode="a", header=not out.exists(), index=False, encoding="utf-8-sig")
