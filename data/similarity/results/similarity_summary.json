@@ -1,87 +1,87 @@
 {
   "model": "BAAI/bge-m3",
-  "n_pairs": 1384,
-  "n_videos": 1366,
+  "n_pairs": 1449,
+  "n_videos": 1430,
   "by_medium": {
-    "broadway": 85,
-    "hollywood": 1299
+    "broadway": 89,
+    "hollywood": 1360
   },
   "coverage_by_reason": {
     "hollywood": {
-      "ok": 1299,
-      "status_not_ok": 202,
-      "too_short": 97,
+      "ok": 1360,
+      "status_not_ok": 128,
+      "too_short": 106,
       "not_in_transcript_file": 81,
+      "synopsis_missing_or_short": 65,
       "language_metadata_not_allowed": 64,
-      "synopsis_missing_or_short": 61,
       "language_text_not_english": 2
     },
     "broadway": {
-      "ok": 85,
-      "too_short": 29,
-      "status_not_ok": 28,
+      "ok": 89,
+      "too_short": 34,
+      "status_not_ok": 19,
       "synopsis_missing_or_short": 11
     }
   },
   "log": [
-    "transcripts: 1992 rows -> kept 1490; excluded 502 ({'status_not_ok': 244, 'too_short': 129, 'language_metadata_not_allowed': 127, 'language_text_not_english': 2})",
+    "transcripts: 1992 rows -> kept 1558; excluded 434 ({'status_not_ok': 162, 'too_short': 143, 'language_metadata_not_allowed': 127, 'language_text_not_english': 2})",
     "panel t2 pairs: 1959 ({'broadway': 153, 'hollywood': 1806})",
-    "pairs after language/transcript filter: 1456; dropped for missing/short synopsis: 72",
-    "pairs to compute: 1384 | unique videos: 1366 | unique works: 1027",
-    "merged 12 shards -> 1384 pairs",
-    "pair coverage by reason:\nmedium                         broadway  hollywood\nreason                                            \nlanguage_metadata_not_allowed         0         64\nlanguage_text_not_english             0          2\nnot_in_transcript_file                0         81\nok                                   85       1299\nstatus_not_ok                        28        202\nsynopsis_missing_or_short            11         61\ntoo_short                            29         97"
+    "pairs after language/transcript filter: 1525; dropped for missing/short synopsis: 76",
+    "pairs to compute: 1449 | unique videos: 1430 | unique works: 1061",
+    "merged 12 shards -> 1449 pairs",
+    "pair coverage by reason:\nmedium                         broadway  hollywood\nreason                                            \nlanguage_metadata_not_allowed         0         64\nlanguage_text_not_english             0          2\nnot_in_transcript_file                0         81\nok                                   89       1360\nstatus_not_ok                        19        128\nsynopsis_missing_or_short            11         65\ntoo_short                            34        106"
   ],
   "describe": {
     "doc_cosine": {
-      "count": 1384.0,
-      "mean": 0.6517,
-      "std": 0.132,
+      "count": 1449.0,
+      "mean": 0.6493,
+      "std": 0.1313,
       "min": 0.2503,
-      "25%": 0.5597,
-      "50%": 0.6524,
-      "75%": 0.7635,
+      "25%": 0.5569,
+      "50%": 0.6476,
+      "75%": 0.7595,
       "max": 0.9076
     },
     "cov_mean": {
-      "count": 1384.0,
-      "mean": 0.5218,
-      "std": 0.0871,
+      "count": 1449.0,
+      "mean": 0.5197,
+      "std": 0.0866,
       "min": 0.2689,
-      "25%": 0.4569,
-      "50%": 0.517,
-      "75%": 0.5918,
+      "25%": 0.4548,
+      "50%": 0.5138,
+      "75%": 0.5904,
       "max": 0.7378
     },
     "end_cov_mean": {
-      "count": 1384.0,
-      "mean": 0.5182,
-      "std": 0.0887,
+      "count": 1449.0,
+      "mean": 0.516,
+      "std": 0.0881,
       "min": 0.2465,
-      "25%": 0.4508,
-      "50%": 0.5128,
-      "75%": 0.5876,
+      "25%": 0.4499,
+      "50%": 0.5092,
+      "75%": 0.5848,
       "max": 0.7758
     },
     "video_align_mean": {
-      "count": 1384.0,
-      "mean": 0.5715,
-      "std": 0.0886,
+      "count": 1449.0,
+      "mean": 0.57,
+      "std": 0.0881,
       "min": 0.3155,
-      "25%": 0.5043,
-      "50%": 0.5711,
-      "75%": 0.6405,
+      "25%": 0.5041,
+      "50%": 0.5681,
+      "75%": 0.6395,
       "max": 0.7923
     },
     "tfidf_cosine": {
-      "count": 1384.0,
-      "mean": 0.1941,
-      "std": 0.159,
+      "count": 1449.0,
+      "mean": 0.1912,
+      "std": 0.157,
       "min": 0.0,
-      "25%": 0.0616,
-      "50%": 0.1608,
-      "75%": 0.2933,
-      "max": 0.9616
+      "25%": 0.0618,
+      "50%": 0.1584,
+      "75%": 0.2891,
+      "max": 0.9615
     }
   },
-  "corr_embedding_vs_tfidf": 0.8371335056354081
+  "corr_embedding_vs_tfidf": 0.8360440440590127
 }
