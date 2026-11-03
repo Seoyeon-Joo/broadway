@@ -1,0 +1,63 @@
+name: condensed 영상 댓글 BERTopic 토픽 분석
+
+# Release "condensed-youtube-comments"의 condensed_comments_merged.csv를 받아 매체(Broadway /
+# Hollywood)별로 BERTopic(all-MiniLM-L6-v2 임베딩 + UMAP + HDBSCAN)을 돌린다.
+# 결과(topics_*.csv, assignments_*.csv, summary_*.md)는 Release "condensed-comment-topics"와
+# Actions 아티팩트에 올림. 로컬 샌드박스는 Hugging Face 접속이 막혀 있어 여기서 돌림.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMMENTS_DATA_TAG: condensed-youtube-comments
+  TOPICS_TAG: condensed-comment-topics
+
+jobs:
+  topics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - medium: broadway
+            args: "--fit-n 100000 --min-topic-size 15 --nr-topics 12 --n-neighbors 10"
+          - medium: hollywood
+            args: "--fit-n 150000 --cap-per-video 300 --min-topic-size 150 --nr-topics 40"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 패키지 설치 (CPU용 torch)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install bertopic sentence-transformers umap-learn hdbscan scikit-learn pandas
+      - name: 댓글 병합본 받아오기
+        run: |
+          mkdir -p data
+          gh release download "$COMMENTS_DATA_TAG" --dir data \
+            --pattern "condensed_comments_merged.csv" --clobber
+          wc -l data/condensed_comments_merged.csv
+      - name: BERTopic 실행 (${{ matrix.medium }})
+        run: |
+          python -u scripts/topic_model_comments.py \
+            --medium ${{ matrix.medium }} --out-dir data/topics ${{ matrix.args }}
+      - name: 결과를 Release에 업로드
+        if: success()
+        run: |
+          bash scripts/checkpoint_release.sh "$TOPICS_TAG" \
+            data/topics/topics_${{ matrix.medium }}.csv \
+            data/topics/assignments_${{ matrix.medium }}.csv \
+            data/topics/summary_${{ matrix.medium }}.md \
+            data/topics/prep_stats_${{ matrix.medium }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: topics-${{ matrix.medium }}
+          path: data/topics/
+          retention-days: 30
+          if-no-files-found: ignore
