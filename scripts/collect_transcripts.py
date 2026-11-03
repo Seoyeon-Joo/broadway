@@ -96,8 +96,8 @@ def fetch_one(api, vid):
         return "no_transcript", "", "", ""
     except (VideoUnavailable, VideoUnplayable, AgeRestricted):
         return "unavailable", "", "", ""
-    except (IpBlocked, RequestBlocked):
-        return "blocked", "", "", ""
+    except (IpBlocked, RequestBlocked) as e:
+        return "blocked", f"{type(e).__name__}: {str(e)[:150]}".replace("\n", " "), "", ""
     except CouldNotRetrieveTranscript as e:
         return "error", str(e)[:200].replace("\n", " "), "", ""
     except Exception as e:  # noqa: BLE001
@@ -142,7 +142,7 @@ def main():
 
     titles = titles_lookup(a.metadata)
     api = make_api()
-    buf, blocked_run, counts = [], 0, {}
+    buf, blocked_run, counts, samples = [], 0, {}, []
 
     def flush():
         if buf:
@@ -153,6 +153,8 @@ def main():
     for i, v in enumerate(todo, 1):
         status, text, lang, is_auto = fetch_one(api, v)
         counts[status] = counts.get(status, 0) + 1
+        if status in ("blocked", "error") and len(samples) < 5:
+            samples.append(f"{v}: {status}: {text}")
         if status == "blocked":
             blocked_run += 1
             if blocked_run >= a.max_consecutive_blocked:
@@ -169,6 +171,12 @@ def main():
         time.sleep(a.sleep)
     flush()
     print(f"done: {counts}")
+    for m in samples:
+        print("  sample:", m)
+    import json
+    (out_dir / f"diag_shard_{a.shard_index}.json").write_text(
+        json.dumps({"shard": a.shard_index, "counts": counts, "samples": samples}, ensure_ascii=False, indent=1),
+        encoding="utf-8")
     return 0
 
 

@@ -31,6 +31,12 @@ def main():
     out.to_excel(a.transcripts, index=False)
 
     gained = new["status"].value_counts().to_dict()
+    import json
+    for f in sorted(Path(a.shards).rglob("diag_shard_*.json")):
+        d = json.loads(f.read_text(encoding="utf-8"))
+        print(f"shard {d['shard']}: {d['counts']}")
+        for sm in d["samples"][:2]:
+            print("   ", sm)
     print(f"existing {len(old)} | new/updated {len(new)} {gained} | total now {len(out)}")
     print("total by status:", out["status"].value_counts().to_dict())
 
