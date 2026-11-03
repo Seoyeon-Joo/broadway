@@ -2,7 +2,7 @@
 add_spoiler_intensity.py
 ------------------------
 패널(final_v3)의 weekly_data 시트 맨 끝에 열을 이어 붙인다 (새 탭은 만들지 않음).
-  duration_sec, n_shots  t2_duration_sec, t2_n_shots 와 같은 값 (PCA 입력)
+  duration_sec, n_shots  패널의 값 그대로 (PCA 입력)
   similarity         시놉시스 커버리지(cov_mean) - compute_similarity.py 결과
   spoiler_intensity  (영상 길이, 컷수, 유사도)를 PCA로 합친 1개 점수 (PC1)
 
@@ -29,9 +29,9 @@ FEATS = ["log_duration", "log_shots", "similarity"]
 def prep(df, id_col):
     """패널에서 (작품, t2 영상) 쌍 단위 특징 테이블."""
     p = df.dropna(subset=["t2_video_id"]).drop_duplicates([id_col, "t2_video_id"])[
-        [id_col, "t2_video_id", "t2_duration_sec", "t2_n_shots", "similarity"]].copy()
-    p["log_duration"] = np.log(p["t2_duration_sec"].where(p["t2_duration_sec"] > 0))
-    p["log_shots"] = np.log(p["t2_n_shots"].where(p["t2_n_shots"] > 0))
+        [id_col, "t2_video_id", "duration_sec", "n_shots", "similarity"]].copy()
+    p["log_duration"] = np.log(p["duration_sec"].where(p["duration_sec"] > 0))
+    p["log_shots"] = np.log(p["n_shots"].where(p["n_shots"] > 0))
     return p
 
 
@@ -76,14 +76,15 @@ def insert_after(df, anchor, cols):
 def process(panel_path, res, medium, id_col, sheet, out_path, metric, pooled_store):
     sheets = pd.read_excel(panel_path, sheet_name=None)
     sheet = sheet or list(sheets)[0]
-    df = sheets[sheet].drop(columns=["similarity", "spoiler_intensity", "duration_sec", "n_shots"], errors="ignore")
+    df = sheets[sheet].drop(columns=["similarity", "spoiler_intensity"], errors="ignore")
+    orig_cols = list(sheets[sheet].columns)
     r = res[res["medium"] == medium][["work_id", "video_id", metric]].rename(
         columns={"work_id": id_col, "video_id": "t2_video_id", metric: "similarity"}).drop_duplicates(
         [id_col, "t2_video_id"])
     n0 = len(df)
     df = df.merge(r, on=[id_col, "t2_video_id"], how="left")
     assert len(df) == n0, "행 수가 달라짐"
-    pooled_store[medium] = (df, id_col, sheet, sheets, out_path)
+    pooled_store[medium] = (df, id_col, sheet, sheets, out_path, orig_cols)
     return df
 
 
@@ -101,7 +102,7 @@ def main():
     res = pd.read_csv(a.results, encoding="utf-8-sig")
 
     store = {}
-    process(a.hollywood, res, "hollywood", "movie_id", "weekly_data", out / "hollywood_final_v3_similarity.xlsx",
+    process(a.hollywood, res, "hollywood", "movie_id", None, out / "hollywood_final_v3_similarity.xlsx",
             a.metric, store)
     process(a.broadway, res, "broadway", "show_id", None, out / "broadway_final_v3_similarity.xlsx",
             a.metric, store)
@@ -126,17 +127,14 @@ def main():
             p["si"] = score(sc, pca, sign, p)
             scores[m] = p.set_index([store[m][1], "t2_video_id"])["si"]
 
-    for m, (df, id_col, sheet, sheets, path) in store.items():
+    for m, (df, id_col, sheet, sheets, path, orig_cols) in store.items():
         key = pd.MultiIndex.from_frame(df[[id_col, "t2_video_id"]])
         df["spoiler_intensity"] = scores[m].reindex(key).to_numpy()
         df.loc[df["t2_video_id"].isna(), "spoiler_intensity"] = np.nan
-        # 시트는 새로 만들지 않고, 기존 시트(weekly_data) 맨 끝에 네 열을 이어 붙인다.
-        # duration_sec / n_shots 는 같은 행의 t2_duration_sec / t2_n_shots 값 (PCA 입력을 한눈에 보려는 용도).
-        base = df.drop(columns=["similarity", "spoiler_intensity", "duration_sec", "n_shots"], errors="ignore")
-        tail = pd.DataFrame({"duration_sec": base["t2_duration_sec"], "n_shots": base["t2_n_shots"],
-                             "similarity": df["similarity"], "spoiler_intensity": df["spoiler_intensity"]},
-                            index=base.index)
-        sheets[sheet] = pd.concat([base, tail], axis=1)
+        # 새 탭은 만들지 않는다. 패널에 이미 있는 열 위치(similarity, spoiler_intensity)는 그대로 두고 값만 갱신하고,
+        # 없으면 시트 맨 끝에 붙인다. duration_sec / n_shots 는 패널 값을 그대로 둔다.
+        order = [c for c in orig_cols if c in df.columns] + [c for c in ("similarity", "spoiler_intensity") if c not in orig_cols]
+        sheets[sheet] = df[order]
         with pd.ExcelWriter(path, engine="openpyxl") as w:
             for name, d in sheets.items():
                 d.to_excel(w, sheet_name=name, index=False)
