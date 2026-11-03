@@ -262,6 +262,9 @@ def main():
                      help="이번 실행에서 처리할 최대 영상 개수 (GitHub Actions 시간 제한 대비)")
     ap.add_argument("--max-comments-per-video", type=int, default=200,
                      help="영상 하나당 최대 수집 댓글 개수(top-level 기준, 답글은 별도)")
+    ap.add_argument("--max-pages", type=int, default=200,
+                     help="영상 하나당 최대 페이지 수(페이지당 최대 100스레드). 기본 200 = 약 "
+                          "2만 스레드. 댓글이 더 많은 영상을 전부 받으려면 크게 올릴 것")
     ap.add_argument("--api-key", default=None, help="단일 키 직접 지정 (테스트용)")
     ap.add_argument("--shows", nargs="+", default=None,
                      help="테스트용: 'video_id:show' 형태로 나열")
@@ -320,7 +323,8 @@ def main():
             show = target.get("show", "")
             try:
                 rows, status = fetch_comments_for_video(
-                    session, key_pool, video_id, args.max_comments_per_video
+                    session, key_pool, video_id, args.max_comments_per_video,
+                    max_pages=args.max_pages,
                 )
             except QuotaExceededError as e:
                 print(f"  중단: {e}")

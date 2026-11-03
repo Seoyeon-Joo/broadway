@@ -14,8 +14,11 @@ on:
         description: "shard당 처리할 최대 영상 개수"
         default: "600"
       max_comments_per_video:
-        description: "영상 하나당 최대 수집 댓글 개수(top-level 기준)"
-        default: "1000"
+        description: "영상 하나당 최대 수집 댓글 개수(top-level + 답글 행 합계). 전부 받으려면 매우 크게"
+        default: "100000000"
+      max_pages:
+        description: "영상 하나당 최대 페이지 수(페이지당 100스레드)"
+        default: "100000"
 
 permissions:
   contents: write
@@ -76,7 +79,8 @@ jobs:
             --shard-index ${{ matrix.shard }} \
             --num-shards "$NUM_SHARDS" \
             --limit "${{ github.event.inputs.limit || '600' }}" \
-            --max-comments-per-video "${{ github.event.inputs.max_comments_per_video || '1000' }}"
+            --max-comments-per-video "${{ github.event.inputs.max_comments_per_video || '100000000' }}" \
+            --max-pages "${{ github.event.inputs.max_pages || '100000' }}"
 
       - name: 결과를 Release에 업로드
         if: always()
