@@ -1,17 +1,17 @@
 {
   "model": "BAAI/bge-m3",
-  "n_pairs": 1381,
-  "n_videos": 1363,
+  "n_pairs": 1384,
+  "n_videos": 1366,
   "by_medium": {
     "broadway": 85,
-    "hollywood": 1296
+    "hollywood": 1299
   },
   "coverage_by_reason": {
     "hollywood": {
-      "ok": 1296,
-      "status_not_ok": 199,
+      "ok": 1299,
+      "status_not_ok": 202,
       "too_short": 97,
-      "not_in_transcript_file": 87,
+      "not_in_transcript_file": 81,
       "language_metadata_not_allowed": 64,
       "synopsis_missing_or_short": 61,
       "language_text_not_english": 2
@@ -24,64 +24,64 @@
     }
   },
   "log": [
-    "transcripts: 1986 rows -> kept 1487; excluded 499 ({'status_not_ok': 241, 'too_short': 129, 'language_metadata_not_allowed': 127, 'language_text_not_english': 2})",
+    "transcripts: 1992 rows -> kept 1490; excluded 502 ({'status_not_ok': 244, 'too_short': 129, 'language_metadata_not_allowed': 127, 'language_text_not_english': 2})",
     "panel t2 pairs: 1959 ({'broadway': 153, 'hollywood': 1806})",
-    "pairs after language/transcript filter: 1453; dropped for missing/short synopsis: 72",
-    "pairs to compute: 1381 | unique videos: 1363 | unique works: 1025",
-    "merged 12 shards -> 1381 pairs",
-    "pair coverage by reason:\nmedium                         broadway  hollywood\nreason                                            \nlanguage_metadata_not_allowed         0         64\nlanguage_text_not_english             0          2\nnot_in_transcript_file                0         87\nok                                   85       1296\nstatus_not_ok                        28        199\nsynopsis_missing_or_short            11         61\ntoo_short                            29         97"
+    "pairs after language/transcript filter: 1456; dropped for missing/short synopsis: 72",
+    "pairs to compute: 1384 | unique videos: 1366 | unique works: 1027",
+    "merged 12 shards -> 1384 pairs",
+    "pair coverage by reason:\nmedium                         broadway  hollywood\nreason                                            \nlanguage_metadata_not_allowed         0         64\nlanguage_text_not_english             0          2\nnot_in_transcript_file                0         81\nok                                   85       1299\nstatus_not_ok                        28        202\nsynopsis_missing_or_short            11         61\ntoo_short                            29         97"
   ],
   "describe": {
     "doc_cosine": {
-      "count": 1381.0,
-      "mean": 0.6519,
-      "std": 0.1319,
+      "count": 1384.0,
+      "mean": 0.6517,
+      "std": 0.132,
       "min": 0.2503,
-      "25%": 0.5601,
+      "25%": 0.5597,
       "50%": 0.6524,
-      "75%": 0.7636,
+      "75%": 0.7635,
       "max": 0.9076
     },
     "cov_mean": {
-      "count": 1381.0,
-      "mean": 0.522,
+      "count": 1384.0,
+      "mean": 0.5218,
       "std": 0.0871,
       "min": 0.2689,
       "25%": 0.4569,
       "50%": 0.517,
-      "75%": 0.592,
+      "75%": 0.5918,
       "max": 0.7378
     },
     "end_cov_mean": {
-      "count": 1381.0,
-      "mean": 0.5184,
+      "count": 1384.0,
+      "mean": 0.5182,
       "std": 0.0887,
       "min": 0.2465,
-      "25%": 0.4509,
-      "50%": 0.513,
+      "25%": 0.4508,
+      "50%": 0.5128,
       "75%": 0.5876,
       "max": 0.7758
     },
     "video_align_mean": {
-      "count": 1381.0,
-      "mean": 0.5717,
-      "std": 0.0885,
+      "count": 1384.0,
+      "mean": 0.5715,
+      "std": 0.0886,
       "min": 0.3155,
-      "25%": 0.5046,
-      "50%": 0.5714,
+      "25%": 0.5043,
+      "50%": 0.5711,
       "75%": 0.6405,
       "max": 0.7923
     },
     "tfidf_cosine": {
-      "count": 1381.0,
-      "mean": 0.1944,
-      "std": 0.1591,
+      "count": 1384.0,
+      "mean": 0.1941,
+      "std": 0.159,
       "min": 0.0,
-      "25%": 0.0626,
-      "50%": 0.1612,
-      "75%": 0.294,
+      "25%": 0.0616,
+      "50%": 0.1608,
+      "75%": 0.2933,
       "max": 0.9616
     }
   },
-  "corr_embedding_vs_tfidf": 0.8371223018294371
+  "corr_embedding_vs_tfidf": 0.8371335056354081
 }

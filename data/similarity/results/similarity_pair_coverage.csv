@@ -234,7 +234,7 @@
 515,Father Stu,SM-kUryDnPw,hollywood,ok,678,True
 603,1982,RuDL2IydvYs,hollywood,synopsis_missing_or_short,27,False
 604,Lightyear,6OPvw88dC9g,hollywood,ok,649,True
-498,The Lost City,a8rcVO64Ft4,hollywood,not_in_transcript_file,460,False
+498,The Lost City,a8rcVO64Ft4,hollywood,status_not_ok,460,False
 544,Eiffel,RuDefZCyLTo,hollywood,ok,800,True
 501,Everything Everywhere All at Once,RCJPLt_jyW8,hollywood,ok,710,True
 616,Facing Nolan,Gckmb-P68nU,hollywood,ok,65,True
@@ -973,7 +973,7 @@
 1872,Mufasa: The Lion King,jnC-o1MjtyU,hollywood,not_in_transcript_file,561,False
 1827,Moana 2,_4tljsDhknA,hollywood,too_short,568,False
 1874,A Complete Unknown,5fhJ-lnJ1UU,hollywood,ok,624,True
-1875,Homestead,clstWlBK-aA,hollywood,not_in_transcript_file,465,False
+1875,Homestead,clstWlBK-aA,hollywood,status_not_ok,465,False
 1876,Babygirl,Wha_JwnATo0,hollywood,status_not_ok,443,False
 1819,Red One,MM-eoGbmRLg,hollywood,ok,557,True
 1877,The Fire Inside,pQYbCmT-XtE,hollywood,ok,191,True
@@ -984,7 +984,7 @@
 1785,Memoir of a Snail,UkoME7583vQ,hollywood,ok,703,True
 1871,Sonic the Hedgehog 3,_LNeKAZzooo,hollywood,ok,681,True
 1874,A Complete Unknown,GAFIj9L_xnA,hollywood,ok,624,True
-1875,Homestead,oIv21LLPVg4,hollywood,not_in_transcript_file,465,False
+1875,Homestead,oIv21LLPVg4,hollywood,ok,465,True
 1884,Rear Window,DmojcyKD9S0,hollywood,not_in_transcript_file,144,False
 1885,Jaws,7HWgpIsKb1I,hollywood,ok,650,True
 337,Dune,5cgVDFYmUM4,hollywood,ok,601,True
@@ -1334,7 +1334,7 @@
 2315,Dead of Winter,Pqv5hVlUskc,hollywood,ok,560,True
 2316,The Girl Who Leapt Through Time2025 Re-release (4K Restoration),dnTEDV2Vh14,hollywood,not_in_transcript_file,532,False
 2317,The Rocky Horror Picture Show2025 Re-release (50 Anniversary),5PAIiNZRz5k,hollywood,ok,612,True
-2322,Germany,JGByF6naiss,hollywood,not_in_transcript_file,597,False
+2322,Germany,JGByF6naiss,hollywood,status_not_ok,597,False
 2240,Suspended Time,AmmgOyw_jYE,hollywood,ok,674,True
 2324,The Smashing Machine,a1jKPzrfMnc,hollywood,ok,383,True
 2325,Avatar: The Way of Water2025 Re-release,o_HjXetUZq4,hollywood,ok,660,True
@@ -1733,7 +1733,7 @@
 2768,Spider-Man: Brand New Day,DXfSjOK9pSk,hollywood,ok,692,True
 2704,Disclosure Day,ZyreQQoQep0,hollywood,ok,530,True
 2677,Star Wars: The Mandalorian and Grogu,iv2V7Q_YnOM,hollywood,ok,683,True
-2772,Boyhood12th Anniversary,zXpfhf19mug,hollywood,not_in_transcript_file,732,False
+2772,Boyhood12th Anniversary,zXpfhf19mug,hollywood,ok,732,True
 2713,The Death of Robin Hood,LFu6VQftZZg,hollywood,ok,604,True
 2768,Spider-Man: Brand New Day,SQBeWuhUHmA,hollywood,ok,692,True
 2773,One Night Only,jhO8JaqcjKk,hollywood,ok,612,True
@@ -1771,7 +1771,7 @@
 2785,The End of Oak Street,C6sNYz4iohM,hollywood,ok,659,True
 2814,Colony,lOod9a4z37E,hollywood,ok,630,True
 2815,Idiots,jYb-BMnMmtI,hollywood,ok,366,True
-2816,Legend of the White Dragon,wPWBKSxp0nQ,hollywood,not_in_transcript_file,63,False
+2816,Legend of the White Dragon,wPWBKSxp0nQ,hollywood,ok,63,True
 2723,Minions & Monsters,KzrqR9UoJHo,hollywood,status_not_ok,844,False
 2789,The Brink of War,kEvWwSCOkPw,hollywood,ok,696,True
 2822,The Sun Never Sets,r2dyxRNoS74,hollywood,synopsis_missing_or_short,24,False
