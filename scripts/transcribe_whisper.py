@@ -19,6 +19,9 @@ Whisper가 감지한 언어가 영어가 아니면 status='no_transcript'(영어
   # 브로드웨이 유사도가 비어 있는 영상 63개 (data/whisper_targets_broadway.csv)
   py -3.13 scripts/transcribe_whisper.py --targets data/whisper_targets_broadway.csv --out transcripts_whisper_v2/transcripts_shard_0.csv --limit 5   # 시험
   py -3.13 scripts/transcribe_whisper.py --targets data/whisper_targets_broadway.csv --out transcripts_whisper_v2/transcripts_shard_0.csv             # 전체 (이어서 하기 가능)
+  # 두 개로 나눠서 (터미널 2개에서 각각 실행; 출력 파일 이름은 transcripts_shard_N.csv 여야 merge가 읽음)
+  py -3.13 scripts/transcribe_whisper.py --targets data/whisper_targets_broadway.csv --shard-count 2 --shard-index 0 --out transcripts_whisper_v2/transcripts_shard_0.csv
+  py -3.13 scripts/transcribe_whisper.py --targets data/whisper_targets_broadway.csv --shard-count 2 --shard-index 1 --out transcripts_whisper_v2/transcripts_shard_1.csv
   옵션: --model medium(기본)|small|large-v3  --device auto|cpu|cuda  --cookies-from-browser chrome  --vad  --language auto  --separate-vocals
 """
 import argparse
@@ -92,6 +95,8 @@ def main():
     ap.add_argument("--device", default="auto")
     ap.add_argument("--cookies-from-browser", default="")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--shard-count", type=int, default=1, help="대상을 몇 조각으로 나눌지 (예: 2)")
+    ap.add_argument("--shard-index", type=int, default=0, help="이 실행이 맡을 조각 번호 (0부터)")
     a = ap.parse_args()
 
     from faster_whisper import WhisperModel
@@ -101,7 +106,9 @@ def main():
     done = set()
     if out.exists():
         done = set(pd.read_csv(out, usecols=["video_url"])["video_url"].str.extract(r"v=([\w-]{11})")[0])
-    todo = [v for v in t["video_id"] if v not in done]
+    # 영상 목록을 고정된 순서로 shard_count 조각으로 나눠 이 실행의 몫(shard_index)만 처리
+    mine = [v for k, v in enumerate(t["video_id"]) if k % a.shard_count == a.shard_index]
+    todo = [v for v in mine if v not in done]
     if a.limit:
         todo = todo[:a.limit]
     print(f"targets {len(t)} | already done {len(done)} | to do {len(todo)} | model {a.model}")
