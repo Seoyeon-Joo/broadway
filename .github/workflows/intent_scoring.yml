@@ -1,0 +1,52 @@
+name: 관람 의사 댓글 점수 계산 (마스킹 + 임베딩 + 시드 유사도)
+
+# 1단계: 작품명·인물명을 마스킹한 댓글을 임베딩하고(결과 저장) 관람/구매 의사 시드 문장과의
+# 유사도 점수와 기준선 확정용 구간별 샘플을 만든다. 결과는 Release "condensed-comment-intent"에 올림.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMMENTS_DATA_TAG: condensed-youtube-comments
+  INTENT_TAG: condensed-comment-intent
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 패키지 설치
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install sentence-transformers scikit-learn pandas spacy
+          python -m spacy download en_core_web_sm
+      - name: 댓글 병합본 받아오기
+        run: |
+          mkdir -p data
+          gh release download "$COMMENTS_DATA_TAG" --dir data \
+            --pattern "condensed_comments_merged.csv" --clobber
+      - name: 마스킹 + 임베딩 + 점수
+        run: python -u scripts/intent_scoring.py --out-dir data/intent
+      - name: 결과를 Release에 업로드
+        run: |
+          bash scripts/checkpoint_release.sh "$INTENT_TAG" \
+            data/intent/samples.csv data/intent/stats.json data/intent/scores.csv.gz \
+            data/intent/comments_masked.csv.gz
+          bash scripts/checkpoint_release.sh "$INTENT_TAG" \
+            data/intent/embeddings_unique.npy data/intent/emb_inverse.npy
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: intent-samples
+          path: |
+            data/intent/samples.csv
+            data/intent/stats.json
+          retention-days: 30
+          if-no-files-found: ignore
