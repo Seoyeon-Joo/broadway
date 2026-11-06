@@ -1,6 +1,6 @@
 ﻿work_id,work_title,video_id,medium,reason,synopsis_words,computed
 2,The Croods: A New Age,BSRC6053orM,hollywood,ok,513,True
-7,Pinocchio,RctVqeefxXc,hollywood,too_short,679,False
+7,Pinocchio,RctVqeefxXc,hollywood,ok,679,True
 8,The War with Grandpa,plJvCGOnny0,hollywood,status_not_ok,684,False
 10,Come Play,fqvYjakULpE,hollywood,ok,663,True
 14,Tenet,8OEwRIexziE,hollywood,ok,739,True
@@ -19,7 +19,7 @@
 36,American Skin,cZSEJRPYcW0,hollywood,ok,457,True
 61,A Glitch in the Matrix,wk_i0xN44bg,hollywood,ok,52,True
 50,The Little Things,AqPYDeSZY1E,hollywood,ok,690,True
-76,End Game,o6glOKQ9fJ4,hollywood,too_short,825,False
+76,End Game,o6glOKQ9fJ4,hollywood,ok,825,True
 50,The Little Things,-vRPCGYNqRQ,hollywood,ok,690,True
 63,Judas and the Black Messiah,y_HbxFiJ-5g,hollywood,ok,574,True
 67,Willy's Wonderland,poo2gTrlJKE,hollywood,ok,645,True
@@ -186,7 +186,7 @@
 395,Flee,Pmp8-LUAO8U,hollywood,ok,682,True
 456,Uncharted,Gh9IiHgGx-M,hollywood,ok,597,True
 464,Studio 666,eaXZKKGr36I,hollywood,ok,512,True
-387,Licorice Pizza,dHc9DmEz9bg,hollywood,too_short,658,False
+387,Licorice Pizza,dHc9DmEz9bg,hollywood,ok,658,True
 370,King Richard,ayLq7YuKAAo,hollywood,ok,565,True
 449,Death on the Nile,u2Tlbp2wgZ0,hollywood,ok,640,True
 477,Radhe Shyam,xw9NOuDAniU,hollywood,ok,668,True
@@ -196,7 +196,7 @@
 457,Dog,QqFqXFkUbtw,hollywood,ok,721,True
 508,Selena2022 Re-release,ntV7DY2nLOo,hollywood,ok,685,True
 509,You Won't Be Alone,528sE0tsjeo,hollywood,ok,942,True
-369,Encanto,6cgOGyBVUAM,hollywood,too_short,643,False
+369,Encanto,6cgOGyBVUAM,hollywood,language_metadata_not_allowed,643,False
 513,Sonic the Hedgehog 2,FpFLfW9S0xc,hollywood,ok,612,True
 506,Morbius,_n2WgjmxQeA,hollywood,ok,487,True
 456,Uncharted,I-WSy4wDJO4,hollywood,ok,597,True
@@ -208,7 +208,7 @@
 531,Vivo,CxlP4c9Yc8M,hollywood,ok,529,True
 541,Acharya,Bu52h4LnsV4,hollywood,language_metadata_not_allowed,535,False
 528,The Northman,Txq9CJ6o5XA,hollywood,ok,818,True
-470,The Batman,uHjoUG62J6U,hollywood,too_short,630,False
+470,The Batman,uHjoUG62J6U,hollywood,ok,630,True
 550,Vortex,ofZVVetCHHU,hollywood,ok,385,True
 551,Happening,N8xvkXn18MY,hollywood,status_not_ok,474,False
 552,Diva2022 Re-release,W6PxErKmsYw,hollywood,ok,695,True
@@ -275,7 +275,7 @@
 682,The Invitation,FPuhc5LgU-Y,hollywood,ok,689,True
 691,Jaws2022 Re-release,IxgkP4_kKmg,hollywood,ok,650,True
 679,Orphan: First Kill,-lMzna3H0zg,hollywood,ok,462,True
-694,After Ever Happy,yxXN8lQgyqQ,hollywood,too_short,651,False
+694,After Ever Happy,yxXN8lQgyqQ,hollywood,ok,651,True
 695,Star Trek II: The Wrath of Khan2022 Re-release,jl75g8o894M,hollywood,ok,633,True
 696,Hawa,2VicY07_1hY,hollywood,too_short,45,False
 710,Hold Me Tight,y-ChWNy4HX8,hollywood,ok,681,True
@@ -330,7 +330,7 @@
 818,Violent Night,lQasnIZr8EM,hollywood,ok,537,True
 802,The Menu,BDUdH6Yc4S8,hollywood,ok,609,True
 836,The Whale,dJT3HsiC4UM,hollywood,ok,534,True
-841,Loudmouth,iZtgS45wNN0,hollywood,too_short,0,False
+841,Loudmouth,iZtgS45wNN0,hollywood,synopsis_missing_or_short,0,False
 843,The Trial2022 Re-release,juwea9X3Guc,hollywood,ok,384,True
 845,Avatar: The Way of Water,rD_nVGVC1x0,hollywood,ok,660,True
 846,Puss in Boots: The Last Wish,wjvhqygDC8o,hollywood,ok,699,True
@@ -383,7 +383,7 @@
 863,Plane,HbO7N3uSpTc,hollywood,not_in_transcript_file,448,False
 923,The Quiet Girl,M_TJy8x0itE,hollywood,ok,599,True
 924,My Happy Ending,Xss-cJaDUYg,hollywood,ok,31,True
-810,EO,lag2OiceAj0,hollywood,too_short,0,False
+810,EO,lag2OiceAj0,hollywood,synopsis_missing_or_short,0,False
 927,Chocolat2023 Re-release,D_DRgiJmfQE,hollywood,ok,684,True
 931,Creed III,bzh5ReTb_Mo,hollywood,ok,702,True
 917,Cocaine Bear,kuyF5LCkALs,hollywood,ok,547,True
@@ -429,7 +429,7 @@
 1016,Sisu,k2_AidcZWms,hollywood,ok,834,True
 997,Beau Is Afraid,iQk_mAk4bjs,hollywood,ok,728,True
 993,Suzume,ziUTzEGuJdA,hollywood,ok,814,True
-968,The Super Mario Bros. Movie,lLC6Q_ssa90,hollywood,too_short,573,False
+968,The Super Mario Bros. Movie,lLC6Q_ssa90,hollywood,ok,573,True
 1014,"Are You There God? It's Me, Margaret.",if27jngPv1w,hollywood,ok,696,True
 1035,Hypnotic,FH41kJyzssI,hollywood,ok,543,True
 1016,Sisu,-hcw-6hWveM,hollywood,ok,834,True
@@ -479,7 +479,7 @@
 1102,Amanda,ayNM-KwS0a8,hollywood,ok,525,True
 1096,Mission: Impossible - Dead Reckoning Part One,2VKOt-Xjgko,hollywood,ok,671,True
 1095,Insidious: The Red Door,VP4IZ-i4iR0,hollywood,ok,564,True
-1088,Indiana Jones and the Dial of Destiny,Bm44ezaC5x0,hollywood,too_short,641,False
+1088,Indiana Jones and the Dial of Destiny,Bm44ezaC5x0,hollywood,ok,641,True
 1080,No Hard Feelings,XNkfscRFba4,hollywood,ok,653,True
 1108,Psycho-Pass: Providence,cza7M5V4ISs,hollywood,ok,755,True
 1109,Terrifier,0pDr_t7tw_8,hollywood,ok,115,True
@@ -496,7 +496,7 @@
 1123,Teenage Mutant Ninja Turtles: Mutant Mayhem,SPHwer84W4o,hollywood,ok,547,True
 1124,The First Slam Dunk,KvL8u6-QNtM,hollywood,status_not_ok,76,False
 1076,Asteroid City,rBmcnYLUhT4,hollywood,ok,1493,True
-1130,Sympathy for the Devil,_BE1F97NIK4,hollywood,too_short,717,False
+1130,Sympathy for the Devil,_BE1F97NIK4,hollywood,ok,717,True
 1100,Priyotoma,6QV9mMPyGYM,hollywood,status_not_ok,85,False
 1118,Barbie,ynU-wVdesr0,hollywood,ok,590,True
 1132,Meg 2: The Trench,3JAFasPQGeA,hollywood,status_not_ok,480,False
@@ -513,7 +513,7 @@
 1156,Blue Beetle,S2FJOGDfwzU,hollywood,ok,629,True
 1157,Strays,FyXSBLWPFx4,hollywood,ok,376,True
 1132,Meg 2: The Trench,3U54mCI52Ss,hollywood,ok,480,True
-1143,The Last Voyage of the Demeter,HamzSUDgAGc,hollywood,too_short,773,False
+1143,The Last Voyage of the Demeter,HamzSUDgAGc,hollywood,ok,773,True
 1060,Spider-Man: Across the Spider-Verse,Ek40XtVsO7g,hollywood,ok,688,True
 1136,The Highest of Stakes,_i7J2hnZpH0,hollywood,status_not_ok,608,False
 1078,The Wicker Man50th Anniversary,Vj3yhBb3Eu8,hollywood,ok,462,True
@@ -524,7 +524,7 @@
 1166,Bottoms,34JrlQ5CUws,hollywood,ok,565,True
 1107,Theater Camp,U2czyUiQloE,hollywood,ok,657,True
 1145,Jules,VfuJ59vNEig,hollywood,ok,404,True
-1168,Fremont,T5rukYnT8bU,hollywood,too_short,696,False
+1168,Fremont,T5rukYnT8bU,hollywood,ok,696,True
 1170,The Moon,wiG8iU2myoE,hollywood,ok,73,True
 1175,The Equalizer 3,Bpuout_Y4Lo,hollywood,ok,604,True
 1156,Blue Beetle,YWKFtftnPi4,hollywood,ok,629,True
@@ -546,11 +546,11 @@
 1161,Gran Turismo,d1Mc4nS_VTI,hollywood,ok,586,True
 1176,Jawan,UFrkV9aCAQY,hollywood,language_metadata_not_allowed,849,False
 1196,Stop Making Sense2023 Re-release,li9EPHbS03Y,hollywood,status_not_ok,284,False
-1198,The Blind,FNVN6yABvkI,hollywood,too_short,59,False
+1198,The Blind,FNVN6yABvkI,hollywood,ok,59,True
 1122,Talk to Me,9VdtgxNhKLE,hollywood,ok,694,True
 1212,On Fire,-Eg0z0HYhQw,hollywood,ok,707,True
 1213,The Kill Room,MDEh1vQ1I7k,hollywood,ok,428,True
-1219,Siege,hhUa_N4QTxY,hollywood,too_short,37,False
+1219,Siege,hhUa_N4QTxY,hollywood,ok,37,True
 1208,Saw X,yaphl4vOrlM,hollywood,ok,592,True
 1209,The Creator,9S_DTwvn7Os,hollywood,ok,570,True
 1184,A Haunting in Venice,0f_0xQE9TIo,hollywood,ok,666,True
@@ -571,9 +571,9 @@
 1220,The Exorcist: Believer,Zo64ciZSPBc,hollywood,not_in_transcript_file,531,False
 1241,The Nightmare Before Christmas30th Anniversary Re-Release,AwFZYNzDeQk,hollywood,language_metadata_not_allowed,507,False
 1175,The Equalizer 3,KkUiy25FtYY,hollywood,status_not_ok,604,False
-1227,Dicks: The Musical,YFznEIQhgOE,hollywood,too_short,481,False
+1227,Dicks: The Musical,YFznEIQhgOE,hollywood,ok,481,True
 1243,The Canterville Ghost,zN_U2veLH1w,hollywood,ok,826,True
-1239,Divinity,9yL5JbZtrbA,hollywood,too_short,44,False
+1239,Divinity,9yL5JbZtrbA,hollywood,ok,44,True
 1249,Five Nights at Freddy's,6OATR0VIHXg,hollywood,ok,485,True
 1253,Terrifier 22023 Re-release,WtQXOMs1Mdo,hollywood,ok,466,True
 993,Suzume,eupIzTO2kBM,hollywood,ok,814,True
@@ -585,22 +585,22 @@
 1258,Radical,Kscgs6RRlWs,hollywood,ok,409,True
 1220,The Exorcist: Believer,YKaWp4TRzAo,hollywood,not_in_transcript_file,531,False
 1251,Freelance,fq_2dpC-irU,hollywood,ok,570,True
-1263,All Dirt Roads Taste of Salt,Boyw8YyVmLc,hollywood,too_short,22,False
+1263,All Dirt Roads Taste of Salt,Boyw8YyVmLc,hollywood,synopsis_missing_or_short,22,False
 1249,Five Nights at Freddy's,D7r4Gik7EiY,hollywood,ok,485,True
 1270,Tiger 3,T28PkBMygKQ,hollywood,ok,596,True
 1271,Journey to Bethlehem,bZZR8WbyWSA,hollywood,too_short,62,False
 1207,PAW Patrol: The Mighty Movie,P4LoZkopa2w,hollywood,ok,618,True
 1220,The Exorcist: Believer,uIEDyEdOq8A,hollywood,ok,531,True
 1250,After Death,5ePsOi5LL0U,hollywood,ok,75,True
-1273,Dream Scenario,4zgyoNV7X9Y,hollywood,too_short,596,False
+1273,Dream Scenario,4zgyoNV7X9Y,hollywood,ok,596,True
 1276,The Hunger Games: The Ballad of Songbirds & Snakes,bHUS-mvlfzA,hollywood,ok,654,True
 1278,Thanksgiving,d2LptlRECXk,hollywood,status_not_ok,0,False
 1269,The Marvels,fgPB37nJ-GY,hollywood,ok,528,True
 1258,Radical,DjHkG7JGPKI,hollywood,ok,409,True
-1259,What Happens Later,nJI7DD1cOB0,hollywood,too_short,519,False
+1259,What Happens Later,nJI7DD1cOB0,hollywood,ok,519,True
 1272,It's a Wonderful Knife,RBeppR5T35g,hollywood,ok,665,True
-1247,The Persian Version,ybsPRc5AlrM,hollywood,too_short,96,False
-1260,The Marsh King's Daughter,tw0I1RtijkM,hollywood,too_short,743,False
+1247,The Persian Version,ybsPRc5AlrM,hollywood,ok,96,True
+1260,The Marsh King's Daughter,tw0I1RtijkM,hollywood,ok,743,True
 1281,Next Goal Wins,54gXWg7rNyw,hollywood,ok,633,True
 1289,Deep Sea,l7W2Ri3IhLw,hollywood,ok,404,True
 1276,The Hunger Games: The Ballad of Songbirds & Snakes,6zuw_KfBDEs,hollywood,ok,654,True
@@ -626,8 +626,8 @@
 1333,Salaar,58uTNJarR8c,hollywood,too_short,524,False
 1334,Ferrari,ZJ_vf77UFlY,hollywood,status_not_ok,376,False
 1308,The Boy and the Heron,F99-lNqVc-U,hollywood,ok,640,True
-1320,Dunki,7YLo1n5a0g4,hollywood,too_short,608,False
-1279,Napoleon,Fd7bfCKc10Q,hollywood,too_short,598,False
+1320,Dunki,7YLo1n5a0g4,hollywood,language_metadata_not_allowed,608,False
+1279,Napoleon,Fd7bfCKc10Q,hollywood,ok,598,True
 1295,Animal,nLgGRXwYs34,hollywood,ok,524,True
 1335,All of Us Strangers,CTCChrM6JCI,hollywood,ok,692,True
 1297,Silent Night,Mb75MjpOG8o,hollywood,ok,474,True
@@ -662,7 +662,7 @@
 1328,Migration,xtAPwQSx7QA,hollywood,ok,665,True
 1381,Out of Darkness,YcENK4s3uTc,hollywood,synopsis_missing_or_short,0,False
 1341,Night Swim,UahJMdt32dE,hollywood,ok,514,True
-1382,Turning Red,DLCGNHRHxYw,hollywood,too_short,699,False
+1382,Turning Red,DLCGNHRHxYw,hollywood,language_metadata_not_allowed,699,False
 1384,DuneIMAX,UMU8FCPYeRw,hollywood,ok,559,True
 1280,Wish,To_hlwc43qE,hollywood,ok,620,True
 1390,Drift,4wknIM_7Us0,hollywood,too_short,27,False
@@ -684,7 +684,7 @@
 1335,All of Us Strangers,7GJSq4RD_Io,hollywood,ok,692,True
 1390,Drift,CE9KEWl8Plo,hollywood,status_not_ok,27,False
 1419,Kung Fu Panda 4,eGYJvDH5NCU,hollywood,ok,574,True
-1421,Cabrini,zniVv7AIOww,hollywood,too_short,409,False
+1421,Cabrini,zniVv7AIOww,hollywood,ok,409,True
 1378,Bob Marley: One Love,WizOk9ThKTA,hollywood,ok,472,True
 1424,Love Lies Bleeding,-grql0mn1UI,hollywood,status_not_ok,640,False
 1404,Article 370,fW1N4Vhqjkw,hollywood,ok,736,True
@@ -723,7 +723,7 @@
 1479,The Beast,2EZ9SwSHr0Q,hollywood,ok,66,True
 1462,A Fragile Flower,rWX3oegC6F0,hollywood,language_metadata_not_allowed,184,False
 1455,Godzilla X Kong: The New Empire,ArggowBKQ0o,hollywood,not_in_transcript_file,680,False
-1484,Shrek 22024 Re-release,kGn5JN3dhgE,hollywood,too_short,663,False
+1484,Shrek 22024 Re-release,kGn5JN3dhgE,hollywood,ok,663,True
 1485,The Long Game,4QJrOxuuO5c,hollywood,ok,656,True
 1486,Sting,ZXwu36GazGk,hollywood,ok,270,True
 1444,Immaculate,tPokOhsNTLI,hollywood,ok,572,True
@@ -766,7 +766,7 @@
 1363,Hundreds of Beavers,853Q3pHoNl8,hollywood,ok,599,True
 1541,The Garfield Movie,XQtt_ZOyWRI,hollywood,ok,697,True
 1545,Star Wars: Episode I - The Phantom Menace2012 3D Release,wX1CNyKr2aw,hollywood,ok,701,True
-1523,Lost Soulz,tDjqpb5oGSE,hollywood,too_short,121,False
+1523,Lost Soulz,tDjqpb5oGSE,hollywood,ok,121,True
 1541,The Garfield Movie,0KHktl9Dj7Q,hollywood,ok,697,True
 1534,IF,IuO2kB1MEAk,hollywood,ok,648,True
 1540,Furiosa: A Mad Max Saga,FV02V283wb0,hollywood,synopsis_missing_or_short,0,False
@@ -803,9 +803,9 @@
 1600,Blue Lock: Episode Nagi,l1yLZJAyD74,hollywood,synopsis_missing_or_short,5,False
 1610,Seven Samurai70th Anniversary 4K Re-Release,HH7tFsAN0wk,hollywood,ok,691,True
 1595,Despicable Me 4,BJ0SqrbGe4w,hollywood,status_not_ok,598,False
-1570,Inside Out 2,zLag_Ffm1wE,hollywood,too_short,655,False
+1570,Inside Out 2,zLag_Ffm1wE,hollywood,ok,655,True
 1614,Fly Me to the Moon,n_pIH5pbV3s,hollywood,ok,408,True
-1596,Horizon: An American Saga - Chapter 1,fN3llKZN1xI,hollywood,too_short,634,False
+1596,Horizon: An American Saga - Chapter 1,fN3llKZN1xI,hollywood,ok,634,True
 1615,The Lion King2024 Re-release,lQdMcpRXEKg,hollywood,ok,643,True
 1597,Kalki 2898 AD,CxQ6ibZgFnw,hollywood,not_in_transcript_file,485,False
 1585,Kinds of Kindness,J-tmKBQxx44,hollywood,ok,1020,True
@@ -816,7 +816,7 @@
 1626,Bad Newz,s86691ltZ3E,hollywood,ok,366,True
 1541,The Garfield Movie,7VeoyBDIVwM,hollywood,ok,697,True
 1635,Deadpool & Wolverine,L-_piJpTkYo,hollywood,ok,650,True
-1595,Despicable Me 4,4jQVwiP99qg,hollywood,too_short,598,False
+1595,Despicable Me 4,4jQVwiP99qg,hollywood,ok,598,True
 1613,Longlegs,ECrcZFpZxq0,hollywood,ok,600,True
 1603,Last Summer,tnPi15ABD6A,hollywood,ok,349,True
 1625,Twisters,uWDeSoX3WC4,hollywood,ok,700,True
@@ -839,9 +839,9 @@
 1672,The Good Half,jfxnQmLMZCg,hollywood,ok,31,True
 1635,Deadpool & Wolverine,SOxAZFAkjrg,hollywood,ok,650,True
 1664,Alien: Romulus,ezCzJcuxbh4,hollywood,ok,601,True
-1676,The Forge,9kFWEWx6kUY,hollywood,too_short,750,False
+1676,The Forge,9kFWEWx6kUY,hollywood,ok,750,True
 1677,The Crow,EIYr6xMpfs8,hollywood,synopsis_missing_or_short,0,False
-1595,Despicable Me 4,t6KGpr87jVw,hollywood,too_short,598,False
+1595,Despicable Me 4,t6KGpr87jVw,hollywood,ok,598,True
 1655,Borderlands,X22NMhzBnJE,hollywood,ok,356,True
 1644,Harold and the Purple Crayon,jC5fjFiLu2Y,hollywood,ok,532,True
 1681,Revolver,A5mkJQX5ATI,hollywood,ok,87,True
@@ -849,7 +849,7 @@
 1677,The Crow,ITGI9oU_8Jo,hollywood,synopsis_missing_or_short,0,False
 1685,1992,IoniG4k3fsY,hollywood,ok,59,True
 1688,Shaun of the Dead2024 Re-release,XWw9vE39IGc,hollywood,ok,630,True
-1666,My Penguin Friend,OntQK9VAYMY,hollywood,too_short,36,False
+1666,My Penguin Friend,OntQK9VAYMY,hollywood,ok,36,True
 1691,"Paris, Texas2024 Re-release",esdwEVyW7X0,hollywood,ok,678,True
 1598,Sound of Hope: The Story of Possum Trot,d4U1t6U6KlU,hollywood,ok,58,True
 1696,Escape,MOg457domoM,hollywood,ok,468,True
@@ -872,7 +872,7 @@
 1721,Whiplash10th Anniversary,B2PxQ2ANAPo,hollywood,not_in_transcript_file,603,False
 1643,Trap,nmmNymUWLIs,hollywood,ok,680,True
 1722,Howl's Moving Castle20th Anniversary – Studio Ghibli Fest 2024,UTORpuFpAm8,hollywood,status_not_ok,708,False
-1700,The Front Room,g_4TysWJehE,hollywood,too_short,535,False
+1700,The Front Room,g_4TysWJehE,hollywood,ok,535,True
 1724,The Shade,qIKndfYY9tY,hollywood,too_short,68,False
 1683,Afraid,V8_iYGoiJ_E,hollywood,ok,634,True
 1733,The Wild Robot,zO5UQSD0wfg,hollywood,ok,514,True
@@ -880,7 +880,7 @@
 1734,Devara Part 1,wosHAM8n3dk,hollywood,language_metadata_not_allowed,612,False
 1735,Megalopolis,gR0q79FtkUs,hollywood,ok,683,True
 1720,The Substance,YQvCJvVFPrE,hollywood,ok,518,True
-1708,Am I Racist?,pXKF2vxoyqY,hollywood,too_short,226,False
+1708,Am I Racist?,pXKF2vxoyqY,hollywood,ok,226,True
 1739,Saturday Night,YQvCJvVFPrE,hollywood,ok,494,True
 1675,Blink Twice,P7iHSd-yvds,hollywood,ok,683,True
 1743,Joker: Folie à Deux,hADXuR7GRj0,hollywood,too_short,634,False
@@ -971,7 +971,7 @@
 1785,Memoir of a Snail,37INUesDFco,hollywood,ok,703,True
 1871,Sonic the Hedgehog 3,-uJZxSr587M,hollywood,ok,681,True
 1872,Mufasa: The Lion King,jnC-o1MjtyU,hollywood,not_in_transcript_file,561,False
-1827,Moana 2,_4tljsDhknA,hollywood,too_short,568,False
+1827,Moana 2,_4tljsDhknA,hollywood,ok,568,True
 1874,A Complete Unknown,5fhJ-lnJ1UU,hollywood,ok,624,True
 1875,Homestead,clstWlBK-aA,hollywood,status_not_ok,465,False
 1876,Babygirl,Wha_JwnATo0,hollywood,status_not_ok,443,False
@@ -992,8 +992,8 @@
 1887,Back to the Future,WddEaUntSHE,hollywood,ok,36,True
 1819,Red One,61ytijl_4m8,hollywood,ok,557,True
 1888,Back to the Future Part II,rbj1ZxDQGWY,hollywood,language_metadata_not_allowed,629,False
-1889,Shrek,tzgy93dvHqE,hollywood,too_short,689,False
-1890,Kung Fu Panda,8y9QnS_tMkY,hollywood,too_short,589,False
+1889,Shrek,tzgy93dvHqE,hollywood,ok,689,True
+1890,Kung Fu Panda,8y9QnS_tMkY,hollywood,language_text_not_english,589,False
 1277,Trolls Band Together,0vwOuBu9wPc,hollywood,ok,702,True
 1891,The Grinch,GK1sTHx5y0g,hollywood,ok,566,True
 1892,The Thing,Nht9St2-PCk,hollywood,ok,699,True
@@ -1005,7 +1005,7 @@
 1898,Scott Pilgrim vs. the World,cqI1FDZSOKY,hollywood,ok,511,True
 1899,Love Actually,VJk_vYFhE-A,hollywood,ok,601,True
 1900,Shaun of the Dead,XWw9vE39IGc,hollywood,ok,630,True
-1901,Shrek 2,kGn5JN3dhgE,hollywood,too_short,663,False
+1901,Shrek 2,kGn5JN3dhgE,hollywood,ok,663,True
 1902,Dazed and Confused,H7mCEK2tx7s,hollywood,ok,677,True
 1903,Field of Dreams,t-Ts51qyxuw,hollywood,ok,787,True
 1617,Touch,nwVBsMuQW0k,hollywood,status_not_ok,495,False
@@ -1026,7 +1026,7 @@
 1874,A Complete Unknown,AOKPZFCJ2uI,hollywood,ok,624,True
 1826,Wicked,L-jMNB30zx4,hollywood,ok,667,True
 1878,The Brutalist,ZgUKjnLxXow,hollywood,ok,747,True
-1924,I'm Still Here,jnrytBYYah8,hollywood,too_short,441,False
+1924,I'm Still Here,jnrytBYYah8,hollywood,ok,441,True
 1829,Bonhoeffer,rdUxgBW9weQ,hollywood,ok,201,True
 1845,Y2K,reu4fLGNEK8,hollywood,ok,541,True
 1874,A Complete Unknown,VcuiYAfgog4,hollywood,ok,624,True
@@ -1082,8 +1082,8 @@
 1932,Brave the Dark,BAqxIV0G6Sk,hollywood,ok,76,True
 1946,Swept Away2025 Re-release,wqMRwZIwcqo,hollywood,not_in_transcript_file,238,False
 1937,Blades in the Darkness,GTC4yJnDEi0,hollywood,ok,83,True
-2000,The Boondock Saints2025 Re-release,4WBjNPILb9Q,hollywood,too_short,642,False
-1967,The Vortex,fQGPJJTFxy4,hollywood,too_short,138,False
+2000,The Boondock Saints2025 Re-release,4WBjNPILb9Q,hollywood,ok,642,True
+1967,The Vortex,fQGPJJTFxy4,hollywood,ok,138,True
 2002,Black Bag,g0PjvMUDjac,hollywood,ok,644,True
 2004,The Last Supper,YBjt_UnG5Ic,hollywood,synopsis_missing_or_short,9,False
 1938,Dog Man,1qFZXI8YKsg,hollywood,ok,627,True
@@ -1093,7 +1093,7 @@
 1878,The Brutalist,MswJ3MLFgHc,hollywood,ok,747,True
 2007,The Actor,fju2UklDwYw,hollywood,synopsis_missing_or_short,28,False
 1981,My Dead Friend Zoe,C4RLYUT7E54,hollywood,ok,124,True
-1984,Brothers After War,q1j2fUMbWXg,hollywood,too_short,645,False
+1984,Brothers After War,q1j2fUMbWXg,hollywood,ok,645,True
 1970,Cleaner,w_3LC7eD-ow,hollywood,ok,608,True
 2013,Snow White,zgfhM4hXq9w,hollywood,ok,686,True
 1988,Mickey 17,AAgT5H7fJio,hollywood,ok,717,True
@@ -1117,7 +1117,7 @@
 2025,The Chosen: Last Supper,Ca58ecYjZV8,hollywood,ok,658,True
 2051,Kaiju No. 8: Mission Recon,8Ee-p41z99A,hollywood,ok,874,True
 2052,Sacramento,zfCR6dvBE4M,hollywood,synopsis_missing_or_short,13,False
-2029,The Penguin Lessons,CV9giEnIHXg,hollywood,too_short,484,False
+2029,The Penguin Lessons,CV9giEnIHXg,hollywood,ok,484,True
 1968,The Monkey,copmUAqabWk,hollywood,not_in_transcript_file,619,False
 2045,When Fall Is Coming,lUIR6s4jO7M,hollywood,ok,56,True
 2054,The Teacher,gBNWG2ialT0,hollywood,ok,80,True
@@ -1149,17 +1149,17 @@
 2091,Bonjour Tristesse,O-emJsiKaqU,hollywood,status_not_ok,289,False
 2020,Secret Mall Apartment,G2Dw-vSUPxs,hollywood,synopsis_missing_or_short,26,False
 2092,Yadang: The Snitch,7lqYpg2R5tc,hollywood,ok,399,True
-2059,Colorful Stage! The Movie: A Miku Who Can't Sing,JlmBSQuqqZs,hollywood,too_short,503,False
+2059,Colorful Stage! The Movie: A Miku Who Can't Sing,JlmBSQuqqZs,hollywood,ok,503,True
 2062,Sneaks,4DIW0i3Nr4o,hollywood,ok,497,True
-2063,The Ugly Stepsister,lSwO1B078o4,hollywood,too_short,831,False
+2063,The Ugly Stepsister,lSwO1B078o4,hollywood,ok,831,True
 2086,Thunderbolts*,JDDkNeY4il8,hollywood,ok,688,True
-2036,A Minecraft Movie,CucLrDxxEr8,hollywood,too_short,685,False
+2036,A Minecraft Movie,CucLrDxxEr8,hollywood,language_text_not_english,685,False
 2102,Shadow Force,_NZHhdVduvg,hollywood,status_not_ok,566,False
 2072,Until Dawn,rXoJZuQm2ro,hollywood,ok,694,True
 2103,Fight or Flight,_FrrNa1kh74,hollywood,ok,518,True
 2046,The King of Kings,7wgFbCKpJDs,hollywood,status_not_ok,354,False
 2106,Wolf Children2025 Re-release (4K Restoration),fYUjf0nvlUU,hollywood,ok,534,True
-2107,#Single,8a3jPl4gZZM,hollywood,too_short,60,False
+2107,#Single,8a3jPl4gZZM,hollywood,language_text_not_english,60,False
 2108,Demon Slayer: Kimetsu no Yaiba - The Movie: Mugen Train2025 Re-release,Fq8fr12-pzQ,hollywood,ok,587,True
 2109,Kingdom of Heaven2025 Re-release,aCF5ZohD8I8,hollywood,status_not_ok,744,False
 2065,The Shrouds,bbe1K1D7C3A,hollywood,ok,535,True
@@ -1168,7 +1168,7 @@
 2073,On Swift Horses,RuuJ3oKmN9k,hollywood,synopsis_missing_or_short,0,False
 2083,April,NNfki921pjA,hollywood,ok,645,True
 2077,Jongli,hy6Y9exRw4g,hollywood,not_in_transcript_file,137,False
-1673,Mountains,nkWIMLNLQgI,hollywood,too_short,46,False
+1673,Mountains,nkWIMLNLQgI,hollywood,language_metadata_not_allowed,46,False
 2116,Hurry Up Tomorrow,vKYy8F6ZT-A,hollywood,ok,460,True
 2101,Clown in a Cornfield,K4gYDYNDrhg,hollywood,ok,613,True
 2072,Until Dawn,PGFDm_ACOvg,hollywood,ok,694,True
@@ -1205,7 +1205,7 @@
 2147,How to Train Your Dragon,V0XYhQoeYM0,hollywood,ok,582,True
 2153,28 Years Later,p6sS-lkFso8,hollywood,language_metadata_not_allowed,0,False
 2154,Elio,YmfJuSfDzDI,hollywood,ok,648,True
-2130,The Phoenician Scheme,sBdL_gXsEPs,hollywood,too_short,538,False
+2130,The Phoenician Scheme,sBdL_gXsEPs,hollywood,ok,538,True
 2140,The Life of Chuck,sMnKBLOALGA,hollywood,ok,756,True
 2156,Brokeback Mountain20th anniversary,rc21uSA9B1s,hollywood,ok,549,True
 2159,Apocalypse Now2025 Re-release,oZK6bPDZH-k,hollywood,ok,622,True
@@ -1258,12 +1258,12 @@
 2146,In the Fire of War,BWL6Wq8lRdY,hollywood,ok,83,True
 2206,The Bad Guys 2,EP1l1S-pto8,hollywood,ok,564,True
 2207,The Naked Gun,61s0U3Azw0Y,hollywood,ok,665,True
-2219,War 2,v-tLXDShaAU,hollywood,too_short,657,False
+2219,War 2,v-tLXDShaAU,hollywood,ok,657,True
 2220,Shin Godzilla2025 Re-release,aQbaLV0Y6D0,hollywood,not_in_transcript_file,567,False
 2195,"Oh, Hi!",G9tnr0A-SrY,hollywood,ok,488,True
-2218,Freakier Friday,yYUCEwhp6FM,hollywood,too_short,662,False
+2218,Freakier Friday,yYUCEwhp6FM,hollywood,ok,662,True
 2206,The Bad Guys 2,ucjQs04HwCY,hollywood,ok,564,True
-2228,Coolie,h2IfcrtGunA,hollywood,too_short,688,False
+2228,Coolie,h2IfcrtGunA,hollywood,language_metadata_not_allowed,688,False
 275,Together,a_bI8qHa8gw,hollywood,ok,32,True
 2208,Sketch,g9BW9VhmikQ,hollywood,ok,493,True
 2232,Black Swan2025 Re-release,caPy0OZmXKs,hollywood,not_in_transcript_file,742,False
@@ -1314,8 +1314,8 @@
 2287,Spinal Tap II: The End Continues,fSMfPKV1Vfc,hollywood,ok,694,True
 2288,The Sound of Music60th Anniversary,TB9F-n_8u88,hollywood,ok,723,True
 2291,Clemente,hwtTs9HhMdg,hollywood,ok,59,True
-2227,Nobody 2,TIw85phId1w,hollywood,too_short,700,False
-2294,Happyend,elg5inmtwUA,hollywood,too_short,40,False
+2227,Nobody 2,TIw85phId1w,hollywood,ok,700,True
+2294,Happyend,elg5inmtwUA,hollywood,ok,40,True
 2285,The Long Walk,H8Oj7hTTSuU,hollywood,ok,754,True
 2217,Weapons,dkcBhSeVi2o,hollywood,ok,695,True
 2302,Apollo 132025 Re-release (30TH Anniversary),cv4i_KevOrY,hollywood,ok,702,True
@@ -1357,7 +1357,7 @@
 2290,The History of Sound,BLji5LjgdHM,hollywood,ok,473,True
 2335,Mr. K,2JIapVlpXDQ,hollywood,ok,44,True
 2347,Black Phone 2,50yDEWVBOmU,hollywood,ok,470,True
-2336,Tron: Ares,WlP1nrKZOsE,hollywood,too_short,617,False
+2336,Tron: Ares,WlP1nrKZOsE,hollywood,ok,617,True
 2348,Good Fortune,Cs5NGns5yyI,hollywood,ok,905,True
 2340,After the Hunt,_4HbWsZjs9Y,hollywood,status_not_ok,726,False
 2324,The Smashing Machine,TFGE3nwMNG4,hollywood,ok,383,True
@@ -1374,7 +1374,7 @@
 2311,Gabby's Dollhouse: The Movie,N5hyBLHiItA,hollywood,ok,795,True
 2368,The Twilight Saga: New Moon2025 Re-release,OMTCetHEd9M,hollywood,ok,569,True
 2353,The Mastermind,Y6QVPcvpUoE,hollywood,ok,352,True
-2371,Last Days,JYdOMqS46F0,hollywood,too_short,31,False
+2371,Last Days,JYdOMqS46F0,hollywood,ok,31,True
 2361,Hedda,LnODFAInqDw,hollywood,ok,587,True
 2376,Dracula,bphD-U1Cddc,hollywood,ok,366,True
 2347,Black Phone 2,2Qo7D0tIR3I,hollywood,ok,470,True
@@ -1415,7 +1415,7 @@
 2418,Eternity,acnlfq5BpBM,hollywood,synopsis_missing_or_short,0,False
 2419,Wake Up Dead Man,JweUZA5scyE,hollywood,ok,686,True
 2402,Keeper,g1y9A5YZPq4,hollywood,ok,526,True
-2420,Hamnet,_kT46OtQh3k,hollywood,too_short,697,False
+2420,Hamnet,_kT46OtQh3k,hollywood,ok,697,True
 2410,Rebuilding,LohqsgbpUR8,hollywood,synopsis_missing_or_short,27,False
 2338,Soul on Fire,rn15ADtPAu0,hollywood,ok,76,True
 2404,King Ivory,yfeGat-oRkI,hollywood,ok,91,True
@@ -1449,7 +1449,7 @@
 2455,The Housemaid,KOMMjo0C0YA,hollywood,ok,667,True
 2456,The SpongeBob Movie: Search for SquarePants,pief0sGVYpc,hollywood,too_short,430,False
 2457,Marty Supreme,38IdMim5Mbg,hollywood,ok,778,True
-2414,Wicked: For Good,V4Mo_WiB3Fs,hollywood,too_short,716,False
+2414,Wicked: For Good,V4Mo_WiB3Fs,hollywood,ok,716,True
 2458,Anaconda,rl5jBwVjQ0E,hollywood,language_metadata_not_allowed,508,False
 2459,Song Sung Blue,fNYRy_UrErE,hollywood,ok,692,True
 2420,Hamnet,Avg0-Yw17pA,hollywood,ok,697,True
@@ -1497,7 +1497,7 @@
 2481,The Lord of the Rings: The Return of the King2026 Re-release,Crt41uoe--o,hollywood,language_metadata_not_allowed,691,False
 2460,Is This Thing On?,9hidufKrqRk,hollywood,ok,494,True
 2482,Charlie the Wonderdog,wHx3RaaEInE,hollywood,ok,613,True
-2483,Madagascar2026 Re-release,2XiUqNJraJU,hollywood,too_short,569,False
+2483,Madagascar2026 Re-release,2XiUqNJraJU,hollywood,ok,569,True
 2487,Zombie Land Saga: Yumeginga Paradise,DYddMzvF1yw,hollywood,ok,563,True
 2488,Sound of Falling,2Nd3YEPtnLc,hollywood,ok,717,True
 2467,We Bury the Dead,QyX4LJ4iZlU,hollywood,ok,694,True
@@ -1509,14 +1509,14 @@
 2495,Standout: The Ben Kjar Story,pYJXi7HvGgs,hollywood,ok,91,True
 2486,A Private Life,MNTPvkg39pY,hollywood,ok,655,True
 2467,We Bury the Dead,cEvKumxopXo,hollywood,ok,694,True
-2471,I Was a Stranger,-9eU43qlNPc,hollywood,too_short,46,False
+2471,I Was a Stranger,-9eU43qlNPc,hollywood,ok,46,True
 2448,Dust Bunny,oca_L2kUeys,hollywood,ok,495,True
 2455,The Housemaid,fQYTB-CMaPE,hollywood,ok,667,True
 2456,The SpongeBob Movie: Search for SquarePants,G56DWdFEh-s,hollywood,status_not_ok,430,False
 2421,The Secret Agent,halreD4bXF8,hollywood,ok,508,True
 2505,Back to the Past,4JHL0OHPx9Y,hollywood,ok,506,True
 2482,Charlie the Wonderdog,Lx566Hfg-dQ,hollywood,ok,613,True
-2472,Dead Man's Wire,YoKWXpWpuBk,hollywood,too_short,483,False
+2472,Dead Man's Wire,YoKWXpWpuBk,hollywood,ok,483,True
 2471,I Was a Stranger,DPakBknrIHU,hollywood,language_metadata_not_allowed,46,False
 1995,Eephus,yaE6UlGYGV8,hollywood,ok,38,True
 2490,Mercy,PsVYbJ2mSfk,hollywood,ok,837,True
@@ -1536,7 +1536,7 @@
 2528,Cold Storage,cPyMUIMPHRI,hollywood,ok,715,True
 2503,Shelter,0lkQWuhroAk,hollywood,ok,499,True
 2501,Iron Lung,r_nUjipEWDY,hollywood,ok,643,True
-2529,The Mortuary Assistant,JTeHtrGFZFo,hollywood,too_short,567,False
+2529,The Mortuary Assistant,JTeHtrGFZFo,hollywood,ok,567,True
 2458,Anaconda,R7dNFF8rOxs,hollywood,ok,508,True
 2524,GOAT,dkC1QiHc2NQ,hollywood,ok,639,True
 2523,Wuthering Heights,xRqvDpJCAwg,hollywood,ok,673,True
@@ -1619,7 +1619,7 @@
 2596,The Drama,Lnje85J9cFg,hollywood,ok,585,True
 2604,"You, Me & Tuscany",r1lnge0MR5g,hollywood,ok,734,True
 2614,Normal,xd-0_VrAdsU,hollywood,language_metadata_not_allowed,531,False
-2616,Busboys,R5Li4KG9G04,hollywood,too_short,29,False
+2616,Busboys,R5Li4KG9G04,hollywood,synopsis_missing_or_short,29,False
 2618,Fight Club2026 Re-release,nbo1eF8czfg,hollywood,ok,334,True
 2622,Whisper of the Heart2026 Re-release,tR2UA7QN-j4,hollywood,not_in_transcript_file,44,False
 2623,Bridesmaids2026 Re-release,zXuJVCzmriM,hollywood,ok,753,True
@@ -1627,7 +1627,7 @@
 2630,No Picnic2026 4K Re-release,BCgqgMsluIA,hollywood,ok,48,True
 2638,Fuze,_XE9fk1djvU,hollywood,ok,478,True
 2640,I Swear,3KWIt20bKf8,hollywood,ok,627,True
-2641,Desert Warrior,_BFU0z6nHKE,hollywood,too_short,45,False
+2641,Desert Warrior,_BFU0z6nHKE,hollywood,ok,45,True
 2642,The Story of Everything,-oLkbovsxNY,hollywood,ok,576,True
 2563,Reminders of Him,joUUuo3mzLg,hollywood,ok,646,True
 2643,Ricky,ZzVHg848UeM,hollywood,language_metadata_not_allowed,17,False
@@ -1649,7 +1649,7 @@
 2650,The Devil Wears Prada 2,uYnrM4dkUOk,hollywood,ok,588,True
 2659,Mortal Kombat II,TZf6NqK75ds,hollywood,status_not_ok,588,False
 2660,The Sheep Detectives,_uDEhdQEGGs,hollywood,ok,687,True
-2670,Shrek25th Anniversary,tzgy93dvHqE,hollywood,too_short,689,False
+2670,Shrek25th Anniversary,tzgy93dvHqE,hollywood,ok,689,True
 2673,The Secret World of Arrietty2026 Re-release,Y-LEwbmvRtY,hollywood,not_in_transcript_file,746,False
 2613,Lee Cronin's The Mummy,ARPuNwGBMd0,hollywood,ok,607,True
 2596,The Drama,PUCu72RleAo,hollywood,ok,585,True
@@ -1685,7 +1685,7 @@
 2696,Trainspotting30th Anniversary,p8IJjMNxJVs,hollywood,ok,695,True
 2698,Another World,YsY3yl1LEfU,hollywood,ok,1348,True
 2699,Rockstar,NenY_-eZEys,hollywood,language_metadata_not_allowed,354,False
-2704,Disclosure Day,Miu55e2hBJQ,hollywood,too_short,530,False
+2704,Disclosure Day,Miu55e2hBJQ,hollywood,ok,530,True
 2705,The Furious,2nCz02Bd1wA,hollywood,ok,684,True
 2684,The Breadwinner,D2exiPAwT0Y,hollywood,ok,522,True
 2685,Pressure,2SSHw95aue8,hollywood,ok,683,True
@@ -1701,12 +1701,12 @@
 2683,Backrooms,1LG7jkzHyQo,hollywood,too_short,689,False
 2636,Michael,_DIOYzrzX-4,hollywood,ok,440,True
 2726,Lucky Strike,QgnWr2h4b1M,hollywood,status_not_ok,447,False
-2713,The Death of Robin Hood,nBC8h0eEfA0,hollywood,too_short,604,False
+2713,The Death of Robin Hood,nBC8h0eEfA0,hollywood,ok,604,True
 2728,Couture,dksvZy9i2c8,hollywood,language_metadata_not_allowed,27,False
 2707,Stop! That! Train!,6G10M27NxBc,hollywood,ok,413,True
 2711,Toy Story 5,ANW66dkaPJk,hollywood,ok,623,True
 2733,Young Washington,FjdBWYKfMNc,hollywood,ok,548,True
-2683,Backrooms,SnvaJP1jytQ,hollywood,too_short,689,False
+2683,Backrooms,SnvaJP1jytQ,hollywood,language_text_not_english,689,False
 2727,The Invite,pvcrRYR1Sjg,hollywood,ok,406,True
 2713,The Death of Robin Hood,iPfe0eVT-LE,hollywood,ok,604,True
 2697,Carolina Caroline,mmrSbMfQyKM,hollywood,ok,254,True
@@ -1802,117 +1802,117 @@
 2829,Hope,yaCPbblzfcg,hollywood,ok,539,True
 2825,By Any Means,k36ZXbAWaOo,hollywood,ok,400,True
 2849,Ghost in the Shell2026 Re-release,P9dFwSKlB7w,hollywood,ok,648,True
-2850,The Musical,k5p5AiFBBtg,hollywood,too_short,370,False
+2850,The Musical,k5p5AiFBBtg,hollywood,ok,370,True
 2828,Onslaught,qDeYh7lEO6s,hollywood,ok,454,True
-2853,My Brother's Wedding2026 Re-release,2M68e0eTQKM,hollywood,too_short,560,False
+2853,My Brother's Wedding2026 Re-release,2M68e0eTQKM,hollywood,ok,560,True
 2,Hadestown,zTsdbm6IiHY,broadway,ok,810,True
-3,Waitress,sc_8n2LNePc,broadway,status_not_ok,933,False
+3,Waitress,sc_8n2LNePc,broadway,language_text_not_english,933,False
 6,Hamilton,RyObRLcZmGw,broadway,ok,1248,True
-10,Wicked,06UKXfCwAJY,broadway,status_not_ok,1157,False
+10,Wicked,06UKXfCwAJY,broadway,ok,1157,True
 10,Wicked,jGi4zlsj8bw,broadway,ok,1157,True
 18,Thoughts of a Colored Man,OqGb-WDIIE0,broadway,ok,31,True
-21,Tina: The Tina Turner Musical,sDOw0RPFO2I,broadway,too_short,97,False
+21,Tina: The Tina Turner Musical,sDOw0RPFO2I,broadway,ok,97,True
 7,Lackawanna Blues,y10jRrRIjc4,broadway,ok,50,True
 15,The Lehman Trilogy,9ARhswZqMuw,broadway,ok,84,True
 18,Thoughts of a Colored Man,6c-Q7QW3x2o,broadway,ok,31,True
 19,"Caroline, or Change",JXRCYOYq_oA,broadway,ok,1046,True
-32,Flying Over Sunset,w7Vw-GaiAoo,broadway,too_short,120,False
+32,Flying Over Sunset,w7Vw-GaiAoo,broadway,ok,120,True
 36,Dear Evan Hansen,qD7Uz87ZGuU,broadway,ok,119,True
-26,Mrs. Doubtfire,VkO5vk95iZA,broadway,status_not_ok,85,False
-38,The Music Man,DqUxWyT-TKM,broadway,too_short,44,False
-37,MJ The Musical,JHqKH5vvBPw,broadway,status_not_ok,406,False
+26,Mrs. Doubtfire,VkO5vk95iZA,broadway,too_short,85,False
+38,The Music Man,DqUxWyT-TKM,broadway,ok,44,True
+37,MJ The Musical,JHqKH5vvBPw,broadway,ok,406,True
 39,Skeleton Crew,zlk_ijl2REo,broadway,ok,75,True
 22,To Kill A Mockingbird,Iz_9xdqen1U,broadway,ok,78,True
-23,Ain't Too Proud—The Life and Times of the Temptations,6D6Hwnnu4zM,broadway,too_short,97,False
+23,Ain't Too Proud—The Life and Times of the Temptations,6D6Hwnnu4zM,broadway,ok,97,True
 39,Skeleton Crew,K2yQEopATK0,broadway,ok,75,True
 40,Plaza Suite,cUqCF56gEEE,broadway,too_short,276,False
 43,Paradise Square,5SRoHUSMoHk,broadway,ok,74,True
-44,American Buffalo,we8VcnyS224,broadway,synopsis_missing_or_short,0,False
+44,American Buffalo,we8VcnyS224,broadway,ok,401,True
 45,Funny Girl,oJN6QCqcx6U,broadway,ok,57,True
 46,How I Learned to Drive,6RpbUdKtfS4,broadway,ok,1297,True
-49,The Little Prince,B93ALg-QKNk,broadway,too_short,75,False
+49,The Little Prince,B93ALg-QKNk,broadway,ok,75,True
 42,Birthday Candles,JRGpwG5TP_M,broadway,ok,41,True
 42,Birthday Candles,XQXXrutNUPg,broadway,ok,41,True
 46,How I Learned to Drive,74_AjKW95NQ,broadway,ok,1297,True
-50,The Minutes,ItcnLVsdeEs,broadway,synopsis_missing_or_short,22,False
+50,The Minutes,ItcnLVsdeEs,broadway,ok,173,True
 55,A Strange Loop,1c-4J5RIy3g,broadway,ok,575,True
-48,Mr. Saturday Night,YTeR29SfSKQ,broadway,too_short,77,False
-51,The Skin of Our Teeth,okm4UXMKDUA,broadway,too_short,497,False
+48,Mr. Saturday Night,YTeR29SfSKQ,broadway,ok,77,True
+51,The Skin of Our Teeth,okm4UXMKDUA,broadway,ok,497,True
 38,The Music Man,nPf03xAZ89I,broadway,ok,44,True
 57,Into the Woods,5ay_WBimgC8,broadway,ok,92,True
-14,Moulin Rouge! The Musical,_LF2cQXATao,broadway,too_short,38,False
+14,Moulin Rouge! The Musical,_LF2cQXATao,broadway,ok,38,True
 16,Aladdin,IZGAl__soCo,broadway,ok,1162,True
-61,Death of a Salesman,uY5-9tiE1Ls,broadway,status_not_ok,1010,False
+61,Death of a Salesman,uY5-9tiE1Ls,broadway,ok,1010,True
 62,Leopoldstadt,0xe0SIM3msE,broadway,ok,391,True
-59,1776,Th_YgmdfVjo,broadway,too_short,1715,False
+59,1776,Th_YgmdfVjo,broadway,ok,1715,True
 60,Cost of Living,MVr5wPjGFLA,broadway,ok,47,True
-33,Harry Potter and the Cursed Child,Mu4LEa0ifD0,broadway,status_not_ok,1344,False
+33,Harry Potter and the Cursed Child,Mu4LEa0ifD0,broadway,ok,1344,True
 68,Walking with Ghosts,uslB7iPQOig,broadway,ok,106,True
 66,KPOP,JYOnHCVU5GI,broadway,ok,1526,True
 67,Kimberly Akimbo,Q3Ksn63qPw8,broadway,ok,1693,True
-63,The Piano Lesson,kJVa5Z5UOsg,broadway,synopsis_missing_or_short,0,False
+63,The Piano Lesson,kJVa5Z5UOsg,broadway,ok,892,True
 64,Topdog/Underdog,5nyck-qx8c0,broadway,ok,465,True
 69,& Juliet,tBEmlA3wsy4,broadway,ok,937,True
 74,A Christmas Carol,3gblTYuttmo,broadway,ok,89,True
 73,Some Like It Hot,4y2KZElv_Ec,broadway,ok,99,True
-63,The Piano Lesson,Z3Zg4iJsi48,broadway,synopsis_missing_or_short,0,False
+63,The Piano Lesson,Z3Zg4iJsi48,broadway,ok,892,True
 67,Kimberly Akimbo,wkrM7YNQCGo,broadway,ok,1693,True
 75,Ain't No Mo',R5WBjR1XZbQ,broadway,ok,584,True
 77,Between Riverside and Crazy,VAZqYBFm4uI,broadway,ok,71,True
 73,Some Like It Hot,GOhxeZPHB60,broadway,ok,99,True
-78,The Collaboration,wjlgbvZs7Og,broadway,synopsis_missing_or_short,24,False
+78,The Collaboration,wjlgbvZs7Og,broadway,ok,62,True
 61,Death of a Salesman,Pqw7uIlP8Ak,broadway,ok,1010,True
-76,Ohio State Murders,xs-NEvQqA6I,broadway,synopsis_missing_or_short,0,False
+76,Ohio State Murders,xs-NEvQqA6I,broadway,ok,148,True
 53,Beetlejuice,sutc1chHAoU,broadway,too_short,0,False
-78,The Collaboration,ck7nnUTuhkc,broadway,status_not_ok,24,False
-78,The Collaboration,S9vuCT_wkUM,broadway,synopsis_missing_or_short,24,False
+78,The Collaboration,ck7nnUTuhkc,broadway,too_short,62,False
+78,The Collaboration,S9vuCT_wkUM,broadway,ok,62,True
 80,A Doll's House,MWdeFaucMu0,broadway,ok,1607,True
 79,Pictures From Home,xfWC9qiL1vU,broadway,ok,69,True
 83,Sweeney Todd,cnaTgPv5cUE,broadway,status_not_ok,53,False
 81,Bad Cinderella,3qPYi5qfbJg,broadway,ok,1020,True
 87,Shucked,46ZkNp89CNk,broadway,ok,938,True
 85,Camelot,FRCWsKrYQcI,broadway,ok,1838,True
-90,Fat Ham,B9wbDeat37s,broadway,too_short,394,False
+90,Fat Ham,B9wbDeat37s,broadway,ok,394,True
 80,A Doll's House,b3M-XxTRs14,broadway,ok,1607,True
 86,Life of Pi,eYIOfNruq3w,broadway,ok,76,True
 80,A Doll's House,KLo5QlHxGcc,broadway,ok,1607,True
 85,Camelot,mXAHJQ88pO8,broadway,ok,1838,True
 91,"New York, New York",xyWMOQbVp7Q,broadway,ok,480,True
-89,Peter Pan Goes Wrong,oXTKYa1n7g0,broadway,too_short,52,False
-101,Back To The Future,LusVpxS87Xk,broadway,status_not_ok,1175,False
+89,Peter Pan Goes Wrong,oXTKYa1n7g0,broadway,language_text_not_english,52,False
+101,Back To The Future,LusVpxS87Xk,broadway,ok,1175,True
 96,Grey House,L8q3Y4M8px4,broadway,ok,63,True
-98,Once Upon A One More Time,HfYJCS8Osw0,broadway,status_not_ok,1328,False
-99,Here Lies Love,GzOEb4dptLA,broadway,too_short,952,False
-102,The Cottage,rthiZx7ECCA,broadway,synopsis_missing_or_short,0,False
+98,Once Upon A One More Time,HfYJCS8Osw0,broadway,ok,1328,True
+99,Here Lies Love,GzOEb4dptLA,broadway,ok,952,True
+102,The Cottage,rthiZx7ECCA,broadway,ok,146,True
 103,The Shark is Broken,QOIGUX_riRQ,broadway,ok,292,True
 111,Harmony,cplEh97iUVo,broadway,ok,1301,True
 101,Back To The Future,txUJriZgGJI,broadway,ok,1175,True
-112,Spamalot,UDnRwn1Rt5w,broadway,too_short,1394,False
+112,Spamalot,UDnRwn1Rt5w,broadway,ok,1394,True
 115,Prayer For The French Republic,QqgROqGHQto,broadway,ok,85,True
 120,An Enemy of the People,AKwUSSO4Kzk,broadway,ok,104,True
-121,The Who's Tommy,0RluWNFLwQA,broadway,too_short,33,False
+121,The Who's Tommy,0RluWNFLwQA,broadway,ok,33,True
 117,Doubt,pmGoNff-cbk,broadway,ok,426,True
 126,The Great Gatsby,OXzxxYv4rhI,broadway,ok,904,True
-129,Cabaret,Wl80UgdgIzY,broadway,synopsis_missing_or_short,29,False
+129,Cabaret,Wl80UgdgIzY,broadway,ok,1319,True
 118,The Notebook,I-6sZmioxFY,broadway,ok,735,True
-119,Water For Elephants,dY7SY81jvBY,broadway,status_not_ok,1052,False
-16,Aladdin,rdhWbv-JXWg,broadway,status_not_ok,1162,False
+119,Water For Elephants,dY7SY81jvBY,broadway,ok,1052,True
+16,Aladdin,rdhWbv-JXWg,broadway,ok,1162,True
 123,Lempicka,v2HY5wvtgdY,broadway,ok,74,True
-121,The Who's Tommy,S1g6mopomAY,broadway,too_short,33,False
-2,Hadestown,Z2sdG5GLqh0,broadway,too_short,810,False
+121,The Who's Tommy,S1g6mopomAY,broadway,ok,33,True
+2,Hadestown,Z2sdG5GLqh0,broadway,ok,810,True
 135,Illinoise,jS7QtYFmepE,broadway,ok,561,True
-122,The Outsiders,OOFay3f8tNo,broadway,too_short,1798,False
-130,Mary Jane,5LvlgPIPvxE,broadway,too_short,33,False
+122,The Outsiders,OOFay3f8tNo,broadway,ok,1798,True
+130,Mary Jane,5LvlgPIPvxE,broadway,ok,33,True
 134,Uncle Vanya,6NpWHjts3lk,broadway,too_short,102,False
-69,& Juliet,nQBgqftDh_I,broadway,too_short,937,False
-72,"A Beautiful Noise, The Neil Diamond Musical",efpCvyt6qY4,broadway,too_short,72,False
-128,The Wiz,f8R_hs-bTRU,broadway,too_short,1647,False
+69,& Juliet,nQBgqftDh_I,broadway,language_text_not_english,937,False
+72,"A Beautiful Noise, The Neil Diamond Musical",efpCvyt6qY4,broadway,ok,72,True
+128,The Wiz,f8R_hs-bTRU,broadway,ok,1647,True
 37,MJ The Musical,iqgG0Bi-5FU,broadway,ok,406,True
 140,Once Upon a Mattress,CswHHvTbeV8,broadway,ok,1309,True
 125,Suffs,GlVJ3JdSVno,broadway,ok,1586,True
 10,Wicked,aAQLWOItdHQ,broadway,too_short,1157,False
-129,Cabaret,11e9IUbsbT0,broadway,too_short,29,False
-148,Sunset Boulevard,5_LUz8aIM_8,broadway,status_not_ok,796,False
+129,Cabaret,11e9IUbsbT0,broadway,ok,1319,True
+148,Sunset Boulevard,5_LUz8aIM_8,broadway,too_short,796,False
 152,Death Becomes Her,A_rn2IzCUQ0,broadway,ok,828,True
 145,Our Town,62oSe6yY0NA,broadway,ok,1100,True
 154,Elf,xsPPm3ZskXg,broadway,ok,1267,True
@@ -1921,40 +1921,40 @@
 157,Eureka Day,ByP8FreHWwQ,broadway,ok,32,True
 10,Wicked,faN9FjVvFRo,broadway,ok,1157,True
 163,Othello,AXFPKGWWClk,broadway,ok,893,True
-172,Floyd Collins,0_2WVfmNN4g,broadway,too_short,1554,False
+172,Floyd Collins,0_2WVfmNN4g,broadway,ok,1554,True
 174,Stranger Things: The First Shadow,LBxhpLkyeR0,broadway,ok,1068,True
 162,Buena Vista Social Club,ELSXAjmvpDQ,broadway,ok,107,True
 156,Gypsy,YOFMls9y650,broadway,ok,39,True
 178,Dead Outlaw,yW3DGm9jF2Y,broadway,ok,1054,True
-160,Redwood,oUvy7OVgTI0,broadway,too_short,120,False
-150,Maybe Happy Ending,ZmdW40TnMXI,broadway,status_not_ok,1456,False
-164,Purpose,S81DhtgSDLY,broadway,too_short,871,False
+160,Redwood,oUvy7OVgTI0,broadway,ok,120,True
+150,Maybe Happy Ending,ZmdW40TnMXI,broadway,too_short,1456,False
+164,Purpose,S81DhtgSDLY,broadway,ok,871,True
 176,Pirates! The Penzance Musical,OKY6ohe6Rck,broadway,ok,122,True
 177,Real Women Have Curves,ICvkqaMyZoE,broadway,ok,637,True
 178,Dead Outlaw,6ioSPq4PI3Q,broadway,ok,1054,True
 180,Mamma Mia!,KbKVeq_mOCo,broadway,ok,1010,True
 184,Waiting for Godot,WyVeRBSRpmI,broadway,ok,461,True
-185,Ragtime,P77YBq8-jys,broadway,status_not_ok,1528,False
-186,Beetlejuice,I6w8T_MrpNQ,broadway,status_not_ok,0,False
+185,Ragtime,P77YBq8-jys,broadway,ok,1528,True
+186,Beetlejuice,I6w8T_MrpNQ,broadway,synopsis_missing_or_short,0,False
 191,Oedipus,KhhhwRyngXk,broadway,ok,49,True
 193,Two Strangers (Carry a Cake Across New York),V2gWGgbGIPA,broadway,ok,609,True
 193,Two Strangers (Carry a Cake Across New York),hPkeiuSY6Sk,broadway,ok,609,True
 33,Harry Potter and the Cursed Child,DAiOcdPh7wY,broadway,too_short,1344,False
 187,Liberation,_jTPNUw_faw,broadway,ok,55,True
-14,Moulin Rouge! The Musical,hItx6yY-8Oc,broadway,status_not_ok,38,False
+14,Moulin Rouge! The Musical,hItx6yY-8Oc,broadway,ok,38,True
 194,Marjorie Prime,Ms4v4mIWQBA,broadway,ok,36,True
-197,Every Brilliant Thing,o8GwrsvGROU,broadway,synopsis_missing_or_short,0,False
+197,Every Brilliant Thing,o8GwrsvGROU,broadway,ok,278,True
 198,Death of a Salesman,bxDZ6UdrMdU,broadway,ok,1010,True
 201,Becky Shaw,-S_igEowjBc,broadway,ok,63,True
-202,Cats: The Jellicle Ball,yVCattsN90M,broadway,status_not_ok,31,False
+202,Cats: The Jellicle Ball,yVCattsN90M,broadway,ok,31,True
 204,"Beaches, A New Musical",64JGpppGPKQ,broadway,ok,81,True
-207,The Rocky Horror Show,TjqVyHvpBSc,broadway,too_short,916,False
+207,The Rocky Horror Show,TjqVyHvpBSc,broadway,language_text_not_english,916,False
 2,Hadestown,tzou_CuCwS0,broadway,ok,810,True
 69,& Juliet,5d98Q_vNQR4,broadway,ok,937,True
 201,Becky Shaw,6TrTxgdS-3Q,broadway,ok,63,True
-212,The Balusters,JapTNakGCKI,broadway,synopsis_missing_or_short,20,False
-211,Schmigadoon!,QFWk_mf1BCM,broadway,status_not_ok,1096,False
+212,The Balusters,JapTNakGCKI,broadway,ok,182,True
+211,Schmigadoon!,QFWk_mf1BCM,broadway,ok,1096,True
 204,"Beaches, A New Musical",L05r2gmOVgo,broadway,ok,81,True
-206,The Lost Boys,1mR77-wc6bo,broadway,too_short,1256,False
-207,The Rocky Horror Show,9lxkizjdcx8,broadway,too_short,916,False
-208,Titaníque,TbZXPOlT5QA,broadway,too_short,103,False
+206,The Lost Boys,1mR77-wc6bo,broadway,ok,1256,True
+207,The Rocky Horror Show,9lxkizjdcx8,broadway,ok,916,True
+208,Titaníque,TbZXPOlT5QA,broadway,ok,103,True
