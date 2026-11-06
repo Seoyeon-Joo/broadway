@@ -1,0 +1,36 @@
+name: Gap-fix synopses (9 Broadway shows with missing/short synopsis)
+
+# similarity 계산에서 시놉시스가 없거나 30단어 미만이던 9개 작품의 Wikipedia 페이지를 직접 지정해 다시 수집한다.
+# 결과: data/synopses_gapfix_broadway.xlsx (본 파일에는 자동으로 합치지 않음)
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [synopsis-gapfix]
+    paths:
+      - scripts/gapfix_synopses.py
+      - .github/workflows/gapfix_synopses.yml
+
+permissions:
+  contents: write
+
+jobs:
+  gapfix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas openpyxl
+      - name: Re-collect the 9 shows
+        run: python scripts/gapfix_synopses.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/synopses_gapfix_broadway.xlsx
+          git diff --staged --quiet || git commit -m "Gap-fix synopses [automated]"
+          git pull --rebase origin synopsis-gapfix
+          git push
