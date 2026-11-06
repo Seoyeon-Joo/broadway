@@ -25,6 +25,7 @@ from collect_synopses import api, get_text, split_sections  # noqa: E402
 
 OUT = "data/synopses_gapfix_broadway.xlsx"
 MAX_CHARS = 32000
+MIN_PLOT_WORDS = 20
 
 # work_id: (title, year, [공연 페이지 후보], [원작 페이지 후보])
 TARGETS = {
@@ -105,7 +106,7 @@ def plot_from_act_lines(text):
 def extract(text):
     from collect_synopses import plot_section
     p, h = plot_section(text)
-    if p and words(p) >= 120:
+    if p and words(p) >= MIN_PLOT_WORDS:   # 짧은 Synopsis/Premise 섹션도 받아옴 (원래 120단어)
         return p, "heading: " + h
     p, lab = plot_from_headings(text)
     if p:

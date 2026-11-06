@@ -5,11 +5,6 @@ name: Gap-fix synopses (9 Broadway shows with missing/short synopsis)
 
 on:
   workflow_dispatch: {}
-  push:
-    branches: [synopsis-gapfix]
-    paths:
-      - scripts/gapfix_synopses.py
-      - .github/workflows/gapfix_synopses.yml
 
 permissions:
   contents: write
