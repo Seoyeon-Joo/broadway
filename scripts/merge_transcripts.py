@@ -21,6 +21,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--shards", required=True)
     ap.add_argument("--transcripts", default="data/similarity/youtube_transcripts_all.xlsx")
+    ap.add_argument("--prefer-new", action="store_true",
+                    help="새 결과가 ok이면 기존 텍스트보다 짧아도 항상 새 결과로 교체 (한 방법으로 통일하고 싶을 때, 예: Whisper 전체). "
+                         "새 결과가 ok가 아니면 이 옵션을 써도 기존을 유지")
     a = ap.parse_args()
 
     old = pd.read_excel(a.transcripts)
@@ -35,7 +38,8 @@ def main():
     new_w = nwords(new.set_index("video_url")["text"])
     worse = [u for u in new["video_url"]
              if u in old_w.index and old_w[u] > 0
-             and (new.set_index("video_url").at[u, "status"] != "ok" or new_w[u] < old_w[u])]
+             and (new.set_index("video_url").at[u, "status"] != "ok"
+                  or (not a.prefer_new and new_w[u] < old_w[u]))]
     if worse:
         print(f"기존 텍스트가 더 좋아 유지: {len(worse)}개")
         new = new[~new["video_url"].isin(worse)]
