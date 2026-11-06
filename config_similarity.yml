@@ -22,7 +22,7 @@ languages: [en]
 detect_language: true
 
 # ---- 품질 필터
-min_transcript_words: 50       # 이보다 짧은 스크립트는 제외
+min_transcript_words: 10       # 하한 10으로 계산, 50/20 버전은 결과의 transcript_words로 후처리 필터
 min_synopsis_words: 30         # 이보다 짧은 시놉시스(리드 문단 등)는 계산 제외 (제외 목록은 skipped_pairs.csv)
 
 # ---- 임베딩
