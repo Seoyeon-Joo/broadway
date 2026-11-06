@@ -1,0 +1,26 @@
+name: Refetch durations
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pandas
+      - run: python scripts/refetch_durations.py
+        env:
+          YOUTUBE_API_KEYS: ${{ secrets.YOUTUBE_API_KEYS }}
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/duration_check.csv
+          git diff --staged --quiet || git commit -m "duration check [automated]"
+          git pull --rebase origin main
+          git push
