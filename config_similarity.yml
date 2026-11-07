@@ -1,13 +1,11 @@
 # compute_similarity.py 설정 (시놉시스 vs 영상 스크립트 유사도)
 
 # ---- 입력 (repo 기준 상대경로)
-transcripts_xlsx: data/similarity/youtube_transcripts_all.xlsx
+transcripts_xlsx: data/similarity/youtube_transcripts_all_v13.csv
 synopses_hollywood_xlsx: data/similarity/synopses_hollywood.xlsx
-synopses_broadway_xlsx: data/similarity/synopses_broadway.xlsx
 # 패널의 t2_video_id가 분석 대상 영상. 패널에 남은 작품·영상만 계산한다.
-panel_hollywood_xlsx: data/similarity/panel_current/hollywood.xlsx   # 최신 정리본 (movie_id, t2_video_id)
+panel_hollywood_xlsx: data/similarity/panel_current/hollywood_v13.xlsx   # 최신 정리본 (movie_id, t2_video_id)
 panel_hollywood_sheet: Sheet1
-panel_broadway_xlsx: data/similarity/panel_current/broadway.xlsx     # (show_id, t2_video_id)
 # 패널을 안 쓸 때(위 두 줄을 지우면)만 사용되는 구버전 매핑 (scripts/build_video_work_map.py 로 생성)
 video_work_map_csv: data/video_work_map.csv
 

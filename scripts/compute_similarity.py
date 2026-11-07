@@ -150,7 +150,7 @@ def load_panel_pairs(cfg):
 
 
 def load_transcripts(path, cfg, log):
-    t = pd.read_excel(path)
+    t = pd.read_csv(path) if str(path).lower().endswith('.csv') else pd.read_excel(path)
     n0 = len(t)
     t["video_url"] = t["video_url"].astype(str).str.strip()
     t["video_id"] = extract_video_id(t["video_url"])
