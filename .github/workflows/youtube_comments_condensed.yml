@@ -120,7 +120,7 @@ jobs:
           import pandas as pd
           c = pd.read_csv("data/condensed_comments_merged.csv", encoding="utf-8-sig", low_memory=False)
           t = pd.read_csv("data/condensed_comment_targets.csv", encoding="utf-8-sig", dtype=str)
-          t = t[["video_id", "medium", "work_id", "source", "weeks_as_t2", "duration_sec", "n_shots"]]
+          t = t[["video_id", "medium", "work_id", "source", "weeks_as_t2", "duration_sec", "n_shots", "in_current_panel"]]
           c = c.merge(t, on="video_id", how="left")
           c.to_csv("data/condensed_comments_merged.csv", index=False, encoding="utf-8-sig")
           print("최종", len(c), "행, 고유 영상", c["video_id"].nunique())
