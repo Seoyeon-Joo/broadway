@@ -11,7 +11,7 @@ permissions:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   COMMENTS_DATA_TAG: condensed-youtube-comments
-  INTENT_TAG: condensed-comment-intent
+  INTENT_TAG: condensed-comment-intent-v2
 
 jobs:
   score:
@@ -33,7 +33,7 @@ jobs:
           gh release download "$COMMENTS_DATA_TAG" --dir data \
             --pattern "condensed_comments_merged.csv" --clobber
       - name: 마스킹 + 임베딩 + 점수
-        run: python -u scripts/intent_scoring.py --out-dir data/intent
+        run: python -u scripts/intent_scoring.py --out-dir data/intent --only-current
       - name: 결과를 Release에 업로드
         run: |
           bash scripts/checkpoint_release.sh "$INTENT_TAG" \

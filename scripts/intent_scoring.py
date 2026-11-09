@@ -168,12 +168,19 @@ def main():
     ap.add_argument("--max-rows", type=int, default=0)
     ap.add_argument("--band-n", type=int, default=40)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--only-current", action="store_true",
+                    help="in_current_panel==1 인 영상의 댓글만 사용(최신 패널에서 빠진 영상 제외)")
     args = ap.parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
     rng = np.random.RandomState(args.seed)
 
     df = pd.read_csv(args.comments, encoding="utf-8-sig", low_memory=False,
-                     usecols=["video_id", "comment_id", "is_reply", "text", "like_count", "medium", "show", "source"])
+                     usecols=["video_id", "comment_id", "is_reply", "text", "like_count", "medium", "show", "source"]
+                     + (["in_current_panel"] if args.only_current else []))
+    if args.only_current:
+        n0 = len(df)
+        df = df[pd.to_numeric(df["in_current_panel"], errors="coerce").fillna(0) == 1].drop(columns=["in_current_panel"])
+        print(f"현재 패널 영상만: {n0:,} -> {len(df):,}행")
     if args.max_rows:
         df = df.sample(min(args.max_rows, len(df)), random_state=args.seed)
     df["like_count"] = pd.to_numeric(df["like_count"], errors="coerce").fillna(0)
