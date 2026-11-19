@@ -1,0 +1,11 @@
+﻿,lex_tfidf_uni_cos,lex_tfidf_bi_cos,lex_tfidf_cov_mean,lex_tfidf_end_cov_mean,lex_word_recall,lex_entity_recall,bgem3_doc_cosine,bgem3_cov_mean,bgem3_end_cov_mean,bgem3_tfidf_cosine
+lex_tfidf_uni_cos,1.0,0.979,0.931,0.841,0.775,0.847,,,,
+lex_tfidf_bi_cos,0.979,1.0,0.91,0.797,0.766,0.849,,,,
+lex_tfidf_cov_mean,0.931,0.91,1.0,0.848,0.868,0.858,,,,
+lex_tfidf_end_cov_mean,0.841,0.797,0.848,1.0,0.744,0.762,,,,
+lex_word_recall,0.775,0.766,0.868,0.744,1.0,0.807,,,,
+lex_entity_recall,0.847,0.849,0.858,0.762,0.807,1.0,,,,
+bgem3_doc_cosine,,,,,,,,,,
+bgem3_cov_mean,,,,,,,,,,
+bgem3_end_cov_mean,,,,,,,,,,
+bgem3_tfidf_cosine,,,,,,,,,,
