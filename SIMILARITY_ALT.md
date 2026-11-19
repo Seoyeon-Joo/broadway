@@ -28,3 +28,9 @@ GitHub → Actions → **Compute Similarity ALT (TF-IDF / SBERT / BGE-en)** → 
 ```
 python scripts/compute_similarity_alt.py --smoke --limit 60 --out-dir /tmp/alt_smoke    # 해싱 벡터로 파이프라인만 확인
 ```
+
+## Qwen3-VL-4B 플롯 포인트 커버리지 (GPU, 직접 실행)
+`scripts/qwen_vl_plot_coverage.py` — GitHub Actions에서는 못 돌린다 (무료 러너에 GPU 없음 + 영상 다운로드가 YouTube IP 차단).
+1. `caption`: 영상 파일(`videos/{video_id}.mp4`)에서 30초 구간마다 4프레임을 뽑아 Qwen3-VL-4B로 장면 설명 생성
+2. `judge`: 시놉시스 문장마다 영상 근거(자막 + 장면 설명)를 붙여 "이 사건이 영상에 나오는가" Yes 확률 → `pc_mean`, `pc_ratio`, `pc_end_mean`
+`judge`는 영상 파일 없이 자막만으로도 돌아간다(그 경우 `has_visual_captions=0`). 사용법은 스크립트 상단 주석 참고. GPU 환경이 없어 작성 환경에서 실행 검증을 못 했으므로 `--limit 3`으로 먼저 확인할 것.
