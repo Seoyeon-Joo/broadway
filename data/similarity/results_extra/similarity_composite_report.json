@@ -1,0 +1,57 @@
+{
+  "inputs": [
+    "alt",
+    "extra"
+  ],
+  "n_pairs": 997,
+  "by_medium": {
+    "broadway": 138,
+    "hollywood": 859
+  },
+  "columns_used": [
+    "lex_tfidf_uni_cos",
+    "lex_tfidf_bi_cos",
+    "lex_tfidf_cov_mean",
+    "lex_word_recall",
+    "lex_entity_recall",
+    "sbert_mpnet_doc_cosine",
+    "sbert_mpnet_cov_mean",
+    "sbert_minilm_doc_cosine",
+    "sbert_minilm_cov_mean",
+    "bge_large_en_doc_cosine",
+    "bge_large_en_cov_mean",
+    "bgem3_doc_cosine",
+    "bgem3_cov_mean",
+    "q3emb06_doc_cosine",
+    "q3emb06_cov_mean",
+    "x_rerank_mean",
+    "x_nli_mean"
+  ],
+  "n_complete_pairs_for_pc1": 858,
+  "n_pairs_with_sim_z_mean": 997,
+  "pc1_explained_variance_ratio": 0.771,
+  "pc1_loadings": {
+    "lex_tfidf_uni_cos": 0.254,
+    "lex_tfidf_bi_cos": 0.242,
+    "lex_tfidf_cov_mean": 0.265,
+    "lex_word_recall": 0.238,
+    "lex_entity_recall": 0.236,
+    "sbert_mpnet_doc_cosine": 0.237,
+    "sbert_mpnet_cov_mean": 0.235,
+    "sbert_minilm_doc_cosine": 0.238,
+    "sbert_minilm_cov_mean": 0.237,
+    "bge_large_en_doc_cosine": 0.214,
+    "bge_large_en_cov_mean": 0.238,
+    "bgem3_doc_cosine": 0.283,
+    "bgem3_cov_mean": 0.288,
+    "q3emb06_doc_cosine": 0.24,
+    "q3emb06_cov_mean": 0.25,
+    "x_rerank_mean": 0.258,
+    "x_nli_mean": 0.133
+  },
+  "cronbach_alpha_z": 0.98,
+  "mean_pairwise_spearman": 0.804,
+  "min_pairwise_spearman": 0.44,
+  "spearman_sim_z_mean_vs_pc1": 0.999,
+  "spearman_sim_z_mean_vs_bgem3_cov_mean": 0.939
+}
