@@ -1,0 +1,55 @@
+# compute_similarity_extra.py 설정: 기존 bge-m3 / ALT(TF-IDF·SBERT·bge-en)와 겹치지 않는 방식으로 유사도 재측정
+# 입력/필터는 config_similarity_alt.yml과 같은 규칙을 쓴다 (같은 (작품, t2 영상) 쌍).
+
+# ---- 입력
+transcripts_xlsx: data/similarity/youtube_transcripts_all_v13.csv
+synopses_hollywood_xlsx: data/similarity/synopses_hollywood.xlsx
+synopses_broadway_xlsx: data/similarity/synopses_broadway.xlsx
+panel_hollywood_xlsx: data/similarity/panel_current/hollywood_v13.xlsx
+panel_hollywood_sheet: Sheet1
+panel_broadway_xlsx: data/similarity/panel_current/broadway.xlsx
+
+# ---- 출력
+out_dir: data/similarity/results_extra
+alt_results_csv: data/similarity/results_alt/similarity_alt_results.csv      # 상관 비교용 (없으면 건너뜀)
+existing_results_csv: data/similarity/results/similarity_results.csv         # 기존 bge-m3 결과 (상관 비교용)
+
+# ---- 필터 (기존/ALT와 동일)
+languages: [en]
+detect_language: true
+min_transcript_words: 10
+min_synopsis_words: 30
+sentence_min_words: 6
+end_fraction: 0.2
+
+device: cpu
+batch_size: 16
+
+# ---- 1) Qwen3-Embedding 커버리지 + 서사 순서 일치도
+# 0.6B는 CPU에서도 돌아간다. 4B/8B는 GPU(Colab/로컬)에서 name만 바꾸고 tag도 바꿔서 돌릴 것 (예: q3emb4b).
+retriever:
+  tag: q3emb06
+  name: Qwen/Qwen3-Embedding-0.6B
+  max_len: 512
+  chunk_words: 200
+  chunk_overlap: 50
+  coverage_thresholds: [0.5, 0.6]
+  instruction: "Given a sentence from a story synopsis, retrieve the video transcript passage that narrates the same event"
+
+order:
+  span_top_fraction: 0.5      # span 지표: 커버리지 상위 몇 %의 문장으로 영상 구간 폭을 잴지
+
+# ---- 2) cross-encoder 계열 (retriever 유사도 상위 cross_top_k개 청크만 점수화)
+cross_top_k: 3
+
+reranker:                     # 문장-청크 관련도 확률 (bge-reranker-v2-m3, 다국어)
+  enabled: true
+  name: BAAI/bge-reranker-v2-m3
+  max_len: 512
+  batch_size: 8
+
+nli:                          # 청크(전제)가 문장(가설)을 함의할 확률
+  enabled: true
+  name: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+  max_len: 512
+  batch_size: 16

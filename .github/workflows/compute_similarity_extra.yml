@@ -1,0 +1,100 @@
+name: Compute Similarity EXTRA (Qwen3-Embedding / reranker / NLI / order)
+
+# 기존 bge-m3, ALT(TF-IDF/SBERT/bge-en)와 겹치지 않는 방식으로 같은 (작품, t2 영상) 쌍을 다시 잰다.
+# 영상 단위 12조각으로 나눠 병렬 실행한 뒤 합치고, 기존 결과와 Spearman 상관을 낸다.
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "cross-encoder 중 계산할 것만 콤마로 (reranker,nli). 비우면 config대로 전부 (retriever/order 지표는 항상 계산)"
+        required: false
+        default: ""
+      limit:
+        description: "디버그용: 쌍 수 제한 (0 = 전체). limit을 쓰면 결과를 커밋하지 않는다"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: compute-similarity-extra
+  cancel-in-progress: true
+
+jobs:
+  shard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements_similarity_extra.txt
+      - name: Install dependencies (CPU torch)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements_similarity_extra.txt
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-extra-${{ hashFiles('config_similarity_extra.yml') }}
+      - name: Compute shard
+        env:
+          ONLY: ${{ github.event.inputs.only }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          ARGS="--config config_similarity_extra.yml --shard-count 12 --shard-index ${{ matrix.shard }}"
+          if [ -n "$ONLY" ]; then ARGS="$ARGS --only $ONLY"; fi
+          if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then ARGS="$ARGS --limit $LIMIT"; fi
+          python scripts/compute_similarity_extra.py $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extrashard-${{ matrix.shard }}
+          path: data/similarity/results_extra/shards/shard_${{ matrix.shard }}.csv
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install light dependencies
+        run: pip install pandas numpy scikit-learn scipy openpyxl pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: extrashard-*
+          merge-multiple: true
+          path: shards_in
+      - name: Merge shards and build final outputs
+        run: python scripts/compute_similarity_extra.py --config config_similarity_extra.yml --merge-from shards_in
+      - name: Build composite (all methods) and length-bias report
+        run: python scripts/build_similarity_composite.py
+      - name: Job summary
+        run: |
+          echo '### Similarity EXTRA summary' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          python -c "import json;d=json.load(open('data/similarity/results_extra/similarity_extra_summary.json'));print(json.dumps({k:d[k] for k in ('n_pairs','n_videos','by_medium','log','spearman_vs_bgem3_cov_mean')},ensure_ascii=False,indent=1))" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: similarity-extra-results
+          path: data/similarity/results_extra/
+      - name: Commit results
+        if: ${{ github.event.inputs.limit == '' || github.event.inputs.limit == '0' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf data/similarity/results_extra/shards
+          git add data/similarity/results_extra/
+          git diff --cached --quiet || git commit -m "Update similarity EXTRA results [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push
