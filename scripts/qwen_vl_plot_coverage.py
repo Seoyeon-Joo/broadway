@@ -202,6 +202,39 @@ def run_judge(a):
     print(f"saved {len(rows)} rows -> {Path(a.out_dir) / 'plot_coverage.csv'}")
 
 
+# ----------------------------------------------------------------------------- 결과를 GitHub에 올리기
+def push_results(a):
+    """out-dir의 결과를 data/similarity/results_qwen/ 으로 복사해 main에 커밋·푸시한다.
+    토큰은 환경변수 GITHUB_TOKEN (Colab: Secrets에 GITHUB_TOKEN 등록 후 셀에서 os.environ에 넣기).
+    토큰은 git 설정에 저장하지 않고 이번 푸시에만 URL로 쓴다."""
+    import os
+    import shutil
+    import subprocess
+    tok = os.environ.get("GITHUB_TOKEN")
+    if not tok:
+        print("GITHUB_TOKEN 환경변수가 없어 푸시를 건너뜀 (결과는 out-dir에 있음)")
+        return
+    repo_root = Path(__file__).resolve().parent.parent
+    dest = repo_root / "data" / "similarity" / "results_qwen"
+    dest.mkdir(parents=True, exist_ok=True)
+    for name in ("captions.jsonl", "plot_coverage.csv", "missing_videos.txt"):
+        src = Path(a.out_dir) / name
+        if src.exists():
+            shutil.copy(src, dest / name)
+    run = lambda *c, **k: subprocess.run(c, cwd=repo_root, check=True, **k)
+    run("git", "config", "user.name", "qwen-colab")
+    run("git", "config", "user.email", "qwen-colab@users.noreply.github.com")
+    run("git", "add", "data/similarity/results_qwen")
+    if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=repo_root).returncode == 0:
+        print("변경 없음: 푸시할 것이 없음")
+        return
+    run("git", "commit", "-m", f"Update Qwen3-VL plot coverage results ({a.stage})")
+    url = f"https://x-access-token:{tok}@github.com/Seoyeon-Joo/broadway.git"
+    run("git", "pull", "--rebase", url, "main", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    r = subprocess.run(["git", "push", url, "HEAD:main"], cwd=repo_root, capture_output=True, text=True)
+    print("푸시 성공" if r.returncode == 0 else "푸시 실패: " + r.stderr.replace(tok, "***")[-400:])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", choices=["caption", "judge"])
@@ -218,9 +251,12 @@ def main():
     ap.add_argument("--max-windows", type=int, default=40, help="영상당 최대 구간 수 (긴 영상은 간격을 넓혀 전체를 덮음)")
     ap.add_argument("--max-new-tokens", type=int, default=80)
     ap.add_argument("--top-k", type=int, default=3, help="판정 시 문장마다 붙이는 근거 조각 수")
+    ap.add_argument("--push", action="store_true", help="끝나면 결과를 data/similarity/results_qwen/ 에 커밋·푸시 (GITHUB_TOKEN 필요)")
     a = ap.parse_args()
     Path(a.out_dir).mkdir(parents=True, exist_ok=True)
     run_caption(a) if a.stage == "caption" else run_judge(a)
+    if a.push:
+        push_results(a)
 
 
 if __name__ == "__main__":

@@ -34,3 +34,13 @@ python scripts/compute_similarity_alt.py --smoke --limit 60 --out-dir /tmp/alt_s
 1. `caption`: 영상 파일(`videos/{video_id}.mp4`)에서 30초 구간마다 4프레임을 뽑아 Qwen3-VL-4B로 장면 설명 생성
 2. `judge`: 시놉시스 문장마다 영상 근거(자막 + 장면 설명)를 붙여 "이 사건이 영상에 나오는가" Yes 확률 → `pc_mean`, `pc_ratio`, `pc_end_mean`
 `judge`는 영상 파일 없이 자막만으로도 돌아간다(그 경우 `has_visual_captions=0`). 사용법은 스크립트 상단 주석 참고. GPU 환경이 없어 작성 환경에서 실행 검증을 못 했으므로 `--limit 3`으로 먼저 확인할 것.
+
+### Qwen 결과를 GitHub에 자동으로 올리기 (`--push`)
+Colab 셀에서 `--push`를 붙이면 끝날 때 `out_qwen/`의 결과가 `data/similarity/results_qwen/`에 커밋·푸시된다.
+필요한 것: 이 레포 하나에만 `Contents: Read and write` 권한을 준 fine-grained 토큰을 Colab **Secrets**에 `GITHUB_TOKEN`으로 등록 (노트북 셀이나 채팅에 토큰을 직접 붙여넣지 말 것).
+```python
+import os
+from google.colab import userdata
+os.environ["GITHUB_TOKEN"] = userdata.get("GITHUB_TOKEN")
+!python scripts/qwen_vl_plot_coverage.py judge --out-dir out_qwen --push
+```
