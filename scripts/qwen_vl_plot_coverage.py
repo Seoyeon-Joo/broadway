@@ -45,7 +45,10 @@ def load_model(name):
         from transformers import Qwen3VLForConditionalGeneration as VL
     except ImportError:  # transformers가 너무 오래된 경우
         sys.exit("transformers>=4.57 필요: pip install -U 'transformers>=4.57'")
-    model = VL.from_pretrained(name, torch_dtype=torch.bfloat16, device_map="auto")
+    # bf16을 지원하지 않는 GPU(예: Colab 무료 T4)에서는 fp16 사용
+    dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.is_bf16_supported()) else torch.float16
+    print(f"loading {name} with dtype={dtype}", flush=True)
+    model = VL.from_pretrained(name, torch_dtype=dtype, device_map="auto")
     proc = AutoProcessor.from_pretrained(name)
     return model, proc
 
