@@ -46,7 +46,7 @@ def load_model(name):
     except ImportError:  # transformers가 너무 오래된 경우
         sys.exit("transformers>=4.57 필요: pip install -U 'transformers>=4.57'")
     # bf16을 지원하지 않는 GPU(예: Colab 무료 T4)에서는 fp16 사용
-    dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.is_bf16_supported()) else torch.float16
+    dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.get_device_capability(0)[0] >= 8) else torch.float16  # Ampere(8.x) 이상만 bf16 (T4는 7.5 -> fp16)
     print(f"loading {name} with dtype={dtype}", flush=True)
     model = VL.from_pretrained(name, dtype=dtype, device_map="auto")
     proc = AutoProcessor.from_pretrained(name)
