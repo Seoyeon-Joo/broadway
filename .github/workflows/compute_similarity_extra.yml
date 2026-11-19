@@ -1,7 +1,7 @@
 name: Compute Similarity EXTRA (Qwen3-Embedding / reranker / NLI / order)
 
 # 기존 bge-m3, ALT(TF-IDF/SBERT/bge-en)와 겹치지 않는 방식으로 같은 (작품, t2 영상) 쌍을 다시 잰다.
-# 영상 단위 12조각으로 나눠 병렬 실행한 뒤 합치고, 기존 결과와 Spearman 상관을 낸다.
+# 영상 단위 20조각으로 나눠 병렬 실행한 뒤 합치고, 기존 결과와 Spearman 상관을 낸다.
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -50,7 +50,7 @@ jobs:
           ONLY: ${{ github.event.inputs.only }}
           LIMIT: ${{ github.event.inputs.limit }}
         run: |
-          ARGS="--config config_similarity_extra.yml --shard-count 12 --shard-index ${{ matrix.shard }}"
+          ARGS="--config config_similarity_extra.yml --shard-count 20 --shard-index ${{ matrix.shard }}"
           if [ -n "$ONLY" ]; then ARGS="$ARGS --only $ONLY"; fi
           if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then ARGS="$ARGS --limit $LIMIT"; fi
           python scripts/compute_similarity_extra.py $ARGS

@@ -158,7 +158,7 @@ def compute_shard(pairs, mask, cfg, smoke, want):
     sub = pairs[mask].reset_index(drop=True)
     rc = cfg["retriever"]
     tag = rc["tag"]
-    top_k = int(cfg["cross_top_k"])
+    max_k = max(int(cfg["cross_top_k"]), int(cfg["reranker"].get("top_k", 0)), int(cfg["nli"].get("top_k", 0)))
     taus = rc["coverage_thresholds"]
     ef = cfg["end_fraction"]
 
@@ -185,12 +185,10 @@ def compute_shard(pairs, mask, cfg, smoke, want):
         w_emb[k] = l2norm(s_all[o:o + n])
         o += n
 
-    rows, jobs = [], []  # jobs: (pair_idx, sent_idx, chunk_idx)
-    sims = []
+    rows, tops = [], []  # tops[p]: (문장 수, k) 유사도 상위 청크 인덱스
     for p, r in enumerate(sub.itertuples(index=False)):
         ce, se = v_emb[r.video_url], w_emb[(r.medium, r.work_id)]
         sim = se @ ce.T
-        sims.append(sim)
         cov = sim.max(axis=1)
         n_end = max(1, int(np.ceil(len(cov) * ef)))
         rec = {
@@ -206,11 +204,7 @@ def compute_shard(pairs, mask, cfg, smoke, want):
         for k_, v_ in order_metrics(sim, cfg["order"]["span_top_fraction"]).items():
             rec[f"{tag}_{k_}"] = v_
         rows.append(rec)
-        k = min(top_k, sim.shape[1])
-        top = np.argsort(-sim, axis=1)[:, :k]
-        for i in range(sim.shape[0]):
-            for j in top[i]:
-                jobs.append((p, i, int(j)))
+        tops.append(np.argsort(-sim, axis=1)[:, :min(max_k, sim.shape[1])])
     res = pd.DataFrame(rows)
 
     # cross-encoder 계열: 후보 (문장, 청크) 쌍만 점수화
@@ -219,6 +213,8 @@ def compute_shard(pairs, mask, cfg, smoke, want):
         if not cc.get("enabled", True) or (want and kind_key not in want):
             return
         scorer = SmokeScorer() if smoke else PairScorer(cc["name"], kind, cfg["device"], cc["max_len"], cc["batch_size"])
+        k_sc = int(cc.get("top_k", cfg["cross_top_k"]))
+        jobs = [(p, i, int(j)) for p, top in enumerate(tops) for i in range(top.shape[0]) for j in top[i][:k_sc]]
         sent_txt = [sub.at[p, "sentences"][i] for p, i, _ in jobs]
         chunk_txt = [v_chunks[sub.at[p, "video_url"]][j] for p, _, j in jobs]
         print(f"[{name_for_log}] scoring {len(jobs)} (sentence, chunk) candidates", flush=True)
