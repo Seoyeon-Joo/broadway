@@ -1,0 +1,121 @@
+name: Compute Similarity EXTRA rerun (split slow shards)
+
+# EXTRA 전체 실행에서 시간 초과(또는 실패)한 shard만 영상 단위로 더 쪼개 다시 계산하고,
+# 원래 실행(base_run_id)에서 성공한 shard 결과와 합쳐 최종 결과를 커밋한다.
+# 원래 실행의 shard 수(20)와 같아야 같은 영상 분할이 된다.
+on:
+  workflow_dispatch:
+    inputs:
+      base_run_id:
+        description: "성공한 shard 결과를 가져올 원래 EXTRA 실행의 run id"
+        required: true
+      shards:
+        description: "다시 계산할 shard 번호 (콤마 구분, 예: 2,12,14,19)"
+        required: true
+      sub_n:
+        description: "각 shard를 몇 조각으로 더 쪼갤지"
+        required: true
+        default: "4"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: compute-similarity-extra-rerun
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - id: m
+        env:
+          SHARDS: ${{ github.event.inputs.shards }}
+          SUB_N: ${{ github.event.inputs.sub_n }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          sh = [int(x) for x in os.environ["SHARDS"].split(",") if x.strip()]
+          n = int(os.environ["SUB_N"])
+          print("matrix=" + json.dumps({"include": [{"shard": s, "sub": i} for s in sh for i in range(n)]}))
+          PY
+
+  shard:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements_similarity_extra.txt
+      - name: Install dependencies (CPU torch)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements_similarity_extra.txt
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-extra-${{ hashFiles('config_similarity_extra.yml') }}
+      - name: Compute sub-shard
+        run: >
+          python scripts/compute_similarity_extra.py --config config_similarity_extra.yml
+          --shard-count 20 --shard-index ${{ matrix.shard }}
+          --sub-shard ${{ matrix.sub }}/${{ github.event.inputs.sub_n }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extrasub-${{ matrix.shard }}-${{ matrix.sub }}
+          path: data/similarity/results_extra/shards/shard_${{ matrix.shard }}_${{ matrix.sub }}.csv
+
+  merge:
+    needs: shard
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install light dependencies
+        run: pip install pandas numpy scikit-learn scipy openpyxl pyyaml
+      - name: Download successful shards from the base run
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.inputs.base_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: extrashard-*
+          merge-multiple: true
+          path: shards_in
+      - name: Download re-computed sub-shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: extrasub-*
+          merge-multiple: true
+          path: shards_in
+      - name: Check coverage and merge
+        run: |
+          ls shards_in | head -60
+          python scripts/compute_similarity_extra.py --config config_similarity_extra.yml --merge-from shards_in
+          python scripts/build_similarity_composite.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: similarity-extra-results
+          path: data/similarity/results_extra/
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf data/similarity/results_extra/shards
+          git add data/similarity/results_extra/
+          git diff --cached --quiet || git commit -m "Update similarity EXTRA results (rerun of split shards) [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push

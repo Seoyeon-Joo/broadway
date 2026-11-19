@@ -21,6 +21,7 @@ cross-encoder는 쌍마다 비용이 커서, 후보 청크는 retriever 유사�
   계산(샤드):  python scripts/compute_similarity_extra.py --config config_similarity_extra.yml --shard-count 12 --shard-index 0
   합치기:      python scripts/compute_similarity_extra.py --config config_similarity_extra.yml --merge-from <shards 폴더>
   스모크:      python scripts/compute_similarity_extra.py --config config_similarity_extra.yml --smoke --limit 30
+  재실행(시간 초과한 shard를 쪼개서): ... --shard-count 20 --shard-index 2 --sub-shard 0/4  (0/4 ~ 3/4를 각각 실행)
 --smoke 는 모델 대신 해싱 벡터와 단어 겹침 점수를 써서 파이프라인만 점검 (논문 결과에 쓰지 말 것).
 """
 import argparse
@@ -301,6 +302,8 @@ def main():
     ap.add_argument("--out-dir", default=None)
     ap.add_argument("--shard-count", type=int, default=1)
     ap.add_argument("--shard-index", type=int, default=0)
+    ap.add_argument("--sub-shard", default=None,
+                    help="i/n: 이 shard의 영상을 n개로 더 쪼개 i번째만 계산 (시간 초과한 shard를 다시 돌릴 때). 결과는 shard_<index>_<i>.csv")
     ap.add_argument("--merge-from", default=None)
     a = ap.parse_args()
 
@@ -317,7 +320,13 @@ def main():
     if a.limit:
         pairs = pairs.head(a.limit).reset_index(drop=True)
     uv = sorted(pairs["video_url"].unique())
-    mine = set(uv[a.shard_index::a.shard_count])
+    mine_list = uv[a.shard_index::a.shard_count]
+    sub_tag = ""
+    if a.sub_shard:
+        si, sn = (int(x) for x in a.sub_shard.split("/"))
+        mine_list = mine_list[si::sn]
+        sub_tag = f"_{si}"
+    mine = set(mine_list)
     mask = pairs["video_url"].isin(mine).to_numpy()
     log.append(f"shard {a.shard_index}/{a.shard_count}: {int(mask.sum())} pairs")
 
@@ -326,7 +335,7 @@ def main():
     out = pd.concat([ids.reset_index(drop=True), res], axis=1)
     sd = out_dir / "shards"
     sd.mkdir(parents=True, exist_ok=True)
-    out.to_csv(sd / f"shard_{a.shard_index}.csv", index=False, encoding="utf-8-sig")
+    out.to_csv(sd / f"shard_{a.shard_index}{sub_tag}.csv", index=False, encoding="utf-8-sig")
     print("\n".join(log))
     print(f"shard {a.shard_index} done: {len(out)} pairs, {out.shape[1]} columns")
 
