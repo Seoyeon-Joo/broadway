@@ -1,0 +1,51 @@
+# compute_similarity_alt.py 설정: 기존 similarity(bge-m3)에 더해 다른 방식으로 다시 측정 (로버스트니스용)
+# 입력/필터는 config_similarity.yml과 같은 규칙을 쓴다.
+
+# ---- 입력
+transcripts_xlsx: data/similarity/youtube_transcripts_all_v13.csv
+synopses_hollywood_xlsx: data/similarity/synopses_hollywood.xlsx
+synopses_broadway_xlsx: data/similarity/synopses_broadway.xlsx
+panel_hollywood_xlsx: data/similarity/panel_current/hollywood_v13.xlsx
+panel_hollywood_sheet: Sheet1
+panel_broadway_xlsx: data/similarity/panel_current/broadway.xlsx   # Broadway t2 영상 (자막이 없으면 coverage에서 not_in_transcript_file)
+
+# ---- 출력
+out_dir: data/similarity/results_alt
+existing_results_csv: data/similarity/results/similarity_results.csv   # 기존 bge-m3 결과 (상관 비교용)
+
+# ---- 필터 (기존과 동일)
+languages: [en]
+detect_language: true
+min_transcript_words: 10
+min_synopsis_words: 30
+sentence_min_words: 6
+end_fraction: 0.2
+
+# ---- 어휘 기반(lexical) 지표: 모델 불필요
+lexical:
+  chunk_words: 200
+  chunk_overlap: 50
+  coverage_thresholds: [0.1, 0.2]     # TF-IDF 코사인은 임베딩보다 값이 작다
+
+# ---- 임베딩 모델들 (태그가 결과 열 접두어가 된다)
+device: cpu
+batch_size: 16
+models:
+  - tag: sbert_mpnet            # Sentence-BERT 계열 대표 모델
+    name: sentence-transformers/all-mpnet-base-v2
+    max_len: 384
+    chunk_words: 160
+    chunk_overlap: 40
+    coverage_thresholds: [0.4, 0.5]
+  - tag: sbert_minilm           # 가볍고 빠른 SBERT (모델 크기에 따른 차이 확인)
+    name: sentence-transformers/all-MiniLM-L12-v2
+    max_len: 256
+    chunk_words: 120
+    chunk_overlap: 30
+    coverage_thresholds: [0.4, 0.5]
+  - tag: bge_large_en           # 영어 전용 BGE (기존 bge-m3와 같은 계열의 영어 특화판)
+    name: BAAI/bge-large-en-v1.5
+    max_len: 512
+    chunk_words: 200
+    chunk_overlap: 50
+    coverage_thresholds: [0.6, 0.7]

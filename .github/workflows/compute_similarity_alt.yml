@@ -1,0 +1,98 @@
+name: Compute Similarity ALT (TF-IDF / SBERT / BGE-en)
+
+# 기존 bge-m3 유사도(compute_similarity*.yml)와 같은 (작품, t2 영상) 쌍을 다른 방식으로 다시 잰다.
+# 영상 단위 12조각으로 나눠 병렬 실행한 뒤 합치고, 기존 bge-m3 결과와 Spearman 상관을 낸다.
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "계산할 태그만 콤마로 (예: lex,sbert_mpnet). 비우면 전부 = lex + config_similarity_alt.yml의 models"
+        required: false
+        default: ""
+      limit:
+        description: "디버그용: 쌍 수 제한 (0 = 전체). limit을 쓰면 결과를 커밋하지 않는다"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: compute-similarity-alt
+  cancel-in-progress: true
+
+jobs:
+  shard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements_similarity.txt
+      - name: Install dependencies (CPU torch)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements_similarity.txt
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-alt-${{ hashFiles('config_similarity_alt.yml') }}
+      - name: Compute shard
+        env:
+          ONLY: ${{ github.event.inputs.only }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          ARGS="--config config_similarity_alt.yml --shard-count 12 --shard-index ${{ matrix.shard }}"
+          if [ -n "$ONLY" ]; then ARGS="$ARGS --only $ONLY"; fi
+          if [ -n "$LIMIT" ] && [ "$LIMIT" != "0" ]; then ARGS="$ARGS --limit $LIMIT"; fi
+          python scripts/compute_similarity_alt.py $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: altshard-${{ matrix.shard }}
+          path: data/similarity/results_alt/shards/shard_${{ matrix.shard }}.csv
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install light dependencies
+        run: pip install pandas numpy scikit-learn openpyxl pyyaml
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: altshard-*
+          merge-multiple: true
+          path: shards_in
+      - name: Merge shards and build final outputs
+        run: python scripts/compute_similarity_alt.py --config config_similarity_alt.yml --merge-from shards_in
+      - name: Job summary
+        run: |
+          echo '### Similarity ALT summary' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          python -c "import json;d=json.load(open('data/similarity/results_alt/similarity_alt_summary.json'));print(json.dumps({k:d[k] for k in ('n_pairs','n_videos','by_medium','log','spearman_vs_bgem3_cov_mean')},ensure_ascii=False,indent=1))" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: similarity-alt-results
+          path: data/similarity/results_alt/
+      - name: Commit results
+        if: ${{ github.event.inputs.limit == '' || github.event.inputs.limit == '0' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf data/similarity/results_alt/shards
+          git add data/similarity/results_alt/
+          git diff --cached --quiet || git commit -m "Update similarity ALT results [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push
